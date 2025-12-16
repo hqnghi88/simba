@@ -12,6 +12,17 @@
 <a href="https://www.producthunt.com/posts/simba-2?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-simba&#0045;2" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=863851&theme=light&t=1739449352356" alt="Simba&#0032; - Connect&#0032;your&#0032;Knowledge&#0032;into&#0032;any&#0032;RAG&#0032;based&#0032;system | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 </p>
 
+> [!IMPORTANT]
+> **This is a customized/forked version of Simba optimized for local usage WITHOUT Docker.**
+> 
+> Unlike the original Simba, this version is pre-configured for:
+> *   **Local LLM/Embeddings**: Uses **Ollama** (default `llama3.2`) instead of OpenAI.
+> *   **Local Database**: Uses **LiteDB (SQLite)** instead of PostgreSQL/Supabase.
+> *   **Local Vector Store**: Uses **FAISS** instead of PGVector.
+> *   **Mock Authentication**: Bypasses Supabase auth for easy local access.
+>
+> Ideal for running completely offline or on local machines (Mac/Linux) without complex Docker orchestration.
+
 <p align="center">
 
 
