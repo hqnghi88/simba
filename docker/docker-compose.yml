@@ -1,0 +1,126 @@
+version: "3.9"
+name: simba
+
+services:
+  server:
+    image: ${IMAGE_NAME:-simba}:${IMAGE_TAG:-latest}
+    env_file:
+      - ../.env
+    ports:
+      - "5005:5005"
+    environment:
+      - REDIS_HOST=redis
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/1
+      - PYTHONPATH=/app
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - LANGCHAIN_TRACING_V2=${LANGCHAIN_TRACING_V2:-false}
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY:-}
+      - DEVICE=${DEVICE:-cpu}
+      - OLLAMA_HOST=http://ollama:11434
+      
+      - SUPABASE_URL=http://host.docker.internal:8000
+      - SUPABASE_JWT_SECRET
+      - ANON_KEY
+      - SUPABASE_PUBLIC_KEY
+      - POSTGRES_HOST=host.docker.internal
+      - POSTGRES_PORT
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    volumes:
+      - ../config.yaml:/app/config.yaml
+      - ../uploads:/app/uploads:rw
+      - ../markdown:/app/markdown:rw
+      - ../vector_stores:/app/vector_stores:rw
+    depends_on:
+      - redis
+    networks:
+      - simba_network
+    runtime: ${RUNTIME:+${RUNTIME}}
+    entrypoint: ["/app/docker-entrypoint.sh"]
+    command: ["python", "-m", "uvicorn", "simba.__main__:create_app", "--host", "0.0.0.0", "--port", "5005", "--factory"]
+
+  celery_worker:
+    image: ${IMAGE_NAME:-simba}:${IMAGE_TAG:-latest}
+    env_file:
+      - ../.env
+    environment:
+      - REDIS_HOST=redis
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/1
+      - PYTHONPATH=/app
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - DEVICE=${DEVICE:-cpu}
+      - SUPABASE_URL
+      - SUPABASE_JWT_SECRET
+      - ANON_KEY
+      - SUPABASE_PUBLIC_KEY
+      - POSTGRES_HOST
+      - POSTGRES_PORT
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    volumes:
+      - ../config.yaml:/app/config.yaml
+      - ../uploads:/app/uploads:rw
+      - ../vector_stores:/app/vector_stores:rw
+    depends_on:
+      - redis
+    networks:
+      - simba_network
+    runtime: ${RUNTIME:+${RUNTIME}}
+    entrypoint: ["/app/docker-entrypoint.sh"]
+    command: ["celery", "-A", "simba.core.celery_config.celery_app", "worker", "--loglevel=info", "-Q", "parsing"]
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - simba_network
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  frontend:
+    image: ${FRONTEND_IMAGE_NAME:-simba-frontend}:${FRONTEND_IMAGE_TAG:-latest}
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:5005
+      - NODE_ENV=development
+    networks:
+      - simba_network
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    environment:
+      - OLLAMA_ORIGINS=*
+    volumes:
+      - ollama_models:/root/.ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - simba_network
+    runtime: ${RUNTIME:+${RUNTIME}}
+    profiles:
+      - ${RUN_OLLAMA:-default}
+
+networks:
+  simba_network:
+    name: simba_network
+    driver: bridge
+    external: true
+
+volumes:
+  redis_data:
+  ollama_models:

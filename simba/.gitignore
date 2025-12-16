@@ -1,0 +1,26 @@
+.env
+__pycache__
+.venv
+.DS_Store
+core/__pycache__/*
+faiss_index/
+.vscode
+**/__pycache__/
+
+.DS_Store
+# Ignore everything in the folders
+data/
+# Allow the .gitkeep files
+!data/csv/.gitkeep
+!data/pdf/.gitkeep
+!data/xlsx/.gitkeep
+!data/markdown_zerox/.gitkeep
+!data/markdownOld/.gitkeep
+
+
+uploads/**
+!uploads/.gitkeep
+
+
+# Redis
+dump.rdb
