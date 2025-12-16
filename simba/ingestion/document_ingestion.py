@@ -11,14 +11,14 @@ from langchain.schema import Document
 
 from simba.core.config import settings
 from simba.core.factories.database_factory import get_database
+from simba.core.factories.storage_factory import StorageFactory
 from simba.core.factories.vector_store_factory import VectorStoreFactory
 from simba.models.simbadoc import MetadataType, SimbaDoc
 from simba.splitting import Splitter
-from simba.core.factories.storage_factory import StorageFactory
 from simba.storage.base import StorageProvider
-from .loader import Loader
-from .file_handling import delete_file_locally
 
+from .file_handling import delete_file_locally
+from .loader import Loader
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +46,7 @@ class DocumentIngestionService:
         try:
             # Import here to avoid circular import
             from simba.tasks.generate_summary import generate_summary_task
+
             # Generate file path
             file_path = Path(folder_path.strip("/")) / file.filename
             file_extension = f".{file.filename.split('.')[-1].lower()}"

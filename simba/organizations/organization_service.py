@@ -1,13 +1,20 @@
 import logging
+from datetime import datetime
 from typing import List, Optional
 from uuid import uuid4
-from datetime import datetime
-from fastapi import HTTPException, status
-from sqlalchemy.orm import Session, relationship
-from sqlalchemy import Column, String, DateTime, ForeignKey, text
 
-from simba.database.postgres import PostgresDB, Base
-from simba.models.organization import Organization, OrganizationCreate, OrganizationMember, OrganizationMemberInvite, OrganizationMemberUpdate
+from fastapi import HTTPException, status
+from sqlalchemy import Column, DateTime, ForeignKey, String, text
+from sqlalchemy.orm import Session, relationship
+
+from simba.database.postgres import Base, PostgresDB
+from simba.models.organization import (
+    Organization,
+    OrganizationCreate,
+    OrganizationMember,
+    OrganizationMemberInvite,
+    OrganizationMemberUpdate,
+)
 
 logger = logging.getLogger(__name__)
 

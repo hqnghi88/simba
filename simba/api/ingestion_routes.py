@@ -4,12 +4,14 @@ import logging
 import os
 import uuid
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 import aiofiles
-from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile, Body
+from fastapi import APIRouter, Body, Depends, File, HTTPException, Query, UploadFile
 from fastapi.responses import FileResponse
+from pydantic import BaseModel
 
+from simba.api.middleware.auth import get_current_user
 from simba.core.config import settings
 from simba.core.factories.database_factory import get_database
 from simba.core.factories.vector_store_factory import VectorStoreFactory
@@ -17,8 +19,6 @@ from simba.ingestion import Loader
 from simba.ingestion.document_ingestion import DocumentIngestionService
 from simba.ingestion.file_handling import save_file_locally
 from simba.models.simbadoc import SimbaDoc
-from simba.api.middleware.auth import get_current_user
-from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
 

@@ -3,11 +3,11 @@ from typing import Optional, Union
 from uuid import UUID
 
 from fastapi import Depends, HTTPException, Request, status
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials, APIKeyHeader
+from fastapi.security import APIKeyHeader, HTTPAuthorizationCredentials, HTTPBearer
 
+from simba.auth.api_key_service import APIKeyService
 from simba.auth.auth_service import AuthService
 from simba.auth.role_service import RoleService
-from simba.auth.api_key_service import APIKeyService
 from simba.auth.supabase_client import get_supabase_client
 
 logger = logging.getLogger(__name__)

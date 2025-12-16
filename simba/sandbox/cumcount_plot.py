@@ -8,12 +8,20 @@ import seaborn as sns
 
 from simba.mixins.config_reader import ConfigReader
 from simba.utils.checks import (
-    check_all_file_names_are_represented_in_video_log, check_if_dir_exists,
-    check_str, check_valid_boolean, check_valid_dataframe)
+    check_all_file_names_are_represented_in_video_log,
+    check_if_dir_exists,
+    check_str,
+    check_valid_boolean,
+    check_valid_dataframe,
+)
 from simba.utils.data import create_color_palette, detect_bouts
 from simba.utils.printing import stdout_success
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    get_fn_ext, read_df, read_video_info)
+from simba.utils.read_write import (
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+    read_df,
+    read_video_info,
+)
 
 
 def plot_clf_cumcount(config_path: Union[str, os.PathLike],

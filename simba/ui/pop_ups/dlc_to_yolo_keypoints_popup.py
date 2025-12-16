@@ -8,9 +8,10 @@ import pandas as pd
 from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.third_party_label_appenders.transform.dlc_to_yolo import DLC2Yolo
 from simba.third_party_label_appenders.transform.utils import (
-    get_yolo_keypoint_bp_id_idx, get_yolo_keypoint_flip_idx)
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, FolderSelect,
-                                        SimBADropDown)
+    get_yolo_keypoint_bp_id_idx,
+    get_yolo_keypoint_flip_idx,
+)
+from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, FolderSelect, SimBADropDown
 from simba.utils.checks import check_if_dir_exists
 from simba.utils.read_write import recursive_file_search, str_2_bool
 

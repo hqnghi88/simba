@@ -9,12 +9,15 @@ from typing import Union
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.plotting.data_plotter import DataPlotter
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, DropDownMenu,
-                                        SimbaButton, SimbaCheckbox,
-                                        SimBADropDown)
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    DropDownMenu,
+    SimbaButton,
+    SimbaCheckbox,
+    SimBADropDown,
+)
 from simba.utils.enums import Formats, Keys, Links
-from simba.utils.errors import (DuplicationError, InvalidInputError,
-                                NoFilesFoundError)
+from simba.utils.errors import DuplicationError, InvalidInputError, NoFilesFoundError
 from simba.utils.read_write import get_fn_ext
 
 DECIMALS_OPTIONS = list(range(0, 11))

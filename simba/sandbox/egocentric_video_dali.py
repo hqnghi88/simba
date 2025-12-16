@@ -41,8 +41,10 @@ def warp_affine_numpy(frames: np.ndarray, rotation_matrices: np.ndarray):
 
 import cv2
 
-from simba.sandbox.warp_numba import (align_target_warpaffine_vectors,
-                                      center_rotation_warpaffine_vectors)
+from simba.sandbox.warp_numba import (
+    align_target_warpaffine_vectors,
+    center_rotation_warpaffine_vectors,
+)
 from simba.utils.data import egocentrically_align_pose
 from simba.utils.read_write import read_df, read_img_batch_from_video_gpu
 

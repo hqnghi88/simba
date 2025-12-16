@@ -1,5 +1,4 @@
-from simba.plotting.ROI_feature_visualizer_mp import \
-    ROIfeatureVisualizerMultiprocess
+from simba.plotting.ROI_feature_visualizer_mp import ROIfeatureVisualizerMultiprocess
 
 ## DEFINE A LIST OF ROI NAMES THAT WE WISH TO SEE ROI DIRECTIONALITY FOR.
 # CHANGE My_first and My_second_poygon to the actual names of your ROIS

@@ -1,11 +1,12 @@
 import logging
-from typing import Dict, Any
-from fastapi import APIRouter, Depends, HTTPException, status
 from pathlib import Path
+from typing import Any, Dict
+
+from fastapi import APIRouter, Depends, HTTPException, status
 
 from simba.api.middleware.auth import get_current_user
-from simba.models.user import UserResponse
 from simba.core.config import Settings
+from simba.models.user import UserResponse
 
 logger = logging.getLogger(__name__)
 

@@ -1,19 +1,21 @@
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
 
+from simba.chatbot.demo.nodes.compress_node import compress
+from simba.chatbot.demo.nodes.cot_node import cot
+from simba.chatbot.demo.nodes.fallback_node import fallback
 from simba.chatbot.demo.nodes.generate_node import generate
 from simba.chatbot.demo.nodes.hallucination_node import grade_generation_v_documents_and_question
+from simba.chatbot.demo.nodes.hyde_node import hyde
+from simba.chatbot.demo.nodes.rerank_node import rerank
+
 # ===========================================
 # Import nodes
 from simba.chatbot.demo.nodes.retrieve_node import retrieve
-from simba.chatbot.demo.nodes.rerank_node import rerank
-from simba.chatbot.demo.nodes.compress_node import compress
-from simba.chatbot.demo.state import State
-from simba.chatbot.demo.nodes.hyde_node import hyde
 from simba.chatbot.demo.nodes.routing_node import routing
-from simba.chatbot.demo.nodes.fallback_node import fallback
 from simba.chatbot.demo.nodes.transform_query_node import transform_query
-from simba.chatbot.demo.nodes.cot_node import cot
+from simba.chatbot.demo.state import State
+
 # ===========================================
 
 workflow = StateGraph(State)

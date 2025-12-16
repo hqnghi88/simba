@@ -14,13 +14,16 @@ from simba.data_processors.interpolate import Interpolate
 from simba.data_processors.smoothing import Smoothing
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pose_importer_mixin import PoseImporterMixin
-from simba.utils.checks import (check_if_dir_exists,
-                                check_if_keys_exist_in_dict, check_int,
-                                check_str, check_valid_lst)
+from simba.utils.checks import (
+    check_if_dir_exists,
+    check_if_keys_exist_in_dict,
+    check_int,
+    check_str,
+    check_valid_lst,
+)
 from simba.utils.enums import Methods
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_all_videos_in_project,
-                                    get_video_meta_data, write_df)
+from simba.utils.read_write import find_all_videos_in_project, get_video_meta_data, write_df
 
 
 class SLEAPImporterSLP(ConfigReader, PoseImporterMixin):

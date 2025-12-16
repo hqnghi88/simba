@@ -9,8 +9,7 @@ import pandas as pd
 from tables import NaturalNameWarning
 
 from simba.utils.checks import check_if_filepath_list_is_empty
-from simba.utils.errors import (BodypartColumnNotFoundError,
-                                InvalidFileTypeError, NotDirectoryError)
+from simba.utils.errors import BodypartColumnNotFoundError, InvalidFileTypeError, NotDirectoryError
 from simba.utils.printing import SimbaTimer, stdout_success
 
 warnings.filterwarnings("ignore", category=NaturalNameWarning)

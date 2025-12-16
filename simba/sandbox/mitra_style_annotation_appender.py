@@ -5,8 +5,7 @@ from typing import Union
 import pandas as pd
 
 from simba.mixins.config_reader import ConfigReader
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists)
+from simba.utils.checks import check_file_exist_and_readable, check_if_dir_exists
 from simba.utils.printing import SimbaTimer
 from simba.utils.read_write import read_df, write_df
 

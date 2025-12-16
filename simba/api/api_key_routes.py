@@ -5,11 +5,11 @@ import logging
 from typing import List, Optional
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, status, Query, Path
+from fastapi import APIRouter, Depends, HTTPException, Path, Query, status
 
-from simba.models.api_key import APIKeyCreate, APIKeyResponse, APIKeyInfo
-from simba.auth.api_key_service import APIKeyService
 from simba.api.middleware.auth import get_current_user, require_role, require_tenant_access
+from simba.auth.api_key_service import APIKeyService
+from simba.models.api_key import APIKeyCreate, APIKeyInfo, APIKeyResponse
 
 logger = logging.getLogger(__name__)
 

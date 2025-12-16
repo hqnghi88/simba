@@ -12,8 +12,7 @@ from typing import Union
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.ui.tkinter_functions import DropDownMenu, FileSelect
-from simba.unsupervised.embedding_correlation_calculator import \
-    EmbeddingCorrelationCalculator
+from simba.unsupervised.embedding_correlation_calculator import EmbeddingCorrelationCalculator
 from simba.unsupervised.enums import UMLOptions
 from simba.utils.checks import check_file_exist_and_readable
 from simba.utils.enums import Formats, Options

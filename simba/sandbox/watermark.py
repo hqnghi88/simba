@@ -8,12 +8,15 @@ except:
 import os
 import subprocess
 
-from simba.utils.checks import (check_file_exist_and_readable, check_float,
-                                check_if_dir_exists, check_str)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_float,
+    check_if_dir_exists,
+    check_str,
+)
 from simba.utils.errors import InvalidInputError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_all_videos_in_directory, get_fn_ext,
-                                    get_video_meta_data)
+from simba.utils.read_write import find_all_videos_in_directory, get_fn_ext, get_video_meta_data
 
 
 def watermark_video(video_path: Union[str, os.PathLike],

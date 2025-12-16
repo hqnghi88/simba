@@ -13,8 +13,7 @@ from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.ui.tkinter_functions import DropDownMenu, FileSelect, FolderSelect
 from simba.unsupervised.enums import UMLOptions, Unsupervised
 from simba.unsupervised.hdbscan_clusterer import HDBSCANClusterer
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists)
+from simba.utils.checks import check_file_exist_and_readable, check_if_dir_exists
 from simba.utils.enums import Formats
 
 

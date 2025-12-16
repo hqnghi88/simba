@@ -12,20 +12,29 @@ import pandas as pd
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.feature_extraction_mixin import FeatureExtractionMixin
-from simba.mixins.feature_extraction_supplement_mixin import \
-    FeatureExtractionSupplemental
+from simba.mixins.feature_extraction_supplement_mixin import FeatureExtractionSupplemental
 from simba.mixins.plotting_mixin import PlottingMixin
 from simba.utils.checks import (
-    check_all_file_names_are_represented_in_video_log, check_float, check_int,
-    check_that_column_exist, check_valid_boolean, check_valid_lst)
+    check_all_file_names_are_represented_in_video_log,
+    check_float,
+    check_int,
+    check_that_column_exist,
+    check_valid_boolean,
+    check_valid_lst,
+)
 from simba.utils.enums import TagNames
 from simba.utils.errors import FrameRangeError, InvalidInputError, NoDataError
 from simba.utils.lookups import get_current_time
 from simba.utils.printing import SimbaTimer, log_event, stdout_success
-from simba.utils.read_write import (create_directory, find_core_cnt,
-                                    find_files_of_filetypes_in_directory,
-                                    find_time_stamp_from_frame_numbers,
-                                    get_fn_ext, read_df, read_video_info)
+from simba.utils.read_write import (
+    create_directory,
+    find_core_cnt,
+    find_files_of_filetypes_in_directory,
+    find_time_stamp_from_frame_numbers,
+    get_fn_ext,
+    read_df,
+    read_video_info,
+)
 
 
 def _time_bin_movement_helper(data: list,

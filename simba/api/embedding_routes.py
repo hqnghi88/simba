@@ -1,7 +1,9 @@
 from typing import List
 
 from fastapi import APIRouter, HTTPException
+
 from simba.embeddings import EmbeddingService
+
 embedding_route = APIRouter()
 
 # Initialize the embedding service

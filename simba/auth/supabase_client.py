@@ -2,7 +2,7 @@ import logging
 import os
 from typing import Optional
 
-from supabase import create_client, Client
+from supabase import Client, create_client
 from supabase.client import ClientOptions
 
 from simba.core.config import settings

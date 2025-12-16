@@ -9,18 +9,28 @@ import numpy as np
 import pandas as pd
 from shapely.geometry import Polygon
 
-from simba.data_processors.spontaneous_alternation_calculator import \
-    SpontaneousAlternationCalculator
+from simba.data_processors.spontaneous_alternation_calculator import (
+    SpontaneousAlternationCalculator,
+)
 from simba.mixins.config_reader import ConfigReader
-from simba.utils.checks import (check_file_exist_and_readable, check_float,
-                                check_int, check_str, check_valid_lst)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_float,
+    check_int,
+    check_str,
+    check_valid_lst,
+)
 from simba.utils.data import detect_bouts
 from simba.utils.enums import Formats, Paths, TextOptions
 from simba.utils.errors import AnimalNumberError, InvalidInputError
 from simba.utils.printing import stdout_success
-from simba.utils.read_write import (concatenate_videos_in_folder,
-                                    find_core_cnt, find_video_of_file,
-                                    get_video_meta_data, read_frm_of_video)
+from simba.utils.read_write import (
+    concatenate_videos_in_folder,
+    find_core_cnt,
+    find_video_of_file,
+    get_video_meta_data,
+    read_frm_of_video,
+)
 
 ALTERNATION_COLOR = (0, 255, 0)
 ERROR_COLOR = (0, 0, 255)

@@ -7,8 +7,7 @@ from simba.mixins.annotator_mixin import AnnotatorMixin
 from simba.mixins.config_reader import ConfigReader
 from simba.utils.checks import check_file_exist_and_readable
 from simba.utils.enums import Options
-from simba.utils.read_write import (find_video_of_file, get_fn_ext,
-                                    get_video_meta_data)
+from simba.utils.read_write import find_video_of_file, get_fn_ext, get_video_meta_data
 
 
 class TargetedAnnotatorWithClips(AnnotatorMixin, ConfigReader):

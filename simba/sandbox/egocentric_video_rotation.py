@@ -6,17 +6,26 @@ from typing import Optional, Tuple, Union
 import cv2
 import numpy as np
 
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists, check_if_valid_rgb_tuple,
-                                check_int, check_valid_array,
-                                check_valid_boolean)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_dir_exists,
+    check_if_valid_rgb_tuple,
+    check_int,
+    check_valid_array,
+    check_valid_boolean,
+)
 from simba.utils.data import egocentrically_align_pose
 from simba.utils.enums import Formats
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (concatenate_videos_in_folder,
-                                    find_core_cnt, get_fn_ext,
-                                    get_video_meta_data, read_df,
-                                    read_frm_of_video, remove_a_folder)
+from simba.utils.read_write import (
+    concatenate_videos_in_folder,
+    find_core_cnt,
+    get_fn_ext,
+    get_video_meta_data,
+    read_df,
+    read_frm_of_video,
+    remove_a_folder,
+)
 
 
 def egocentric_video_aligner(frm_range: np.ndarray,

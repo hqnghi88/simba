@@ -3,9 +3,13 @@ import time
 import numpy as np
 import pandas as pd
 
-from simba.utils.checks import (check_float, check_if_df_field_is_boolean,
-                                check_instance, check_int,
-                                check_valid_dataframe)
+from simba.utils.checks import (
+    check_float,
+    check_if_df_field_is_boolean,
+    check_instance,
+    check_int,
+    check_valid_dataframe,
+)
 from simba.utils.data import detect_bouts
 
 

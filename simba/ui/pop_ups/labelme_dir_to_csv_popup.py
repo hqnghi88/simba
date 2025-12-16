@@ -5,8 +5,7 @@ from tkinter import *
 
 from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.third_party_label_appenders.converters import labelme_to_df
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, FolderSelect,
-                                        SimBADropDown)
+from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, FolderSelect, SimBADropDown
 from simba.utils.checks import check_if_dir_exists
 from simba.utils.read_write import str_2_bool
 

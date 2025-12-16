@@ -6,19 +6,20 @@ from typing import Any, Dict, Optional, Union
 import cv2
 import numpy as np
 
-from simba.data_processors.directing_other_animals_calculator import \
-    DirectingOtherAnimalsAnalyzer
+from simba.data_processors.directing_other_animals_calculator import DirectingOtherAnimalsAnalyzer
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.plotting_mixin import PlottingMixin
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_keys_exist_in_dict,
-                                check_if_valid_rgb_tuple, check_valid_array,
-                                check_valid_lst,
-                                check_video_and_data_frm_count_align)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_keys_exist_in_dict,
+    check_if_valid_rgb_tuple,
+    check_valid_array,
+    check_valid_lst,
+    check_video_and_data_frm_count_align,
+)
 from simba.utils.data import create_color_palettes
 from simba.utils.enums import Formats, TextOptions
-from simba.utils.errors import (AnimalNumberError, InvalidInputError,
-                                NoFilesFoundError)
+from simba.utils.errors import AnimalNumberError, InvalidInputError, NoFilesFoundError
 from simba.utils.printing import stdout_success
 from simba.utils.read_write import get_fn_ext, get_video_meta_data, read_df
 from simba.utils.warnings import NoDataFoundWarning

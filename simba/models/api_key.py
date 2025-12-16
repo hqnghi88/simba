@@ -2,7 +2,7 @@
 API Key model for authentication without username/password.
 """
 from datetime import datetime
-from typing import List, Optional, Union, Any
+from typing import Any, List, Optional, Union
 from uuid import UUID
 
 from pydantic import BaseModel, Field, validator

@@ -10,12 +10,18 @@ import pandas as pd
 import seaborn as sns
 
 from simba.utils.checks import (
-    check_all_file_names_are_represented_in_video_log, check_float,
-    check_if_dir_exists)
+    check_all_file_names_are_represented_in_video_log,
+    check_float,
+    check_if_dir_exists,
+)
 from simba.utils.data import detect_bouts
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    get_fn_ext, read_df, read_video_info,
-                                    read_video_info_csv)
+from simba.utils.read_write import (
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+    read_df,
+    read_video_info,
+    read_video_info_csv,
+)
 
 GROUP_COLORS = {'CNO': 'red', 'SALINE': 'blue'}
 

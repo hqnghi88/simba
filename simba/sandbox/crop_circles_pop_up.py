@@ -9,12 +9,10 @@ from shapely.geometry import Polygon
 from simba.mixins.image_mixin import ImageMixin
 from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.ui.tkinter_functions import FileSelect, FolderSelect
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists)
+from simba.utils.checks import check_file_exist_and_readable, check_if_dir_exists
 from simba.utils.enums import Formats, Options
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_all_videos_in_directory, get_fn_ext,
-                                    get_video_meta_data)
+from simba.utils.read_write import find_all_videos_in_directory, get_fn_ext, get_video_meta_data
 from simba.video_processors.roi_selector_circle import ROISelectorCircle
 
 

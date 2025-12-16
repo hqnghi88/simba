@@ -11,11 +11,16 @@ import pandas as pd
 from simba.mixins.plotting_mixin import PlottingMixin
 from simba.mixins.unsupervised_mixin import UMLMixin
 from simba.unsupervised.enums import Clustering, UMLOptions, Unsupervised
-from simba.utils.checks import (check_if_dir_exists,
-                                check_if_filepath_list_is_empty,
-                                check_if_keys_exist_in_dict, check_instance,
-                                check_int, check_str, check_that_column_exist,
-                                check_valid_lst)
+from simba.utils.checks import (
+    check_if_dir_exists,
+    check_if_filepath_list_is_empty,
+    check_if_keys_exist_in_dict,
+    check_instance,
+    check_int,
+    check_str,
+    check_that_column_exist,
+    check_valid_lst,
+)
 from simba.utils.enums import Formats, Options
 from simba.utils.printing import stdout_success
 from simba.utils.read_write import read_pickle

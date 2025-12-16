@@ -12,20 +12,28 @@ from PIL import ImageTk
 from scipy.spatial.distance import cdist
 from shapely.geometry import Polygon
 
-from simba.utils.checks import (check_file_exist_and_readable, check_instance,
-                                check_int, check_str, check_valid_array,
-                                check_valid_dataframe, check_valid_tuple,
-                                check_video_and_data_frm_count_align)
-from simba.utils.enums import (ROI_SETTINGS, ConfigKey, Formats, Keys, Options,
-                               Paths)
-from simba.utils.errors import (InvalidInputError, NoROIDataError,
-                                NotDirectoryError)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_instance,
+    check_int,
+    check_str,
+    check_valid_array,
+    check_valid_dataframe,
+    check_valid_tuple,
+    check_video_and_data_frm_count_align,
+)
+from simba.utils.enums import ROI_SETTINGS, ConfigKey, Formats, Keys, Options, Paths
+from simba.utils.errors import InvalidInputError, NoROIDataError, NotDirectoryError
 from simba.utils.printing import stdout_success, stdout_trash
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    get_fn_ext, get_video_meta_data,
-                                    read_config_file, read_df, read_roi_data)
-from simba.utils.warnings import (FrameRangeWarning, NoFileFoundWarning,
-                                  VideoFileWarning)
+from simba.utils.read_write import (
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+    get_video_meta_data,
+    read_config_file,
+    read_df,
+    read_roi_data,
+)
+from simba.utils.warnings import FrameRangeWarning, NoFileFoundWarning, VideoFileWarning
 from simba.video_processors.roi_selector import ROISelector
 from simba.video_processors.roi_selector_circle import ROISelectorCircle
 from simba.video_processors.roi_selector_polygon import ROISelectorPolygon

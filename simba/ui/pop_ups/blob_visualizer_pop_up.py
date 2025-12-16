@@ -4,8 +4,7 @@ import numpy as np
 
 from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.plotting.blob_visualizer import BlobVisualizer
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, FolderSelect,
-                                        SimBADropDown)
+from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, FolderSelect, SimBADropDown
 from simba.utils.checks import check_if_dir_exists
 from simba.utils.lookups import get_color_dict
 from simba.utils.read_write import find_core_cnt

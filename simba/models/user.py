@@ -1,7 +1,8 @@
-from typing import Dict, Optional, Any
 from datetime import datetime
+from typing import Any, Dict, Optional
 
 from pydantic import BaseModel, EmailStr, Field
+
 
 class UserBase(BaseModel):
     """Base user model with common fields."""

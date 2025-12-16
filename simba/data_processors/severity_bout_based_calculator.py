@@ -10,8 +10,7 @@ import pandas as pd
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.feature_extraction_mixin import FeatureExtractionMixin
-from simba.utils.checks import (check_if_filepath_list_is_empty,
-                                check_that_column_exist)
+from simba.utils.checks import check_if_filepath_list_is_empty, check_that_column_exist
 from simba.utils.data import create_color_palettes, detect_bouts, find_bins
 from simba.utils.errors import InvalidVideoFileError
 from simba.utils.printing import SimbaTimer, stdout_success

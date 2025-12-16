@@ -10,15 +10,22 @@ except:
 
 import math
 
-from simba.data_processors.cuda.utils import (_cuda_abs_energy,
-                                              _cuda_bubble_sort, _cuda_mac,
-                                              _cuda_mad, _cuda_max, _cuda_mean,
-                                              _cuda_median, _cuda_min,
-                                              _cuda_range, _cuda_rms,
-                                              _cuda_standard_deviation,
-                                              _cuda_sum, _cuda_variance)
-from simba.utils.checks import (check_float, check_valid_array,
-                                check_valid_tuple)
+from simba.data_processors.cuda.utils import (
+    _cuda_abs_energy,
+    _cuda_bubble_sort,
+    _cuda_mac,
+    _cuda_mad,
+    _cuda_max,
+    _cuda_mean,
+    _cuda_median,
+    _cuda_min,
+    _cuda_range,
+    _cuda_rms,
+    _cuda_standard_deviation,
+    _cuda_sum,
+    _cuda_variance,
+)
+from simba.utils.checks import check_float, check_valid_array, check_valid_tuple
 from simba.utils.enums import Formats
 
 THREADS_PER_BLOCK = 512

@@ -6,24 +6,34 @@ from typing import List, Optional, Tuple, Union
 import cv2
 import numpy as np
 import pandas as pd
-from shapely.geometry import (LineString, MultiLineString, MultiPolygon, Point,
-                              Polygon)
+from shapely.geometry import LineString, MultiLineString, MultiPolygon, Point, Polygon
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.plotting_mixin import PlottingMixin
-from simba.utils.checks import (check_float, check_if_dir_exists,
-                                check_if_valid_rgb_tuple, check_instance,
-                                check_int, check_iterable_length, check_str,
-                                check_valid_boolean, check_valid_lst)
+from simba.utils.checks import (
+    check_float,
+    check_if_dir_exists,
+    check_if_valid_rgb_tuple,
+    check_instance,
+    check_int,
+    check_iterable_length,
+    check_str,
+    check_valid_boolean,
+    check_valid_lst,
+)
 from simba.utils.data import create_color_palettes
 from simba.utils.enums import Defaults, Formats
 from simba.utils.errors import InvalidInputError
 from simba.utils.lookups import get_color_dict
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (concatenate_videos_in_folder,
-                                    find_core_cnt, find_video_of_file,
-                                    get_fn_ext, get_video_meta_data,
-                                    remove_a_folder)
+from simba.utils.read_write import (
+    concatenate_videos_in_folder,
+    find_core_cnt,
+    find_video_of_file,
+    get_fn_ext,
+    get_video_meta_data,
+    remove_a_folder,
+)
 from simba.utils.warnings import FrameRangeWarning
 
 ACCEPTED_TYPES = [Polygon, LineString, MultiPolygon, MultiLineString, Point]

@@ -7,13 +7,20 @@ import pandas as pd
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.roi_tools.roi_utils import (change_roi_dict_video_name,
-                                       get_roi_data_for_video_name,
-                                       get_roi_df_from_dict)
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, Entry_Box,
-                                        SimbaButton, SimbaCheckbox,
-                                        SimBADropDown, SimBALabel,
-                                        TwoOptionQuestionPopUp)
+from simba.roi_tools.roi_utils import (
+    change_roi_dict_video_name,
+    get_roi_data_for_video_name,
+    get_roi_df_from_dict,
+)
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    Entry_Box,
+    SimbaButton,
+    SimbaCheckbox,
+    SimBADropDown,
+    SimBALabel,
+    TwoOptionQuestionPopUp,
+)
 from simba.utils.checks import check_file_exist_and_readable
 from simba.utils.enums import Formats, Keys, Links, TkBinds
 from simba.utils.errors import NoFilesFoundError

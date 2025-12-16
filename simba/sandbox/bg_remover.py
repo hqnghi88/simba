@@ -10,8 +10,7 @@ try:
 except:
     from typing_extensions import Literal
 
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists)
+from simba.utils.checks import check_file_exist_and_readable, check_if_dir_exists
 from simba.utils.enums import Formats
 from simba.utils.printing import SimbaTimer, stdout_success
 from simba.utils.read_write import get_fn_ext, get_video_meta_data

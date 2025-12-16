@@ -11,11 +11,16 @@ from simba.utils.checks import check_if_dir_exists, check_valid_tuple
 from simba.utils.enums import UML, Formats
 from simba.utils.lookups import get_model_names
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (check_float, check_if_keys_exist_in_dict,
-                                    check_int, check_valid_array,
-                                    check_valid_boolean,
-                                    find_files_of_filetypes_in_directory,
-                                    read_pickle, write_pickle)
+from simba.utils.read_write import (
+    check_float,
+    check_if_keys_exist_in_dict,
+    check_int,
+    check_valid_array,
+    check_valid_boolean,
+    find_files_of_filetypes_in_directory,
+    read_pickle,
+    write_pickle,
+)
 
 
 class SimBAHdbscan():

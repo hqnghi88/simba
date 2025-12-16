@@ -19,11 +19,12 @@ from statsmodels.stats.diagnostic import lilliefors
 from simba.enums import Paths
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.feature_extraction_mixin import FeatureExtractionMixin
-from simba.read_config_unit_tests import (check_if_filepath_list_is_empty,
-                                          read_project_path_and_file_type)
+from simba.read_config_unit_tests import (
+    check_if_filepath_list_is_empty,
+    read_project_path_and_file_type,
+)
 from simba.utils.printing import SimbaTimer
-from simba.utils.read_write import (get_fn_ext, read_config_file, read_df,
-                                    read_video_info, write_df)
+from simba.utils.read_write import get_fn_ext, read_config_file, read_df, read_video_info, write_df
 
 TAIL_BP_NAMES = ["objectA", "peduncle_base"]
 CENTER_BP_NAMES = ["midpoint"]

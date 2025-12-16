@@ -4,11 +4,12 @@ from typing import Optional, Union
 import pandas as pd
 
 from simba.mixins.config_reader import ConfigReader
-from simba.roi_tools.roi_utils import (get_circle_df_headers,
-                                       get_polygon_df_headers,
-                                       get_rectangle_df_headers)
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_valid_boolean)
+from simba.roi_tools.roi_utils import (
+    get_circle_df_headers,
+    get_polygon_df_headers,
+    get_rectangle_df_headers,
+)
+from simba.utils.checks import check_file_exist_and_readable, check_valid_boolean
 from simba.utils.enums import Keys
 from simba.utils.errors import InvalidInputError
 from simba.utils.printing import stdout_success

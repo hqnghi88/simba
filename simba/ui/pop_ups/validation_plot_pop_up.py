@@ -9,10 +9,8 @@ import numpy as np
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.plotting.single_run_model_validation_video import \
-    ValidateModelOneVideo
-from simba.plotting.single_run_model_validation_video_mp import \
-    ValidateModelOneVideoMultiprocess
+from simba.plotting.single_run_model_validation_video import ValidateModelOneVideo
+from simba.plotting.single_run_model_validation_video_mp import ValidateModelOneVideoMultiprocess
 from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, SimBADropDown
 from simba.utils.checks import check_float, check_int
 from simba.utils.enums import Links, Options

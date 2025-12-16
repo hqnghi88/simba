@@ -16,41 +16,56 @@ from shapely.geometry import Polygon
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.geometry_mixin import GeometryMixin
 from simba.mixins.plotting_mixin import PlottingMixin
-from simba.roi_tools.interactive_roi_modifier_tkinter import \
-    InteractiveROIModifier
+from simba.roi_tools.interactive_roi_modifier_tkinter import InteractiveROIModifier
 from simba.roi_tools.roi_selector_circle_tkinter import ROISelectorCircle
 from simba.roi_tools.roi_selector_polygon_tkinter import ROISelectorPolygon
 from simba.roi_tools.roi_selector_rectangle_tkinter import ROISelector
-from simba.roi_tools.roi_utils import (change_roi_dict_video_name,
-                                       create_circle_entry,
-                                       create_duplicated_circle_entry,
-                                       create_duplicated_polygon_entry,
-                                       create_duplicated_rectangle_entry,
-                                       create_polygon_entry,
-                                       create_rectangle_entry,
-                                       get_circle_df_headers,
-                                       get_ear_tags_for_rectangle,
-                                       get_half_circle_vertices,
-                                       get_polygon_df_headers,
-                                       get_pose_for_roi_ui,
-                                       get_rectangle_df_headers, get_roi_data,
-                                       get_roi_df_from_dict,
-                                       get_triangle_vertices,
-                                       get_vertices_hexagon,
-                                       insert_gridlines_on_roi_img)
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, DropDownMenu,
-                                        Entry_Box, SimbaButton, SimBADropDown,
-                                        SimBALabel, get_menu_icons)
-from simba.utils.checks import (check_file_exist_and_readable, check_float,
-                                check_int, check_str, check_valid_array)
+from simba.roi_tools.roi_utils import (
+    change_roi_dict_video_name,
+    create_circle_entry,
+    create_duplicated_circle_entry,
+    create_duplicated_polygon_entry,
+    create_duplicated_rectangle_entry,
+    create_polygon_entry,
+    create_rectangle_entry,
+    get_circle_df_headers,
+    get_ear_tags_for_rectangle,
+    get_half_circle_vertices,
+    get_polygon_df_headers,
+    get_pose_for_roi_ui,
+    get_rectangle_df_headers,
+    get_roi_data,
+    get_roi_df_from_dict,
+    get_triangle_vertices,
+    get_vertices_hexagon,
+    insert_gridlines_on_roi_img,
+)
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    DropDownMenu,
+    Entry_Box,
+    SimbaButton,
+    SimBADropDown,
+    SimBALabel,
+    get_menu_icons,
+)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_float,
+    check_int,
+    check_str,
+    check_valid_array,
+)
 from simba.utils.enums import OS, ROI_SETTINGS, Formats, Keys
-from simba.utils.errors import (FrameRangeError, InvalidInputError,
-                                NoROIDataError)
-from simba.utils.lookups import (create_color_palettes, get_color_dict,
-                                 get_img_resize_info, get_monitor_info)
+from simba.utils.errors import FrameRangeError, InvalidInputError, NoROIDataError
+from simba.utils.lookups import (
+    create_color_palettes,
+    get_color_dict,
+    get_img_resize_info,
+    get_monitor_info,
+)
 from simba.utils.printing import stdout_information, stdout_success
-from simba.utils.read_write import (get_fn_ext, get_video_meta_data,
-                                    read_frm_of_video)
+from simba.utils.read_write import get_fn_ext, get_video_meta_data, read_frm_of_video
 from simba.utils.warnings import DuplicateNamesWarning
 
 WINDOW_SIZE_OPTIONS = [round(x * 0.05, 2) for x in range(21)]

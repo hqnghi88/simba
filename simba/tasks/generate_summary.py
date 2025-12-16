@@ -1,9 +1,10 @@
 import logging
+from typing import Any, Dict, List
+
 from simba.core.celery_config import celery_app as celery
 from simba.core.factories.database_factory import get_database
 from simba.ingestion.summary import summarize_document
 from simba.models.simbadoc import SimbaDoc
-from typing import Dict, Any, List
 
 logger = logging.getLogger(__name__)
 

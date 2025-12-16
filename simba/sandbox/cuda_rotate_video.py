@@ -10,8 +10,7 @@ from simba.mixins.image_mixin import ImageMixin
 from simba.utils.checks import check_int, check_valid_array
 from simba.utils.enums import Formats
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (get_fn_ext, get_video_meta_data,
-                                    read_img_batch_from_video_gpu)
+from simba.utils.read_write import get_fn_ext, get_video_meta_data, read_img_batch_from_video_gpu
 
 
 def rotate_img_stack_cupy(imgs: np.ndarray,

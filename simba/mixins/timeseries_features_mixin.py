@@ -8,12 +8,10 @@ import multiprocessing
 
 import numpy as np
 import pandas as pd
-from numba import (boolean, float32, float64, int64, jit, njit, prange, typed,
-                   types)
+from numba import boolean, float32, float64, int64, jit, njit, prange, typed, types
 from numba.typed import Dict, List
 from numpy.lib.stride_tricks import as_strided
-from statsmodels.tsa.stattools import (adfuller, grangercausalitytests, kpss,
-                                       zivot_andrews)
+from statsmodels.tsa.stattools import adfuller, grangercausalitytests, kpss, zivot_andrews
 
 from simba.utils.errors import InvalidInputError
 
@@ -26,9 +24,15 @@ import typing
 from typing import Optional, Tuple, Union, get_type_hints
 
 from simba.mixins.statistics_mixin import Statistics
-from simba.utils.checks import (check_float, check_instance, check_int,
-                                check_str, check_that_column_exist,
-                                check_valid_array, check_valid_lst)
+from simba.utils.checks import (
+    check_float,
+    check_instance,
+    check_int,
+    check_str,
+    check_that_column_exist,
+    check_valid_array,
+    check_valid_lst,
+)
 from simba.utils.enums import ENV_VARS, Formats
 from simba.utils.read_write import find_core_cnt, read_sys_env
 

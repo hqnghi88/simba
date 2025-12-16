@@ -1,21 +1,22 @@
+import json
 import logging
+from contextlib import contextmanager
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+
 import psycopg2
+from fastapi import HTTPException, status
 from psycopg2.extras import RealDictCursor
 from psycopg2.pool import ThreadedConnectionPool
-from fastapi import HTTPException, status
-from contextlib import contextmanager
-from sqlalchemy import create_engine, Column, String, JSON
+from sqlalchemy import JSON, Column, String, create_engine
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 from sqlalchemy.engine import URL
+from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from sqlalchemy.pool import NullPool
-from datetime import datetime
-import json
 
 from simba.core.config import settings
-from simba.models.simbadoc import SimbaDoc, MetadataType
 from simba.database.base import DatabaseService
-from typing import List, Optional, Dict, Any
+from simba.models.simbadoc import MetadataType, SimbaDoc
 
 logger = logging.getLogger(__name__)
 

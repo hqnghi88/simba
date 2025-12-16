@@ -7,8 +7,7 @@ from simba.mixins.geometry_mixin import GeometryMixin
 from simba.mixins.image_mixin import ImageMixin
 from simba.utils.checks import check_valid_array
 from simba.utils.data import savgol_smoother
-from simba.utils.read_write import (get_video_meta_data, read_df,
-                                    read_frm_of_video)
+from simba.utils.read_write import get_video_meta_data, read_df, read_frm_of_video
 
 
 def img_kmeans(data: np.ndarray,

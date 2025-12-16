@@ -2,10 +2,8 @@ __author__ = "Simon Nilsson"
 
 from tkinter import *
 
-from simba.data_processors.severity_bout_based_calculator import \
-    SeverityBoutCalculator
-from simba.data_processors.severity_frame_based_calculator import \
-    SeverityFrameCalculator
+from simba.data_processors.severity_bout_based_calculator import SeverityBoutCalculator
+from simba.data_processors.severity_frame_based_calculator import SeverityFrameCalculator
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, DropDownMenu

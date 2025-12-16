@@ -9,8 +9,11 @@ from simba.mixins.config_reader import ConfigReader
 from simba.mixins.plotting_mixin import PlottingMixin
 from simba.mixins.unsupervised_mixin import UMLMixin
 from simba.unsupervised.enums import Clustering, Unsupervised
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_keys_exist_in_dict, check_instance)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_keys_exist_in_dict,
+    check_instance,
+)
 from simba.utils.printing import stdout_success
 from simba.utils.read_write import read_pickle
 

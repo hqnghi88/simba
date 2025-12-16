@@ -1,6 +1,7 @@
+from simba.chatbot.demo.chains.cot_chain import cot_chain
 from simba.chatbot.demo.state import State
 from simba.core.factories.database_factory import get_database
-from simba.chatbot.demo.chains.cot_chain import cot_chain
+
 
 def cot(state: State):
     db = get_database()

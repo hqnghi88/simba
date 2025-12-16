@@ -7,8 +7,7 @@ import cv2
 import numpy as np
 import pandas as pd
 
-from simba.data_processors.directing_animal_to_bodypart import \
-    DirectingAnimalsToBodyPartAnalyzer
+from simba.data_processors.directing_animal_to_bodypart import DirectingAnimalsToBodyPartAnalyzer
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.plotting_mixin import PlottingMixin
 from simba.utils.data import create_color_palettes

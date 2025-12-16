@@ -15,22 +15,31 @@ from simba.mixins.config_reader import ConfigReader
 from simba.mixins.geometry_mixin import GeometryMixin
 from simba.mixins.plotting_mixin import PlottingMixin
 from simba.mixins.train_model_mixin import TrainModelMixin
-from simba.utils.checks import (check_float, check_if_valid_rgb_tuple,
-                                check_int, check_nvidea_gpu_available,
-                                check_str, check_that_column_exist,
-                                check_valid_boolean,
-                                check_video_and_data_frm_count_align)
+from simba.utils.checks import (
+    check_float,
+    check_if_valid_rgb_tuple,
+    check_int,
+    check_nvidea_gpu_available,
+    check_str,
+    check_that_column_exist,
+    check_valid_boolean,
+    check_video_and_data_frm_count_align,
+)
 from simba.utils.data import create_color_palette, detect_bouts
 from simba.utils.enums import ConfigKey, Dtypes, Options, TagNames, TextOptions
-from simba.utils.errors import (InvalidInputError, NoDataError,
-                                NoSpecifiedOutputError)
+from simba.utils.errors import InvalidInputError, NoDataError, NoSpecifiedOutputError
 from simba.utils.lookups import get_current_time
 from simba.utils.printing import SimbaTimer, log_event, stdout_success
-from simba.utils.read_write import (concatenate_videos_in_folder,
-                                    create_directory,
-                                    find_all_videos_in_project, find_core_cnt,
-                                    get_fn_ext, get_video_meta_data,
-                                    read_config_entry, read_df)
+from simba.utils.read_write import (
+    concatenate_videos_in_folder,
+    create_directory,
+    find_all_videos_in_project,
+    find_core_cnt,
+    get_fn_ext,
+    get_video_meta_data,
+    read_config_entry,
+    read_df,
+)
 from simba.utils.warnings import FrameRangeWarning
 
 

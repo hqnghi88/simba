@@ -7,16 +7,23 @@ from simba.data_processors.interpolate import Interpolate
 from simba.data_processors.smoothing import Smoothing
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pose_importer_mixin import PoseImporterMixin
-from simba.utils.checks import (check_if_dir_exists,
-                                check_if_keys_exist_in_dict, check_int,
-                                check_str, check_valid_lst)
+from simba.utils.checks import (
+    check_if_dir_exists,
+    check_if_keys_exist_in_dict,
+    check_int,
+    check_str,
+    check_valid_lst,
+)
 from simba.utils.enums import ConfigKey, Formats, TagNames
 from simba.utils.printing import SimbaTimer, log_event, stdout_success
-from simba.utils.read_write import (clean_superanimal_topview_filename,
-                                    find_all_videos_in_project,
-                                    find_files_of_filetypes_in_directory,
-                                    get_video_meta_data,
-                                    read_dlc_superanimal_h5, write_df)
+from simba.utils.read_write import (
+    clean_superanimal_topview_filename,
+    find_all_videos_in_project,
+    find_files_of_filetypes_in_directory,
+    get_video_meta_data,
+    read_dlc_superanimal_h5,
+    write_df,
+)
 
 
 class SuperAnimalTopViewImporter(PoseImporterMixin, ConfigReader):

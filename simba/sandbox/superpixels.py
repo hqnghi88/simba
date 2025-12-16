@@ -4,8 +4,7 @@ import numpy as np
 from skimage.color import rgb2gray
 from skimage.data import astronaut
 from skimage.filters import sobel
-from skimage.segmentation import (felzenszwalb, mark_boundaries, quickshift,
-                                  slic, watershed)
+from skimage.segmentation import felzenszwalb, mark_boundaries, quickshift, slic, watershed
 from skimage.util import img_as_float
 
 img = cv2.imread('/Users/simon/Desktop/test.png').astype(np.float32)/255.0

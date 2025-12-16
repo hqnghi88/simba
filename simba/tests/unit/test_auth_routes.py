@@ -1,7 +1,8 @@
 import json
+from unittest.mock import AsyncMock, MagicMock, patch
+
 import pytest
 from fastapi.testclient import TestClient
-from unittest.mock import patch, MagicMock, AsyncMock
 
 from simba.__main__ import create_app
 from simba.api.auth_routes import auth_router

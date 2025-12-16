@@ -19,8 +19,7 @@ from simba.utils.checks import check_instance, check_int
 from simba.utils.enums import Formats
 from simba.utils.errors import NoFilesFoundError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (get_video_meta_data, read_df,
-                                    read_frm_of_video)
+from simba.utils.read_write import get_video_meta_data, read_df, read_frm_of_video
 
 dpi = matplotlib.rcParams["figure.dpi"]
 

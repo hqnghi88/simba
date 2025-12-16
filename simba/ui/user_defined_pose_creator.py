@@ -10,14 +10,18 @@ import numpy as np
 
 import simba
 from simba.mixins.plotting_mixin import PlottingMixin
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists, check_int, check_str,
-                                check_valid_img_path, check_valid_lst)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_dir_exists,
+    check_int,
+    check_str,
+    check_valid_img_path,
+    check_valid_lst,
+)
 from simba.utils.data import create_color_palettes
 from simba.utils.enums import Paths, TextOptions
 from simba.utils.errors import InvalidInputError
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    read_img)
+from simba.utils.read_write import find_files_of_filetypes_in_directory, read_img
 
 WINDOW_NAME = "DEFINE POSE ESTIMATED BODY-PARTS"
 

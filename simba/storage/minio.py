@@ -2,7 +2,7 @@ import logging
 import os
 import tempfile
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Dict, Optional
 
 from fastapi import UploadFile
 from minio import Minio

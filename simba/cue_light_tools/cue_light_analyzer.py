@@ -16,17 +16,27 @@ import pandas as pd
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.statistics_mixin import Statistics
 from simba.utils.checks import (
-    check_all_file_names_are_represented_in_video_log, check_if_dir_exists,
-    check_if_valid_img, check_int, check_nvidea_gpu_available,
-    check_valid_boolean, check_valid_lst)
+    check_all_file_names_are_represented_in_video_log,
+    check_if_dir_exists,
+    check_if_valid_img,
+    check_int,
+    check_nvidea_gpu_available,
+    check_valid_boolean,
+    check_valid_lst,
+)
 from simba.utils.data import detect_bouts, slice_roi_dict_from_attribute
 from simba.utils.enums import Defaults, Keys
 from simba.utils.errors import NoROIDataError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_core_cnt,
-                                    find_files_of_filetypes_in_directory,
-                                    find_video_of_file, get_video_meta_data,
-                                    read_df, read_frm_of_video, write_df)
+from simba.utils.read_write import (
+    find_core_cnt,
+    find_files_of_filetypes_in_directory,
+    find_video_of_file,
+    get_video_meta_data,
+    read_df,
+    read_frm_of_video,
+    write_df,
+)
 
 
 def slice_rectangle_from_img(img: np.ndarray,

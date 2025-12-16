@@ -12,9 +12,11 @@ import PIL
 
 from simba.utils.checks import check_if_dir_exists, check_if_keys_exist_in_dict
 from simba.utils.errors import NoFilesFoundError
-from simba.utils.read_write import (copy_files_to_directory,
-                                    find_files_of_filetypes_in_directory,
-                                    get_fn_ext)
+from simba.utils.read_write import (
+    copy_files_to_directory,
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+)
 
 
 def _b64_to_arr(img_b64):

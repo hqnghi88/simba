@@ -15,12 +15,18 @@ import cv2
 
 from simba.mixins.image_mixin import ImageMixin
 from simba.third_party_label_appenders.transform.utils import b64_to_arr
-from simba.utils.checks import (check_if_dir_exists,
-                                check_if_keys_exist_in_dict, check_str,
-                                check_valid_boolean)
+from simba.utils.checks import (
+    check_if_dir_exists,
+    check_if_keys_exist_in_dict,
+    check_str,
+    check_valid_boolean,
+)
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    img_array_to_clahe, read_json)
+from simba.utils.read_write import (
+    find_files_of_filetypes_in_directory,
+    img_array_to_clahe,
+    read_json,
+)
 
 
 class Labelme2DLC:

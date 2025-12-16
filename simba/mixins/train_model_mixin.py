@@ -30,8 +30,7 @@ from sklearn.feature_selection import VarianceThreshold
 from sklearn.inspection import partial_dependence, permutation_importance
 from sklearn.metrics import classification_report, precision_recall_curve
 from sklearn.model_selection import ShuffleSplit, learning_curve
-from sklearn.preprocessing import (MinMaxScaler, QuantileTransformer,
-                                   StandardScaler)
+from sklearn.preprocessing import MinMaxScaler, QuantileTransformer, StandardScaler
 from sklearn.tree import export_graphviz
 from sklearn.utils import parallel_backend
 
@@ -55,36 +54,70 @@ except:
     from typing_extensions import Literal
 
 from simba.mixins.plotting_mixin import PlottingMixin
-from simba.plotting.shap_agg_stats_visualizer import \
-    ShapAggregateStatisticsCalculator
+from simba.plotting.shap_agg_stats_visualizer import ShapAggregateStatisticsCalculator
 from simba.ui.tkinter_functions import TwoOptionQuestionPopUp
-from simba.utils.checks import (check_all_dfs_in_list_has_same_cols,
-                                check_file_exist_and_readable,
-                                check_filepaths_in_iterable_exist, check_float,
-                                check_if_dir_exists, check_if_valid_input,
-                                check_instance, check_int, check_str,
-                                check_that_column_exist, check_valid_array,
-                                check_valid_boolean, check_valid_dataframe,
-                                check_valid_lst, is_lxc_container)
-from simba.utils.data import (detect_bouts, detect_bouts_multiclass,
-                              get_library_version)
-from simba.utils.enums import (OS, ConfigKey, Defaults, Dtypes, Formats, Links,
-                               Methods, MLParamKeys, Options)
-from simba.utils.errors import (ClassifierInferenceError, CorruptedFileError,
-                                DataHeaderError, FaultyTrainingSetError,
-                                FeatureNumberMismatchError, InvalidInputError,
-                                MissingColumnsError, NoDataError,
-                                SamplingError, SimBAModuleNotFoundError)
+from simba.utils.checks import (
+    check_all_dfs_in_list_has_same_cols,
+    check_file_exist_and_readable,
+    check_filepaths_in_iterable_exist,
+    check_float,
+    check_if_dir_exists,
+    check_if_valid_input,
+    check_instance,
+    check_int,
+    check_str,
+    check_that_column_exist,
+    check_valid_array,
+    check_valid_boolean,
+    check_valid_dataframe,
+    check_valid_lst,
+    is_lxc_container,
+)
+from simba.utils.data import detect_bouts, detect_bouts_multiclass, get_library_version
+from simba.utils.enums import (
+    OS,
+    ConfigKey,
+    Defaults,
+    Dtypes,
+    Formats,
+    Links,
+    Methods,
+    MLParamKeys,
+    Options,
+)
+from simba.utils.errors import (
+    ClassifierInferenceError,
+    CorruptedFileError,
+    DataHeaderError,
+    FaultyTrainingSetError,
+    FeatureNumberMismatchError,
+    InvalidInputError,
+    MissingColumnsError,
+    NoDataError,
+    SamplingError,
+    SimBAModuleNotFoundError,
+)
 from simba.utils.lookups import get_meta_data_file_headers, get_table
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_core_cnt, get_fn_ext,
-                                    get_memory_usage_of_df, get_pkg_version,
-                                    read_config_entry, read_df, read_meta_file,
-                                    str_2_bool)
-from simba.utils.warnings import (GPUToolsWarning, MissingUserInputWarning,
-                                  MultiProcessingFailedWarning,
-                                  NoModuleWarning, NotEnoughDataWarning,
-                                  SamplingWarning, ShapWarning)
+from simba.utils.read_write import (
+    find_core_cnt,
+    get_fn_ext,
+    get_memory_usage_of_df,
+    get_pkg_version,
+    read_config_entry,
+    read_df,
+    read_meta_file,
+    str_2_bool,
+)
+from simba.utils.warnings import (
+    GPUToolsWarning,
+    MissingUserInputWarning,
+    MultiProcessingFailedWarning,
+    NoModuleWarning,
+    NotEnoughDataWarning,
+    SamplingWarning,
+    ShapWarning,
+)
 
 plt.switch_backend("agg")
 

@@ -14,13 +14,15 @@ from simba.mixins.feature_extraction_mixin import FeatureExtractionMixin
 from simba.mixins.plotting_mixin import PlottingMixin
 from simba.utils.checks import (
     check_all_file_names_are_represented_in_video_log,
-    check_file_exist_and_readable, check_instance, check_int, check_valid_lst)
-from simba.utils.errors import (CountError, InvalidInputError,
-                                NoSpecifiedOutputError)
+    check_file_exist_and_readable,
+    check_instance,
+    check_int,
+    check_valid_lst,
+)
+from simba.utils.errors import CountError, InvalidInputError, NoSpecifiedOutputError
 from simba.utils.lookups import get_color_dict
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (concatenate_videos_in_folder,
-                                    find_core_cnt, get_fn_ext, read_df)
+from simba.utils.read_write import concatenate_videos_in_folder, find_core_cnt, get_fn_ext, read_df
 
 
 def distance_plotter_mp(

@@ -7,8 +7,7 @@ import PIL.Image
 from PIL import ImageDraw, ImageFont, ImageTk
 
 import simba
-from simba.utils.checks import (check_file_exist_and_readable, check_float,
-                                check_if_valid_rgb_tuple)
+from simba.utils.checks import check_file_exist_and_readable, check_float, check_if_valid_rgb_tuple
 from simba.utils.enums import Defaults, FontPaths, Paths
 from simba.utils.read_write import get_video_meta_data
 

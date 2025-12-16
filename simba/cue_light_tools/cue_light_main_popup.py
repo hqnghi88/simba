@@ -9,26 +9,34 @@ from typing import List, Union
 
 from simba.cue_light_tools.cue_light_analyzer import CueLightAnalyzer
 from simba.cue_light_tools.cue_light_clf_statistics import CueLightClfAnalyzer
-from simba.cue_light_tools.cue_light_movement_statistics import \
-    CueLightMovementAnalyzer
+from simba.cue_light_tools.cue_light_movement_statistics import CueLightMovementAnalyzer
 from simba.cue_light_tools.cue_light_visualizer import CueLightVisualizer
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.ui.pop_ups.cue_light_clf_analyzer_popup import \
-    CueLightClfAnalyzerPopUp
-from simba.ui.pop_ups.cue_light_data_analyzer_popup import \
-    CueLightDataAnalyzerPopUp
-from simba.ui.pop_ups.cue_light_movement_analyzer_popup import \
-    CueLightMovementAnalyzerPopUp
+from simba.ui.pop_ups.cue_light_clf_analyzer_popup import CueLightClfAnalyzerPopUp
+from simba.ui.pop_ups.cue_light_data_analyzer_popup import CueLightDataAnalyzerPopUp
+from simba.ui.pop_ups.cue_light_movement_analyzer_popup import CueLightMovementAnalyzerPopUp
 from simba.ui.pop_ups.cue_light_visualizer_popup import CueLightVisulizerPopUp
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, SimbaButton,
-                                        SimBADropDown, SimBALabel)
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    SimbaButton,
+    SimBADropDown,
+    SimBALabel,
+)
 from simba.utils.checks import check_float, check_int
 from simba.utils.enums import Keys, Links
-from simba.utils.errors import (CountError, NoChoosenClassifierError,
-                                NoFilesFoundError, NoROIDataError)
-from simba.utils.read_write import (find_video_of_file, get_all_clf_names,
-                                    get_fn_ext, read_config_entry)
+from simba.utils.errors import (
+    CountError,
+    NoChoosenClassifierError,
+    NoFilesFoundError,
+    NoROIDataError,
+)
+from simba.utils.read_write import (
+    find_video_of_file,
+    get_all_clf_names,
+    get_fn_ext,
+    read_config_entry,
+)
 
 
 class CueLightMainPopUp(ConfigReader, PopUpMixin):

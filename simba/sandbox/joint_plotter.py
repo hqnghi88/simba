@@ -7,8 +7,13 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-from simba.utils.checks import (check_if_dir_exists, check_instance, check_str,
-                                check_that_column_exist, check_valid_array)
+from simba.utils.checks import (
+    check_if_dir_exists,
+    check_instance,
+    check_str,
+    check_that_column_exist,
+    check_valid_array,
+)
 from simba.utils.errors import InvalidInputError
 from simba.utils.lookups import get_categorical_palettes
 

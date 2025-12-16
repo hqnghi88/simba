@@ -1,12 +1,13 @@
 import logging
-
-from typing import List, Optional, Any, Dict, Tuple
 from abc import ABC, abstractmethod
+from typing import Any, Dict, List, Optional, Tuple
 
 from langchain.docstore.document import Document
-from langchain.vectorstores import VectorStore
 from langchain.schema.embeddings import Embeddings
+from langchain.vectorstores import VectorStore
+
 from simba.core.factories.embeddings_factory import get_embeddings
+
 logger = logging.getLogger(__name__)
 
 

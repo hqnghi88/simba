@@ -9,14 +9,20 @@ import pandas as pd
 from simba.data_processors.interpolate import Interpolate
 from simba.data_processors.smoothing import Smoothing
 from simba.mixins.config_reader import ConfigReader
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_keys_exist_in_dict, check_instance,
-                                check_int, check_str)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_keys_exist_in_dict,
+    check_instance,
+    check_int,
+    check_str,
+)
 from simba.utils.errors import FileExistError, InvalidInputError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    get_fn_ext,
-                                    get_number_of_header_columns_in_df)
+from simba.utils.read_write import (
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+    get_number_of_header_columns_in_df,
+)
 
 DLC_ = 'DLC_'
 DeepCut = 'DeepCut'

@@ -8,33 +8,24 @@ from typing import Union
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.ui.tkinter_functions import (DropDownMenu, Entry_Box, FileSelect,
-                                        hxtScrollbar)
+from simba.ui.tkinter_functions import DropDownMenu, Entry_Box, FileSelect, hxtScrollbar
 from simba.unsupervised.dataset_creator import DatasetCreator
 from simba.unsupervised.enums import UMLOptions, Unsupervised
-from simba.unsupervised.pop_ups.cluster_frequentist_stats_popup import \
-    ClusterFrequentistStatisticsPopUp
-from simba.unsupervised.pop_ups.cluster_validation_pop_up import \
-    ClusterValidatorPopUp
-from simba.unsupervised.pop_ups.cluster_videos_popup import \
-    ClusterVisualizerPopUp
+from simba.unsupervised.pop_ups.cluster_frequentist_stats_popup import (
+    ClusterFrequentistStatisticsPopUp,
+)
+from simba.unsupervised.pop_ups.cluster_validation_pop_up import ClusterValidatorPopUp
+from simba.unsupervised.pop_ups.cluster_videos_popup import ClusterVisualizerPopUp
 from simba.unsupervised.pop_ups.cluster_xai_popup import ClusterXAIPopUp
-from simba.unsupervised.pop_ups.clusterer_comparison_popup import \
-    ClustererComparisonPopUp
+from simba.unsupervised.pop_ups.clusterer_comparison_popup import ClustererComparisonPopUp
 from simba.unsupervised.pop_ups.data_extractor_popup import DataExtractorPopUp
-from simba.unsupervised.pop_ups.embedding_correlations_popup import \
-    EmbedderCorrelationsPopUp
+from simba.unsupervised.pop_ups.embedding_correlations_popup import EmbedderCorrelationsPopUp
 from simba.unsupervised.pop_ups.fit_cluster_popup import FitClusterModelsPopUp
-from simba.unsupervised.pop_ups.fit_dim_reduction_popup import \
-    FitDimReductionPopUp
-from simba.unsupervised.pop_ups.grid_search_visualizer_popup import \
-    GridSearchVisualizerPopUp
-from simba.unsupervised.pop_ups.print_embedding_info_popup import \
-    PrintEmBeddingInfoPopUp
-from simba.unsupervised.pop_ups.transform_cluster_popup import \
-    TransformClustererPopUp
-from simba.unsupervised.pop_ups.transform_dim_reduction_popup import \
-    TransformDimReductionPopUp
+from simba.unsupervised.pop_ups.fit_dim_reduction_popup import FitDimReductionPopUp
+from simba.unsupervised.pop_ups.grid_search_visualizer_popup import GridSearchVisualizerPopUp
+from simba.unsupervised.pop_ups.print_embedding_info_popup import PrintEmBeddingInfoPopUp
+from simba.unsupervised.pop_ups.transform_cluster_popup import TransformClustererPopUp
+from simba.unsupervised.pop_ups.transform_dim_reduction_popup import TransformDimReductionPopUp
 from simba.utils.enums import Formats
 
 

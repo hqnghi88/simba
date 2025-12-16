@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import MagicMock, patch
+
+import pytest
 
 # Create a mock Supabase client
 mock_supabase = MagicMock()

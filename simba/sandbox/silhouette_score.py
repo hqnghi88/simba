@@ -109,8 +109,7 @@ x, y = make_blobs(n_samples=50000, n_features=20, centers=5, cluster_std=10, cen
 score_gpu = silhouette_score_gpu(x=x, y=y)
 print(time.time() - start)
 
-from sklearn.metrics import \
-    silhouette_score as sklearn_silhouette  # SKLEARN ALTERNATIVE
+from sklearn.metrics import silhouette_score as sklearn_silhouette  # SKLEARN ALTERNATIVE
 
 start = time.time()
 score_sklearn = sklearn_silhouette(x, y)

@@ -3,8 +3,7 @@ from typing import Optional
 import numpy as np
 from numba import cuda
 
-from simba.utils.checks import (check_if_valid_img, check_instance,
-                                check_valid_array)
+from simba.utils.checks import check_if_valid_img, check_instance, check_valid_array
 
 
 @cuda.jit()

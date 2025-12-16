@@ -7,8 +7,7 @@ import numpy as np
 from PIL import Image, ImageTk
 
 from simba.enums import Formats
-from simba.misc_tools import (find_all_videos_in_directory, get_fn_ext,
-                              get_video_meta_data)
+from simba.misc_tools import find_all_videos_in_directory, get_fn_ext, get_video_meta_data
 from simba.mixins.config_reader import ConfigReader
 from simba.utils.printing import stdout_success
 

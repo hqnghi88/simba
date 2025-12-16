@@ -1,7 +1,11 @@
+from typing import List
+
 from langchain.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
+
 from simba.core.factories.llm_factory import get_llm
-from typing import List
+
+
 class DocumentSelectorChain(BaseModel):
     is_summary_enough: bool = Field(description="True if the summary is enough to answer the question, False otherwise")
     id: List[str] = Field(description="The id of the document")   

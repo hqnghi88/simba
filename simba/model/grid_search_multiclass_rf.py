@@ -11,14 +11,11 @@ from sklearn.model_selection import train_test_split
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.train_model_mixin import TrainModelMixin
-from simba.utils.checks import (check_if_filepath_list_is_empty,
-                                check_if_list_contains_values)
-from simba.utils.enums import (ConfigKey, Dtypes, Formats, Methods,
-                               MLParamKeys, Options, TagNames)
+from simba.utils.checks import check_if_filepath_list_is_empty, check_if_list_contains_values
+from simba.utils.enums import ConfigKey, Dtypes, Formats, Methods, MLParamKeys, Options, TagNames
 from simba.utils.errors import NoDataError, SamplingError
 from simba.utils.printing import log_event, stdout_success
-from simba.utils.read_write import (read_config_entry, read_simba_meta_files,
-                                    write_df)
+from simba.utils.read_write import read_config_entry, read_simba_meta_files, write_df
 
 
 class GridSearchMulticlassRandomForestClassifier(ConfigReader, TrainModelMixin):

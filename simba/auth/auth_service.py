@@ -1,10 +1,10 @@
 import logging
-from typing import Dict, Optional, Any
+from typing import Any, Dict, Optional
 
 from pydantic import EmailStr
 
-from simba.auth.supabase_client import get_supabase_client
 from simba.auth.role_service import RoleService
+from simba.auth.supabase_client import get_supabase_client
 from simba.database.postgres import PostgresDB
 
 logger = logging.getLogger(__name__)

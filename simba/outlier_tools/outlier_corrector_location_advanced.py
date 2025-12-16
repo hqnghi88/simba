@@ -14,8 +14,12 @@ from simba.mixins.feature_extraction_mixin import FeatureExtractionMixin
 from simba.utils.enums import TagNames
 from simba.utils.errors import InvalidInputError, NoFilesFoundError
 from simba.utils.printing import SimbaTimer, log_event, stdout_success
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    get_fn_ext, read_df, write_df)
+from simba.utils.read_write import (
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+    read_df,
+    write_df,
+)
 
 
 class OutlierCorrecterLocationAdvanced(ConfigReader, FeatureExtractionMixin):

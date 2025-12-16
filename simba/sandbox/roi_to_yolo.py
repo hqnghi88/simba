@@ -8,12 +8,15 @@ from shapely.geometry import Polygon
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.geometry_mixin import GeometryMixin
-from simba.utils.checks import (check_if_dir_exists, check_int,
-                                check_valid_boolean, check_valid_dict)
+from simba.utils.checks import check_if_dir_exists, check_int, check_valid_boolean, check_valid_dict
 from simba.utils.enums import Keys
 from simba.utils.errors import InvalidInputError
-from simba.utils.read_write import (find_video_of_file, get_video_meta_data,
-                                    read_frm_of_video, read_roi_data)
+from simba.utils.read_write import (
+    find_video_of_file,
+    get_video_meta_data,
+    read_frm_of_video,
+    read_roi_data,
+)
 
 
 def simba_rois_to_yolo(config_path: Optional[Union[str, os.PathLike]] = None,

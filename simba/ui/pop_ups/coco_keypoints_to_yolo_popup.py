@@ -6,15 +6,16 @@ from tkinter import *
 import numpy as np
 
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.third_party_label_appenders.transform.coco_keypoints_to_yolo import \
-    COCOKeypoints2Yolo
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, FileSelect,
-                                        FolderSelect, SimBADropDown)
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists)
+from simba.third_party_label_appenders.transform.coco_keypoints_to_yolo import COCOKeypoints2Yolo
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    FileSelect,
+    FolderSelect,
+    SimBADropDown,
+)
+from simba.utils.checks import check_file_exist_and_readable, check_if_dir_exists
 from simba.utils.enums import Options
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    str_2_bool)
+from simba.utils.read_write import find_files_of_filetypes_in_directory, str_2_bool
 
 TRAIN_SIZE_OPTIONS = list(np.arange(10, 110, 10))
 

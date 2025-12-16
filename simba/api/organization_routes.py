@@ -1,20 +1,20 @@
 import logging
+from datetime import datetime
 from typing import List, Optional, Tuple
 from uuid import uuid4
-from datetime import datetime
 
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from simba.api.middleware.auth import get_current_user
-from simba.models.user import UserResponse
+from simba.auth.supabase_client import get_supabase_client
 from simba.models.organization import (
-    Organization, 
-    OrganizationCreate, 
+    Organization,
+    OrganizationCreate,
     OrganizationMember,
     OrganizationMemberInvite,
-    OrganizationMemberUpdate
+    OrganizationMemberUpdate,
 )
-from simba.auth.supabase_client import get_supabase_client
+from simba.models.user import UserResponse
 from simba.organizations.organization_service import OrganizationService
 
 logger = logging.getLogger(__name__)

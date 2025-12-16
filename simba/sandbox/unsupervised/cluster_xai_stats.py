@@ -10,11 +10,13 @@ from sklearn.inspection import permutation_importance
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.train_model_mixin import TrainModelMixin
-from simba.plotting.shap_agg_stats_visualizer import \
-    ShapAggregateStatisticsCalculator
+from simba.plotting.shap_agg_stats_visualizer import ShapAggregateStatisticsCalculator
 from simba.unsupervised.enums import Clustering, Unsupervised
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_keys_exist_in_dict, check_instance)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_keys_exist_in_dict,
+    check_instance,
+)
 from simba.utils.enums import Formats
 from simba.utils.errors import InvalidInputError
 from simba.utils.printing import SimbaTimer, stdout_success
@@ -47,8 +49,7 @@ PERMUTATION_IMPORTANCE = "permutation_importance"
 DESCRIPTIVE_STATISTICS = "descriptive_statistics"
 ANOVA_HEADERS = ["FEATURE NAME", "F-STATISTIC", "P-VALUE"]
 
-from simba.utils.checks import (check_if_dir_exists, check_valid_boolean,
-                                check_valid_dict)
+from simba.utils.checks import check_if_dir_exists, check_valid_boolean, check_valid_dict
 from simba.utils.enums import UML, Formats
 
 

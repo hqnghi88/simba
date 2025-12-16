@@ -11,14 +11,21 @@ from skimage import io
 from skimage.color import label2rgb
 from skimage.segmentation import mark_boundaries, slic
 
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_valid_img, check_int,
-                                check_valid_array)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_valid_img,
+    check_int,
+    check_valid_array,
+)
 from simba.utils.enums import Defaults, Formats
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (concatenate_videos_in_folder,
-                                    find_core_cnt, get_fn_ext,
-                                    get_video_meta_data, read_frm_of_video)
+from simba.utils.read_write import (
+    concatenate_videos_in_folder,
+    find_core_cnt,
+    get_fn_ext,
+    get_video_meta_data,
+    read_frm_of_video,
+)
 
 
 def get_img_slic(img: np.ndarray,

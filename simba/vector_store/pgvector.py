@@ -1,27 +1,29 @@
-import logging
-from typing import List, Optional, Tuple, Dict, Any, Union
-from psycopg2.extras import RealDictCursor, Json
-import uuid
 import json
-from datetime import datetime
-from sqlalchemy import Column, String, DateTime, ForeignKey, func, Integer, text, bindparam, Float
-from sqlalchemy.dialects.postgresql import UUID, JSONB, ARRAY
-from sqlalchemy.orm import relationship
-from pgvector.sqlalchemy import Vector
-from langchain_core.documents import Document
-from langchain.schema.embeddings import Embeddings
-from simba.core.config import settings
-from simba.models.simbadoc import SimbaDoc, MetadataType
-from simba.database.postgres import PostgresDB, Base, DateTimeEncoder, SQLDocument
-from simba.vector_store.base import VectorStoreBase
-from simba.core.factories.embeddings_factory import get_embeddings
-from langchain_openai import OpenAIEmbeddings
-from langchain.vectorstores import VectorStore
-from uuid import uuid4
-from langchain_community.retrievers import BM25Retriever
-from simba.auth.auth_service import get_supabase_client
-import numpy as np
+import logging
+import uuid
 from collections import defaultdict
+from datetime import datetime
+from typing import Any, Dict, List, Optional, Tuple, Union
+from uuid import uuid4
+
+import numpy as np
+from langchain.schema.embeddings import Embeddings
+from langchain.vectorstores import VectorStore
+from langchain_community.retrievers import BM25Retriever
+from langchain_core.documents import Document
+from langchain_openai import OpenAIEmbeddings
+from pgvector.sqlalchemy import Vector
+from psycopg2.extras import Json, RealDictCursor
+from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, bindparam, func, text
+from sqlalchemy.dialects.postgresql import ARRAY, JSONB, UUID
+from sqlalchemy.orm import relationship
+
+from simba.auth.auth_service import get_supabase_client
+from simba.core.config import settings
+from simba.core.factories.embeddings_factory import get_embeddings
+from simba.database.postgres import Base, DateTimeEncoder, PostgresDB, SQLDocument
+from simba.models.simbadoc import MetadataType, SimbaDoc
+from simba.vector_store.base import VectorStoreBase
 
 supabase = get_supabase_client()
 
@@ -696,7 +698,7 @@ class PGVectorStore(VectorStore):
         """
         try:
             from sentence_transformers import CrossEncoder
-            
+
             # Initialize cross-encoder model
             cross_encoder = CrossEncoder(model_name)
             

@@ -10,13 +10,18 @@ import shap
 from sklearn.ensemble import RandomForestClassifier
 
 from simba.mixins.train_model_mixin import TrainModelMixin
-from simba.plotting.shap_agg_stats_visualizer import \
-    ShapAggregateStatisticsCalculator
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists, check_instance, check_int,
-                                check_str, check_valid_array,
-                                check_valid_boolean, check_valid_dataframe,
-                                check_valid_lst)
+from simba.plotting.shap_agg_stats_visualizer import ShapAggregateStatisticsCalculator
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_dir_exists,
+    check_instance,
+    check_int,
+    check_str,
+    check_valid_array,
+    check_valid_boolean,
+    check_valid_dataframe,
+    check_valid_lst,
+)
 from simba.utils.enums import Defaults, Formats
 from simba.utils.errors import NoDataError
 from simba.utils.printing import SimbaTimer, stdout_success
