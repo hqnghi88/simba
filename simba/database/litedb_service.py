@@ -134,6 +134,11 @@ class LiteDocumentDB:
             if cursor:
                 cursor.close()
 
+
+    def delete_document(self, document_id: str, user_id: str = None) -> bool:
+        """Delete a single document by ID (wrapper for delete_documents)"""
+        return self.delete_documents([document_id])
+
     def delete_documents(self, document_ids: List[str]) -> bool:
         """Delete documents by IDs"""
         cursor = None

@@ -112,16 +112,17 @@ export default function KnowledgeConfigPage() {
   const fetchConfig = async () => {
     try {
       const token = getAccessToken();
-      const response = await fetch('/config', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/config`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      
+
       const data = await response.json();
       setConfig(data);
       setLoading(false);
@@ -132,6 +133,7 @@ export default function KnowledgeConfigPage() {
         description: 'Failed to load configuration',
         variant: 'destructive'
       });
+      setLoading(false); // Stop loading on error
     }
   };
 
@@ -139,11 +141,11 @@ export default function KnowledgeConfigPage() {
   const formatValue = (value: unknown): string => {
     if (value === null) return 'null';
     if (value === undefined) return 'undefined';
-    
+
     if (typeof value === 'object') {
       return JSON.stringify(value, null, 2);
     }
-    
+
     return String(value);
   };
 
@@ -151,14 +153,14 @@ export default function KnowledgeConfigPage() {
   const displayValue = (key: string, value: unknown): string => {
     // Mask API keys and sensitive information
     if (
-      key.includes('api_key') || 
-      key.includes('secret_key') || 
-      key.includes('password') || 
+      key.includes('api_key') ||
+      key.includes('secret_key') ||
+      key.includes('password') ||
       key.includes('token')
     ) {
       return value ? '••••••••••••••••••••••' : '';
     }
-    
+
     return formatValue(value);
   };
 
@@ -234,14 +236,14 @@ export default function KnowledgeConfigPage() {
       key: 'storage',
       fields: config?.storage
         ? Object.entries(config.storage)
-            .filter(([key]) => {
-              // If storage provider is local, hide minio-related fields
-              if (config.storage?.provider === 'local' && key.includes('minio_')) {
-                return false;
-              }
-              return true;
-            })
-            .map(([name, value]) => ({ name, value }))
+          .filter(([key]) => {
+            // If storage provider is local, hide minio-related fields
+            if (config.storage?.provider === 'local' && key.includes('minio_')) {
+              return false;
+            }
+            return true;
+          })
+          .map(([name, value]) => ({ name, value }))
         : [],
     },
     {
@@ -257,7 +259,7 @@ export default function KnowledgeConfigPage() {
   const renderConfigValue = (name: string, value: unknown, isDeprecated: boolean) => {
     // Check if value is an object or array
     const isComplexValue = typeof value === 'object' && value !== null;
-    
+
     return (
       <div className={`text-sm break-all font-mono rounded-md ${isDeprecated ? 'line-through text-gray-400' : 'text-gray-800'}`}>
         {isComplexValue ? (
@@ -289,7 +291,7 @@ export default function KnowledgeConfigPage() {
       <div className="flex items-center justify-between mb-8 border-b pb-4">
         <h1 className="text-3xl font-bold text-gray-800">Knowledge Configuration</h1>
       </div>
-      
+
       <div className="space-y-4">
         {configSections.map((section) => (
           <div key={section.key} className="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
@@ -311,7 +313,7 @@ export default function KnowledgeConfigPage() {
                 )}
               </div>
             </button>
-            
+
             {expandedSection === section.key && (
               <div className="p-5 border-t border-gray-200 bg-white">
                 <div className="space-y-5">
@@ -320,18 +322,18 @@ export default function KnowledgeConfigPage() {
                       No configuration data available
                     </div>
                   )}
-                  
+
                   {section.fields.map((field) => {
                     const isDeprecated = isFieldDeprecated(section.key, field.name);
                     const fieldTitle = field.name.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-                    
+
                     return (
                       <div key={field.name} className="flex flex-col gap-2 pb-4 border-b border-gray-100 last:border-0">
                         <div className="flex items-center gap-2">
                           <Label className={`text-sm font-medium ${isDeprecated ? 'line-through text-gray-400' : 'text-gray-700'}`}>
                             {fieldTitle}
                           </Label>
-                          
+
                           {isDeprecated && (
                             <TooltipProvider>
                               <Tooltip>
@@ -345,7 +347,7 @@ export default function KnowledgeConfigPage() {
                             </TooltipProvider>
                           )}
                         </div>
-                        
+
                         {renderConfigValue(field.name, field.value, isDeprecated)}
                       </div>
                     );
