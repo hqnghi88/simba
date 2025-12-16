@@ -42,8 +42,9 @@ class DefaultRetriever(BaseRetriever):
             List of relevant documents
         """
         k = 20
-        # Use the user_id passed as a parameter first, fallback to kwargs if not provided
-        user = supabase.auth.get_user()
-        current_user_id = user.user.id
+        # For local development with mock auth, use mock user ID
+        # In production, this would get the actual user from Supabase
+        current_user_id = user_id or "mock-user-id"
 
-        return self.store.similarity_search(query, current_user_id)
+        # Use the underlying FAISS store's similarity_search method
+        return self.store.store.similarity_search(query, k=k)

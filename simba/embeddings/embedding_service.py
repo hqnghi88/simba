@@ -147,14 +147,18 @@ class EmbeddingService:
             if not simbadoc:
                 raise ValueError(f"Document {doc_id} not found")
 
-            #docs_ids: List[str] = [doc.id for doc in simbadoc.documents]
-            self.vector_store.delete_documents(doc_id)
+            # Get all chunk IDs from the document
+            docs_ids: List[str] = [doc.id for doc in simbadoc.documents] if simbadoc.documents else []
+            
+            # Delete chunks from vector store if any exist
+            if docs_ids:
+                self.vector_store.delete_documents(docs_ids)
 
             # Update document status
             simbadoc.metadata.enabled = False
             self.database.update_document(doc_id, simbadoc)
 
-            return {"message": f"Document {doc_id} deleted from vector store"}
+            return {"message": f"Document {doc_id} disabled and {len(docs_ids)} chunks removed from vector store"}
         except Exception as e:
             logger.error(f"Error deleting document {doc_id}: {str(e)}")
             raise

@@ -44,11 +44,9 @@ workflow.add_conditional_edges(
     routing # gives either "fallback" or "transform_query"
 )
 workflow.add_edge("transform_query", "cot")
-workflow.add_edge("cot", "generate")
-
-#workflow.add_edge("retrieve", "rerank")
-#workflow.add_edge("rerank", "generate")
-#workflow.add_edge("compress", "generate")
+workflow.add_edge("cot", "retrieve")
+workflow.add_edge("retrieve", "rerank")
+workflow.add_edge("rerank", "generate")
 workflow.add_edge("fallback", END)
 workflow.add_edge("generate", END)
 

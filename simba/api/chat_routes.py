@@ -34,6 +34,7 @@ async def invoke_graph(query: Query = Body(...)):
         try:
             buffer = ""
             last_state = None
+            has_sent_content = False
 
             async for event in graph.astream_events(state, version="v2", config=config):
                 event.get("metadata", {})
@@ -46,6 +47,7 @@ async def invoke_graph(query: Query = Body(...)):
                     last_state = for_client(state)
                     yield f"{json.dumps({'state': last_state})}\n\n"
                 if event_type == "on_chat_model_stream":
+                    has_sent_content = True
                     chunk = event["data"]["chunk"].content
                     state_snapshot = for_client(state)
                     last_state = state_snapshot  # Keep track of latest state
@@ -65,8 +67,16 @@ async def invoke_graph(query: Query = Body(...)):
                 elif event_type == "on_chat_end":
                     # Send the latest state that now includes documents
                     yield f"{json.dumps({'state': last_state})}\n\n"
+            
+            # If no content was streamed, send a fallback message
+            if not has_sent_content:
+                print("WARNING: No content was streamed, sending fallback response")
+                yield f"{json.dumps({'content': 'I apologize, but I encountered an issue generating a response. Please try again or upload some documents to the knowledge base first.', 'state': for_client(state)})}\n\n"
 
         except Exception as e:
+            print(f"ERROR in chat stream: {e}")
+            import traceback
+            traceback.print_exc()
             yield f"{json.dumps({'error': str(e)})}\n\n"
         finally:
             print("Done")

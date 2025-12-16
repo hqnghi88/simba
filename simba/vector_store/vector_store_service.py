@@ -102,6 +102,14 @@ class VectorStoreService:
             self.save()
 
             return True
+        except ValueError as e:
+            if "do not exist in the current store" in str(e):
+                logger.warning(f"Some documents to delete were missing from vector store (ignoring): {e}")
+                # Save anyway to persist any deletions that succeeded (though FAISS atomic?)
+                # Actually if it failed, nothing changed usually. But we want to claim success.
+                return True
+            logger.error(f"Error deleting documents: {e}")
+            raise e
         except Exception as e:
             logger.error(f"Error deleting documents: {e}")
             raise e

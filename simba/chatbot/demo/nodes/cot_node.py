@@ -7,7 +7,15 @@ def cot(state: State):
     db = get_database()
     # Fetch all documents fresh for each request to get latest summaries
     all_docs = db.get_all_documents()
-    all_summaries = "\n\n".join(f"**{doc.id}**\n{doc.metadata.summary}" for doc in all_docs)
+    
+    # Handle empty document list
+    if not all_docs:
+        all_summaries = "No documents available in the knowledge base."
+    else:
+        all_summaries = "\n\n".join(
+            f"**{doc.id}**\n{doc.metadata.summary if doc.metadata and doc.metadata.summary else 'No summary available'}" 
+            for doc in all_docs
+        )
 
     question = state["messages"][-1].content
     sub_queries = state.get("sub_queries", []) 
