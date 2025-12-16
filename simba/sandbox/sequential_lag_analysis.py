@@ -2,8 +2,7 @@ import numpy as np
 import pandas as pd
 from statsmodels.sandbox.stats.runs import runstest_1samp
 
-from simba.utils.checks import (check_float, check_instance, check_str,
-                                check_that_column_exist)
+from simba.utils.checks import check_float, check_instance, check_str, check_that_column_exist
 from simba.utils.data import detect_bouts
 from simba.utils.errors import CountError
 from simba.utils.read_write import read_df

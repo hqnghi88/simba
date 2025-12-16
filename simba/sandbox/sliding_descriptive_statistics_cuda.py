@@ -11,8 +11,7 @@ except:
 import math
 
 from simba.data_processors.cuda.utils import _cuda_mean
-from simba.utils.checks import (check_float, check_valid_array,
-                                check_valid_tuple)
+from simba.utils.checks import check_float, check_valid_array, check_valid_tuple
 from simba.utils.enums import Formats
 
 

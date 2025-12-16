@@ -1,5 +1,6 @@
-from simba.chatbot.demo.chains.hallucination_chain import hallucination_chain
 from simba.chatbot.demo.chains.correctness_chain import correctness_chain
+from simba.chatbot.demo.chains.hallucination_chain import hallucination_chain
+
 
 def grade_generation_v_documents_and_question(state):
     """

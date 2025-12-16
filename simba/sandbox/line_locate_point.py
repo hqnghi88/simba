@@ -5,8 +5,7 @@ from shapely.geometry import LineString, Point, Polygon
 
 from simba.mixins.feature_extraction_mixin import FeatureExtractionMixin
 from simba.mixins.geometry_mixin import GeometryMixin
-from simba.utils.checks import (check_float, check_instance, check_int,
-                                check_valid_array)
+from simba.utils.checks import check_float, check_instance, check_int, check_valid_array
 from simba.utils.read_write import find_core_cnt
 
 

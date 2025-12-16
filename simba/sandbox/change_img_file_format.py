@@ -12,13 +12,11 @@ from typing import Optional, Union
 from PIL import Image
 
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, DropDownMenu,
-                                        FolderSelect)
+from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, DropDownMenu, FolderSelect
 from simba.utils.checks import check_if_dir_exists, check_int, check_str
 from simba.utils.enums import Keys, Links, Options
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    get_fn_ext)
+from simba.utils.read_write import find_files_of_filetypes_in_directory, get_fn_ext
 from simba.video_processors.video_processing import convert_to_jpeg
 
 # class Convert2jpegPopUp(PopUpMixin):

@@ -7,10 +7,13 @@ from typing import Union
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.third_party_label_appenders.third_party_appender import \
-    ThirdPartyLabelAppender
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, FolderSelect,
-                                        SimbaCheckbox, SimBADropDown)
+from simba.third_party_label_appenders.third_party_appender import ThirdPartyLabelAppender
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    FolderSelect,
+    SimbaCheckbox,
+    SimBADropDown,
+)
 from simba.utils.checks import check_if_dir_exists
 from simba.utils.enums import Defaults, Links, Methods, Options
 from simba.utils.errors import NoDataError

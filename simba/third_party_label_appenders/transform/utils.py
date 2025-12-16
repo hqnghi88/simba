@@ -19,20 +19,30 @@ import pandas as pd
 import yaml
 from PIL import Image
 
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists,
-                                check_if_keys_exist_in_dict,
-                                check_if_valid_img, check_int,
-                                check_valid_array, check_valid_dict,
-                                check_valid_lst, check_valid_tuple)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_dir_exists,
+    check_if_keys_exist_in_dict,
+    check_if_valid_img,
+    check_int,
+    check_valid_array,
+    check_valid_dict,
+    check_valid_lst,
+    check_valid_tuple,
+)
 from simba.utils.enums import Formats, Options
-from simba.utils.errors import (FaultyTrainingSetError, InvalidInputError,
-                                NoFilesFoundError)
+from simba.utils.errors import FaultyTrainingSetError, InvalidInputError, NoFilesFoundError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (copy_files_in_directory, create_directory,
-                                    find_files_of_filetypes_in_directory,
-                                    get_fn_ext, read_img, read_json,
-                                    recursive_file_search, save_json)
+from simba.utils.read_write import (
+    copy_files_in_directory,
+    create_directory,
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+    read_img,
+    read_json,
+    recursive_file_search,
+    save_json,
+)
 from simba.utils.warnings import DuplicateNamesWarning
 
 

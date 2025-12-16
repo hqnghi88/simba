@@ -2,7 +2,7 @@
 Abstract base class for database services in Simba.
 """
 from abc import ABC, abstractmethod
-from typing import List, Optional, Any, Dict, Union
+from typing import Any, Dict, List, Optional, Union
 
 from simba.models.simbadoc import SimbaDoc
 

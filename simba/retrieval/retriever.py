@@ -7,11 +7,12 @@ from typing import Any, Dict, List, Optional, Union
 
 from langchain.schema import Document
 
+from simba.auth.auth_service import get_supabase_client
 from simba.core.config import settings
 from simba.core.factories.vector_store_factory import VectorStoreFactory
 from simba.retrieval.base import BaseRetriever, RetrievalMethod
 from simba.retrieval.factory import RetrieverFactory
-from simba.auth.auth_service import get_supabase_client
+
 logger = logging.getLogger(__name__)
 
 

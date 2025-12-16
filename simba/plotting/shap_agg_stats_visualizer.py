@@ -10,18 +10,27 @@ import numpy as np
 import pandas as pd
 
 import simba
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_df_field_is_boolean,
-                                check_if_dir_exists, check_if_valid_img,
-                                check_instance, check_int, check_str,
-                                check_that_column_exist, check_valid_boolean,
-                                check_valid_dataframe, check_valid_tuple)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_df_field_is_boolean,
+    check_if_dir_exists,
+    check_if_valid_img,
+    check_instance,
+    check_int,
+    check_str,
+    check_that_column_exist,
+    check_valid_boolean,
+    check_valid_dataframe,
+    check_valid_tuple,
+)
 from simba.utils.enums import Paths
 from simba.utils.errors import FeatureNumberMismatchError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (bgr_to_rgb_tuple,
-                                    read_shap_feature_categories_csv,
-                                    read_shap_img_paths)
+from simba.utils.read_write import (
+    bgr_to_rgb_tuple,
+    read_shap_feature_categories_csv,
+    read_shap_img_paths,
+)
 
 SIMBA_DIR = os.path.dirname(simba.__file__)
 

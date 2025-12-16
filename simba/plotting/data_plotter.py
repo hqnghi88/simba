@@ -8,14 +8,19 @@ import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed
 
-from simba.data_processors.timebins_movement_calculator import \
-    TimeBinsMovementCalculator
+from simba.data_processors.timebins_movement_calculator import TimeBinsMovementCalculator
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.plotting_mixin import PlottingMixin
 from simba.utils.checks import (
     check_all_file_names_are_represented_in_video_log,
-    check_file_exist_and_readable, check_if_valid_rgb_tuple, check_int,
-    check_str, check_valid_boolean, check_valid_lst, check_valid_tuple)
+    check_file_exist_and_readable,
+    check_if_valid_rgb_tuple,
+    check_int,
+    check_str,
+    check_valid_boolean,
+    check_valid_lst,
+    check_valid_tuple,
+)
 from simba.utils.enums import Formats
 from simba.utils.errors import NoSpecifiedOutputError
 from simba.utils.printing import SimbaTimer, stdout_success

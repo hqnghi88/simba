@@ -12,8 +12,7 @@ import numpy as np
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.ui.tkinter_functions import (DropDownMenu, Entry_Box, FileSelect,
-                                        FolderSelect)
+from simba.ui.tkinter_functions import DropDownMenu, Entry_Box, FileSelect, FolderSelect
 from simba.unsupervised.enums import Clustering, UMLOptions, Unsupervised
 from simba.unsupervised.hdbscan_clusterer import HDBSCANClusterer
 from simba.utils.checks import check_if_dir_exists

@@ -9,8 +9,7 @@ from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.mixins.unsupervised_mixin import UMLMixin
 from simba.ui.tkinter_functions import FileSelect
 from simba.unsupervised.enums import Clustering, Unsupervised
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_keys_exist_in_dict)
+from simba.utils.checks import check_file_exist_and_readable, check_if_keys_exist_in_dict
 from simba.utils.enums import Formats
 from simba.utils.read_write import read_pickle
 

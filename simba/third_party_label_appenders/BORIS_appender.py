@@ -9,18 +9,26 @@ import pandas as pd
 
 from simba.mixins.config_reader import ConfigReader
 from simba.third_party_label_appenders.tools import (
-    is_new_boris_version, read_boris_annotation_files)
-from simba.utils.checks import (check_if_dir_exists,
-                                check_if_filepath_list_is_empty)
-from simba.utils.errors import (NoDataError,
-                                ThirdPartyAnnotationEventCountError,
-                                ThirdPartyAnnotationOverlapError)
+    is_new_boris_version,
+    read_boris_annotation_files,
+)
+from simba.utils.checks import check_if_dir_exists, check_if_filepath_list_is_empty
+from simba.utils.errors import (
+    NoDataError,
+    ThirdPartyAnnotationEventCountError,
+    ThirdPartyAnnotationOverlapError,
+)
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    get_fn_ext, read_df, write_df)
+from simba.utils.read_write import (
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+    read_df,
+    write_df,
+)
 from simba.utils.warnings import (
     ThirdPartyAnnotationsInvalidFileFormatWarning,
-    ThirdPartyAnnotationsOutsidePoseEstimationDataWarning)
+    ThirdPartyAnnotationsOutsidePoseEstimationDataWarning,
+)
 
 BEHAVIOR = 'BEHAVIOR'
 class BorisAppender(ConfigReader):

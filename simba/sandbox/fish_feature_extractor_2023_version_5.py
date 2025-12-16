@@ -20,10 +20,15 @@ from simba.mixins.config_reader import ConfigReader
 from simba.mixins.feature_extraction_mixin import FeatureExtractionMixin
 from simba.utils.enums import Paths
 from simba.utils.printing import SimbaTimer
-from simba.utils.read_write import (check_if_filepath_list_is_empty,
-                                    get_fn_ext, read_config_file, read_df,
-                                    read_project_path_and_file_type,
-                                    read_video_info, write_df)
+from simba.utils.read_write import (
+    check_if_filepath_list_is_empty,
+    get_fn_ext,
+    read_config_file,
+    read_df,
+    read_project_path_and_file_type,
+    read_video_info,
+    write_df,
+)
 
 TAIL_BP_NAMES = ["objectA", "peduncle_base"]
 CENTER_BP_NAMES = ["midpoint"]

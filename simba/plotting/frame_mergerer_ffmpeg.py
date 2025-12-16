@@ -11,17 +11,24 @@ except ImportError:
     from typing_extensions import Literal
 
 from simba.mixins.config_reader import ConfigReader
-from simba.utils.checks import (check_ffmpeg_available,
-                                check_file_exist_and_readable, check_int,
-                                check_nvidea_gpu_available, check_str,
-                                check_valid_lst)
+from simba.utils.checks import (
+    check_ffmpeg_available,
+    check_file_exist_and_readable,
+    check_int,
+    check_nvidea_gpu_available,
+    check_str,
+    check_valid_lst,
+)
 from simba.utils.enums import Paths, TagNames
 from simba.utils.errors import FFMPEGCodecGPUError
 from simba.utils.printing import SimbaTimer, log_event, stdout_success
 from simba.utils.read_write import copy_files_to_directory, get_fn_ext
 from simba.video_processors.video_processing import (
-    horizontal_video_concatenator, mixed_mosaic_concatenator,
-    mosaic_concatenator, vertical_video_concatenator)
+    horizontal_video_concatenator,
+    mixed_mosaic_concatenator,
+    mosaic_concatenator,
+    vertical_video_concatenator,
+)
 
 HORIZONTAL = "horizontal"
 VERTICAL = "vertical"

@@ -4,17 +4,24 @@ from typing import Union
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, Entry_Box,
-                                        FileSelect)
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_string_value_is_valid_video_timestamp,
-                                check_int,
-                                check_that_hhmmss_start_is_before_end)
+from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, Entry_Box, FileSelect
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_string_value_is_valid_video_timestamp,
+    check_int,
+    check_that_hhmmss_start_is_before_end,
+)
 from simba.utils.data import find_frame_numbers_from_time_stamp
 from simba.utils.enums import Formats, Keys, Links, Options
 from simba.utils.read_write import (
-    check_if_hhmmss_timestamp_is_valid_part_of_video, find_video_of_file,
-    get_fn_ext, read_df, read_video_info, remove_a_folder, write_df)
+    check_if_hhmmss_timestamp_is_valid_part_of_video,
+    find_video_of_file,
+    get_fn_ext,
+    read_df,
+    read_video_info,
+    remove_a_folder,
+    write_df,
+)
 from simba.video_processors.video_processing import multi_split_video
 
 

@@ -16,8 +16,12 @@ from simba.utils.data import smooth_data_gaussian, smooth_data_savitzky_golay
 from simba.utils.enums import Dtypes, Methods, Paths
 from simba.utils.errors import NoFilesFoundError
 from simba.utils.printing import stdout_success
-from simba.utils.read_write import (get_fn_ext, read_config_file,
-                                    read_project_path_and_file_type, write_df)
+from simba.utils.read_write import (
+    get_fn_ext,
+    read_config_file,
+    read_project_path_and_file_type,
+    write_df,
+)
 
 
 class MarsImporter(object):

@@ -17,16 +17,19 @@ import pandas as pd
 from simba.mixins.train_model_mixin import TrainModelMixin
 from simba.mixins.unsupervised_mixin import UMLMixin
 from simba.unsupervised.enums import Unsupervised
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists,
-                                check_if_keys_exist_in_dict,
-                                check_if_list_contains_values, check_instance,
-                                check_str, check_that_directory_is_empty,
-                                check_umap_hyperparameters)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_dir_exists,
+    check_if_keys_exist_in_dict,
+    check_if_list_contains_values,
+    check_instance,
+    check_str,
+    check_that_directory_is_empty,
+    check_umap_hyperparameters,
+)
 from simba.utils.enums import Formats
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (drop_df_fields, read_pickle, write_df,
-                                    write_pickle)
+from simba.utils.read_write import drop_df_fields, read_pickle, write_df, write_pickle
 
 try:
     from cuml import UMAP

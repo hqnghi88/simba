@@ -3,9 +3,9 @@ from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from simba.api.middleware.auth import get_current_user, require_role, require_permission
+from simba.api.middleware.auth import get_current_user, require_permission, require_role
 from simba.auth.role_service import RoleService
-from simba.models.role import Role, RoleCreate, RoleUpdate, Permission, UserRoleCreate, UserRole
+from simba.models.role import Permission, Role, RoleCreate, RoleUpdate, UserRole, UserRoleCreate
 
 logger = logging.getLogger(__name__)
 

@@ -21,10 +21,16 @@ except:
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.feature_extraction_mixin import FeatureExtractionMixin
 from simba.mixins.timeseries_features_mixin import TimeseriesFeatureMixin
-from simba.utils.checks import (check_float, check_if_dir_exists,
-                                check_if_filepath_list_is_empty,
-                                check_instance, check_str, check_valid_array,
-                                check_valid_dataframe, check_valid_lst)
+from simba.utils.checks import (
+    check_float,
+    check_if_dir_exists,
+    check_if_filepath_list_is_empty,
+    check_instance,
+    check_str,
+    check_valid_array,
+    check_valid_dataframe,
+    check_valid_lst,
+)
 from simba.utils.data import detect_bouts
 from simba.utils.enums import Formats
 from simba.utils.errors import CountError, InvalidInputError

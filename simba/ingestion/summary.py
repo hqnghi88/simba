@@ -1,6 +1,7 @@
 
-from simba.core.factories.llm_factory import get_llm
 from langchain_core.prompts import ChatPromptTemplate
+
+from simba.core.factories.llm_factory import get_llm
 from simba.models.simbadoc import SimbaDoc
 
 llm = get_llm() 

@@ -8,13 +8,16 @@ import scipy.io as sio
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pose_importer_mixin import PoseImporterMixin
-from simba.utils.checks import (check_if_dir_exists,
-                                check_if_filepath_list_is_empty)
+from simba.utils.checks import check_if_dir_exists, check_if_filepath_list_is_empty
 from simba.utils.errors import CountError, NoFilesFoundError
-from simba.utils.read_write import (find_all_videos_in_project,
-                                    find_video_of_file, get_fn_ext,
-                                    get_video_meta_data, read_config_entry,
-                                    read_config_file)
+from simba.utils.read_write import (
+    find_all_videos_in_project,
+    find_video_of_file,
+    get_fn_ext,
+    get_video_meta_data,
+    read_config_entry,
+    read_config_file,
+)
 from simba.utils.warnings import InvalidValueWarning
 
 

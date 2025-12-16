@@ -17,8 +17,12 @@ from simba.mixins.plotting_mixin import PlottingMixin
 from simba.utils.checks import check_file_exist_and_readable
 from simba.utils.errors import NoFilesFoundError
 from simba.utils.printing import stdout_success
-from simba.utils.read_write import (concatenate_videos_in_folder, get_fn_ext,
-                                    get_video_meta_data, read_df)
+from simba.utils.read_write import (
+    concatenate_videos_in_folder,
+    get_fn_ext,
+    get_video_meta_data,
+    read_df,
+)
 
 #
 # def _image_creator(frm_range: list,

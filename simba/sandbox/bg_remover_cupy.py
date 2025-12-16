@@ -6,18 +6,22 @@ import cv2
 import numpy as np
 
 from simba.data_processors.cuda.image import img_stack_to_grayscale_cupy
-from simba.data_processors.cuda.utils import (_cuda_luminance_pixel_to_grey,
-                                              _is_cuda_available)
-from simba.utils.checks import (check_if_valid_img, check_if_valid_rgb_tuple,
-                                check_int, is_video_color)
+from simba.data_processors.cuda.utils import _cuda_luminance_pixel_to_grey, _is_cuda_available
+from simba.utils.checks import (
+    check_if_valid_img,
+    check_if_valid_rgb_tuple,
+    check_int,
+    is_video_color,
+)
 from simba.utils.enums import Formats
 from simba.utils.errors import SimBAGPUError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (get_fn_ext, get_video_meta_data,
-                                    read_img_batch_from_video_gpu)
-from simba.video_processors.video_processing import (create_average_frm,
-                                                     video_bg_subtraction,
-                                                     video_bg_subtraction_mp)
+from simba.utils.read_write import get_fn_ext, get_video_meta_data, read_img_batch_from_video_gpu
+from simba.video_processors.video_processing import (
+    create_average_frm,
+    video_bg_subtraction,
+    video_bg_subtraction_mp,
+)
 
 
 def bg_subtraction_cupy(video_path: Union[str, os.PathLike],

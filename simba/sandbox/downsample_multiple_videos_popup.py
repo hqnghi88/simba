@@ -3,16 +3,26 @@ import threading
 from tkinter import *
 
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, DropDownMenu,
-                                        Entry_Box, FolderSelect)
-from simba.utils.checks import (check_ffmpeg_available, check_if_dir_exists,
-                                check_int, check_nvidea_gpu_available)
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    DropDownMenu,
+    Entry_Box,
+    FolderSelect,
+)
+from simba.utils.checks import (
+    check_ffmpeg_available,
+    check_if_dir_exists,
+    check_int,
+    check_nvidea_gpu_available,
+)
 from simba.utils.enums import Formats, Keys, Links, Options
 from simba.utils.errors import InvalidInputError
 from simba.utils.read_write import find_all_videos_in_directory
-from simba.video_processors.video_processing import (downsample_video,
-                                                     resize_videos_by_height,
-                                                     resize_videos_by_width)
+from simba.video_processors.video_processing import (
+    downsample_video,
+    resize_videos_by_height,
+    resize_videos_by_width,
+)
 
 
 class DownsampleMultipleVideosPopUp(PopUpMixin):

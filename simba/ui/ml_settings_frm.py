@@ -1,8 +1,7 @@
 import tkinter.ttk as ttk
 from tkinter import NW
 
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, Entry_Box,
-                                        SimbaButton)
+from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, Entry_Box, SimbaButton
 from simba.utils.checks import check_instance
 from simba.utils.enums import Formats, Links
 

@@ -4,10 +4,16 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 import cv2
 import numpy as np
 
-from simba.utils.checks import (check_float, check_if_dir_exists,
-                                check_if_keys_exist_in_dict,
-                                check_if_valid_rgb_tuple, check_instance,
-                                check_int, check_valid_array, check_valid_lst)
+from simba.utils.checks import (
+    check_float,
+    check_if_dir_exists,
+    check_if_keys_exist_in_dict,
+    check_if_valid_rgb_tuple,
+    check_instance,
+    check_int,
+    check_valid_array,
+    check_valid_lst,
+)
 from simba.utils.printing import SimbaTimer, stdout_success
 
 

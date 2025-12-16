@@ -6,8 +6,7 @@ import pandas as pd
 import PIL
 import plotly.express as px
 
-from simba.utils.checks import (check_float, check_instance, check_int,
-                                check_valid_dataframe)
+from simba.utils.checks import check_float, check_instance, check_int, check_valid_dataframe
 from simba.utils.data import create_color_palettes, detect_bouts
 from simba.utils.errors import InvalidInputError
 from simba.utils.read_write import read_df, seconds_to_timestamp

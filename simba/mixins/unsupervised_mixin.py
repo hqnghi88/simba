@@ -6,8 +6,13 @@ import numpy as np
 import pandas as pd
 
 from simba.data_processors.cuda.utils import _is_cuda_available
-from simba.utils.checks import (check_float, check_instance, check_int,
-                                check_valid_array, check_valid_boolean)
+from simba.utils.checks import (
+    check_float,
+    check_instance,
+    check_int,
+    check_valid_array,
+    check_valid_boolean,
+)
 from simba.utils.data import get_library_version
 from simba.utils.enums import Formats
 from simba.utils.errors import SimBAGPUError

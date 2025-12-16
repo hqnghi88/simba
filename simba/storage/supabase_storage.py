@@ -1,15 +1,15 @@
 import logging
 import os
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Dict, Optional
 
 from fastapi import UploadFile
-from supabase import Client
 from storage3.exceptions import StorageApiError
+from supabase import Client
 
+from simba.auth.supabase_client import SupabaseClientSingleton
 from simba.core.config import settings
 from simba.storage.base import StorageProvider
-from simba.auth.supabase_client import SupabaseClientSingleton
 
 logger = logging.getLogger(__name__)
 

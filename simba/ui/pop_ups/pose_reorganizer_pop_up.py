@@ -4,8 +4,12 @@ from tkinter import *
 
 from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.pose_processors.reorganize_keypoint import KeypointReorganizer
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, DropDownMenu,
-                                        FolderSelect, hxtScrollbar)
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    DropDownMenu,
+    FolderSelect,
+    hxtScrollbar,
+)
 from simba.utils.enums import Formats, Keys, Links
 
 

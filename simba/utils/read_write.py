@@ -42,38 +42,72 @@ import pkg_resources
 import pyarrow as pa
 from numba import njit, prange
 from pyarrow import csv
-from shapely.geometry import (LineString, MultiLineString, MultiPolygon, Point,
-                              Polygon)
+from shapely.geometry import LineString, MultiLineString, MultiPolygon, Point, Polygon
 
 import simba
-from simba.utils.checks import (check_ffmpeg_available,
-                                check_file_exist_and_readable, check_float,
-                                check_if_dir_exists,
-                                check_if_filepath_list_is_empty,
-                                check_if_keys_exist_in_dict,
-                                check_if_string_value_is_valid_video_timestamp,
-                                check_if_valid_img, check_if_valid_rgb_tuple,
-                                check_instance, check_int,
-                                check_nvidea_gpu_available, check_str,
-                                check_valid_array, check_valid_boolean,
-                                check_valid_dataframe, check_valid_lst,
-                                check_valid_tuple, check_valid_url,
-                                is_video_color)
-from simba.utils.enums import (ENV_VARS, OS, ConfigKey, Defaults, Dtypes,
-                               Formats, Keys, Links, Options, Paths)
-from simba.utils.errors import (DataHeaderError, DuplicationError,
-                                FFMPEGCodecGPUError, FFMPEGNotFoundError,
-                                FileExistError, FrameRangeError, IntegerError,
-                                InvalidFilepathError, InvalidFileTypeError,
-                                InvalidInputError, InvalidVideoFileError,
-                                MissingProjectConfigEntryError, NoDataError,
-                                NoFilesFoundError, NotDirectoryError,
-                                ParametersFileError, PermissionError,
-                                SimBAPAckageVersionError)
+from simba.utils.checks import (
+    check_ffmpeg_available,
+    check_file_exist_and_readable,
+    check_float,
+    check_if_dir_exists,
+    check_if_filepath_list_is_empty,
+    check_if_keys_exist_in_dict,
+    check_if_string_value_is_valid_video_timestamp,
+    check_if_valid_img,
+    check_if_valid_rgb_tuple,
+    check_instance,
+    check_int,
+    check_nvidea_gpu_available,
+    check_str,
+    check_valid_array,
+    check_valid_boolean,
+    check_valid_dataframe,
+    check_valid_lst,
+    check_valid_tuple,
+    check_valid_url,
+    is_video_color,
+)
+from simba.utils.enums import (
+    ENV_VARS,
+    OS,
+    ConfigKey,
+    Defaults,
+    Dtypes,
+    Formats,
+    Keys,
+    Links,
+    Options,
+    Paths,
+)
+from simba.utils.errors import (
+    DataHeaderError,
+    DuplicationError,
+    FFMPEGCodecGPUError,
+    FFMPEGNotFoundError,
+    FileExistError,
+    FrameRangeError,
+    IntegerError,
+    InvalidFilepathError,
+    InvalidFileTypeError,
+    InvalidInputError,
+    InvalidVideoFileError,
+    MissingProjectConfigEntryError,
+    NoDataError,
+    NoFilesFoundError,
+    NotDirectoryError,
+    ParametersFileError,
+    PermissionError,
+    SimBAPAckageVersionError,
+)
 from simba.utils.printing import SimbaTimer, stdout_success
 from simba.utils.warnings import (
-    FileExistWarning, FrameRangeWarning, GPUToolsWarning, InvalidValueWarning,
-    NoFileFoundWarning, ThirdPartyAnnotationsInvalidFileFormatWarning)
+    FileExistWarning,
+    FrameRangeWarning,
+    GPUToolsWarning,
+    InvalidValueWarning,
+    NoFileFoundWarning,
+    ThirdPartyAnnotationsInvalidFileFormatWarning,
+)
 
 SIMBA_DIR = os.path.dirname(simba.__file__)
 

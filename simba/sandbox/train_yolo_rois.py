@@ -3,7 +3,9 @@ import os
 from simba.bounding_box_tools.yolo.model import fit_yolo, inference_yolo
 from simba.plotting.yolo_visualize import YOLOVisualizer
 from simba.third_party_label_appenders.converters import (
-    simba_rois_to_yolo, split_yolo_train_test_val)
+    simba_rois_to_yolo,
+    split_yolo_train_test_val,
+)
 
 # FIRST WE CREATE SOME YOLO FORMATED DATA LABELS AND EXTRACT THEIR ASSOCIATED IMAGES FROM THE VIDEOS AND SIMBA ROI DEFINITIONS
 ROI_PATH = r"/mnt/c/troubleshooting/RAT_NOR/project_folder/logs/measures/ROI_definitions.h5"

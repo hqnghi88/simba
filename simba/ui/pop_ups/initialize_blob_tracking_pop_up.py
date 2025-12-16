@@ -7,8 +7,10 @@ from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, FolderSelect
 from simba.utils.checks import check_if_dir_exists
 from simba.utils.enums import Links
 from simba.utils.errors import InvalidInputError
-from simba.utils.read_write import (find_all_videos_in_directory,
-                                    find_files_of_filetypes_in_directory)
+from simba.utils.read_write import (
+    find_all_videos_in_directory,
+    find_files_of_filetypes_in_directory,
+)
 
 
 class InitializeBlobTrackerPopUp(PopUpMixin):

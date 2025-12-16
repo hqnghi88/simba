@@ -1,8 +1,12 @@
 import os
 
 from simba.mixins.config_reader import ConfigReader
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    get_fn_ext, read_df, write_df)
+from simba.utils.read_write import (
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+    read_df,
+    write_df,
+)
 
 SIMBA_PROJECT_CONFIG_PATH = r"C:\troubleshooting\mitra\project_folder\project_config.ini" #PATH TO THE SIMBA PROJECT CONFIG (USED TO FIND THE BODY PART NAMES AND CLASSIFIER NAMES)
 DATA_DIRECTORY = r'C:\troubleshooting\mitra\project_folder\csv\targets_inserted' #PATH TO A DIRECTORY CONTAINING SIMBA CSV FILES

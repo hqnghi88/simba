@@ -10,8 +10,13 @@ from itertools import combinations
 from typing import Any, List, Optional, Tuple
 
 from simba.mixins.statistics_mixin import Statistics
-from simba.utils.checks import (check_float, check_instance, check_int,
-                                check_str, check_valid_dataframe)
+from simba.utils.checks import (
+    check_float,
+    check_instance,
+    check_int,
+    check_str,
+    check_valid_dataframe,
+)
 from simba.utils.errors import InvalidInputError
 from simba.utils.read_write import read_pickle
 

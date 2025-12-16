@@ -1,5 +1,6 @@
 from simba.chatbot.demo.chains.transform_query_chain import question_rewrite_chain
 
+
 def transform_query(state):
     """
     Transform the query to produce a better question.

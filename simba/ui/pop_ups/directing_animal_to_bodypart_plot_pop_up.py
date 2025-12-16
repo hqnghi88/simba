@@ -5,12 +5,13 @@ from tkinter import *
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.plotting.directing_animals_to_bodypart_visualizer import \
-    DirectingAnimalsToBodyPartVisualizer
-from simba.plotting.directing_animals_visualizer import \
-    DirectingOtherAnimalsVisualizer
-from simba.plotting.directing_animals_visualizer_mp import \
-    DirectingOtherAnimalsVisualizerMultiprocess
+from simba.plotting.directing_animals_to_bodypart_visualizer import (
+    DirectingAnimalsToBodyPartVisualizer,
+)
+from simba.plotting.directing_animals_visualizer import DirectingOtherAnimalsVisualizer
+from simba.plotting.directing_animals_visualizer_mp import (
+    DirectingOtherAnimalsVisualizerMultiprocess,
+)
 from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, DropDownMenu
 from simba.utils.enums import Formats, Keys, Links, Paths
 from simba.utils.errors import AnimalNumberError

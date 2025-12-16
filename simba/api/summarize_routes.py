@@ -1,11 +1,12 @@
 import logging
-from fastapi import APIRouter, HTTPException, Body
+
+from fastapi import APIRouter, Body, HTTPException
 from pydantic import BaseModel, Field
 
-from simba.tasks.generate_summary import generate_summary_task
+from simba.core.celery_config import celery_app
 from simba.core.factories.database_factory import get_database
 from simba.models.simbadoc import SimbaDoc
-from simba.core.celery_config import celery_app
+from simba.tasks.generate_summary import generate_summary_task
 
 logger = logging.getLogger(__name__)
 summarize_router = APIRouter()

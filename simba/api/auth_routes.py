@@ -1,14 +1,14 @@
 import logging
-from typing import Dict, Optional, List
+from typing import Dict, List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, status, Response, Cookie
+from fastapi import APIRouter, Cookie, Depends, HTTPException, Response, status
 from pydantic import BaseModel, EmailStr, Field
 
+from simba.api.middleware.auth import get_current_user
 from simba.auth.auth_service import AuthService
 from simba.auth.role_service import RoleService
 from simba.core.config import settings
-from simba.models.role import Role, Permission
-from simba.api.middleware.auth import get_current_user
+from simba.models.role import Permission, Role
 
 logger = logging.getLogger(__name__)
 

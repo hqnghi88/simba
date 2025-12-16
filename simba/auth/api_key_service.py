@@ -2,19 +2,19 @@
 Service for managing API keys in the Simba application.
 """
 import hashlib
+import json
 import logging
 import secrets
-import json
 from datetime import datetime
-from typing import List, Optional, Dict, Any
+from typing import Any, Dict, List, Optional
 from uuid import UUID
 
 from fastapi import HTTPException, status
 
-from simba.models.api_key import APIKey, APIKeyInfo, APIKeyResponse, APIKeyCreate
-from simba.database.postgres import PostgresDB
 from simba.auth.role_service import RoleService
 from simba.auth.supabase_client import get_supabase_client
+from simba.database.postgres import PostgresDB
+from simba.models.api_key import APIKey, APIKeyCreate, APIKeyInfo, APIKeyResponse
 
 logger = logging.getLogger(__name__)
 supabase = get_supabase_client()

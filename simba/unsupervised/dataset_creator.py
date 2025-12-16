@@ -10,9 +10,11 @@ from simba.mixins.config_reader import ConfigReader
 from simba.mixins.unsupervised_mixin import UMLMixin
 from simba.unsupervised.bout_aggregator import bout_aggregator
 from simba.unsupervised.enums import Unsupervised
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_filepath_list_is_empty,
-                                check_instance)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_filepath_list_is_empty,
+    check_instance,
+)
 from simba.utils.errors import NoDataError
 from simba.utils.printing import SimbaTimer, stdout_success
 from simba.utils.read_write import get_fn_ext, read_df, write_pickle

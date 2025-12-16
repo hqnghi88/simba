@@ -6,16 +6,13 @@ import pickle
 from tkinter import *
 from typing import Union
 
-from simba.bounding_box_tools.agg_boundary_stats import \
-    AggBoundaryStatisticsCalculator
-from simba.bounding_box_tools.boundary_statistics import \
-    BoundaryStatisticsCalculator
+from simba.bounding_box_tools.agg_boundary_stats import AggBoundaryStatisticsCalculator
+from simba.bounding_box_tools.boundary_statistics import BoundaryStatisticsCalculator
 from simba.bounding_box_tools.find_boundaries import AnimalBoundaryFinder
 from simba.bounding_box_tools.visualize_boundaries import BoundaryVisualizer
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, DropDownMenu,
-                                        Entry_Box)
+from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, DropDownMenu, Entry_Box
 from simba.utils.checks import check_int
 from simba.utils.enums import Formats, Keys, Links
 from simba.utils.errors import NoChoosenMeasurementError, NoFilesFoundError

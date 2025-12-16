@@ -4,8 +4,12 @@ from typing import Optional, Tuple, Union
 import cv2
 import numpy as np
 
-from simba.utils.checks import (check_if_dir_exists, check_if_valid_rgb_tuple,
-                                check_int, check_valid_tuple)
+from simba.utils.checks import (
+    check_if_dir_exists,
+    check_if_valid_rgb_tuple,
+    check_int,
+    check_valid_tuple,
+)
 
 
 def create_uniform_img(size: Tuple[int, int],

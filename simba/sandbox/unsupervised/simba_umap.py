@@ -9,10 +9,15 @@ import numpy as np
 import pandas as pd
 from numba import typed
 
-from simba.utils.checks import (check_file_exist_and_readable, check_float,
-                                check_if_keys_exist_in_dict, check_int,
-                                check_str, check_valid_boolean,
-                                check_valid_dict)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_float,
+    check_if_keys_exist_in_dict,
+    check_int,
+    check_str,
+    check_valid_boolean,
+    check_valid_dict,
+)
 from simba.utils.enums import UML, Options
 from simba.utils.lookups import get_model_names
 from simba.utils.read_write import drop_df_fields, read_pickle, write_pickle

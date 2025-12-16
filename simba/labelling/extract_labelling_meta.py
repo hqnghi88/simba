@@ -6,7 +6,10 @@ import pandas as pd
 from simba.mixins.config_reader import ConfigReader
 from simba.utils.checks import (
     check_all_file_names_are_represented_in_video_log,
-    check_if_df_field_is_boolean, check_that_column_exist, check_valid_boolean)
+    check_if_df_field_is_boolean,
+    check_that_column_exist,
+    check_valid_boolean,
+)
 from simba.utils.data import detect_bouts
 from simba.utils.errors import CountError
 from simba.utils.printing import SimbaTimer, stdout_success

@@ -5,9 +5,12 @@ from typing import Tuple
 import numpy as np
 from numba import cuda
 
-from simba.data_processors.cuda.utils import (_cuda_2d_transpose, _cuda_add_2d,
-                                              _cuda_matrix_multiplication,
-                                              _cuda_subtract_2d)
+from simba.data_processors.cuda.utils import (
+    _cuda_2d_transpose,
+    _cuda_add_2d,
+    _cuda_matrix_multiplication,
+    _cuda_subtract_2d,
+)
 from simba.utils.checks import check_int, check_valid_array
 from simba.utils.enums import Formats
 from simba.utils.errors import InvalidInputError

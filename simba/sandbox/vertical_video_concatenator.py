@@ -2,9 +2,13 @@ import os
 import subprocess
 from typing import List, Optional, Union
 
-from simba.utils.checks import (check_ffmpeg_available, check_if_dir_exists,
-                                check_int, check_nvidea_gpu_available,
-                                check_valid_lst)
+from simba.utils.checks import (
+    check_ffmpeg_available,
+    check_if_dir_exists,
+    check_int,
+    check_nvidea_gpu_available,
+    check_valid_lst,
+)
 from simba.utils.errors import FFMPEGCodecGPUError, InvalidInputError
 from simba.utils.printing import SimbaTimer
 from simba.utils.read_write import get_video_meta_data

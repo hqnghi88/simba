@@ -27,33 +27,61 @@ except:
 import simba
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.image_mixin import ImageMixin
-from simba.utils.checks import (check_ffmpeg_available,
-                                check_file_exist_and_readable, check_float,
-                                check_if_dir_exists,
-                                check_if_filepath_list_is_empty,
-                                check_if_string_value_is_valid_video_timestamp,
-                                check_instance, check_int,
-                                check_nvidea_gpu_available, check_str,
-                                check_that_hhmmss_start_is_before_end,
-                                check_valid_lst, check_valid_tuple)
+from simba.utils.checks import (
+    check_ffmpeg_available,
+    check_file_exist_and_readable,
+    check_float,
+    check_if_dir_exists,
+    check_if_filepath_list_is_empty,
+    check_if_string_value_is_valid_video_timestamp,
+    check_instance,
+    check_int,
+    check_nvidea_gpu_available,
+    check_str,
+    check_that_hhmmss_start_is_before_end,
+    check_valid_lst,
+    check_valid_tuple,
+)
 from simba.utils.data import find_frame_numbers_from_time_stamp
 from simba.utils.enums import OS, ConfigKey, Formats, Options, Paths
-from simba.utils.errors import (CountError, DirectoryExistError,
-                                FFMPEGCodecGPUError, FFMPEGNotFoundError,
-                                FileExistError, FrameRangeError,
-                                InvalidFileTypeError, InvalidInputError,
-                                InvalidVideoFileError, NoDataError,
-                                NoFilesFoundError, NotDirectoryError)
-from simba.utils.lookups import (get_ffmpeg_crossfade_methods, get_fonts,
-                                 percent_to_crf_lookup, percent_to_qv_lk)
+from simba.utils.errors import (
+    CountError,
+    DirectoryExistError,
+    FFMPEGCodecGPUError,
+    FFMPEGNotFoundError,
+    FileExistError,
+    FrameRangeError,
+    InvalidFileTypeError,
+    InvalidInputError,
+    InvalidVideoFileError,
+    NoDataError,
+    NoFilesFoundError,
+    NotDirectoryError,
+)
+from simba.utils.lookups import (
+    get_ffmpeg_crossfade_methods,
+    get_fonts,
+    percent_to_crf_lookup,
+    percent_to_qv_lk,
+)
 from simba.utils.printing import SimbaTimer, stdout_success
 from simba.utils.read_write import (
     check_if_hhmmss_timestamp_is_valid_part_of_video,
-    concatenate_videos_in_folder, find_all_videos_in_directory, find_core_cnt,
-    find_files_of_filetypes_in_directory, get_fn_ext, get_video_meta_data,
-    read_config_entry, read_config_file, read_frm_of_video)
-from simba.utils.warnings import (FileExistWarning, InValidUserInputWarning,
-                                  SameInputAndOutputWarning)
+    concatenate_videos_in_folder,
+    find_all_videos_in_directory,
+    find_core_cnt,
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+    get_video_meta_data,
+    read_config_entry,
+    read_config_file,
+    read_frm_of_video,
+)
+from simba.utils.warnings import (
+    FileExistWarning,
+    InValidUserInputWarning,
+    SameInputAndOutputWarning,
+)
 from simba.video_processors.extract_frames import video_to_frames
 from simba.video_processors.roi_selector import ROISelector
 from simba.video_processors.roi_selector_circle import ROISelectorCircle

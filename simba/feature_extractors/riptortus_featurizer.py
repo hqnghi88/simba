@@ -25,10 +25,15 @@ from simba.mixins.feature_extraction_mixin import FeatureExtractionMixin
 from simba.mixins.timeseries_features_mixin import TimeseriesFeatureMixin
 from simba.utils.enums import Paths
 from simba.utils.printing import SimbaTimer
-from simba.utils.read_write import (check_if_filepath_list_is_empty,
-                                    get_fn_ext, read_config_file, read_df,
-                                    read_project_path_and_file_type,
-                                    read_video_info, write_df)
+from simba.utils.read_write import (
+    check_if_filepath_list_is_empty,
+    get_fn_ext,
+    read_config_file,
+    read_df,
+    read_project_path_and_file_type,
+    read_video_info,
+    write_df,
+)
 
 HEAD_BP_NAMES = ["Heat_tip", "Left_eye", "Right_eye", "Head_back"]
 THORAX_BP_NAMES = ["Thorax", "Thorax_rear"]

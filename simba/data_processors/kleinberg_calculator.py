@@ -11,9 +11,14 @@ import pandas as pd
 
 from simba.data_processors.pybursts_calculator import kleinberg_burst_detection
 from simba.mixins.config_reader import ConfigReader
-from simba.utils.checks import (check_float, check_if_dir_exists,
-                                check_if_filepath_list_is_empty, check_int,
-                                check_that_column_exist, check_valid_lst)
+from simba.utils.checks import (
+    check_float,
+    check_if_dir_exists,
+    check_if_filepath_list_is_empty,
+    check_int,
+    check_that_column_exist,
+    check_valid_lst,
+)
 from simba.utils.enums import Paths, TagNames
 from simba.utils.printing import SimbaTimer, log_event, stdout_success
 from simba.utils.read_write import get_fn_ext, read_df, write_df

@@ -2,8 +2,8 @@ import logging
 
 import torch
 from celery import Celery
-from celery.signals import worker_init, worker_shutdown, worker_shutting_down
 from celery.schedules import crontab
+from celery.signals import worker_init, worker_shutdown, worker_shutting_down
 
 from simba.core.config import settings
 

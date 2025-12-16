@@ -7,8 +7,7 @@ from typing import Union
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.ui.tkinter_functions import FileSelect
-from simba.unsupervised.cluster_frequentist_calculator import \
-    ClusterFrequentistCalculator
+from simba.unsupervised.cluster_frequentist_calculator import ClusterFrequentistCalculator
 from simba.utils.checks import check_file_exist_and_readable
 from simba.utils.enums import Formats
 

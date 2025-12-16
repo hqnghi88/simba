@@ -6,8 +6,7 @@ from tkinter import *
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.ui.tkinter_functions import DropDownMenu, FolderSelect
-from simba.unsupervised.clusterer_comparison_calculator import \
-    ClustererComparisonCalculator
+from simba.unsupervised.clusterer_comparison_calculator import ClustererComparisonCalculator
 from simba.utils.checks import check_if_dir_exists
 from simba.utils.enums import Formats, Options
 from simba.utils.errors import CountError

@@ -2,12 +2,19 @@ import threading
 from tkinter import *
 
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.sandbox.convert_to_mp4 import (convert_to_avi, convert_to_mov,
-                                          convert_to_mp4, convert_to_webm)
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, DropDownMenu,
-                                        FileSelect, FolderSelect)
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists)
+from simba.sandbox.convert_to_mp4 import (
+    convert_to_avi,
+    convert_to_mov,
+    convert_to_mp4,
+    convert_to_webm,
+)
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    DropDownMenu,
+    FileSelect,
+    FolderSelect,
+)
+from simba.utils.checks import check_file_exist_and_readable, check_if_dir_exists
 from simba.utils.enums import Keys, Links, Options
 
 

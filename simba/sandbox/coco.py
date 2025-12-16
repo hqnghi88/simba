@@ -15,11 +15,9 @@ from skimage.draw import polygon
 from simba.mixins.geometry_mixin import GeometryMixin
 from simba.mixins.image_mixin import ImageMixin
 from simba.sandbox.keyPoi import _geometries_to_exterior_keypoints_helper
-from simba.utils.checks import (check_instance, check_int, check_valid_array,
-                                check_valid_lst)
+from simba.utils.checks import check_instance, check_int, check_valid_array, check_valid_lst
 from simba.utils.enums import Defaults, Formats
-from simba.utils.read_write import (find_core_cnt, get_video_meta_data,
-                                    read_df, read_frm_of_video)
+from simba.utils.read_write import find_core_cnt, get_video_meta_data, read_df, read_frm_of_video
 
 
 def geometry_to_rle(geometry: Union[np.ndarray, Polygon], img_size: Tuple[int, int]):

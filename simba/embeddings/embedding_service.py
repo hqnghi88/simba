@@ -8,6 +8,7 @@ from simba.core.factories.vector_store_factory import VectorStoreFactory
 from simba.embeddings.utils import _clean_documents
 from simba.models.simbadoc import SimbaDoc
 from simba.splitting.splitter import Splitter
+
 logger = logging.getLogger(__name__)
 
 

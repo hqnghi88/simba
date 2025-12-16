@@ -1,5 +1,5 @@
-from simba.core.factories.vector_store_factory import VectorStoreFactory
 from simba.auth.auth_service import get_supabase_client
+from simba.core.factories.vector_store_factory import VectorStoreFactory
 
 # Initialize vector store for reranking
 vector_store = VectorStoreFactory.get_vector_store()

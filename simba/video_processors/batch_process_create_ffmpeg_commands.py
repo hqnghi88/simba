@@ -10,20 +10,20 @@ import json
 import os
 import shutil
 
-from simba.utils.checks import (check_ffmpeg_available,
-                                check_file_exist_and_readable, check_str)
+from simba.utils.checks import check_ffmpeg_available, check_file_exist_and_readable, check_str
 from simba.utils.enums import Formats
 from simba.utils.errors import CropError, FFMPEGNotFoundError, PermissionError
-from simba.utils.lookups import (get_current_time, get_ffmpeg_encoders,
-                                 gpu_quality_to_cpu_quality_lk)
+from simba.utils.lookups import get_current_time, get_ffmpeg_encoders, gpu_quality_to_cpu_quality_lk
 from simba.utils.warnings import CropWarning
-from simba.video_processors.video_processing import (change_single_video_fps,
-                                                     clahe_enhance_video,
-                                                     clip_video_in_range,
-                                                     crop_video,
-                                                     downsample_video,
-                                                     superimpose_frame_count,
-                                                     video_to_greyscale)
+from simba.video_processors.video_processing import (
+    change_single_video_fps,
+    clahe_enhance_video,
+    clip_video_in_range,
+    crop_video,
+    downsample_video,
+    superimpose_frame_count,
+    video_to_greyscale,
+)
 
 
 class FFMPEGCommandCreator(object):

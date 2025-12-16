@@ -20,9 +20,14 @@ from simba.utils.checks import check_int
 from simba.utils.enums import Formats, Labelling
 from simba.utils.errors import FrameRangeError, InvalidInputError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_time_stamp_from_frame_numbers,
-                                    get_all_clf_names, get_fn_ext,
-                                    get_video_meta_data, read_df, write_df)
+from simba.utils.read_write import (
+    find_time_stamp_from_frame_numbers,
+    get_all_clf_names,
+    get_fn_ext,
+    get_video_meta_data,
+    read_df,
+    write_df,
+)
 from simba.utils.warnings import FrameRangeWarning
 from simba.video_processors.video_processing import clip_video_in_range
 

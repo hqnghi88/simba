@@ -7,11 +7,15 @@ from typing import Union
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
 from simba.model.inference_batch import InferenceBatch
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, Entry_Box,
-                                        FileSelect, SimbaButton, SimBADropDown,
-                                        SimBALabel)
-from simba.utils.checks import (check_file_exist_and_readable, check_float,
-                                check_int)
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    Entry_Box,
+    FileSelect,
+    SimbaButton,
+    SimBADropDown,
+    SimBALabel,
+)
+from simba.utils.checks import check_file_exist_and_readable, check_float, check_int
 from simba.utils.enums import ConfigKey, Dtypes, Formats, Keys, Links
 from simba.utils.errors import InvalidInputError, NoDataError
 from simba.utils.printing import stdout_success

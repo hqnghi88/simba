@@ -11,14 +11,23 @@ import pandas as pd
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.geometry_mixin import GeometryMixin
 from simba.mixins.plotting_mixin import PlottingMixin
-from simba.utils.checks import (check_instance, check_int, check_str,
-                                check_that_column_exist, check_valid_boolean)
+from simba.utils.checks import (
+    check_instance,
+    check_int,
+    check_str,
+    check_that_column_exist,
+    check_valid_boolean,
+)
 from simba.utils.data import create_color_palette
 from simba.utils.enums import Formats, Options
 from simba.utils.errors import CountError, InvalidFilepathError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    get_fn_ext, get_video_meta_data, read_df)
+from simba.utils.read_write import (
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+    get_video_meta_data,
+    read_df,
+)
 from simba.utils.warnings import FrameRangeWarning
 
 

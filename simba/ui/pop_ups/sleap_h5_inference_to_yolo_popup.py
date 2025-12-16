@@ -5,14 +5,16 @@ from tkinter import *
 import numpy as np
 
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.third_party_label_appenders.transform.sleap_h5_to_yolo import \
-    SleapH52Yolo
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, FolderSelect,
-                                        SimbaCheckbox, SimBADropDown)
+from simba.third_party_label_appenders.transform.sleap_h5_to_yolo import SleapH52Yolo
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    FolderSelect,
+    SimbaCheckbox,
+    SimBADropDown,
+)
 from simba.utils.checks import check_if_dir_exists
 from simba.utils.enums import Options
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    str_2_bool)
+from simba.utils.read_write import find_files_of_filetypes_in_directory, str_2_bool
 
 TRAIN_SIZE_OPTIONS = list(np.arange(10, 110, 10))
 SAMPLE_SIZE_OPTIONS = list(np.arange(50, 650, 50))

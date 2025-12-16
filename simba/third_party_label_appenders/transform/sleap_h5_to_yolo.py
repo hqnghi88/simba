@@ -6,18 +6,25 @@ import cv2
 import numpy as np
 import pandas as pd
 
-from simba.third_party_label_appenders.converters import \
-    create_yolo_keypoint_yaml
-from simba.utils.checks import (check_float, check_if_dir_exists, check_int,
-                                check_str, check_valid_boolean,
-                                check_valid_tuple)
+from simba.third_party_label_appenders.converters import create_yolo_keypoint_yaml
+from simba.utils.checks import (
+    check_float,
+    check_if_dir_exists,
+    check_int,
+    check_str,
+    check_valid_boolean,
+    check_valid_tuple,
+)
 from simba.utils.enums import Options
 from simba.utils.errors import InvalidInputError, NoFilesFoundError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (create_directory,
-                                    find_files_of_filetypes_in_directory,
-                                    get_video_meta_data, read_frm_of_video,
-                                    read_sleap_h5)
+from simba.utils.read_write import (
+    create_directory,
+    find_files_of_filetypes_in_directory,
+    get_video_meta_data,
+    read_frm_of_video,
+    read_sleap_h5,
+)
 from simba.utils.warnings import FrameRangeWarning
 from simba.utils.yolo import keypoint_array_to_yolo_annotation_str
 

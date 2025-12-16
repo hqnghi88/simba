@@ -1,11 +1,18 @@
 from tkinter import *
 
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, DropDownMenu,
-                                        FileSelect, FolderSelect)
-from simba.utils.checks import (check_ffmpeg_available,
-                                check_file_exist_and_readable,
-                                check_if_dir_exists, check_int)
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    DropDownMenu,
+    FileSelect,
+    FolderSelect,
+)
+from simba.utils.checks import (
+    check_ffmpeg_available,
+    check_file_exist_and_readable,
+    check_if_dir_exists,
+    check_int,
+)
 from simba.utils.enums import Keys, Links, Options
 from simba.utils.printing import SimbaTimer, stdout_success
 from simba.utils.read_write import find_files_of_filetypes_in_directory

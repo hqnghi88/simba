@@ -1,4 +1,5 @@
 import functools
+
 #from simba.utils.checks import
 import multiprocessing
 import os
@@ -11,9 +12,13 @@ from skimage.segmentation import felzenszwalb
 
 from simba.utils.enums import Defaults, Formats
 from simba.utils.printing import SimbaTimer
-from simba.utils.read_write import (concatenate_videos_in_folder,
-                                    find_core_cnt, get_fn_ext,
-                                    get_video_meta_data, read_frm_of_video)
+from simba.utils.read_write import (
+    concatenate_videos_in_folder,
+    find_core_cnt,
+    get_fn_ext,
+    get_video_meta_data,
+    read_frm_of_video,
+)
 
 
 def _felzenszwalb_helper(frm_range: Tuple[int, List[int]],

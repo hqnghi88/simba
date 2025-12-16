@@ -7,15 +7,20 @@ import cv2
 import numpy as np
 from numba import cuda, jit, njit, prange
 
-from simba.utils.checks import (check_if_dir_exists, check_int,
-                                check_valid_array)
-from simba.utils.data import (align_target_warpaffine_vectors,
-                              center_rotation_warpaffine_vectors,
-                              egocentrically_align_pose)
+from simba.utils.checks import check_if_dir_exists, check_int, check_valid_array
+from simba.utils.data import (
+    align_target_warpaffine_vectors,
+    center_rotation_warpaffine_vectors,
+    egocentrically_align_pose,
+)
 from simba.utils.enums import Formats
 from simba.utils.errors import FrameRangeError
-from simba.utils.read_write import (get_fn_ext, get_video_meta_data, read_df,
-                                    read_img_batch_from_video_gpu)
+from simba.utils.read_write import (
+    get_fn_ext,
+    get_video_meta_data,
+    read_df,
+    read_img_batch_from_video_gpu,
+)
 
 THREADS_PER_BLOCK = 256
 

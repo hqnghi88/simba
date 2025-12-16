@@ -5,20 +5,26 @@ import threading
 from tkinter import *
 from typing import Union
 
-from simba.data_processors.spontaneous_alternation_calculator import \
-    SpontaneousAlternationCalculator
+from simba.data_processors.spontaneous_alternation_calculator import (
+    SpontaneousAlternationCalculator,
+)
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.plotting.spontaneous_alternation_plotter import \
-    SpontaneousAlternationsPlotter
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, DropDownMenu,
-                                        FileSelect)
+from simba.plotting.spontaneous_alternation_plotter import SpontaneousAlternationsPlotter
+from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, DropDownMenu, FileSelect
 from simba.utils.enums import Formats, Keys, Links, Options
-from simba.utils.errors import (AnimalNumberError, CountError,
-                                InvalidInputError, NoFilesFoundError,
-                                NoROIDataError)
-from simba.utils.read_write import (find_files_of_filetypes_in_directory,
-                                    find_video_of_file, get_fn_ext)
+from simba.utils.errors import (
+    AnimalNumberError,
+    CountError,
+    InvalidInputError,
+    NoFilesFoundError,
+    NoROIDataError,
+)
+from simba.utils.read_write import (
+    find_files_of_filetypes_in_directory,
+    find_video_of_file,
+    get_fn_ext,
+)
 
 
 class SpontaneousAlternationPopUp(ConfigReader, PopUpMixin):

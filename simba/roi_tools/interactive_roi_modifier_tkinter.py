@@ -9,11 +9,13 @@ from PIL import Image, ImageTk
 from shapely.geometry import Polygon
 
 from simba.mixins.plotting_mixin import PlottingMixin
-from simba.roi_tools.roi_utils import (get_circle_df_headers,
-                                       get_image_from_label,
-                                       get_polygon_df_headers,
-                                       get_rectangle_df_headers,
-                                       insert_gridlines_on_roi_img)
+from simba.roi_tools.roi_utils import (
+    get_circle_df_headers,
+    get_image_from_label,
+    get_polygon_df_headers,
+    get_rectangle_df_headers,
+    insert_gridlines_on_roi_img,
+)
 from simba.utils.checks import check_instance, check_valid_polygon
 from simba.utils.enums import ROI_SETTINGS, Keys, TkBinds
 

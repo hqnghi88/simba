@@ -12,18 +12,27 @@ import pandas as pd
 
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.plotting_mixin import PlottingMixin
-from simba.utils.checks import (check_file_exist_and_readable, check_int,
-                                check_valid_boolean, check_valid_dataframe,
-                                check_valid_lst)
-from simba.utils.data import (create_color_palettes, detect_bouts,
-                              slice_roi_dict_from_attribute)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_int,
+    check_valid_boolean,
+    check_valid_dataframe,
+    check_valid_lst,
+)
+from simba.utils.data import create_color_palettes, detect_bouts, slice_roi_dict_from_attribute
 from simba.utils.enums import Defaults, Formats, Keys, TextOptions
 from simba.utils.errors import NoROIDataError, NoSpecifiedOutputError
 from simba.utils.printing import stdout_success
-from simba.utils.read_write import (concatenate_videos_in_folder,
-                                    create_directory, find_core_cnt,
-                                    get_fn_ext, get_video_meta_data, read_df,
-                                    read_frm_of_video, remove_a_folder)
+from simba.utils.read_write import (
+    concatenate_videos_in_folder,
+    create_directory,
+    find_core_cnt,
+    get_fn_ext,
+    get_video_meta_data,
+    read_df,
+    read_frm_of_video,
+    remove_a_folder,
+)
 
 
 def _plot_cue_light_data(frm_idxs: list,

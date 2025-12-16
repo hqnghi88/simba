@@ -7,9 +7,12 @@ import pandas as pd
 from numba import jit, prange
 
 from simba.drop_bp_cords import getBpNames
-from simba.read_config_unit_tests import (check_file_exist_and_readable,
-                                          check_if_filepath_list_is_empty,
-                                          read_config_entry, read_config_file)
+from simba.read_config_unit_tests import (
+    check_file_exist_and_readable,
+    check_if_filepath_list_is_empty,
+    read_config_entry,
+    read_config_file,
+)
 from simba.rw_dfs import read_df
 
 COL_NAMES = [

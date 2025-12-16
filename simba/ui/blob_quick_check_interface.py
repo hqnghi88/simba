@@ -10,10 +10,14 @@ from shapely.geometry import MultiPolygon, Polygon
 
 from simba.mixins.geometry_mixin import GeometryMixin
 from simba.mixins.image_mixin import ImageMixin
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, Entry_Box,
-                                        SimbaButton)
-from simba.utils.checks import (check_if_valid_img, check_instance, check_int,
-                                check_str, check_valid_tuple)
+from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, Entry_Box, SimbaButton
+from simba.utils.checks import (
+    check_if_valid_img,
+    check_instance,
+    check_int,
+    check_str,
+    check_valid_tuple,
+)
 from simba.utils.enums import Formats
 from simba.utils.errors import FrameRangeError, InvalidVideoFileError
 from simba.utils.printing import SimbaTimer

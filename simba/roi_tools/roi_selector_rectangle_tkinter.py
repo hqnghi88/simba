@@ -5,8 +5,7 @@ import cv2
 from PIL import Image, ImageTk
 
 from simba.roi_tools.roi_utils import get_image_from_label
-from simba.utils.checks import (check_if_valid_rgb_tuple, check_instance,
-                                check_int)
+from simba.utils.checks import check_if_valid_rgb_tuple, check_instance, check_int
 from simba.utils.warnings import ROIWarning
 
 DRAW_FRAME_NAME = "DEFINE SHAPE"

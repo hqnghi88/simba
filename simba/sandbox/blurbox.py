@@ -2,12 +2,14 @@ import os
 import subprocess
 from typing import Optional, Union
 
-from simba.utils.checks import (check_ffmpeg_available,
-                                check_file_exist_and_readable, check_float,
-                                check_if_dir_exists)
+from simba.utils.checks import (
+    check_ffmpeg_available,
+    check_file_exist_and_readable,
+    check_float,
+    check_if_dir_exists,
+)
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (find_all_videos_in_directory, get_fn_ext,
-                                    get_video_meta_data)
+from simba.utils.read_write import find_all_videos_in_directory, get_fn_ext, get_video_meta_data
 from simba.video_processors.roi_selector import ROISelector
 
 

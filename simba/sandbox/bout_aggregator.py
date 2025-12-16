@@ -9,8 +9,13 @@ except:
 
 import pandas as pd
 
-from simba.utils.checks import (check_instance, check_int, check_str,
-                                check_valid_dataframe, check_valid_lst)
+from simba.utils.checks import (
+    check_instance,
+    check_int,
+    check_str,
+    check_valid_dataframe,
+    check_valid_lst,
+)
 from simba.utils.data import detect_bouts, read_df
 from simba.utils.enums import Formats
 from simba.utils.errors import InvalidInputError

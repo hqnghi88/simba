@@ -1,12 +1,11 @@
 import logging
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Any, Dict, List, Optional, Tuple
 
 from fastapi import HTTPException, status
 
-from simba.models.role import Role, Permission, UserRole
-from simba.database.postgres import PostgresDB
-
 from simba.core.config import settings
+from simba.database.postgres import PostgresDB
+from simba.models.role import Permission, Role, UserRole
 
 logger = logging.getLogger(__name__)
 

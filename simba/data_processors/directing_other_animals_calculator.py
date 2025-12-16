@@ -12,15 +12,17 @@ from simba.mixins.config_reader import ConfigReader
 from simba.mixins.feature_extraction_mixin import FeatureExtractionMixin
 from simba.utils.checks import (
     check_all_file_names_are_represented_in_video_log,
-    check_file_exist_and_readable, check_that_dir_has_list_of_filenames,
-    check_valid_boolean, check_valid_dataframe, check_valid_lst)
+    check_file_exist_and_readable,
+    check_that_dir_has_list_of_filenames,
+    check_valid_boolean,
+    check_valid_dataframe,
+    check_valid_lst,
+)
 from simba.utils.enums import Formats, Keys, Paths, TagNames
-from simba.utils.errors import (AnimalNumberError, CountError,
-                                InvalidInputError, NoFilesFoundError)
+from simba.utils.errors import AnimalNumberError, CountError, InvalidInputError, NoFilesFoundError
 from simba.utils.lookups import create_directionality_cords
 from simba.utils.printing import SimbaTimer, log_event, stdout_success
-from simba.utils.read_write import (create_directory, get_fn_ext, read_df,
-                                    write_df)
+from simba.utils.read_write import create_directory, get_fn_ext, read_df, write_df
 
 NOSE, EAR_LEFT, EAR_RIGHT = Keys.NOSE.value, Keys.EAR_LEFT.value, Keys.EAR_RIGHT.value
 X_BPS, Y_BPS = Keys.X_BPS.value, Keys.Y_BPS.value

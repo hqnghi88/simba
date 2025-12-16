@@ -1,13 +1,16 @@
 from tkinter import *
 
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, FileSelect,
-                                        FolderSelect, SimbaButton,
-                                        SimBADropDown)
+from simba.ui.tkinter_functions import (
+    CreateLabelFrameWithIcon,
+    FileSelect,
+    FolderSelect,
+    SimbaButton,
+    SimBADropDown,
+)
 from simba.utils.checks import check_if_dir_exists
 from simba.utils.enums import Options
-from simba.utils.read_write import (find_core_cnt, get_video_meta_data,
-                                    str_2_bool)
+from simba.utils.read_write import find_core_cnt, get_video_meta_data, str_2_bool
 from simba.video_processors.videos_to_frames import video_to_frames
 
 ALL_IMAGES = 'ALL IMAGES'

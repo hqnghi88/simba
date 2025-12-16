@@ -17,14 +17,23 @@ from simba.mixins.geometry_mixin import GeometryMixin
 from simba.mixins.plotting_mixin import PlottingMixin
 from simba.utils.checks import (
     check_all_file_names_are_represented_in_video_log,
-    check_filepaths_in_iterable_exist, check_int, check_str,
-    check_valid_boolean, check_valid_dataframe, check_valid_dict)
+    check_filepaths_in_iterable_exist,
+    check_int,
+    check_str,
+    check_valid_boolean,
+    check_valid_dataframe,
+    check_valid_dict,
+)
 from simba.utils.enums import Formats
 from simba.utils.errors import InvalidInputError, NoSpecifiedOutputError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (concatenate_videos_in_folder,
-                                    find_core_cnt, get_fn_ext, read_df,
-                                    remove_a_folder)
+from simba.utils.read_write import (
+    concatenate_videos_in_folder,
+    find_core_cnt,
+    get_fn_ext,
+    read_df,
+    remove_a_folder,
+)
 
 
 def _heatmap_multiprocessor(data: np.array,

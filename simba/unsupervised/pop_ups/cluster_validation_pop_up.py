@@ -10,9 +10,11 @@ from simba.mixins.unsupervised_mixin import UMLMixin
 from simba.ui.tkinter_functions import FolderSelect
 from simba.unsupervised.cluster_validation_calculator import ClusterValidators
 from simba.unsupervised.dbcv_calculator import DBCVCalculator
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists,
-                                check_if_filepath_list_is_empty)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_dir_exists,
+    check_if_filepath_list_is_empty,
+)
 from simba.utils.enums import Formats
 from simba.utils.errors import CountError, InvalidInputError
 from simba.utils.printing import SimbaTimer, stdout_success

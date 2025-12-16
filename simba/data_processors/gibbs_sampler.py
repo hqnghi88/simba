@@ -4,8 +4,7 @@ from typing import Tuple, Union
 import numpy as np
 import pandas as pd
 
-from simba.utils.checks import (check_float, check_if_dir_exists, check_int,
-                                check_valid_array)
+from simba.utils.checks import check_float, check_if_dir_exists, check_int, check_valid_array
 from simba.utils.printing import SimbaTimer, stdout_success
 
 

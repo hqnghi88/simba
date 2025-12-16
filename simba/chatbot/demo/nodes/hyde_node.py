@@ -1,6 +1,7 @@
 from simba.chatbot.demo.chains.hyde_chain import hyde_chain
-from simba.retrieval import Retriever
 from simba.chatbot.demo.state import State
+from simba.retrieval import Retriever
+
 retriever = Retriever()
 
 def hyde(state:State) -> State:

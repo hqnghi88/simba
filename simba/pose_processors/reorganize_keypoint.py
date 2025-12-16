@@ -8,8 +8,7 @@ from typing import Optional
 
 import pandas as pd
 
-from simba.utils.checks import (check_if_dir_exists,
-                                check_if_filepath_list_is_empty)
+from simba.utils.checks import check_if_dir_exists, check_if_filepath_list_is_empty
 from simba.utils.enums import Formats
 from simba.utils.printing import stdout_success
 

@@ -17,17 +17,26 @@ except ImportError:
 from datetime import datetime
 
 from simba.mixins.config_reader import ConfigReader
-from simba.utils.checks import (check_file_exist_and_readable,
-                                check_if_dir_exists, check_instance, check_int,
-                                check_str, check_that_column_exist,
-                                check_valid_boolean)
+from simba.utils.checks import (
+    check_file_exist_and_readable,
+    check_if_dir_exists,
+    check_instance,
+    check_int,
+    check_str,
+    check_that_column_exist,
+    check_valid_boolean,
+)
 from simba.utils.data import detect_bouts
 from simba.utils.enums import Formats, Options
 from simba.utils.errors import DataHeaderError, InvalidInputError
 from simba.utils.printing import SimbaTimer, stdout_success
-from simba.utils.read_write import (copy_files_to_directory,
-                                    find_files_of_filetypes_in_directory,
-                                    get_fn_ext, read_df, write_df)
+from simba.utils.read_write import (
+    copy_files_to_directory,
+    find_files_of_filetypes_in_directory,
+    get_fn_ext,
+    read_df,
+    write_df,
+)
 
 BODY_PART_TYPE = 'body-part'
 ANIMAL_TYPE = 'animal'

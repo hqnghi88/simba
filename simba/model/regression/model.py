@@ -6,13 +6,22 @@ import pandas as pd
 import xgboost as xgb
 from sklearn.model_selection import StratifiedKFold
 
-from simba.model.regression.metrics import (mean_absolute_error,
-                                            mean_absolute_percentage_error,
-                                            mean_squared_error, r2_score,
-                                            root_mean_squared_error)
-from simba.utils.checks import (check_float, check_instance, check_int,
-                                check_str, check_valid_array,
-                                check_valid_dataframe, check_valid_lst)
+from simba.model.regression.metrics import (
+    mean_absolute_error,
+    mean_absolute_percentage_error,
+    mean_squared_error,
+    r2_score,
+    root_mean_squared_error,
+)
+from simba.utils.checks import (
+    check_float,
+    check_instance,
+    check_int,
+    check_str,
+    check_valid_array,
+    check_valid_dataframe,
+    check_valid_lst,
+)
 from simba.utils.enums import Formats
 from simba.utils.errors import DataHeaderError
 

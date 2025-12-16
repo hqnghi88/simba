@@ -4,12 +4,10 @@ import configparser
 import os
 from tkinter import *
 
-from simba.data_processors.directing_animal_to_bodypart import \
-    DirectingAnimalsToBodyPartAnalyzer
+from simba.data_processors.directing_animal_to_bodypart import DirectingAnimalsToBodyPartAnalyzer
 from simba.mixins.config_reader import ConfigReader
 from simba.mixins.pop_up_mixin import PopUpMixin
-from simba.ui.tkinter_functions import (CreateLabelFrameWithIcon, DropDownMenu,
-                                        Entry_Box)
+from simba.ui.tkinter_functions import CreateLabelFrameWithIcon, DropDownMenu, Entry_Box
 from simba.utils.checks import check_float
 from simba.utils.enums import ConfigKey, Formats, Keys, Links
 from simba.utils.printing import stdout_success
