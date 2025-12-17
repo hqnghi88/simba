@@ -21,6 +21,7 @@ async def invoke_graph(query: Query = Body(...)):
     """Invoke the graph workflow with a message"""
 
     import uuid
+
     # Use unique thread_id for each request to avoid state pollution/memory issues in local dev
     thread_id = str(uuid.uuid4())
     config = {"configurable": {"thread_id": thread_id}}
