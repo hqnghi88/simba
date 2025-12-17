@@ -35,7 +35,9 @@ def generate(state):
     
     # Format chat history as a readable string
     chat_history_str = ""
-    for msg in state["messages"][:-1]: # Exclude the current last message which is the user's new question
+    messages_list = state["messages"]
+
+    for msg in messages_list[:-1]: # Exclude the current last message
         role = "User" if msg.type == "human" else "Simba"
         chat_history_str += f"{role}: {msg.content}\n"
     

@@ -18,9 +18,14 @@ from simba.chatbot.demo.state import State
 
 # ===========================================
 
+# from langgraph.checkpoint.memory import MemorySaver
+from simba.chatbot.demo.file_checkpointer import PickleCheckpointSaver
+
+# ===========================================
+
 workflow = StateGraph(State)
-# Initialize MemorySaver with the configuration directly
-memory = MemorySaver()
+# Initialize File-based Checkpointer for persistence
+memory = PickleCheckpointSaver("simba_memory.pkl")
 
 # ===========================================
 # Define the nodes

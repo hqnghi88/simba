@@ -84,10 +84,12 @@ class EmbeddingService:
 
             try:
                 # Add documents to vector store
+                # This might generate IDs if they don't exist, but we should ensure we use these for persistence
                 self.vector_store.add_documents(document_id=doc_id, documents=langchain_documents)
 
-                # Update document status
+                # Update document status AND the split documents (to save chunk IDs)
                 simbadoc.metadata.enabled = True
+                simbadoc.documents = langchain_documents # Save the actual embedded chunks
                 self.database.update_document(doc_id, simbadoc)
 
             except ValueError as ve:

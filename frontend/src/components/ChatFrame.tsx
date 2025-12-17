@@ -22,9 +22,10 @@ interface ChatFrameProps {
   messages: Message[];
   setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
   onUploadClick: () => void;
+  sessionId: string;
 }
 
-const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadClick }) => {
+const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadClick, sessionId }) => {
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
@@ -62,10 +63,10 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
 
     // Close source panel when submitting a new message
     setSelectedMessage(null);
-    
+
     const userTimestamp = Date.now();
     const botTimestamp = userTimestamp + 1;
-    
+
     // Add user message
     const userMessage: Message = {
       id: `user-${userTimestamp}`,
@@ -79,8 +80,8 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
     setIsLoading(true);
 
     try {
-      const response = await sendMessage(userMessage.content);
-      
+      const response = await sendMessage(userMessage.content, sessionId);
+
       // Add assistant message placeholder
       const assistantMessage: Message = {
         id: `assistant-${botTimestamp}`,
@@ -90,7 +91,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
         state: {},
         followUpQuestions: []
       };
-      
+
       setMessages(prev => [...prev, assistantMessage]);
       setIsThinking(false);
 
@@ -102,7 +103,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
             if (lastMessage && lastMessage.id === assistantMessage.id) {
               return [
                 ...prev.slice(0, -1),
-                { 
+                {
                   ...lastMessage,
                   content: content ? (lastMessage.content + content) : lastMessage.content,
                   state: state || lastMessage.state,
@@ -130,7 +131,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
 
     } catch (error) {
       console.error('Error:', error);
-      
+
       // Show error toast
       toast({
         title: "Error",
@@ -151,7 +152,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
 
   const handleFollowUpClick = (question: string) => {
     setInputMessage(question);
-    const fakeEvent = { preventDefault: () => {} } as React.FormEvent;
+    const fakeEvent = { preventDefault: () => { } } as React.FormEvent;
     handleSubmit(fakeEvent);
   };
 
@@ -174,7 +175,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
         <Card className="h-full flex flex-col rounded-none border-l-0 border-t-0 border-b-0 border-r-0 shadow-none">
           {messages.length === 0 ? (
             <div className="flex-1 flex flex-col items-center justify-center p-4 space-y-4 opacity-70">
-              <motion.div 
+              <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5 }}
@@ -257,7 +258,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
       {/* Source Panel - Only displayed when open */}
       <AnimatePresence>
         {sourcePanelOpen && selectedMessage && (
-          <motion.div 
+          <motion.div
             initial={{ x: '100%', opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: '100%', opacity: 0 }}
@@ -266,10 +267,10 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
           >
             <div className="flex justify-between items-center p-3 border-b bg-gray-50">
               <h3 className="font-medium text-sm truncate pr-2">Sources</h3>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                onClick={closeSourcePanel} 
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={closeSourcePanel}
                 className="h-8 w-8 rounded-full hover:bg-gray-200"
               >
                 <X className="h-4 w-4" />

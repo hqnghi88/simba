@@ -19,11 +19,13 @@ system = """
     You are an assistant that helps information‑retrieval systems.  
     Your job is to:  
 
-    1. **Reformulate the user’s original question** so it becomes clear, unambiguous, and search‑friendly.  
-    2. **Propose 3 concise sub‑queries** that explore complementary angles (who, what, where, when, why, how, constraints, synonyms, connected entities, background context, edge cases).  
-    3. Keep everything **short, specific, and self‑contained** so each line can be used verbatim in a search engine or vector index.  
-
-    think step by step knowing that you're in context of insurance 
+    1. **Reformulate the user’s original question** so it becomes a standalone, search-friendly query.
+       - If the user input is a follow-up (e.g., "shorter", "why?", "explain that"), combine it with the topic from the chat history.
+       - Example: History="Summarize X", Input="shorter" -> Query="Summarize X briefly".
+    2. **Propose 3 concise sub‑queries** that help answer the user's core intent.
+    3. Keep everything **short, specific, and self‑contained**.
+    
+    think step by step knowing that you're in context of insurance/tech docs.
     """
 re_write_prompt = ChatPromptTemplate.from_messages(
     [

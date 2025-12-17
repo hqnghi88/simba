@@ -14,6 +14,7 @@ chat = APIRouter(prefix="/chat", tags=["chat"])
 # request input format
 class Query(BaseModel):
     message: str
+    thread_id: str = None
 
 
 @chat.post("/")
@@ -22,8 +23,14 @@ async def invoke_graph(query: Query = Body(...)):
 
     import uuid
 
-    # Use unique thread_id for each request to avoid state pollution/memory issues in local dev
-    thread_id = str(uuid.uuid4())
+    # Use client provided thread_id or generate one if missing
+    if query.thread_id:
+        thread_id = query.thread_id
+    else:
+        # Fallback to random ID if no session provided (stateless)
+        thread_id = str(uuid.uuid4())
+    
+    print(f"Using thread_id: {thread_id}")
     config = {"configurable": {"thread_id": thread_id}}
     state = State()
     state["messages"] = [HumanMessage(content=query.message)]

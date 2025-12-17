@@ -122,8 +122,8 @@ class VectorStoreService:
                     doc.metadata["document_id"] = document_id
 
             # Log first chunk for debug
-            if documents:
-                 logger.info(f"Sample chunk: {documents[0].page_content[:50]}...")
+            # if documents:
+            #      logger.info(f"Sample chunk: {documents[0].page_content[:50]}...")
 
             for doc in documents:
                 if self.chunk_in_store(doc.id):

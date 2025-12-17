@@ -18,8 +18,22 @@ import { motion } from 'framer-motion';
 
 const STORAGE_KEY = 'chat_messages';
 
+// Helper to generate UUID
+const generateUUID = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+};
+
 const ChatApp: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [sessionId, setSessionId] = useState<string>(() => {
+    // Restore session ID if messages exist, otherwise new
+    const savedMessages = localStorage.getItem(STORAGE_KEY);
+    return savedMessages ? (localStorage.getItem('chat_session_id') || generateUUID()) : generateUUID();
+  });
+
   const [messages, setMessages] = useState<Message[]>(() => {
     // Load messages from localStorage on initial render
     const savedMessages = localStorage.getItem(STORAGE_KEY);
@@ -40,11 +54,15 @@ const ChatApp: React.FC = () => {
   // Save messages to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-  }, [messages]);
+    localStorage.setItem('chat_session_id', sessionId);
+  }, [messages, sessionId]);
 
   const handleClearMessages = () => {
     setMessages([]);
+    const newSessionId = generateUUID();
+    setSessionId(newSessionId);
     localStorage.removeItem(STORAGE_KEY);
+    localStorage.setItem('chat_session_id', newSessionId);
   };
 
   const handleEndDiscussion = () => {
@@ -74,13 +92,13 @@ const ChatApp: React.FC = () => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
       className="p-4 md:p-6 h-full flex flex-col"
     >
-      <motion.div 
+      <motion.div
         className="bg-white shadow-xl flex flex-col h-full rounded-xl overflow-hidden border border-gray-100"
         initial={{ y: 20 }}
         animate={{ y: 0 }}
@@ -96,9 +114,9 @@ const ChatApp: React.FC = () => {
               </div>
             )}
           </div>
-          
+
           <div className="flex items-center gap-2">
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => {
@@ -109,7 +127,7 @@ const ChatApp: React.FC = () => {
             >
               <RotateCw className="h-5 w-5" />
             </motion.button>
-            
+
             <DropdownMenu>
               <DropdownMenuTrigger className="hover:bg-white/20 p-2 rounded-full transition-colors duration-200">
                 <MoreVertical className="h-5 w-5" />
@@ -128,10 +146,11 @@ const ChatApp: React.FC = () => {
         </div>
 
         <div className="flex-1 overflow-hidden relative">
-          <ChatFrame 
-            messages={messages} 
-            setMessages={setMessages} 
+          <ChatFrame
+            messages={messages}
+            setMessages={setMessages}
             onUploadClick={() => setIsUploadModalOpen(true)}
+            sessionId={sessionId}
           />
         </div>
       </motion.div>

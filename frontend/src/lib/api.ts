@@ -1,6 +1,6 @@
 import { config } from '@/config'
 
-export async function sendMessage(message: string): Promise<Response> {
+export async function sendMessage(message: string, threadId?: string): Promise<Response> {
   try {
     const response = await fetch(`${config.apiUrl}/chat`, {
       method: 'POST',
@@ -8,7 +8,8 @@ export async function sendMessage(message: string): Promise<Response> {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        message
+        message,
+        thread_id: threadId
       }),
     });
 
@@ -46,7 +47,7 @@ export async function handleChatStream(
     while (true) {
       const { value, done } = await reader.read();
       if (done) break;
-      
+
       const chunk = decoder.decode(value);
       buffer += chunk;
 
@@ -61,7 +62,7 @@ export async function handleChatStream(
           // Remove 'data: ' prefix if it exists
           const jsonStr = message.replace(/^data: /, '');
           console.log('📦 Raw chunk:', jsonStr);
-          
+
           const data = JSON.parse(jsonStr);
           console.log('🔍 Parsed data:', data);
 
