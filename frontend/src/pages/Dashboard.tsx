@@ -68,31 +68,40 @@ const KPICard: React.FC<KPIProps & { delay: number }> = ({
 
 const Dashboard: React.FC = () => {
     const [loading, setLoading] = React.useState(true);
+    const [recalculating, setRecalculating] = React.useState(false);
     const [kpiData, setKpiData] = React.useState<any>(null);
 
-    // Use import from api.ts
-    React.useEffect(() => {
-        let isMounted = true;
-
-        const fetchData = async () => {
-            try {
-                // Dynamic import to avoid circular dependency if any, or just standard import
-                const { getDashboardKPIs } = await import('@/lib/api');
-                const data = await getDashboardKPIs();
-                if (isMounted) {
-                    setKpiData(data);
-                    setLoading(false);
-                }
-            } catch (e) {
-                console.error("Failed to load dashboard data", e);
-                if (isMounted) setLoading(false);
+    const fetchKPIs = async () => {
+        try {
+            const { getDashboardKPIs } = await import('@/lib/api');
+            const data = await getDashboardKPIs();
+            setKpiData(data);
+            setLoading(false);
+            if (data.is_stale) {
+                console.log("Dashboard data is stale, prompting user.");
             }
-        };
+        } catch (e) {
+            console.error("Failed to load dashboard data", e);
+            setLoading(false);
+        }
+    };
 
-        fetchData();
-
-        return () => { isMounted = false; };
+    React.useEffect(() => {
+        fetchKPIs();
     }, []);
+
+    const handleRecalculate = async () => {
+        setRecalculating(true);
+        try {
+            const { recalculateDashboardKPIs } = await import('@/lib/api');
+            const data = await recalculateDashboardKPIs();
+            setKpiData(data);
+        } catch (e) {
+            console.error("Recalculation failed", e);
+        } finally {
+            setRecalculating(false);
+        }
+    };
 
     const kpis: KPIProps[] = React.useMemo(() => {
         // Default / Mock if loading or error or empty
@@ -203,8 +212,21 @@ const Dashboard: React.FC = () => {
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900">Agriculture Dashboard</h2>
                     <p className="text-muted-foreground mt-1">Real-time overview of your farm's health and metrics.</p>
                 </div>
-                <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-500">Last updated: Just now</span>
+                <div className="flex items-center space-x-4">
+                    {kpiData?.is_stale && (
+                        <div
+                            onClick={recalculating ? undefined : handleRecalculate}
+                            className={`flex items-center px-3 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-200 cursor-pointer hover:bg-amber-200 transition-colors ${recalculating ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        >
+                            <span className="w-2 h-2 bg-amber-500 rounded-full mr-2 animate-pulse"></span>
+                            <span className="text-sm font-medium">
+                                {recalculating ? "Recalculating..." : "New Data Available - Click to Update"}
+                            </span>
+                        </div>
+                    )}
+                    <span className="text-sm text-gray-500">
+                        Last updated: {kpiData?.last_updated ? new Date(kpiData.last_updated).toLocaleString() : 'Never'}
+                    </span>
                 </div>
             </div>
 
