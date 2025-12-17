@@ -43,7 +43,7 @@ class DoclingParser(BaseParser):
             # Update metadata to reflect successful parsing
             document.metadata.parsing_status = "SUCCESS"
             document.metadata.parser = "docling" if not (lower_path.endswith('.txt') or lower_path.endswith('.md')) else "text_loader"
-            document.metadata.parsed_at = datetime.now()
+            document.metadata.parsed_at = datetime.now().isoformat()
 
             new_document = SimbaDoc(id=document.id, documents=docs, metadata=document.metadata)
             return new_document

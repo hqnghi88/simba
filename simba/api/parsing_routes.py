@@ -56,7 +56,7 @@ async def parse_document(request: ParseDocumentRequest):
         if request.sync:
 
             logger.info(f"Processing synchronously with parser: {request.parser}")
-            if request.parser == "docling":
+            if request.parser == "docling" or request.parser == "text_loader":
                 return await parse_document_sync(request.document_id, parser_type="docling")
             elif request.parser == "mistral_ocr":
                 return await parse_document_sync(request.document_id, parser_type="mistral_ocr")
@@ -64,9 +64,10 @@ async def parse_document(request: ParseDocumentRequest):
                 raise HTTPException(status_code=400, detail="Unsupported parser")
 
         # Handle asynchronous parsing based on parser type
-        if request.parser == "docling":
+        # Handle asynchronous parsing based on parser type
+        if request.parser == "docling" or request.parser == "text_loader":
             logger.info(
-                f"Starting asynchronous docling parsing for document: {request.document_id}"
+                f"Starting asynchronous docling parsing for document: {request.document_id} (Parser: {request.parser})"
             )
             task = parse_docling_task.delay(request.document_id)
             return {"task_id": task.id, "status_url": f"parsing/tasks/{task.id}"}
