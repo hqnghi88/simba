@@ -16,16 +16,25 @@ class DoclingParser(BaseParser):
     """
 
     def parse(self, document: SimbaDoc) -> Union[SimbaDoc, List[SimbaDoc]]:
-
         try:
-            loader = DoclingLoader(
-                file_path=document.metadata.file_path,
-                chunker=HybridChunker(
-                    tokenizer="sentence-transformers/all-MiniLM-L6-v2",
-                    device=settings.embedding.device,
-                ),
-            )
-            docs = loader.load()
+            file_path = document.metadata.file_path
+            lower_path = str(file_path).lower()
+            
+            # Use TextLoader for simple text files to avoid Docling restrictions
+            if lower_path.endswith('.txt') or lower_path.endswith('.md'):
+                from langchain_community.document_loaders import TextLoader
+                loader = TextLoader(file_path)
+                docs = loader.load()
+            else:
+                # Use Docling for rich documents
+                loader = DoclingLoader(
+                    file_path=file_path,
+                    chunker=HybridChunker(
+                        tokenizer="sentence-transformers/all-MiniLM-L6-v2",
+                        device=settings.embedding.device,
+                    ),
+                )
+                docs = loader.load()
 
             # Create new IDs for each parsed document
             for doc in docs:
@@ -33,13 +42,14 @@ class DoclingParser(BaseParser):
 
             # Update metadata to reflect successful parsing
             document.metadata.parsing_status = "SUCCESS"
-            document.metadata.parser = "docling"
+            document.metadata.parser = "docling" if not (lower_path.endswith('.txt') or lower_path.endswith('.md')) else "text_loader"
             document.metadata.parsed_at = datetime.now()
 
             new_document = SimbaDoc(id=document.id, documents=docs, metadata=document.metadata)
             return new_document
 
-        except Exception:
+        except Exception as e:
+            print(f"Error parsing document {document.metadata.filename}: {e}")
             document.metadata.parsing_status = "FAILED"
-            # Optionally, log or rethrow the error here
+            # Return the document with status FAILED so downstream knows
             return document

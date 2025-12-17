@@ -6,7 +6,8 @@ from langchain_core.output_parsers import JsonOutputParser
 
 from simba.core.factories.database_factory import get_database
 from simba.core.factories.llm_factory import get_llm
-from simba.infrastructure.logging import logger
+import logging
+logger = logging.getLogger(__name__)
 
 dashboard = APIRouter(prefix="/dashboard", tags=["dashboard"])
 
