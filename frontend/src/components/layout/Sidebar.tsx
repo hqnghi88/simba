@@ -17,6 +17,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   Brain,
+  MessageSquare,
 } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { Input } from "@/components/ui/input"
@@ -37,6 +38,7 @@ const APP_VERSION = "v1.0.0"
 
 const sidebarItems = [
   { name: "Home", icon: Home, path: "/" },
+  { name: "Chat", icon: MessageSquare, path: "/chat" },
   { name: "Documents", icon: Terminal, path: "/documents" },
   { name: "Knowledge", icon: Brain, path: "/knowledge" },
   { name: "Plugins", icon: PlugZap, path: "/plugins" },
@@ -53,7 +55,7 @@ export function Sidebar() {
   const location = useLocation()
   const { user, signOut } = useAuth()
   const [expanded, setExpanded] = useState(true)
-  
+
   // Get user initials for avatar
   const getUserInitials = () => {
     if (!user?.email) return "U"
@@ -77,24 +79,24 @@ export function Sidebar() {
         ) : (
           <BookOpen className="h-6 w-6 mx-auto" />
         )}
-        
+
         {/* Toggle Button - Integrated in header */}
-        <Button 
-          variant="ghost" 
-          size="sm" 
+        <Button
+          variant="ghost"
+          size="sm"
           className="h-8 w-8 p-0 ml-2 hover:bg-gray-100 rounded-md"
           onClick={() => setExpanded(!expanded)}
         >
           {expanded ? <PanelLeftClose className="h-4 w-4" /> : <PanelLeftOpen className="h-4 w-4" />}
         </Button>
       </div>
-      
+
       {/* Search Bar */}
       {expanded && (
         <div className="px-4 pt-3 pb-2">
           <div className="relative flex items-center">
             <Search className="h-4 w-4 absolute left-3 text-gray-400" />
-            <Input 
+            <Input
               className="pl-9 py-1 h-8 text-sm bg-white border-gray-200 text-gray-700 placeholder:text-gray-400"
               placeholder="Go to..."
             />
@@ -102,7 +104,7 @@ export function Sidebar() {
           </div>
         </div>
       )}
-      
+
       {/* Main Navigation */}
       <div className="flex-1 overflow-auto py-4">
         <div className={cn("space-y-1", expanded ? "px-3" : "px-2")}>
@@ -144,15 +146,15 @@ export function Sidebar() {
           </Link>
         ))}
       </div>
-      
+
       {/* User Section */}
       <div className={cn("pt-3 border-t border-gray-200 mt-2", expanded ? "px-3" : "px-2")}>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               className={cn(
-                "w-full hover:bg-gray-100 px-2", 
+                "w-full hover:bg-gray-100 px-2",
                 expanded ? "justify-start" : "justify-center"
               )}
             >

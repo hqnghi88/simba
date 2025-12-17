@@ -1,3 +1,4 @@
+import Dashboard from '@/pages/Dashboard';
 import ChatApp from '@/pages/ChatApp';
 import DocumentManagementApp from "@/pages/DocumentManagementApp";
 import { Routes, Route, Navigate } from 'react-router-dom';
@@ -26,9 +27,14 @@ function App() {
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/reset-password" element={<ResetPassword />} />
-        
+
         <Route element={<MainLayout />}>
           <Route path="/" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/chat" element={
             <ProtectedRoute>
               <ChatApp />
             </ProtectedRoute>
@@ -43,7 +49,7 @@ function App() {
               <KnowledgeConfigPage />
             </ProtectedRoute>
           } />
-          
+
           {/* Settings Routes */}
           <Route path="/settings" element={
             <ProtectedRoute>
@@ -59,7 +65,7 @@ function App() {
             <Route path="roles" element={<RolesPage />} />
             <Route path="api-keys" element={<ApiKeysPage />} />
           </Route>
-          
+
           {/* Legacy routes - redirect to the new settings structure */}
           <Route path="/roles" element={
             <ProtectedRoute>
@@ -76,7 +82,7 @@ function App() {
               <Navigate to="/settings/api-keys" replace />
             </ProtectedRoute>
           } />
-          
+
           <Route path="*" element={<div className="p-8 text-center">Page Not Found</div>} />
         </Route>
       </Routes>
