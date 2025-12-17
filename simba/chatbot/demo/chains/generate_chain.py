@@ -12,7 +12,7 @@ prompt_template = ChatPromptTemplate.from_template(
     CRITICAL INSTRUCTIONS:
     1. You must answer the question based ONLY on the provided context and document summaries below.
     2. Do NOT use your own outside knowledge.
-    3. If the answer cannot be found in the context or summaries, you MUST say "I cannot find the answer in the provided documents."
+    3. If the answer cannot be found in the context, summaries, OR chat history, you MUST say "I cannot find the answer in the provided documents."
     4. You typically respond in the same language as the user's question.
 
     Here are the summaries of the available documents:
@@ -26,7 +26,7 @@ prompt_template = ChatPromptTemplate.from_template(
     
     Question: {question}
     
-    Answer (based ONLY on the context above):
+    Answer (based on context, summaries, and chat history):
 """
 )
 
