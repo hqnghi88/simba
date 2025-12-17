@@ -1,4 +1,8 @@
 from typing import List, Optional
+import os
+import json
+from datetime import datetime
+
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from langchain_core.prompts import ChatPromptTemplate
@@ -6,10 +10,14 @@ from langchain_core.output_parsers import JsonOutputParser
 
 from simba.core.factories.database_factory import get_database
 from simba.core.factories.llm_factory import get_llm
+from simba.core.config import settings
 import logging
+
 logger = logging.getLogger(__name__)
 
 dashboard = APIRouter(prefix="/dashboard", tags=["dashboard"])
+
+KPI_STORAGE_FILE = os.path.join(settings.paths.base_dir, "dashboard_kpis.json")
 
 # Define the data structure for our KPIs
 class KPIData(BaseModel):
@@ -36,12 +44,81 @@ class KPIData(BaseModel):
     solar_radiation_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
     harvest_progress_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
 
-@dashboard.get("/kpi", response_model=KPIData)
+class KPIResponse(KPIData):
+    is_stale: bool = Field(default=False)
+    last_updated: Optional[str] = Field(default=None)
+
+def load_kpis() -> dict:
+    if os.path.exists(KPI_STORAGE_FILE):
+        try:
+            with open(KPI_STORAGE_FILE, 'r') as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Error loading KPIs: {e}")
+    return {}
+
+def save_kpis(data: dict):
+    try:
+        data['last_updated'] = datetime.now().isoformat()
+        with open(KPI_STORAGE_FILE, 'w') as f:
+            json.dump(data, f, indent=2)
+    except Exception as e:
+        logger.error(f"Error saving KPIs: {e}")
+
+@dashboard.get("/kpi", response_model=KPIResponse)
 async def get_kpis():
     """
-    Calculate KPIs based on enabled documents in the knowledge base.
+    Get cached KPIs and check validation status.
     """
-    logger.info("Calculating Dashboard KPIs from documents...")
+    cached_data = load_kpis()
+    
+    # Get latest document update time to check staleness
+    db = get_database()
+    all_docs = db.get_all_documents()
+    enabled_docs = [d for d in all_docs if d.metadata.enabled]
+    
+    latest_doc_ts = 0.0
+    for doc in enabled_docs:
+        # Assuming metadata has uploadedAt or parsed_at
+        ts_str = doc.metadata.parsed_at or doc.metadata.uploadedAt
+        if ts_str:
+            try:
+                # Handle varying formats if needed, assuming isoformat
+                ts = datetime.fromisoformat(ts_str).timestamp()
+                if ts > latest_doc_ts:
+                    latest_doc_ts = ts
+            except:
+                pass
+
+    last_kpi_ts = 0.0
+    if cached_data.get('last_updated'):
+        try:
+            last_kpi_ts = datetime.fromisoformat(cached_data['last_updated']).timestamp()
+        except:
+            pass
+            
+    # Determine staleness:
+    # 1. No cached data -> Stale (needs Calc)
+    # 2. Latest doc is newer than Last Calc -> Stale
+    # 3. No docs enabled -> Not Stale (just N/A)
+    is_stale = False
+    if not cached_data and enabled_docs:
+        is_stale = True
+    elif enabled_docs and latest_doc_ts > last_kpi_ts:
+        is_stale = True
+        
+    response = KPIResponse(**(cached_data or {}))
+    response.is_stale = is_stale
+    response.last_updated = cached_data.get('last_updated')
+    
+    return response
+
+@dashboard.post("/kpi/recalculate", response_model=KPIResponse)
+async def recalculate_kpis():
+    """
+    Force recalculation of KPIs using LLM.
+    """
+    logger.info("Recalculating Dashboard KPIs from documents...")
     
     # 1. Fetch enabled documents
     db = get_database()
@@ -49,29 +126,28 @@ async def get_kpis():
     enabled_docs = [d for d in all_docs if d.metadata.enabled]
     
     if not enabled_docs:
-        # Return defaults if no data
-        return KPIData()
+        return KPIResponse()
         
-    # 2. Prepare Context from Doc Summaries or first chunks
-    # We use summaries if available, or just the first 2000 chars of content per doc
-    # to fit in context window efficiently.
+    # 2. Prepare Context
     context_text = ""
     for doc in enabled_docs:
-        # Try to find a summary property if it exists, otherwise use raw text
-        # Assuming SimbaDoc structure might vary, we'll try to extract text safely
         content = ""
-        if hasattr(doc, "content") and doc.content:
-             content = doc.content[:3000] # Take first 3000 chars
-        elif hasattr(doc, "documents") and doc.documents:
+        # Try to extract text safely (from content or chunks)
+        if hasattr(doc, "documents") and doc.documents:
              # Concatenate first few chunks
-             content = "\n".join([c.page_content for c in doc.documents[:3]])
+             content = "\n".join([c.page_content for c in doc.documents[:5]])
+        elif hasattr(doc, "content") and doc.content:
+             content = doc.content[:3000]
         
         context_text += f"--- Document: {doc.metadata.filename} ---\n{content}\n\n"
     
     if not context_text.strip():
-        return KPIData()
+        # Save empty/default if no content
+        empty_data = KPIData().model_dump()
+        save_kpis(empty_data)
+        return KPIResponse(**empty_data)
 
-    # 3. Use LLM to extract/calculate KPIs
+    # 3. Use LLM
     llm = get_llm()
     parser = JsonOutputParser(pydantic_object=KPIData)
     
@@ -92,8 +168,8 @@ async def get_kpis():
         - Harvest Progress (%)
         
         Also determine the trend ('up', 'down', 'neutral') based on historical comparisons or context in the text.
-        If a specific value is not found, make a REASONABLE ESTIMATE based on the context of the document (e.g. if it talks about heavy rain, rainfall is likely high and trend up).
-        If absolutely no info is available, return "N/A" or safe defaults.
+        If a specific value is not found, make a REASONABLE ESTIMATE based on the context of the document.
+        If absolutely no info is available, return "N/A".
         
         {format_instructions}
         """),
@@ -107,7 +183,16 @@ async def get_kpis():
             "context": context_text,
             "format_instructions": parser.get_format_instructions()
         })
-        return KPIData(**result)
+        
+        # Save to cache
+        save_kpis(result)
+        
+        # Return result with stale=False
+        response = KPIResponse(**result)
+        response.is_stale = False
+        response.last_updated = datetime.now().isoformat()
+        return response
+        
     except Exception as e:
         logger.error(f"Error calculating KPIs: {e}")
-        return KPIData() # Fallback
+        return KPIResponse() # Fallback

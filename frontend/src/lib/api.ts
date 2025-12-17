@@ -115,3 +115,23 @@ export async function getDashboardKPIs(): Promise<any> {
   }
 }
 
+export async function recalculateDashboardKPIs(): Promise<any> {
+  try {
+    const response = await fetch(`${config.apiUrl}/dashboard/kpi/recalculate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error recalculating dashboard KPIs:', error);
+    throw error;
+  }
+}
+
