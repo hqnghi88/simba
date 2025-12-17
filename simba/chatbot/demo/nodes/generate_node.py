@@ -21,12 +21,15 @@ def generate(state):
     print(f"Using {len(context_docs)} compressed documents for generation")
     
 
+    # context_docs contains LangChain Document objects directly from retrieval
     docs_content = "\n\n".join(
         doc.page_content
-        for simbadoc in context_docs
-        if simbadoc is not None
-        for doc in getattr(simbadoc, "documents", [])
+        for doc in context_docs
+        if doc and hasattr(doc, "page_content")
     )
+    
+    # Debug log the context size
+    print(f"Context content length: {len(docs_content)} chars")
 
     summaries = state["summaries"]
     # RAG generation

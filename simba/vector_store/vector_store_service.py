@@ -21,8 +21,45 @@ class VectorStoreService:
     def as_retriever(self, **kwargs):
         return self.store.as_retriever()
     
+    def _get_index_mtime(self):
+        """Get modification time of FAISS index file"""
+        try:
+           index_file = os.path.join(settings.paths.faiss_index_dir, "index.faiss")
+           if os.path.exists(index_file):
+               return os.path.getmtime(index_file)
+        except Exception:
+           pass
+        return 0
+
+    def _reload_if_changed(self):
+        """Reload FAISS index if disk file has changed"""
+        # Only applicable for FAISS
+        if not isinstance(self.store, FAISS): 
+            return
+
+        current_mtime = self._get_index_mtime()
+        # Initialize last_mtime if not set
+        if not hasattr(self, "_last_mtime"):
+            self._last_mtime = current_mtime
+            return # Assume current loaded version is up to date initially
+
+        if current_mtime > self._last_mtime:
+            logger.info(f"Vector store changed on disk (mtime {current_mtime} > {self._last_mtime}). Reloading...")
+            try:
+                self.store = FAISS.load_local(
+                    settings.paths.faiss_index_dir,
+                    self.embeddings,
+                    allow_dangerous_deserialization=True
+                )
+                self._last_mtime = current_mtime
+                logger.info("Vector store reloaded successfully")
+            except Exception as e:
+                logger.error(f"Failed to reload vector store: {e}")
+
     def similarity_search(self, query: str, k: int = 10, **kwargs) -> List[Document]:
         """Wrapper for similarity search on underlying store"""
+        # Auto-reload if needed (for local FAISS + Celery setup)
+        self._reload_if_changed()
         return self.store.similarity_search(query, k=k, **kwargs)
 
     def rerank_results(self, query: str, initial_results: List[Document], top_k: int = 20, **kwargs) -> List[Document]:
@@ -78,20 +115,26 @@ class VectorStoreService:
     def add_documents(self, documents: List[Document], document_id: str = None) -> bool:
         """Add documents with proper synchronization"""
         try:
+            logger.info(f"Adding {len(documents)} chunks to vector store (Document ID: {document_id})")
             # Add document_id to metadata if provided
             if document_id:
                 for doc in documents:
                     doc.metadata["document_id"] = document_id
 
+            # Log first chunk for debug
+            if documents:
+                 logger.info(f"Sample chunk: {documents[0].page_content[:50]}...")
+
             for doc in documents:
                 if self.chunk_in_store(doc.id):
-                    print(f"Document {doc.id} already in store")
+                    logger.warning(f"Document chunk {doc.id} already in store")
                     continue
-                else:
-                    print(f"Adding {doc.id} to store")
+                # else:
+                #    print(f"Adding {doc.id} to store")
 
             self.store.add_documents(documents)
             self.save()
+            logger.info("Vector store saved successfully")
             return True
         except Exception as e:
             logger.error(f"Error adding documents: {e}")

@@ -7,20 +7,26 @@ from simba.core.factories.llm_factory import get_llm
 # prompt = hub.pull("rlm/rag-prompt")
 prompt_template = ChatPromptTemplate.from_template(
     """
-    You are a helpful assistant
-    Your name is Simba.
-    You are able to answer questions about the documents in the context.
-    You are also able to reason and provide general answers
-    You always respond in the user's language.
-    Here are the summaries of the documents that are well fromated to help you answer the question, sometimes summaries are enought to answer the question:
+    You are a strictly constrained AI assistant named Simba.
+    
+    CRITICAL INSTRUCTIONS:
+    1. You must answer the question based ONLY on the provided context and document summaries below.
+    2. Do NOT use your own outside knowledge.
+    3. If the answer cannot be found in the context or summaries, you MUST say "I cannot find the answer in the provided documents."
+    4. You typically respond in the same language as the user's question.
+
+    Here are the summaries of the available documents:
     {summaries}
-    Here is the question:
-    {question}
-    Here is the context:
+    
+    Here is the detailed context from retrieved documents:
     {context}
+    
     Here is the chat history:
     {chat_history}
-    Answer:
+    
+    Question: {question}
+    
+    Answer (based ONLY on the context above):
 """
 )
 
