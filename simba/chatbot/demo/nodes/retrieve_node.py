@@ -15,9 +15,15 @@ def retrieve(state):
     """
     try:
         print("---RETRIEVE---")
-        question = state["messages"][-1].content
+        # Use transformed query if available (handles context/history rewrite)
+        if state.get("sub_queries") and len(state["sub_queries"]) > 0:
+            question = state["sub_queries"][0]
+            print(f"Using transformed query: {question}")
+        else:
+            question = state["messages"][-1].content
+            print(f"Using raw question: {question}")
+            
         # Retrieval with error handling
-
         documents = retriever.retrieve(question, method="default")
         print(f"Retrieved {len(documents)} documents")
         for i, doc in enumerate(documents):

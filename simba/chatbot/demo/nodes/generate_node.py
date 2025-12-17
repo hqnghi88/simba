@@ -32,13 +32,23 @@ def generate(state):
     print(f"Context content length: {len(docs_content)} chars")
 
     summaries = state["summaries"]
+    
+    # Format chat history as a readable string
+    chat_history_str = ""
+    for msg in state["messages"][:-1]: # Exclude the current last message which is the user's new question
+        role = "User" if msg.type == "human" else "Simba"
+        chat_history_str += f"{role}: {msg.content}\n"
+    
+    if not chat_history_str:
+        chat_history_str = "No history."
+
     # RAG generation
     generation = generate_chain.invoke(
         {
             "summaries": summaries,
             "context": docs_content,
             "question": question,
-            "chat_history": state["messages"],
+            "chat_history": chat_history_str,
         }
     )
 

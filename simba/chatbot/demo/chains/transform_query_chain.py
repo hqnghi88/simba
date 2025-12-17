@@ -30,7 +30,7 @@ re_write_prompt = ChatPromptTemplate.from_messages(
         ("system", system),
         (
             "human",
-            "Here is the initial question: \n\n {question} \n",
+            "Here is the chat history:\n{chat_history}\n\nHere is the initial question: \n\n {question} \n Formulate a standalone question that can be understood without the chat history.",
         ),
     ]
 )

@@ -20,10 +20,19 @@ def transform_query(state):
     transform_attempts = state.get("transform_attempts", 0)
     transform_attempts += 1
     
+    # Format chat history
+    chat_history_str = ""
+    for msg in state["messages"][:-1]:
+        role = "User" if msg.type == "human" else "Simba"
+        chat_history_str += f"{role}: {msg.content}\n"
+        
     print(f"Query transformation attempt #{transform_attempts}")
     
     # Re-write question
-    better_question = question_rewrite_chain.invoke({"question": question})
+    better_question = question_rewrite_chain.invoke({
+        "question": question,
+        "chat_history": chat_history_str
+    })
     
     return {
         "question": question,
