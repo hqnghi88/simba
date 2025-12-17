@@ -47,6 +47,7 @@ class KPIData(BaseModel):
 class KPIResponse(KPIData):
     is_stale: bool = Field(default=False)
     last_updated: Optional[str] = Field(default=None)
+    source_doc_ids: List[str] = Field(default=[])
 
 def load_kpis() -> dict:
     if os.path.exists(KPI_STORAGE_FILE):
@@ -72,19 +73,22 @@ async def get_kpis():
     """
     cached_data = load_kpis()
     
-    # Get latest document update time to check staleness
+    # Get enabled documents
     db = get_database()
     all_docs = db.get_all_documents()
     enabled_docs = [d for d in all_docs if d.metadata.enabled]
     
+    current_ids = sorted([d.id for d in enabled_docs])
+    cached_ids = sorted(cached_data.get('source_doc_ids', []))
+    
+    # Check timestamps for freshness of content
     latest_doc_ts = 0.0
     for doc in enabled_docs:
-        # Assuming metadata has uploadedAt or parsed_at
         ts_str = doc.metadata.parsed_at or doc.metadata.uploadedAt
         if ts_str:
             try:
-                # Handle varying formats if needed, assuming isoformat
-                ts = datetime.fromisoformat(ts_str).timestamp()
+                # Handle varying formats if needed
+                ts = datetime.fromisoformat(str(ts_str)).timestamp()
                 if ts > latest_doc_ts:
                     latest_doc_ts = ts
             except:
@@ -98,11 +102,14 @@ async def get_kpis():
             pass
             
     # Determine staleness:
-    # 1. No cached data -> Stale (needs Calc)
-    # 2. Latest doc is newer than Last Calc -> Stale
-    # 3. No docs enabled -> Not Stale (just N/A)
+    # 1. No cached data -> Stale (if docs exist)
+    # 2. Source ID mismatch (Documents added/removed/disabled) -> Stale
+    # 3. Latest doc timestamp > Last Calculation (Content updated) -> Stale
     is_stale = False
+    
     if not cached_data and enabled_docs:
+        is_stale = True
+    elif current_ids != cached_ids:
         is_stale = True
     elif enabled_docs and latest_doc_ts > last_kpi_ts:
         is_stale = True
@@ -110,6 +117,7 @@ async def get_kpis():
     response = KPIResponse(**(cached_data or {}))
     response.is_stale = is_stale
     response.last_updated = cached_data.get('last_updated')
+    response.source_doc_ids = cached_data.get('source_doc_ids', [])
     
     return response
 
@@ -124,17 +132,22 @@ async def recalculate_kpis():
     db = get_database()
     all_docs = db.get_all_documents()
     enabled_docs = [d for d in all_docs if d.metadata.enabled]
+    current_ids = [d.id for d in enabled_docs]
     
     if not enabled_docs:
-        return KPIResponse()
+        # Save empty state
+        empty_data = KPIData().model_dump()
+        empty_data['source_doc_ids'] = []
+        save_kpis(empty_data)
+        return KPIResponse(**empty_data)
         
     # 2. Prepare Context
     context_text = ""
     for doc in enabled_docs:
         content = ""
-        # Try to extract text safely (from content or chunks)
+        # Try to extract text safely
         if hasattr(doc, "documents") and doc.documents:
-             # Concatenate first few chunks
+             # Concatenate first 5 chunks
              content = "\n".join([c.page_content for c in doc.documents[:5]])
         elif hasattr(doc, "content") and doc.content:
              content = doc.content[:3000]
@@ -142,18 +155,23 @@ async def recalculate_kpis():
         context_text += f"--- Document: {doc.metadata.filename} ---\n{content}\n\n"
     
     if not context_text.strip():
-        # Save empty/default if no content
         empty_data = KPIData().model_dump()
+        empty_data['source_doc_ids'] = current_ids
         save_kpis(empty_data)
         return KPIResponse(**empty_data)
 
     # 3. Use LLM
     llm = get_llm()
     parser = JsonOutputParser(pydantic_object=KPIData)
+    # Use a custom parser robust to markdown blocks
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", """You are an Agricultural Data Analyst. 
-        Your task is to analyze the provided documents and extract/calculate key performance indicators (KPIs) for a farm dashboard.
+        Your task is to analyze the provided documents and DIRECTLY EXTRACT key performance indicators (KPIs).
+        
+        DO NOT write any code (Python, etc).
+        DO NOT explain your process.
+        RETURN ONLY A SINGLE JSON OBJECT.
         
         Extract values for the following metrics:
         - Soil Moisture (%, e.g. "64")
@@ -167,32 +185,54 @@ async def recalculate_kpis():
         - Solar Radiation (MJ/m²)
         - Harvest Progress (%)
         
-        Also determine the trend ('up', 'down', 'neutral') based on historical comparisons or context in the text.
-        If a specific value is not found, make a REASONABLE ESTIMATE based on the context of the document.
+        Also determine the trend ('up', 'down', 'neutral').
+        If a specific value is not found, make a REASONABLE ESTIMATE based on the context.
         If absolutely no info is available, return "N/A".
+        
+        Output format must be valid JSON matching this structure:
+        {{
+            "soil_moisture": "value",
+            "soil_moisture_trend": "neutral",
+            "temperature": "value",
+            "temperature_trend": "neutral",
+            ... and so on for all fields ...
+        }}
         
         {format_instructions}
         """),
         ("human", "Here are the documents:\n\n{context}")
     ])
     
-    chain = prompt | llm | parser
+    # We use StrOutputParser first to get raw text, then try to parse JSON
+    from langchain_core.output_parsers import StrOutputParser
+    chain = prompt | llm | StrOutputParser()
     
     try:
-        result = chain.invoke({
+        raw_result = chain.invoke({
             "context": context_text,
             "format_instructions": parser.get_format_instructions()
         })
         
-        # Save to cache
+        # Clean up result if it contains markdown code blocks
+        clean_result = raw_result.strip()
+        if "```json" in clean_result:
+            clean_result = clean_result.split("```json")[1].split("```")[0].strip()
+        elif "```" in clean_result:
+             clean_result = clean_result.split("```")[1].split("```")[0].strip()
+            
+        result = json.loads(clean_result)
+        
+        # Add source IDs and save
+        result['source_doc_ids'] = current_ids
         save_kpis(result)
         
-        # Return result with stale=False
         response = KPIResponse(**result)
         response.is_stale = False
         response.last_updated = datetime.now().isoformat()
+        response.source_doc_ids = current_ids
         return response
         
     except Exception as e:
         logger.error(f"Error calculating KPIs: {e}")
+        logger.error(f"Raw LLM Output was: {locals().get('raw_result', 'Not available')}")
         return KPIResponse() # Fallback

@@ -240,27 +240,30 @@ async def delete_document(
     """Delete a document by ID"""
     try:
         # Delete documents from vector store
+        deleted_ids = []
         for uid in uids:
             # Get document for the current user only
             simbadoc = db.get_document(uid, user_id=current_user["id"])
             if not simbadoc:
-                raise HTTPException(status_code=404, detail=f"Document {uid} not found or you don't have access to it")
+                logger.warning(f"Document {uid} not found during deletion (skipping idempotent).")
+                continue
                 
-            if simbadoc and simbadoc.metadata.enabled:
+            if simbadoc.metadata.enabled:
                 try:
                     store.delete_documents([doc.id for doc in simbadoc.documents])
                 except Exception as e:
-                    # Log the error but continue with deletion
                     logger.warning(
                         f"Error deleting document {uid} from vector store: {str(e)}. Continuing with database deletion."
                     )
-
-        # Delete documents from database for the current user only
-        for uid in uids:
+            
+            # Delete from DB
             db.delete_document(uid, user_id=current_user["id"])
+            deleted_ids.append(uid)
 
         # kms.sync_with_store()
-        return {"message": f"Documents {uids} deleted successfully"}
+        return {"message": f"Documents {deleted_ids} deleted successfully", "deleted": deleted_ids}
+    except HTTPException as e:
+        raise e
     except Exception as e:
         logger.error(f"Error in delete_document: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
