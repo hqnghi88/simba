@@ -20,6 +20,19 @@ class VectorStoreService:
 
     def as_retriever(self, **kwargs):
         return self.store.as_retriever()
+    
+    def similarity_search(self, query: str, k: int = 10, **kwargs) -> List[Document]:
+        """Wrapper for similarity search on underlying store"""
+        return self.store.similarity_search(query, k=k, **kwargs)
+
+    def rerank_results(self, query: str, initial_results: List[Document], top_k: int = 20, **kwargs) -> List[Document]:
+        """
+        Rerank results (fallback for local dev). 
+        Real implementation would use a CrossEncoder.
+        Here we just return the initial results truncated to top_k.
+        """
+        logger.info(f"Reranking fallback: returning top {top_k} from {len(initial_results)} docs")
+        return initial_results[:top_k]
 
     def save(self):
         # Ensure directory exists before saving

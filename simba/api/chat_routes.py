@@ -20,7 +20,10 @@ class Query(BaseModel):
 async def invoke_graph(query: Query = Body(...)):
     """Invoke the graph workflow with a message"""
 
-    config = {"configurable": {"thread_id": "2"}}
+    import uuid
+    # Use unique thread_id for each request to avoid state pollution/memory issues in local dev
+    thread_id = str(uuid.uuid4())
+    config = {"configurable": {"thread_id": thread_id}}
     state = State()
     state["messages"] = [HumanMessage(content=query.message)]
 

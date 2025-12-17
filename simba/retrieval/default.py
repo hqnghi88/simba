@@ -46,5 +46,6 @@ class DefaultRetriever(BaseRetriever):
         # In production, this would get the actual user from Supabase
         current_user_id = user_id or "mock-user-id"
 
-        # Use the underlying FAISS store's similarity_search method
-        return self.store.store.similarity_search(query, k=k)
+        # For local development with mock auth, user_id is ignored by local FAISS
+        # but we pass the query and k to the wrapper method
+        return self.store.similarity_search(query, k=k)
