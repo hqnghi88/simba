@@ -95,3 +95,23 @@ export async function handleChatStream(
   }
 }
 
+export async function getDashboardKPIs(): Promise<any> {
+  try {
+    const response = await fetch(`${config.apiUrl}/dashboard/kpi`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching dashboard KPIs:', error);
+    throw error;
+  }
+}
+

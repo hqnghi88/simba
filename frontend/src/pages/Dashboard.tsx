@@ -67,103 +67,134 @@ const KPICard: React.FC<KPIProps & { delay: number }> = ({
 };
 
 const Dashboard: React.FC = () => {
-    const kpis: KPIProps[] = [
-        {
-            title: "Soil Moisture",
-            value: "64",
-            unit: "%",
-            trend: "up",
-            change: "+2.4%",
-            icon: Droplets,
-            color: "text-blue-500",
-        },
-        {
-            title: "Temperature-Avg",
-            value: "24.5",
-            unit: "°C",
-            trend: "up",
-            change: "+1.2°C",
-            icon: Thermometer,
-            color: "text-orange-500",
-        },
-        {
-            title: "Rainfall",
-            value: "128",
-            unit: "mm",
-            trend: "down",
-            change: "-12%",
-            icon: CloudRainIcon,
-            color: "text-blue-400",
-        },
-        {
-            title: "Humidity",
-            value: "72",
-            unit: "%",
-            trend: "neutral",
-            change: "0%",
-            icon: Wind,
-            color: "text-cyan-500",
-        },
-        {
-            title: "Crop Yield Forecast",
-            value: "4.2",
-            unit: "tons/ha",
-            trend: "up",
-            change: "+5%",
-            icon: Sprout,
-            color: "text-green-600",
-        },
-        {
-            title: "Pest Risk Index",
-            value: "Low",
-            unit: "",
-            trend: "down",
-            change: "-1 level",
-            icon: Bug,
-            color: "text-red-500",
-        },
-        {
-            title: "Fertilizer Usage",
-            value: "150",
-            unit: "kg",
-            trend: "up",
-            change: "+10kg",
-            icon: Activity,
-            color: "text-purple-500",
-        },
-        {
-            title: "Equipment Health",
-            value: "98",
-            unit: "%",
-            trend: "neutral",
-            change: "Stable",
-            icon: BarChart3,
-            color: "text-slate-500",
-        },
-        {
-            title: "Solar Radiation",
-            value: "18.2",
-            unit: "MJ/m²",
-            trend: "up",
-            change: "+3%",
-            icon: Sun,
-            color: "text-yellow-500",
-        },
-        {
-            title: "Harvest Progress",
-            value: "85",
-            unit: "%",
-            trend: "up",
-            change: "+15%",
-            icon: Trees,
-            color: "text-emerald-600",
-        }
-    ];
+    const [loading, setLoading] = React.useState(true);
+    const [kpiData, setKpiData] = React.useState<any>(null);
 
-    // Helper because Lucide might not have CloudRainIcon exported exactly as I guessed
-    // Updating icon for Rainfall to CloudRain if generic, using Droplets for now logic...
-    // Let's replace CloudRain with generic Droplets or modify imports.
-    // Actually I see I didn't import CloudRainIcon. Let's fix that in next edit or use imports correctly.
+    // Use import from api.ts
+    React.useEffect(() => {
+        let isMounted = true;
+
+        const fetchData = async () => {
+            try {
+                // Dynamic import to avoid circular dependency if any, or just standard import
+                const { getDashboardKPIs } = await import('@/lib/api');
+                const data = await getDashboardKPIs();
+                if (isMounted) {
+                    setKpiData(data);
+                    setLoading(false);
+                }
+            } catch (e) {
+                console.error("Failed to load dashboard data", e);
+                if (isMounted) setLoading(false);
+            }
+        };
+
+        fetchData();
+
+        return () => { isMounted = false; };
+    }, []);
+
+    const kpis: KPIProps[] = React.useMemo(() => {
+        // Default / Mock if loading or error or empty
+        const d = kpiData || {};
+
+        return [
+            {
+                title: "Soil Moisture",
+                value: d.soil_moisture || "N/A",
+                unit: "%",
+                trend: d.soil_moisture_trend as any || "neutral",
+                change: "Updated from docs",
+                icon: Droplets,
+                color: "text-blue-500",
+            },
+            {
+                title: "Temperature-Avg",
+                value: d.temperature || "N/A",
+                unit: "°C",
+                trend: d.temperature_trend as any || "neutral",
+                change: "Updated from docs",
+                icon: Thermometer,
+                color: "text-orange-500",
+            },
+            {
+                title: "Rainfall",
+                value: d.rainfall || "N/A",
+                unit: "mm",
+                trend: d.rainfall_trend as any || "neutral",
+                change: "Updated from docs",
+                icon: CloudRainIcon,
+                color: "text-blue-400",
+            },
+            {
+                title: "Humidity",
+                value: d.humidity || "N/A",
+                unit: "%",
+                trend: d.humidity_trend as any || "neutral",
+                change: "Updated from docs",
+                icon: Wind,
+                color: "text-cyan-500",
+            },
+            {
+                title: "Crop Yield Forecast",
+                value: d.crop_yield || "N/A",
+                unit: "tons/ha",
+                trend: d.crop_yield_trend as any || "neutral",
+                change: "Updated from docs",
+                icon: Sprout,
+                color: "text-green-600",
+            },
+            {
+                title: "Pest Risk Index",
+                value: d.pest_risk || "N/A",
+                unit: "",
+                trend: d.pest_risk_trend as any || "neutral",
+                change: "Updated from docs",
+                icon: Bug,
+                color: "text-red-500",
+            },
+            {
+                title: "Fertilizer Usage",
+                value: d.fertilizer || "N/A",
+                unit: "kg",
+                trend: d.fertilizer_trend as any || "neutral",
+                change: "Updated from docs",
+                icon: Activity,
+                color: "text-purple-500",
+            },
+            {
+                title: "Equipment Health",
+                value: d.equipment_health || "N/A",
+                unit: "%",
+                trend: d.equipment_health_trend as any || "neutral",
+                change: "Updated from docs",
+                icon: BarChart3,
+                color: "text-slate-500",
+            },
+            {
+                title: "Solar Radiation",
+                value: d.solar_radiation || "N/A",
+                unit: "MJ/m²",
+                trend: d.solar_radiation_trend as any || "neutral",
+                change: "Updated from docs",
+                icon: Sun,
+                color: "text-yellow-500",
+            },
+            {
+                title: "Harvest Progress",
+                value: d.harvest_progress || "N/A",
+                unit: "%",
+                trend: d.harvest_progress_trend as any || "neutral",
+                change: "Updated from docs",
+                icon: Trees,
+                color: "text-emerald-600",
+            }
+        ];
+    }, [kpiData]);
+
+    if (loading) {
+        return <div className="p-8 flex items-center justify-center">Loading Dashboard Data...</div>;
+    }
 
     return (
         <div className="p-8 space-y-8 bg-zinc-50 min-h-screen">

@@ -33,6 +33,7 @@ def create_app():
     from simba.api.retriever_routes import retriever_route
     from simba.api.role_routes import role_router
     from simba.api.summarize_routes import summarize_router
+    from simba.api.dashboard_routes import dashboard
     from simba.core.config import settings
     from simba.core.utils.logger import setup_logging
 
@@ -114,6 +115,7 @@ def create_app():
     app.include_router(chat)
     app.include_router(config_router)
     app.include_router(database_route)
+    app.include_router(dashboard)
     app.include_router(embedding_route)
     app.include_router(ingestion)
     app.include_router(parsing)
