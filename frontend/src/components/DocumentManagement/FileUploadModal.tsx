@@ -24,12 +24,12 @@ interface FileUploadModalProps {
   folderName?: string
 }
 
-export function FileUploadModal({ 
-  isOpen, 
-  onClose, 
+export function FileUploadModal({
+  isOpen,
+  onClose,
   onUpload, // Destructure onUpload
-  currentFolderId = null, 
-  folderName = 'Home' 
+  currentFolderId = null,
+  folderName = 'Home'
 }: FileUploadModalProps) {
   const [dragActive, setDragActive] = useState(false)
   const [activeTab, setActiveTab] = useState("file")
@@ -43,19 +43,19 @@ export function FileUploadModal({
   const addFiles = (newFiles: FileList) => {
     setSelectedFiles(prevFiles => {
       const dt = new DataTransfer();
-      
+
       // Add existing files
       if (prevFiles) {
         Array.from(prevFiles).forEach(file => {
           dt.items.add(file);
         });
       }
-      
+
       // Add new files
       Array.from(newFiles).forEach(file => {
         dt.items.add(file);
       });
-      
+
       return dt.files;
     });
   };
@@ -95,7 +95,7 @@ export function FileUploadModal({
 
   const removeFile = (indexToRemove: number) => {
     if (!selectedFiles) return;
-    
+
     const dt = new DataTransfer();
     Array.from(selectedFiles).forEach((file, index) => {
       if (index !== indexToRemove) {
@@ -111,14 +111,15 @@ export function FileUploadModal({
         setIsUploading(true);
         // await ingestionApi.uploadDocuments(Array.from(selectedFiles)); // Replaced with onUpload call
         await onUpload(selectedFiles); // Call the passed onUpload function
-        
+
         // Toasting and onClose will now be handled by the parent (DocumentList) 
         // to ensure correct feedback after all parent logic (like fetchDocuments) is done.
         // toast({
         //   title: "Success",
         //   description: `Files uploaded successfully!`,
         // });
-        // onClose(); // Parent will call onClose after its handleUpload completes
+        setSelectedFiles(null);
+        onClose(); // Close the modal on success
       } catch (error) {
         console.error('Error during upload process:', error); // Log error from parent
         // Parent (DocumentList) will show its own error toast
@@ -167,11 +168,10 @@ export function FileUploadModal({
                   Uploading to: {folderName}
                 </div>
               )}
-              
+
               <div
-                className={`grid place-items-center border-2 border-dashed rounded-lg h-32 flex-shrink-0 ${
-                  dragActive ? "border-primary" : "border-gray-300"
-                } cursor-pointer`}
+                className={`grid place-items-center border-2 border-dashed rounded-lg h-32 flex-shrink-0 ${dragActive ? "border-primary" : "border-gray-300"
+                  } cursor-pointer`}
                 onDragEnter={handleDrag}
                 onDragLeave={handleDrag}
                 onDragOver={handleDrag}
@@ -194,8 +194,8 @@ export function FileUploadModal({
                   <div className="max-h-[200px] overflow-y-auto p-2">
                     <div className="space-y-1">
                       {Array.from(selectedFiles).map((file, index) => (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="flex items-center justify-between text-sm text-gray-600 py-1 px-2 rounded-md hover:bg-gray-100 group"
                         >
                           <div className="flex items-center gap-2 min-w-0 flex-1">
@@ -227,9 +227,8 @@ export function FileUploadModal({
           <TabsContent value="directory" className="flex-1">
             <div className="mt-4 space-y-4">
               <div
-                className={`grid place-items-center border-2 border-dashed rounded-lg h-32 flex-shrink-0 ${
-                  dragActive ? "border-primary" : "border-gray-300"
-                } cursor-pointer`}
+                className={`grid place-items-center border-2 border-dashed rounded-lg h-32 flex-shrink-0 ${dragActive ? "border-primary" : "border-gray-300"
+                  } cursor-pointer`}
                 onClick={handleAreaClick}
               >
                 <div className="text-center">
@@ -256,10 +255,10 @@ export function FileUploadModal({
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <Checkbox 
-                    id="recursive" 
-                    checked={recursive} 
-                    onCheckedChange={(checked) => setRecursive(checked as boolean)} 
+                  <Checkbox
+                    id="recursive"
+                    checked={recursive}
+                    onCheckedChange={(checked) => setRecursive(checked as boolean)}
                   />
                   <Label htmlFor="recursive">Process subfolders recursively</Label>
                 </div>
@@ -293,11 +292,11 @@ export function FileUploadModal({
               className="hidden"
               onChange={handleDirectorySelect}
             />
-            <Button 
+            <Button
               onClick={handleUpload}
-              disabled={(activeTab === "file" && !selectedFiles) || 
-                        (activeTab === "directory" && !selectedFiles) ||
-                        isUploading}
+              disabled={(activeTab === "file" && !selectedFiles) ||
+                (activeTab === "directory" && !selectedFiles) ||
+                isUploading}
             >
               {isUploading ? "Uploading..." : "OK"}
             </Button>

@@ -34,8 +34,15 @@ def transform_query(state):
         "chat_history": chat_history_str
     })
     
+    # Default to original question if transformation fails
+    sub_queries = [question]
+    if better_question and hasattr(better_question, "sub_queries"):
+        sub_queries = better_question.sub_queries
+    else:
+        print("Warning: Query transformation failed. Using original question.")
+    
     return {
         "question": question,
-        "sub_queries": better_question.sub_queries,
+        "sub_queries": sub_queries,
         "transform_attempts": transform_attempts
     }
