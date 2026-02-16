@@ -24,13 +24,18 @@ class AuthService:
             if supabase.__class__.__name__ == "MockSupabaseClient":
                 logger.info(f"MOCK: User signed up successfully: {email}")
                 # Return dummy user
+                # Return dummy user with admin role
                 return {
                     "id": "mock-user-id",
                     "email": email,
                     "created_at": "2023-01-01T00:00:00Z",
                     "metadata": user_metadata,
-                    "roles": [],
-                    "permissions": []
+                    "roles": [{"id": 0, "name": "admin", "description": "Administrator role"}],
+                    "permissions": [
+                        {"id": 1, "name": "read", "description": "Read access"},
+                        {"id": 2, "name": "write", "description": "Write access"},
+                        {"id": 3, "name": "admin", "description": "Admin access"}
+                    ]
                 }
             
             response = supabase.auth.sign_up({
@@ -99,6 +104,12 @@ class AuthService:
                         "email": email,
                         "created_at": "2023-01-01T00:00:00Z",
                         "metadata": {},
+                        "roles": [{"id": 0, "name": "admin", "description": "Administrator role"}],
+                        "permissions": [
+                            {"id": 1, "name": "read", "description": "Read access"},
+                            {"id": 2, "name": "write", "description": "Write access"},
+                            {"id": 3, "name": "admin", "description": "Admin access"}
+                        ]
                     },
                     "session": {
                         "access_token": "mock-access-token",

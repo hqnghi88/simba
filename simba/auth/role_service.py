@@ -227,7 +227,15 @@ class RoleService:
     def get_user_roles(user_id: str) -> List[Role]:
         """Get all roles for a user."""
         if not RoleService._is_postgres_enabled():
-             return []
+            # Return dummy admin role for local development if not using Postgres
+            return [
+                Role(
+                    id=0,
+                    name="admin",
+                    description="Administrator (Default Local Role)",
+                    created_at="2023-01-01T00:00:00Z"
+                )
+            ]
         try:
             # Get roles for user with a JOIN query
             rows = PostgresDB.fetch_all("""
@@ -322,7 +330,7 @@ class RoleService:
     def has_role(user_id: str, role_name: str) -> bool:
         """Check if a user has a specific role."""
         if not RoleService._is_postgres_enabled():
-             return False
+            return True # Allow all roles in local/mock mode
         try:
             # Check if user has role with a JOIN query
             row = PostgresDB.fetch_one("""
@@ -342,7 +350,7 @@ class RoleService:
     def has_permission(user_id: str, permission_name: str) -> bool:
         """Check if a user has a specific permission through any of their roles."""
         if not RoleService._is_postgres_enabled():
-             return True # Allow everything in local mode?? Risky but maybe user wants it. No, returning False.
+             return True # Allow all permissions in local/mock mode
         try:
             # Check if user has permission with a JOIN query
             row = PostgresDB.fetch_one("""
@@ -427,7 +435,12 @@ class RoleService:
     def get_user_permissions(user_id: str) -> List[Permission]:
         """Get all permissions for a user through their roles."""
         if not RoleService._is_postgres_enabled():
-             return []
+            # Return dummy permissions for local development if not using Postgres
+            return [
+                Permission(id=1, name="read", description="Read access"),
+                Permission(id=2, name="write", description="Write access"),
+                Permission(id=3, name="admin", description="Admin access")
+            ]
         try:
             # Get user permissions with a JOIN query
             rows = PostgresDB.fetch_all("""

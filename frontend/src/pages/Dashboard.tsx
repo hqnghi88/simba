@@ -10,9 +10,11 @@ import {
     BarChart3,
     TrendingUp,
     Activity,
-    Trees
+    Trees,
+    Info
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface KPIProps {
     title: string;
@@ -22,10 +24,11 @@ interface KPIProps {
     change: string;
     icon: React.ElementType;
     color: string;
+    explanation?: string;
 }
 
 const KPICard: React.FC<KPIProps & { delay: number }> = ({
-    title, value, unit, trend, change, icon: Icon, color, delay
+    title, value, unit, trend, change, icon: Icon, color, delay, explanation
 }) => {
     return (
         <motion.div
@@ -35,8 +38,20 @@ const KPICard: React.FC<KPIProps & { delay: number }> = ({
         >
             <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                    <CardTitle className="text-sm font-medium text-muted-foreground">
+                    <CardTitle className="text-sm font-medium text-muted-foreground flex items-center">
                         {title}
+                        {explanation && (
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Info className="h-3 w-3 ml-1.5 cursor-help opacity-50 hover:opacity-100 transition-opacity" />
+                                    </TooltipTrigger>
+                                    <TooltipContent side="top" className="max-w-[200px] text-xs">
+                                        <p>{explanation}</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+                        )}
                     </CardTitle>
                     <div className={`p-2 rounded-full ${color} bg-opacity-10`}>
                         <Icon className={`h-4 w-4 ${color.replace('bg-', 'text-')}`} />
@@ -57,7 +72,7 @@ const KPICard: React.FC<KPIProps & { delay: number }> = ({
                         )}
                         <p className={`text-xs ${trend === 'up' ? 'text-green-500' : trend === 'down' ? 'text-red-500' : 'text-gray-500'
                             }`}>
-                            {change} from last week
+                            {change}
                         </p>
                     </div>
                 </CardContent>
@@ -113,90 +128,100 @@ const Dashboard: React.FC = () => {
                 value: d.soil_moisture || "N/A",
                 unit: "%",
                 trend: d.soil_moisture_trend as any || "neutral",
-                change: "Updated from docs",
+                change: d.soil_moisture_trend_reasoning || "Stable data",
                 icon: Droplets,
                 color: "text-blue-500",
+                explanation: d.soil_moisture_explanation,
             },
             {
                 title: "Temperature-Avg",
                 value: d.temperature || "N/A",
                 unit: "°C",
                 trend: d.temperature_trend as any || "neutral",
-                change: "Updated from docs",
+                change: d.temperature_trend_reasoning || "Stable data",
                 icon: Thermometer,
                 color: "text-orange-500",
+                explanation: d.temperature_explanation,
             },
             {
                 title: "Rainfall",
                 value: d.rainfall || "N/A",
                 unit: "mm",
                 trend: d.rainfall_trend as any || "neutral",
-                change: "Updated from docs",
+                change: d.rainfall_trend_reasoning || "Stable data",
                 icon: CloudRainIcon,
                 color: "text-blue-400",
+                explanation: d.rainfall_explanation,
             },
             {
                 title: "Humidity",
                 value: d.humidity || "N/A",
                 unit: "%",
                 trend: d.humidity_trend as any || "neutral",
-                change: "Updated from docs",
+                change: d.humidity_trend_reasoning || "Stable data",
                 icon: Wind,
                 color: "text-cyan-500",
+                explanation: d.humidity_explanation,
             },
             {
                 title: "Crop Yield Forecast",
                 value: d.crop_yield || "N/A",
                 unit: "tons/ha",
                 trend: d.crop_yield_trend as any || "neutral",
-                change: "Updated from docs",
+                change: d.crop_yield_trend_reasoning || "Stable data",
                 icon: Sprout,
                 color: "text-green-600",
+                explanation: d.crop_yield_explanation,
             },
             {
                 title: "Pest Risk Index",
                 value: d.pest_risk || "N/A",
                 unit: "",
                 trend: d.pest_risk_trend as any || "neutral",
-                change: "Updated from docs",
+                change: d.pest_risk_trend_reasoning || "Stable data",
                 icon: Bug,
                 color: "text-red-500",
+                explanation: d.pest_risk_explanation,
             },
             {
                 title: "Fertilizer Usage",
                 value: d.fertilizer || "N/A",
                 unit: "kg",
                 trend: d.fertilizer_trend as any || "neutral",
-                change: "Updated from docs",
+                change: d.fertilizer_trend_reasoning || "Stable data",
                 icon: Activity,
                 color: "text-purple-500",
+                explanation: d.fertilizer_explanation,
             },
             {
                 title: "Equipment Health",
                 value: d.equipment_health || "N/A",
                 unit: "%",
                 trend: d.equipment_health_trend as any || "neutral",
-                change: "Updated from docs",
+                change: d.equipment_health_trend_reasoning || "Stable data",
                 icon: BarChart3,
                 color: "text-slate-500",
+                explanation: d.equipment_health_explanation,
             },
             {
                 title: "Solar Radiation",
                 value: d.solar_radiation || "N/A",
                 unit: "MJ/m²",
                 trend: d.solar_radiation_trend as any || "neutral",
-                change: "Updated from docs",
+                change: d.solar_radiation_trend_reasoning || "Stable data",
                 icon: Sun,
                 color: "text-yellow-500",
+                explanation: d.solar_radiation_explanation,
             },
             {
                 title: "Harvest Progress",
                 value: d.harvest_progress || "N/A",
                 unit: "%",
                 trend: d.harvest_progress_trend as any || "neutral",
-                change: "Updated from docs",
+                change: d.harvest_progress_trend_reasoning || "Stable data",
                 icon: Trees,
                 color: "text-emerald-600",
+                explanation: d.harvest_progress_explanation,
             }
         ];
     }, [kpiData]);

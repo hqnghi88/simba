@@ -31,7 +31,7 @@ httpClient.interceptors.response.use(
           throw new Error('No refresh token available');
         }
 
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/refresh`, {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/auth/refresh`, {
           refresh_token: refreshToken
         });
 
@@ -48,7 +48,7 @@ httpClient.interceptors.response.use(
         // If refresh fails, clear tokens and redirect to login
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
-        window.location.href = '/login';
+        window.location.href = '/auth/login';
         return Promise.reject(refreshError);
       }
     }

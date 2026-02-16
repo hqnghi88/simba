@@ -43,6 +43,28 @@ class KPIData(BaseModel):
     equipment_health_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
     solar_radiation_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
     harvest_progress_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
+    
+    # Reasons/Explanations for transparency
+    soil_moisture_explanation: str = Field(description="Reasoning for Soil Moisture value", default="")
+    soil_moisture_trend_reasoning: str = Field(description="Why is soil moisture trending this way?", default="")
+    temperature_explanation: str = Field(description="Reasoning for Temperature value", default="")
+    temperature_trend_reasoning: str = Field(description="Why is temperature trending this way?", default="")
+    rainfall_explanation: str = Field(description="Reasoning for Rainfall value", default="")
+    rainfall_trend_reasoning: str = Field(description="Why is rainfall trending this way?", default="")
+    humidity_explanation: str = Field(description="Reasoning for Humidity value", default="")
+    humidity_trend_reasoning: str = Field(description="Why is humidity trending this way?", default="")
+    crop_yield_explanation: str = Field(description="Reasoning for Crop Yield value", default="")
+    crop_yield_trend_reasoning: str = Field(description="Why is crop yield trending this way?", default="")
+    pest_risk_explanation: str = Field(description="Reasoning for Pest Risk value", default="")
+    pest_risk_trend_reasoning: str = Field(description="Why is pest risk trending this way?", default="")
+    fertilizer_explanation: str = Field(description="Reasoning for Fertilizer value", default="")
+    fertilizer_trend_reasoning: str = Field(description="Why is fertilizer trending this way?", default="")
+    equipment_health_explanation: str = Field(description="Reasoning for Equipment Health value", default="")
+    equipment_health_trend_reasoning: str = Field(description="Why is equipment health trending this way?", default="")
+    solar_radiation_explanation: str = Field(description="Reasoning for Solar Radiation value", default="")
+    solar_radiation_trend_reasoning: str = Field(description="Why is solar radiation trending this way?", default="")
+    harvest_progress_explanation: str = Field(description="Reasoning for Harvest Progress value", default="")
+    harvest_progress_trend_reasoning: str = Field(description="Why is harvest progress trending this way?", default="")
 
 class KPIResponse(KPIData):
     is_stale: bool = Field(default=False)
@@ -185,16 +207,19 @@ async def recalculate_kpis():
         - Solar Radiation (MJ/m²)
         - Harvest Progress (%)
         
-        Also determine the trend ('up', 'down', 'neutral').
-        If a specific value is not found, make a REASONABLE ESTIMATE based on the context.
-        If absolutely no info is available, return "N/A".
+        Also determine the trend ('up', 'down', 'neutral') and provide:
+        1. An EXPLANATION for the current value (how it was derived/extracted).
+        2. A TREND REASONING (why is it up, down, or stable based on document evidence).
+        
+        If a specific value is not found, make a REASONABLE ESTIMATE based on the context and explain your reasoning.
+        If absolutely no info is available, return "N/A" and explain why.
         
         Output format must be valid JSON matching this structure:
         {{
             "soil_moisture": "value",
-            "soil_moisture_trend": "neutral",
-            "temperature": "value",
-            "temperature_trend": "neutral",
+            "soil_moisture_trend": "up",
+            "soil_moisture_explanation": "brief reasoning for the value",
+            "soil_moisture_trend_reasoning": "brief reasoning for the trend",
             ... and so on for all fields ...
         }}
         
