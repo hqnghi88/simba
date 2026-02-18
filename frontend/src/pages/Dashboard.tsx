@@ -46,8 +46,11 @@ const KPICard: React.FC<KPIProps & { delay: number }> = ({
                                     <TooltipTrigger asChild>
                                         <Info className="h-3 w-3 ml-1.5 cursor-help opacity-50 hover:opacity-100 transition-opacity" />
                                     </TooltipTrigger>
-                                    <TooltipContent side="top" className="max-w-[200px] text-xs">
-                                        <p>{explanation}</p>
+                                    <TooltipContent side="top" className="max-w-[300px] p-3 text-xs leading-relaxed">
+                                        <div className="space-y-1">
+                                            <p className="font-semibold text-primary-foreground/90 border-b border-primary-foreground/20 pb-1 mb-1">Source Evidence</p>
+                                            <p>{explanation}</p>
+                                        </div>
                                     </TooltipContent>
                                 </Tooltip>
                             </TooltipProvider>
@@ -62,7 +65,7 @@ const KPICard: React.FC<KPIProps & { delay: number }> = ({
                         {value}
                         <span className="text-xs font-normal text-muted-foreground ml-1">{unit}</span>
                     </div>
-                    <div className="flex items-center mt-1">
+                    <div className="flex items-center mt-1 group relative">
                         {trend === 'up' ? (
                             <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
                         ) : trend === 'down' ? (
@@ -70,10 +73,15 @@ const KPICard: React.FC<KPIProps & { delay: number }> = ({
                         ) : (
                             <Activity className="h-4 w-4 text-gray-500 mr-1" />
                         )}
-                        <p className={`text-xs ${trend === 'up' ? 'text-green-500' : trend === 'down' ? 'text-red-500' : 'text-gray-500'
+                        <p className={`text-xs truncate max-w-[150px] ${trend === 'up' ? 'text-green-500' : trend === 'down' ? 'text-red-500' : 'text-gray-500'
                             }`}>
                             {change}
                         </p>
+                        {change && change.length > 20 && (
+                            <div className="absolute bottom-full left-0 mb-2 invisible group-hover:visible bg-popover text-popover-foreground text-[10px] p-2 rounded shadow-md border z-20 w-48">
+                                {change}
+                            </div>
+                        )}
                     </div>
                 </CardContent>
             </Card>
@@ -238,18 +246,28 @@ const Dashboard: React.FC = () => {
                     <p className="text-muted-foreground mt-1">Real-time overview of your farm's health and metrics.</p>
                 </div>
                 <div className="flex items-center space-x-4">
-                    {kpiData?.is_stale && (
-                        <div
+                    <div className="flex items-center space-x-2">
+                        {kpiData?.is_stale && (
+                            <div
+                                onClick={recalculating ? undefined : handleRecalculate}
+                                className={`flex items-center px-3 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-200 cursor-pointer hover:bg-amber-200 transition-colors ${recalculating ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            >
+                                <span className="w-2 h-2 bg-amber-500 rounded-full mr-2 animate-pulse"></span>
+                                <span className="text-sm font-medium">
+                                    {recalculating ? "Recalculating..." : "New Data Available - Click to Update"}
+                                </span>
+                            </div>
+                        )}
+                        <button
                             onClick={recalculating ? undefined : handleRecalculate}
-                            className={`flex items-center px-3 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-200 cursor-pointer hover:bg-amber-200 transition-colors ${recalculating ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            disabled={recalculating}
+                            className={`p-2 rounded-md border border-gray-200 hover:bg-gray-100 transition-colors ${recalculating ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            title="Force Recalculate"
                         >
-                            <span className="w-2 h-2 bg-amber-500 rounded-full mr-2 animate-pulse"></span>
-                            <span className="text-sm font-medium">
-                                {recalculating ? "Recalculating..." : "New Data Available - Click to Update"}
-                            </span>
-                        </div>
-                    )}
-                    <span className="text-sm text-gray-500">
+                            <Activity className={`h-4 w-4 text-gray-500 ${recalculating ? 'animate-spin' : ''}`} />
+                        </button>
+                    </div>
+                    <span className="text-sm text-gray-500 shrink-0">
                         Last updated: {kpiData?.last_updated ? new Date(kpiData.last_updated).toLocaleString() : 'Never'}
                     </span>
                 </div>
@@ -294,7 +312,7 @@ const Dashboard: React.FC = () => {
                     </CardContent>
                 </Card>
             </div>
-        </div>
+        </div >
     );
 };
 

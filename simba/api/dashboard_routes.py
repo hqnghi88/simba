@@ -1,4 +1,5 @@
-from typing import List, Optional
+from typing import List, Optional, Any
+
 import os
 import json
 from datetime import datetime
@@ -21,16 +22,16 @@ KPI_STORAGE_FILE = os.path.join(settings.paths.base_dir, "dashboard_kpis.json")
 
 # Define the data structure for our KPIs
 class KPIData(BaseModel):
-    soil_moisture: str = Field(description="Value for Soil Moisture", default="N/A")
-    temperature: str = Field(description="Value for Average Temperature", default="N/A")
-    rainfall: str = Field(description="Value for Rainfall", default="N/A")
-    humidity: str = Field(description="Value for Humidity", default="N/A")
-    crop_yield: str = Field(description="Value for Crop Yield Forecast", default="N/A")
-    pest_risk: str = Field(description="Value for Pest Risk Index", default="Low")
-    fertilizer: str = Field(description="Value for Fertilizer Usage", default="N/A")
-    equipment_health: str = Field(description="Value for Equipment Health", default="Good")
-    solar_radiation: str = Field(description="Value for Solar Radiation", default="N/A")
-    harvest_progress: str = Field(description="Value for Harvest Progress", default="0%")
+    soil_moisture: Any = Field(description="Value for Soil Moisture", default="N/A")
+    temperature: Any = Field(description="Value for Average Temperature", default="N/A")
+    rainfall: Any = Field(description="Value for Rainfall", default="N/A")
+    humidity: Any = Field(description="Value for Humidity", default="N/A")
+    crop_yield: Any = Field(description="Value for Crop Yield Forecast", default="N/A")
+    pest_risk: Any = Field(description="Value for Pest Risk Index", default="Low")
+    fertilizer: Any = Field(description="Value for Fertilizer Usage", default="N/A")
+    equipment_health: Any = Field(description="Value for Equipment Health", default="Good")
+    solar_radiation: Any = Field(description="Value for Solar Radiation", default="N/A")
+    harvest_progress: Any = Field(description="Value for Harvest Progress", default="0%")
     
     # Trends for UI
     soil_moisture_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
@@ -123,18 +124,24 @@ async def get_kpis():
         except:
             pass
             
-    # Determine staleness:
-    # 1. No cached data -> Stale (if docs exist)
-    # 2. Source ID mismatch (Documents added/removed/disabled) -> Stale
-    # 3. Latest doc timestamp > Last Calculation (Content updated) -> Stale
+    # Determine staleness
     is_stale = False
     
+    logger.debug(f"Staleness Check: current_ids={current_ids}")
+    logger.debug(f"Staleness Check: cached_ids={cached_ids}")
+    logger.debug(f"Staleness Check: latest_doc_ts={latest_doc_ts}, last_kpi_ts={last_kpi_ts}")
+
     if not cached_data and enabled_docs:
         is_stale = True
+        logger.info("Staleness Check: Stale because no cached data")
     elif current_ids != cached_ids:
         is_stale = True
-    elif enabled_docs and latest_doc_ts > last_kpi_ts:
+        logger.info(f"Staleness Check: Stale because list of docs changed. Diff: {set(current_ids) ^ set(cached_ids)}")
+    elif enabled_docs and (latest_doc_ts - last_kpi_ts) > 1.0: # Add 1s buffer
         is_stale = True
+        logger.info(f"Staleness Check: Stale because documents were updated more recently than the last calculation. Diff: {latest_doc_ts - last_kpi_ts}s")
+    else:
+        logger.debug("Staleness Check: Data is UP TO DATE")
         
     response = KPIResponse(**(cached_data or {}))
     response.is_stale = is_stale
@@ -163,18 +170,21 @@ async def recalculate_kpis():
         save_kpis(empty_data)
         return KPIResponse(**empty_data)
         
-    # 2. Prepare Context
+    # 2. Prepare Context (Selective for speed)
     context_text = ""
-    for doc in enabled_docs:
+    logger.info(f"Preparing context for {len(enabled_docs)} enabled documents")
+    
+    # Only take the 5 most recent documents, and only 3 chunks each
+    for doc in enabled_docs[:5]:
         content = ""
-        # Try to extract text safely
         if hasattr(doc, "documents") and doc.documents:
-             # Concatenate first 5 chunks
-             content = "\n".join([c.page_content for c in doc.documents[:5]])
+             logger.info(f"Processing top chunks for {doc.metadata.filename}")
+             content = "\n".join([c.page_content for c in doc.documents[:3]])
         elif hasattr(doc, "content") and doc.content:
-             content = doc.content[:3000]
+             content = doc.content[:2000]
         
-        context_text += f"--- Document: {doc.metadata.filename} ---\n{content}\n\n"
+        if content:
+            context_text += f"--- Source: {doc.metadata.filename} ---\n{content}\n\n"
     
     if not context_text.strip():
         empty_data = KPIData().model_dump()
@@ -184,80 +194,70 @@ async def recalculate_kpis():
 
     # 3. Use LLM
     llm = get_llm()
-    parser = JsonOutputParser(pydantic_object=KPIData)
-    # Use a custom parser robust to markdown blocks
+    # Explicitly set max_tokens lower for the dashboard to force speed
+    llm.max_tokens = 800
     
     prompt = ChatPromptTemplate.from_messages([
-        ("system", """You are an Agricultural Data Analyst. 
-        Your task is to analyze the provided documents and DIRECTLY EXTRACT key performance indicators (KPIs).
+        ("system", """You are a meticulous Agricultural Data Scientist.
+        Extract metrics from the provided text and provide HEAVY EVIDENCE for each value.
         
-        DO NOT write any code (Python, etc).
-        DO NOT explain your process.
-        RETURN ONLY A SINGLE JSON OBJECT.
+        LOCATIONS: Hoa Binh (VN), Luang Prabang (LA), Phrae (TH).
         
-        Extract values for the following metrics:
-        - Soil Moisture (%, e.g. "64")
-        - Temperature (AVG in Celsius, e.g. "24.5")
-        - Rainfall (mm, e.g. "128")
-        - Humidity (%, e.g. "72")
-        - Crop Yield Forecast (tons/ha)
-        - Pest Risk Index (Low/Medium/High)
-        - Fertilizer Usage (kg)
-        - Equipment Health (%)
-        - Solar Radiation (MJ/m²)
-        - Harvest Progress (%)
+        REQUIRED FIELDS for EACH metric (e.g. soil_moisture):
+        - [metric]: The value string (e.g. "25.4")
+        - [metric]_trend: "up", "down", or "neutral"
+        - [metric]_explanation: EXACT CITATION from the text stating the document name and context.
+        - [metric]_trend_reasoning: Brief logic for the trend choice.
         
-        Also determine the trend ('up', 'down', 'neutral') and provide:
-        1. An EXPLANATION for the current value (how it was derived/extracted).
-        2. A TREND REASONING (why is it up, down, or stable based on document evidence).
+        ALL FIELDS MUST BE PRESENT FOR THESE METRICS: 
+        soil_moisture, temperature, rainfall, humidity, crop_yield, pest_risk, fertilizer, equipment_health, solar_radiation, harvest_progress.
         
-        If a specific value is not found, make a REASONABLE ESTIMATE based on the context and explain your reasoning.
-        If absolutely no info is available, return "N/A" and explain why.
-        
-        Output format must be valid JSON matching this structure:
-        {{
-            "soil_moisture": "value",
-            "soil_moisture_trend": "up",
-            "soil_moisture_explanation": "brief reasoning for the value",
-            "soil_moisture_trend_reasoning": "brief reasoning for the trend",
-            ... and so on for all fields ...
-        }}
-        
-        {format_instructions}
+        CRITICAL RULES:
+        - If you find a value, you MUST explain exactly which document it came from.
+        - If you fallback (e.g. 24.5C for temp), explain it as "Regional Average for Indochina".
+        - RETURN ONLY A PURE JSON OBJECT. NO CHAT.
         """),
-        ("human", "Here are the documents:\n\n{context}")
+        ("human", "Analyze these documents and provide a JSON response with evidence for EVERY field:\n\n{context}")
     ])
     
-    # We use StrOutputParser first to get raw text, then try to parse JSON
     from langchain_core.output_parsers import StrOutputParser
     chain = prompt | llm | StrOutputParser()
     
     try:
-        raw_result = chain.invoke({
-            "context": context_text,
-            "format_instructions": parser.get_format_instructions()
-        })
+        logger.info(f"Invoking LLM for KPIs. Context length: {len(context_text)} chars")
+        raw_result = chain.invoke({"context": context_text})
+        logger.info(f"Raw LLM Response: {raw_result}")
         
-        # Clean up result if it contains markdown code blocks
+        # Robust JSON cleaning
         clean_result = raw_result.strip()
-        if "```json" in clean_result:
-            clean_result = clean_result.split("```json")[1].split("```")[0].strip()
-        elif "```" in clean_result:
-             clean_result = clean_result.split("```")[1].split("```")[0].strip()
+        if "{" in clean_result:
+            clean_result = clean_result[clean_result.find("{"):clean_result.rfind("}")+1]
             
         result = json.loads(clean_result)
         
-        # Add source IDs and save
-        result['source_doc_ids'] = current_ids
-        save_kpis(result)
+        # Merge with defaults and cast to strings
+        final_values = KPIData().model_dump()
+        for k, v in result.items():
+            if k in final_values:
+                # Force everything to string for the frontend, but handle nested objects if LLM messed up
+                if isinstance(v, dict):
+                    # Try to extract 'value' if it's nested
+                    final_values[k] = str(v.get('value', v))
+                else:
+                    final_values[k] = str(v)
         
-        response = KPIResponse(**result)
+        final_values['source_doc_ids'] = sorted(current_ids)
+        save_kpis(final_values)
+        
+        response = KPIResponse(**final_values)
         response.is_stale = False
         response.last_updated = datetime.now().isoformat()
-        response.source_doc_ids = current_ids
         return response
         
     except Exception as e:
-        logger.error(f"Error calculating KPIs: {e}")
-        logger.error(f"Raw LLM Output was: {locals().get('raw_result', 'Not available')}")
+        logger.error(f"Error calculating KPIs: {e}", exc_info=True)
+        # Return last known good data or empty
+        cached = load_kpis()
+        if cached:
+            return KPIResponse(**cached)
         return KPIResponse() # Fallback

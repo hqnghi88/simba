@@ -112,7 +112,7 @@ export default function KnowledgeConfigPage() {
   const fetchConfig = async () => {
     try {
       const token = getAccessToken();
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8081';
       const response = await fetch(`${apiUrl}/config`, {
         headers: {
           'Authorization': `Bearer ${token}`

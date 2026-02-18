@@ -55,11 +55,19 @@ def get_llm(LLMConfig: Optional[LLMConfig] = None):
         )
 
     elif settings.llm.provider == "vllm":
-        return VLLM(
-            model=settings.llm.model_name,
-            trust_remote_code=True,  # mandatory for hf models
+        # vllm-mlx and other vLLM servers provide an OpenAI-compatible API
+        base_url = settings.llm.base_url
+        if not base_url.endswith("/v1"):
+            base_url = f"{base_url.rstrip('/')}/v1"
+            
+        return ChatOpenAI(
+            model_name=settings.llm.model_name,
             temperature=settings.llm.temperature,
+            api_key="not-needed",
+            base_url=base_url,
             streaming=settings.llm.streaming,
+            max_tokens=settings.llm.max_tokens or 2048,
+            model_kwargs={"response_format": {"type": "json_object"}}
         )
 
     elif settings.llm.provider == "anthropic":

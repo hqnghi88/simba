@@ -1,0 +1,67 @@
+🚀 Starting Simba Environment Setup (vLLM-MLX Edition)...
+✅ Using poetry command: /Users/hqnghi/.local/bin/poetry
+📝 Updating frontend/.env...
+✅ Redis is already running.
+🧠 Starting vLLM-MLX server on port 8000...
+⏳ Waiting for vLLM to start (check vllm.log for details)...
+✅ vLLM is ready!
+✅ Setup complete. Starting Simba services...
+------------------------------------------------
+🧠 vLLM Server: http://localhost:8000
+🖥️  Simba API:   http://localhost:8081
+🌐 React Frontend: http://localhost:5173
+------------------------------------------------
+📡 Starting Simba FastAPI server on port 8081...
+⚙️  Starting Celery worker (parsers)...
+🎨 Starting React frontend...
+/Users/hqnghi/.local/pipx/venvs/poetry/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+/Users/hqnghi/.local/pipx/venvs/poetry/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Starting Celery worker for parsing tasks...
+Starting React frontend...
+
+> frontend@0.0.0 dev
+> vite
+
+Port 5173 is in use, trying another one...
+
+  VITE v6.3.2  ready in 240 ms
+
+  ➜  Local:   http://localhost:5174/
+  ➜  Network: use --host to expose
+⚠️ Missing environment variable: OPENAI_API_KEY
+⚠️ Missing environment variable: POSTGRES_USER
+⚠️ Missing environment variable: POSTGRES_PASSWORD
+⚠️ Missing environment variable: POSTGRES_HOST
+Missing Supabase credentials. Using MockSupabaseClient. Auth features will not work.
+ 
+ -------------- celery@m4air.local v5.5.2 (immunity)
+--- ***** ----- 
+-- ******* ---- macOS-15.7.4-arm64-arm-64bit 2026-02-17 20:38:52
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         simba:0x16fafea90
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/1
+- *** --- * --- .> concurrency: 10 (solo)
+-- ******* ---- .> task events: ON
+--- ***** ----- 
+ -------------- [queues]
+                .> parsing          exchange=parsing(direct) key=parsing
+                
+
+[tasks]
+  . catchup_summaries_task
+  . generate_summary_task
+  . ingest_document
+  . mistral_ocr_task
+  . parse_docling
+
+[2026-02-17 20:38:52,623: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2026-02-17 20:38:52,628: INFO/MainProcess] mingle: searching for neighbors
+[2026-02-17 20:38:53,641: INFO/MainProcess] mingle: all alone
+[2026-02-17 20:38:53,657: INFO/MainProcess] celery@m4air.local ready.
+[2026-02-17 20:38:56,280: WARNING/MainProcess] Got shutdown from remote
+7:29:03 AM [vite] .env changed, restarting server...
+7:29:03 AM [vite] server restarted.

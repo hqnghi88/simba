@@ -1,0 +1,269 @@
+/Users/hqnghi/.local/pipx/venvs/poetry/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Starting Celery worker for parsing tasks...
+⚠️ Missing environment variable: OPENAI_API_KEY
+⚠️ Missing environment variable: POSTGRES_USER
+⚠️ Missing environment variable: POSTGRES_PASSWORD
+⚠️ Missing environment variable: POSTGRES_HOST
+Missing Supabase credentials. Using MockSupabaseClient. Auth features will not work.
+ 
+ -------------- celery@m4air.local v5.5.2 (immunity)
+--- ***** ----- 
+-- ******* ---- macOS-15.7.4-arm64-arm-64bit 2026-02-17 08:14:59
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         simba:0x1029ec690
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/1
+- *** --- * --- .> concurrency: 10 (solo)
+-- ******* ---- .> task events: ON
+--- ***** ----- 
+ -------------- [queues]
+                .> parsing          exchange=parsing(direct) key=parsing
+                
+
+[tasks]
+  . catchup_summaries_task
+  . generate_summary_task
+  . ingest_document
+  . mistral_ocr_task
+  . parse_docling
+
+[2026-02-17 08:14:59,075: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2026-02-17 08:14:59,077: INFO/MainProcess] mingle: searching for neighbors
+[2026-02-17 08:15:00,088: INFO/MainProcess] mingle: all alone
+[2026-02-17 08:15:00,116: INFO/MainProcess] celery@m4air.local ready.
+[2026-02-17 08:16:21,901: INFO/MainProcess] Task parse_docling[099179b2-516a-4f51-9eab-2b6d74a8128b] received
+[2026-02-17 08:16:21,902: INFO/MainProcess] Starting Docling parsing for document ID: d76002ed-811e-4e78-b360-0f01d45f4437
+[2026-02-17 08:16:21,902: INFO/MainProcess] Creating new VectorStoreFactory singleton instance
+[2026-02-17 08:16:21,902: INFO/MainProcess] Initializing VectorStoreFactory store
+[2026-02-17 08:16:22,268: INFO/MainProcess] Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+[2026-02-17 08:16:30,338: INFO/MainProcess] Using embedding dimension: 384
+[2026-02-17 08:16:30,338: INFO/MainProcess] Loading existing FAISS vector store
+[2026-02-17 08:16:30,339: INFO/MainProcess] Initialized LiteDB at /Users/hqnghi/git/simba/uploads/documents.db
+[2026-02-17 08:16:30,340: INFO/MainProcess] Fetching document with ID: d76002ed-811e-4e78-b360-0f01d45f4437
+[2026-02-17 08:16:30,340: INFO/MainProcess] Document found with ID: d76002ed-811e-4e78-b360-0f01d45f4437
+[2026-02-17 08:16:30,721: INFO/MainProcess] Going to convert document batch...
+[2026-02-17 08:16:30,721: INFO/MainProcess] Initializing pipeline for StandardPdfPipeline with options hash 70041f74270850b7bedf7c8f5c2dcede
+[2026-02-17 08:16:30,739: INFO/MainProcess] Loading plugin 'docling_defaults'
+[2026-02-17 08:16:30,740: INFO/MainProcess] Registered ocr engines: ['easyocr', 'ocrmac', 'rapidocr', 'tesserocr', 'tesseract']
+[2026-02-17 08:16:30,776: INFO/MainProcess] Accelerator device: 'mps'
+[2026-02-17 08:16:32,332: INFO/MainProcess] Accelerator device: 'mps'
+[2026-02-17 08:16:33,950: INFO/MainProcess] Accelerator device: 'mps'
+[2026-02-17 08:16:34,415: INFO/MainProcess] Loading plugin 'docling_defaults'
+[2026-02-17 08:16:34,416: INFO/MainProcess] Registered picture descriptions: ['vlm', 'api']
+[2026-02-17 08:16:34,416: INFO/MainProcess] Processing document 7826439bc6147a130c77136bc2f4edb0.pdf
+[2026-02-17 08:17:04,459: INFO/MainProcess] Finished converting document 7826439bc6147a130c77136bc2f4edb0.pdf in 33.79 sec.
+Token indices sequence length is longer than the specified maximum sequence length for this model (1104 > 512). Running this sequence through the model will result in indexing errors
+[2026-02-17 08:17:04,678: INFO/MainProcess] Fetching document with ID: d76002ed-811e-4e78-b360-0f01d45f4437
+[2026-02-17 08:17:04,681: INFO/MainProcess] Document found with ID: d76002ed-811e-4e78-b360-0f01d45f4437
+[2026-02-17 08:17:04,688: INFO/MainProcess] Adding 43 chunks to vector store (Document ID: d76002ed-811e-4e78-b360-0f01d45f4437)
+[2026-02-17 08:17:05,230: INFO/MainProcess] Vector store saved successfully
+[2026-02-17 08:17:05,231: INFO/MainProcess] Document d76002ed-811e-4e78-b360-0f01d45f4437 updated successfully
+[2026-02-17 08:17:05,231: INFO/MainProcess] Document d76002ed-811e-4e78-b360-0f01d45f4437 updated successfully
+[2026-02-17 08:17:05,242: INFO/MainProcess] Task parse_docling[099179b2-516a-4f51-9eab-2b6d74a8128b] succeeded in 43.3395777500009s: {'status': 'success', 'document_id': 'd76002ed-811e-4e78-b360-0f01d45f4437'}
+
+SIGHUP not supported: Restarting with SIGHUP is unstable on this platform!
+[2026-02-17 20:27:46,359: WARNING/MainProcess] consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 341, in start
+    blueprint.start(self)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 772, in start
+    c.loop(*c.loop_args())
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/worker/loops.py", line 97, in asynloop
+    next(loop)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/asynchronous/hub.py", line 308, in create_loop
+    poll_timeout = fire_timers(propagate=propagate) if scheduled else 1
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/asynchronous/hub.py", line 149, in fire_timers
+    entry()
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/asynchronous/timer.py", line 70, in __call__
+    return self.fun(*self.args, **self.kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/asynchronous/timer.py", line 137, in _reschedules
+    return fun(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/transport/redis.py", line 554, in maybe_restore_messages
+    return channel.qos.restore_visible(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/transport/redis.py", line 410, in restore_visible
+    with Mutex(client, self.unacked_mutex_key,
+  File "/Users/hqnghi/.pyenv/versions/3.11.14/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/transport/redis.py", line 166, in Mutex
+    lock_acquired = lock.acquire(blocking=False)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/lock.py", line 210, in acquire
+    if self.do_acquire(token):
+       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/lock.py", line 226, in do_acquire
+    if self.redis.set(self.name, token, nx=True, px=timeout):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/commands/core.py", line 2335, in set
+    return self.execute_command("SET", *pieces, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/client.py", line 559, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/client.py", line 567, in _execute_command
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/retry.py", line 65, in call_with_retry
+    fail(error)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/client.py", line 571, in <lambda>
+    lambda error: self._disconnect_raise(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/client.py", line 555, in _disconnect_raise
+    raise error
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/client.py", line 568, in <lambda>
+    lambda: self._send_command_parse_response(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/client.py", line 541, in _send_command_parse_response
+    conn.send_command(*args, **options)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/connection.py", line 556, in send_command
+    self.send_packed_command(
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/connection.py", line 529, in send_packed_command
+    self.check_health()
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/connection.py", line 521, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/retry.py", line 67, in call_with_retry
+    raise error
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/connection.py", line 511, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/connection.py", line 592, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/_parsers/socket.py", line 115, in readline
+    self._read_from_socket()
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/_parsers/socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+[2026-02-17 20:27:46,454: CRITICAL/MainProcess] Unrecoverable error: OperationalError('Error 61 connecting to localhost:6379. Connection refused.')
+Traceback (most recent call last):
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/transport/virtual/base.py", line 951, in create_channel
+    return self._avail_channels.pop()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/connection.py", line 357, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/connection.py", line 358, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/connection.py", line 730, in _connect
+    raise err
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/connection.py", line 718, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/connection.py", line 472, in _reraise_as_library_errors
+    yield
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/connection.py", line 459, in _ensure_connection
+    return retry_over_time(
+           ^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/utils/functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/connection.py", line 938, in _connection_factory
+    self._connection = self._establish_connection()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/connection.py", line 860, in _establish_connection
+    conn = self.transport.establish_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/transport/virtual/base.py", line 975, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/transport/virtual/base.py", line 953, in create_channel
+    channel = self.Channel(connection)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/transport/redis.py", line 744, in __init__
+    self.client.ping()
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/commands/core.py", line 1212, in ping
+    return self.execute_command("PING", **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/client.py", line 559, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/client.py", line 565, in _execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/connection.py", line 1422, in get_connection
+    connection.connect()
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/redis/connection.py", line 363, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/worker/worker.py", line 203, in start
+    self.blueprint.start(self)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/bootsteps.py", line 365, in start
+    return self.obj.start()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 341, in start
+    blueprint.start(self)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/worker/consumer/connection.py", line 21, in start
+    c.connection = c.connect()
+                   ^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 472, in connect
+    conn = self.connection_for_read(heartbeat=self.amqheartbeat)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 478, in connection_for_read
+    return self.ensure_connected(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 530, in ensure_connected
+    conn = conn.ensure_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/connection.py", line 406, in ensure_connection
+    self._ensure_connection(*args, **kwargs)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/connection.py", line 458, in _ensure_connection
+    with ctx():
+  File "/Users/hqnghi/.pyenv/versions/3.11.14/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/hqnghi/Library/Caches/pypoetry/virtualenvs/simba-core-fe8p8nl3-py3.11/lib/python3.11/site-packages/kombu/connection.py", line 476, in _reraise_as_library_errors
+    raise ConnectionError(str(exc)) from exc
+kombu.exceptions.OperationalError: Error 61 connecting to localhost:6379. Connection refused.
+[2026-02-17 20:27:46,511: WARNING/MainProcess] /Users/hqnghi/.pyenv/versions/3.11.14/lib/python3.11/multiprocessing/resource_tracker.py:123: UserWarning: resource_tracker: process died unexpectedly, relaunching.  Some resources might leak.
+  warnings.warn('resource_tracker: process died unexpectedly, '
+
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+Fatal Python error: init_sys_streams: can't initialize sys standard streams
+Python runtime state: core initialized
+OSError: [Errno 9] Bad file descriptor
+
+Current thread 0x00000001fe2e2240 (most recent call first):
+  <no Python frame>

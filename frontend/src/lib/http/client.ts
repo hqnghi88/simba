@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create the base client
 const httpClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8081',
 });
 
 // Add auth token to requests
@@ -19,11 +19,11 @@ httpClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    
+
     // If error is 401 and we haven't retried yet
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      
+
       try {
         // Try to refresh the token
         const refreshToken = localStorage.getItem('refreshToken');
@@ -31,16 +31,16 @@ httpClient.interceptors.response.use(
           throw new Error('No refresh token available');
         }
 
-        const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/auth/refresh`, {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8081'}/auth/refresh`, {
           refresh_token: refreshToken
         });
 
         const { access_token, refresh_token: new_refresh_token } = response.data;
-        
+
         // Update tokens in localStorage
         localStorage.setItem('accessToken', access_token);
         localStorage.setItem('refreshToken', new_refresh_token);
-        
+
         // Retry the original request with the new token
         originalRequest.headers.Authorization = `Bearer ${access_token}`;
         return httpClient(originalRequest);
@@ -52,7 +52,7 @@ httpClient.interceptors.response.use(
         return Promise.reject(refreshError);
       }
     }
-    
+
     return Promise.reject(error);
   }
 );

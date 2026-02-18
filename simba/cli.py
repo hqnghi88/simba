@@ -12,9 +12,10 @@ def cli():
 
 
 @cli.command("server")
-def run_server():
+@click.option("--port", default=int(os.getenv("SIMBA_PORT", 8081)), help="Port to run the server on.")
+def run_server(port):
     """Run the Simba FastAPI server."""
-    click.echo("Starting Simba server...")
+    click.echo(f"Starting Simba server on port {port}...")
     from dotenv import load_dotenv
 
     from simba.__main__ import create_app
@@ -23,7 +24,7 @@ def run_server():
     app = create_app()
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000, workers=1)
+    uvicorn.run(app, host="0.0.0.0", port=port, workers=1)
 
 
 @cli.command("worker")

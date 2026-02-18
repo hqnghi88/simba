@@ -72,9 +72,19 @@ class VectorStoreFactory:
             )
             # Verify dimension match
             if store.index.d != embedding_dim:
-                raise ValueError(
-                    f"Embedding dimension mismatch: Index has {store.index.d}D vs Model has {embedding_dim}D"
+                logger.warning(
+                    f"⚠️ Embedding dimension mismatch: Index has {store.index.d}D vs Model has {embedding_dim}D. "
+                    "Existing index is incompatible with the new model. Re-initializing a new index..."
                 )
+                # Initialize a new index instead of crashing
+                index = faiss.IndexFlatL2(embedding_dim)
+                store = FAISS(
+                    embedding_function=embeddings,
+                    index=index,
+                    docstore=InMemoryDocstore(),
+                    index_to_docstore_id={},
+                )
+                store.save_local(settings.paths.faiss_index_dir)
         else:
             logging.info(f"Initializing new FAISS index with dimension {embedding_dim}")
             index = faiss.IndexFlatL2(embedding_dim)
