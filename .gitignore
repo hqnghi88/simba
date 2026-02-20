@@ -43,3 +43,4 @@ dump.rdb
 
 .db 
 simba_memory.pkl
+.log

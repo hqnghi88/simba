@@ -3,6 +3,9 @@ name: simba
 
 services:
   server:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     image: ${IMAGE_NAME:-simba}:${IMAGE_TAG:-latest}
     env_file:
       - ../.env
@@ -42,6 +45,9 @@ services:
     command: ["python", "-m", "uvicorn", "simba.__main__:create_app", "--host", "0.0.0.0", "--port", "8000", "--factory"]
 
   celery_worker:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     image: ${IMAGE_NAME:-simba}:${IMAGE_TAG:-latest}
     env_file:
       - ../.env
@@ -88,6 +94,9 @@ services:
       retries: 3
 
   frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
     image: ${FRONTEND_IMAGE_NAME:-simba-frontend}:${FRONTEND_IMAGE_TAG:-latest}
     ports:
       - "5173:5173"
