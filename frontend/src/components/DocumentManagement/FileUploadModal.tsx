@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { useState, useRef } from "react"
-import { Upload, Trash2, FolderUp } from "lucide-react"
+import { Upload, Trash2, FolderUp, Database } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
@@ -20,6 +20,7 @@ interface FileUploadModalProps {
   isOpen: boolean
   onClose: () => void
   onUpload: (files: FileList) => Promise<void>; // Added onUpload prop
+  onDataverseUpload?: (persistentId: string, destinationPath: string) => Promise<void>; // Added onDataverseUpload prop
   currentFolderId?: string | null
   folderName?: string
 }
@@ -28,12 +29,14 @@ export function FileUploadModal({
   isOpen,
   onClose,
   onUpload, // Destructure onUpload
+  onDataverseUpload,
   currentFolderId = null,
   folderName = 'Home'
 }: FileUploadModalProps) {
   const [dragActive, setDragActive] = useState(false)
   const [activeTab, setActiveTab] = useState("file")
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null)
+  const [dataverseId, setDataverseId] = useState("")
   const [destinationPath, setDestinationPath] = useState("/")
   const [recursive, setRecursive] = useState(true)
   const [isUploading, setIsUploading] = useState(false)
@@ -106,6 +109,22 @@ export function FileUploadModal({
   };
 
   const handleUpload = async () => {
+    if (activeTab === "dataverse") {
+      if (dataverseId && onDataverseUpload) {
+        try {
+          setIsUploading(true);
+          await onDataverseUpload(dataverseId, destinationPath);
+          setDataverseId("");
+          onClose();
+        } catch (error) {
+          console.error("Error during dataverse upload process:", error);
+        } finally {
+          setIsUploading(false);
+        }
+      }
+      return;
+    }
+
     if (selectedFiles && selectedFiles.length > 0) {
       try {
         setIsUploading(true);
@@ -153,9 +172,10 @@ export function FileUploadModal({
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex-1 flex flex-col">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="file">File Upload</TabsTrigger>
             <TabsTrigger value="directory">Folder Upload</TabsTrigger>
+            <TabsTrigger value="dataverse">Dataverse</TabsTrigger>
           </TabsList>
 
           <TabsContent value="file" className="flex-1 flex flex-col min-h-0">
@@ -265,6 +285,47 @@ export function FileUploadModal({
               </div>
             </div>
           </TabsContent>
+
+          <TabsContent value="dataverse" className="flex-1">
+            <div className="mt-4 space-y-4">
+              <div
+                className="grid place-items-center border-2 border-dashed rounded-lg h-32 flex-shrink-0 border-gray-300"
+              >
+                <div className="text-center">
+                  <Database className="w-10 h-10 mx-auto text-blue-500 mb-2" />
+                  <p className="text-sm text-gray-600">
+                    Import directly from Dataverse
+                  </p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Start document ingestion straight from a target dataset
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3 mt-4">
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="dataverse-id">Dataset Persistent ID</Label>
+                  <Input
+                    id="dataverse-id"
+                    value={dataverseId}
+                    onChange={(e) => setDataverseId(e.target.value)}
+                    placeholder="e.g., doi:10.7910/DVN/PHH72E"
+                  />
+                  <p className="text-xs text-gray-500">The Dataset DOI or Handle URL</p>
+                </div>
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="dataverse-dest-path">Destination Path</Label>
+                  <Input
+                    id="dataverse-dest-path"
+                    value={destinationPath}
+                    onChange={(e) => setDestinationPath(e.target.value)}
+                    placeholder="Destination path (e.g., /dataset)"
+                  />
+                  <p className="text-xs text-gray-500">Where to store the ingested documents</p>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
         </Tabs>
 
         <DialogFooter className="flex justify-between mt-6">
@@ -296,6 +357,7 @@ export function FileUploadModal({
               onClick={handleUpload}
               disabled={(activeTab === "file" && !selectedFiles) ||
                 (activeTab === "directory" && !selectedFiles) ||
+                (activeTab === "dataverse" && !dataverseId) ||
                 isUploading}
             >
               {isUploading ? "Uploading..." : "OK"}

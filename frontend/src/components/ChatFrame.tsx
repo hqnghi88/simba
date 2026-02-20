@@ -2,17 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Paperclip, X, Smile, Plus, Loader2, MessageSquare, Globe, Megaphone, Image as ImageIcon, MoreHorizontal, Mic } from 'lucide-react';
+import { Send, X, Loader2, MessageSquare, Paperclip } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 import { Message } from '@/types/chat';
 import Thinking from '@/components/Thinking';
 import { sendMessage, handleChatStream } from '@/lib/api';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { useToast } from "@/hooks/use-toast";
 import SourcePanel from './SourcePanel';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -157,7 +151,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
   };
 
   const handleSourceClick = (message: Message) => {
-    if (message.role === 'assistant' && message.state?.sources?.length > 0) {
+    if (message.role === 'assistant' && (message.state?.sources?.length || 0) > 0) {
       setSelectedMessage(message);
       setSourcePanelOpen(true);
     }
@@ -230,6 +224,15 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
           <CardFooter className="p-4 border-t bg-white">
             <form onSubmit={handleSubmit} className="w-full flex justify-center">
               <div className="w-full max-w-3xl flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-lg border border-gray-100">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="h-10 w-10 rounded-full shrink-0"
+                  onClick={onUploadClick}
+                >
+                  <Paperclip className="h-5 w-5" />
+                </Button>
                 <Input
                   ref={inputRef}
                   value={inputMessage}
@@ -258,28 +261,39 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ messages, setMessages, onUploadCl
       {/* Source Panel - Only displayed when open */}
       <AnimatePresence>
         {sourcePanelOpen && selectedMessage && (
-          <motion.div
-            initial={{ x: '100%', opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: '100%', opacity: 0 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="h-full w-[300px] sm:w-[320px] md:w-[380px] border-l flex flex-col bg-white overflow-hidden shrink-0 shadow-md"
-          >
-            <div className="flex justify-between items-center p-3 border-b bg-gray-50">
-              <h3 className="font-medium text-sm truncate pr-2">Sources</h3>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={closeSourcePanel}
-                className="h-8 w-8 rounded-full hover:bg-gray-200"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
-            <div className="flex-1 overflow-hidden">
-              <SourcePanel message={selectedMessage} />
-            </div>
-          </motion.div>
+          <>
+            {/* Mobile backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeSourcePanel}
+              className="fixed inset-0 bg-black/20 z-30 md:hidden backdrop-blur-sm"
+            />
+
+            <motion.div
+              initial={{ x: '100%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '100%', opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="absolute md:relative inset-y-0 right-0 z-40 h-full w-[85%] sm:w-[320px] md:w-[380px] border-l flex flex-col bg-white overflow-hidden shrink-0 shadow-xl md:shadow-md"
+            >
+              <div className="flex justify-between items-center p-3 border-b bg-gray-50">
+                <h3 className="font-medium text-sm truncate pr-2">Sources</h3>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={closeSourcePanel}
+                  className="h-8 w-8 rounded-full hover:bg-gray-200"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+              <div className="flex-1 overflow-hidden">
+                <SourcePanel message={selectedMessage} />
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </div>

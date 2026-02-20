@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
 } from "@/components/ui/table";
 import { Plus, Trash2, Eye, FileText, FileSpreadsheet, File, FileCode, FileImage, FolderPlus, Folder, FolderOpen, RefreshCcw, Play, Loader2, Pencil, Settings, Sparkles, Filter, MoreVertical } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -152,7 +152,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
           // if (result.status === 'SUCCESS' || result.status === 'FAILED') {
           //   delete tasks[docId];
           //   hasChanges = true;
-            
+
           //   const doc = documents.find(d => d.id === docId);
           //   if (doc) {
           //     const updatedDoc = {
@@ -184,13 +184,13 @@ const DocumentList: React.FC<DocumentListProps> = ({
     if (Object.keys(pendingUploads).length > 0 && documents.length > 0) {
       const pendingCopy = { ...pendingUploads };
       let hasChanges = false;
-      
+
       const associations = loadDocumentFolderAssociations();
-      
+
       documents.forEach(doc => {
         if (pendingUploads[doc.id]) {
           console.log(`Associating document ${doc.id} with folder ${pendingUploads[doc.id]}`);
-          
+
           const updatedDoc = {
             ...doc,
             metadata: {
@@ -198,14 +198,14 @@ const DocumentList: React.FC<DocumentListProps> = ({
               folder_id: pendingUploads[doc.id]
             }
           };
-          
+
           associations[doc.id] = pendingUploads[doc.id];
           onDocumentUpdate(updatedDoc);
           delete pendingCopy[doc.id];
           hasChanges = true;
         }
       });
-      
+
       if (hasChanges) {
         setPendingUploads(pendingCopy);
         saveDocumentFolderAssociations(associations);
@@ -220,7 +220,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
         setAvailableParsers(parsers);
       } catch (error) {
         console.error("Failed to fetch available parsers:", error);
-        setAvailableParsers(["docling"]); 
+        setAvailableParsers(["docling"]);
       }
     };
     fetchParsers();
@@ -308,16 +308,16 @@ const DocumentList: React.FC<DocumentListProps> = ({
   };
 
   const DOCUMENT_FOLDERS_KEY = 'document_folder_associations';
-  
+
   const saveDocumentFolderAssociations = (associations: Record<string, string | null>) => {
     localStorage.setItem(DOCUMENT_FOLDERS_KEY, JSON.stringify(associations));
   };
-  
+
   const loadDocumentFolderAssociations = (): Record<string, string | null> => {
     const saved = localStorage.getItem(DOCUMENT_FOLDERS_KEY);
     return saved ? JSON.parse(saved) : {};
   };
-  
+
   useEffect(() => {
     if (documents.length === 0) return;
     const associations = loadDocumentFolderAssociations();
@@ -332,7 +332,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
       saveDocumentFolderAssociations(associations);
     }
   }, [documents]);
-  
+
   useEffect(() => {
     if (documents.length === 0) return;
     const associations = loadDocumentFolderAssociations();
@@ -340,7 +340,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
     const updatedDocs = documents.map(doc => {
       if (associations[doc.id] && !doc.metadata.folder_id) {
         hasUpdates = true;
-        return { ...doc, metadata: { ...doc.metadata, folder_id: associations[doc.id] }};
+        return { ...doc, metadata: { ...doc.metadata, folder_id: associations[doc.id] } };
       }
       return doc;
     });
@@ -366,7 +366,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
   };
 
   const handleRenameFolder = (folderId: string, newName: string) => {
-    setFolders(folders.map(folder => 
+    setFolders(folders.map(folder =>
       folder.id === folderId ? { ...folder, name: newName } : folder
     ));
     setIsRenamingId(null);
@@ -397,11 +397,11 @@ const DocumentList: React.FC<DocumentListProps> = ({
 
       let checkAttempts = 0;
       const maxAttempts = 15;
-      
+
       const checkForNewUploads = async () => {
-        const newlyUploaded = documents.filter(doc => 
+        const newlyUploaded = documents.filter(doc =>
           !doc.metadata.folder_id &&
-          !doc.metadata.is_folder && 
+          !doc.metadata.is_folder &&
           fileNames.some(name => doc.metadata.filename === name)
         );
 
@@ -410,7 +410,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
           const updates: Record<string, string> = { ...pendingUploads };
           newlyUploaded.forEach(doc => { updates[doc.id] = currentFolderId!; });
           setPendingUploads(updates);
-          toast({ title: "Association Found", description: `${newlyUploaded.length} file(s) will be linked.`});
+          toast({ title: "Association Found", description: `${newlyUploaded.length} file(s) will be linked.` });
         } else if (checkAttempts < maxAttempts) {
           checkAttempts++;
           setTimeout(checkForNewUploads, 2000);
@@ -458,7 +458,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
           parsing_status: '', uploadedAt: new Date().toISOString(), type: 'folder'
         },
         documents: [], chunks: []
-      } as SimbaDoc)); 
+      } as SimbaDoc));
     return [...folderItems, ...filteredDocs];
   };
 
@@ -483,7 +483,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
     try {
       if (isEnabling.has(doc.id)) return;
       setIsEnabling(prev => { const next = new Set(prev); next.add(doc.id); return next; });
-      const updatedDoc = { ...doc, metadata: { ...doc.metadata, enabled: checked }};
+      const updatedDoc = { ...doc, metadata: { ...doc.metadata, enabled: checked } };
       onDocumentUpdate(updatedDoc);
 
       if (!checked) {
@@ -494,7 +494,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
         if (!silent) toast({ title: "Document embedded", description: `Document embedded successfully.` });
       }
     } catch (error) {
-      const revertedDoc = { ...doc, metadata: { ...doc.metadata, enabled: !checked }};
+      const revertedDoc = { ...doc, metadata: { ...doc.metadata, enabled: !checked } };
       onDocumentUpdate(revertedDoc);
       if (!silent) {
         toast({
@@ -514,16 +514,16 @@ const DocumentList: React.FC<DocumentListProps> = ({
       setParsingButtonStates(prev => ({ ...prev, [document.id]: true }));
       const parserToUse = parserOverride || document.metadata.parser || 'docling';
       if (document.metadata.enabled) {
-        const disabledDoc = { ...document, metadata: { ...document.metadata, enabled: false }};
+        const disabledDoc = { ...document, metadata: { ...document.metadata, enabled: false } };
         onDocumentUpdate(disabledDoc);
         await new Promise(resolve => setTimeout(resolve, 500));
         // Ensure parsing_status is PENDING when re-parsing an enabled document
-        const enabledDoc = { ...document, metadata: { ...document.metadata, enabled: true, parsing_status: 'PENDING', parser: parserToUse }};
+        const enabledDoc = { ...document, metadata: { ...document.metadata, enabled: true, parsing_status: 'PENDING', parser: parserToUse } };
         onDocumentUpdate(enabledDoc);
         await embeddingApi.delete_document(document.id);
       } else {
         // If not enabled, set parser and PENDING status before starting
-        const updatedDoc = { ...document, metadata: { ...document.metadata, parser: parserToUse, parsing_status: 'PENDING' }};
+        const updatedDoc = { ...document, metadata: { ...document.metadata, parser: parserToUse, parsing_status: 'PENDING' } };
         onDocumentUpdate(updatedDoc);
         // Give UI a moment to update before API call
         await new Promise(resolve => setTimeout(resolve, 100));
@@ -544,7 +544,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
       // Revert parsing status if API call failed
       const docToRevert = documents.find(d => d.id === document.id);
       if (docToRevert) {
-        const revertedDoc = { ...docToRevert, metadata: { ...docToRevert.metadata, parsing_status: docToRevert.metadata.parsing_status === 'PENDING' ? (docToRevert.metadata.parser ? 'SUCCESS' : '') : docToRevert.metadata.parsing_status }};
+        const revertedDoc = { ...docToRevert, metadata: { ...docToRevert.metadata, parsing_status: docToRevert.metadata.parsing_status === 'PENDING' ? (docToRevert.metadata.parser ? 'SUCCESS' : '') : docToRevert.metadata.parsing_status } };
         onDocumentUpdate(revertedDoc);
       }
     } finally {
@@ -558,7 +558,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
     if (updatedDoc) {
       const associations = loadDocumentFolderAssociations();
       const folderId = associations[docId] || updatedDoc.metadata.folder_id;
-      const docWithNewStatus = { ...updatedDoc, metadata: { ...updatedDoc.metadata, parsing_status: status, folder_id: folderId }};
+      const docWithNewStatus = { ...updatedDoc, metadata: { ...updatedDoc.metadata, parsing_status: status, folder_id: folderId } };
       onDocumentUpdate(docWithNewStatus);
       if (folderId) { associations[docId] = folderId; saveDocumentFolderAssociations(associations); }
     }
@@ -622,7 +622,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
   const handleMoveDocument = (docId: string, targetFolderId: string | null) => {
     const doc = documents.find(d => d.id === docId);
     if (doc) {
-      const updatedDoc = { ...doc, metadata: { ...doc.metadata, folder_id: targetFolderId }};
+      const updatedDoc = { ...doc, metadata: { ...doc.metadata, folder_id: targetFolderId } };
       onDocumentUpdate(updatedDoc);
       const associations = loadDocumentFolderAssociations();
       associations[docId] = targetFolderId;
@@ -676,7 +676,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
     setToggleLoading(true);
     toast({ title: `${enable ? 'Enabling' : 'Disabling'} documents`, description: `${enable ? 'Enabling' : 'Disabling'} ${docsToUpdate.length} document(s)...` });
     docsToUpdate.forEach(doc => {
-      const updatedDoc = { ...doc, metadata: { ...doc.metadata, enabled: enable }};
+      const updatedDoc = { ...doc, metadata: { ...doc.metadata, enabled: enable } };
       onDocumentUpdate(updatedDoc);
     });
     let successCount = 0; let errorCount = 0; const failedDocs = [];
@@ -686,7 +686,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
     }
     if (failedDocs.length > 0) {
       failedDocs.forEach(doc => {
-        const revertedDoc = { ...doc, metadata: { ...doc.metadata, enabled: !enable }};
+        const revertedDoc = { ...doc, metadata: { ...doc.metadata, enabled: !enable } };
         onDocumentUpdate(revertedDoc);
       });
     }
@@ -790,7 +790,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
 
     if (errorCount > 0) toast({ variant: "destructive", title: "Operation partially completed", description: `${successCount} document(s) summarization started, ${errorCount} failed` });
     else if (successCount > 0) toast({ title: "Success", description: `Summary generation started for ${successCount} document(s)` });
-    
+
     // Deselect after action
     // setSelectedIds(new Set()); 
     // User might want to perform another action on the same selection
@@ -836,7 +836,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
 
     if (errorCount > 0) toast({ variant: "destructive", title: "Operation partially completed", description: `${successCount} document(s) parsing started with ${selectedBulkParser}, ${errorCount} failed` });
     else if (successCount > 0) toast({ title: "Success", description: `Parsing started for ${successCount} document(s) with ${selectedBulkParser}` });
-    
+
     // Deselect after action
     // setSelectedIds(new Set());
   };
@@ -1093,7 +1093,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
           <TableHeader>
             <TableRow>
               <TableHead className="w-8">
-                <Checkbox 
+                <Checkbox
                   checked={selectedIds.size === getCurrentFolderDocuments().filter(d => !d.metadata.is_folder).length && getCurrentFolderDocuments().filter(d => !d.metadata.is_folder).length > 0}
                   onCheckedChange={(checked) => {
                     if (checked) {
@@ -1106,13 +1106,13 @@ const DocumentList: React.FC<DocumentListProps> = ({
                 />
               </TableHead>
               <TableHead>Name</TableHead>
-              {visibleColumns.chunkNumber && <TableHead>Chunk Number</TableHead>}
-              {visibleColumns.uploadDate && <TableHead>Upload Date</TableHead>}
-              {visibleColumns.loader && <TableHead>Loader</TableHead>}
-              {visibleColumns.enable && <TableHead>Enable</TableHead>}
-              {visibleColumns.parsingStatus && <TableHead>Parsing Status</TableHead>}
-              {visibleColumns.isSummarized && <TableHead>Is Summarized</TableHead>}
-              <TableHead className="w-[100px]">Actions</TableHead>
+              {visibleColumns.chunkNumber && <TableHead className="hidden lg:table-cell">Chunk Number</TableHead>}
+              {visibleColumns.uploadDate && <TableHead className="hidden md:table-cell">Upload Date</TableHead>}
+              {visibleColumns.loader && <TableHead className="hidden xl:table-cell">Loader</TableHead>}
+              {visibleColumns.enable && <TableHead className="hidden sm:table-cell">Enable</TableHead>}
+              {visibleColumns.parsingStatus && <TableHead className="hidden sm:table-cell">Parsing Status</TableHead>}
+              {visibleColumns.isSummarized && <TableHead className="hidden md:table-cell">Summarized</TableHead>}
+              <TableHead className="w-[100px] text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -1130,7 +1130,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
                   <div className="flex items-center gap-1">
                     {getBreadcrumbs().map((crumb, i, arr) => (
                       <React.Fragment key={crumb.id || 'root'}>
-                        <button 
+                        <button
                           className={cn(
                             "hover:text-blue-500 text-xs px-1",
                             i === arr.length - 1 && "font-medium"
@@ -1147,10 +1147,10 @@ const DocumentList: React.FC<DocumentListProps> = ({
                 </div>
               </TableCell>
             </TableRow>
-            
+
             {getCurrentFolderDocuments().map((doc, index) => (
-              <TableRow 
-                key={doc.id} 
+              <TableRow
+                key={doc.id}
                 className={cn(
                   "hover:bg-gray-50",
                   doc.metadata.is_folder && "cursor-pointer group" // Ensure 'group' class for folder rename hover
@@ -1174,7 +1174,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
               >
                 <TableCell className="w-8">
                   <div onClick={(e) => handleCheckboxClick(doc.id, index, e)}>
-                    <Checkbox 
+                    <Checkbox
                       checked={selectedIds.has(doc.id)}
                     />
                   </div>
@@ -1198,7 +1198,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
                       />
                     ) : (
                       <div className="flex items-center gap-2">
-                        <span 
+                        <span
                           className={cn("cursor-pointer", doc.metadata.is_folder && "font-medium hover:underline")}
                           onClick={() => {
                             if (doc.metadata.is_folder) {
@@ -1224,17 +1224,17 @@ const DocumentList: React.FC<DocumentListProps> = ({
                   </div>
                 </TableCell>
                 {visibleColumns.chunkNumber && (
-                  <TableCell>
+                  <TableCell className="hidden lg:table-cell text-center">
                     {doc.metadata.is_folder ? '' : (doc.metadata.enabled ? doc.documents.length : 0)}
                   </TableCell>
                 )}
                 {visibleColumns.uploadDate && (
-                  <TableCell>
+                  <TableCell className="hidden md:table-cell">
                     {doc.metadata.is_folder ? '' : formatDate(doc.metadata.uploadedAt || "Unknown")}
                   </TableCell>
                 )}
                 {visibleColumns.loader && (
-                  <TableCell>
+                  <TableCell className="hidden xl:table-cell">
                     {doc.metadata.loader && !doc.metadata.is_folder ? (
                       <Badge variant="outline">{doc.metadata.loader}</Badge>
                     ) : (
@@ -1243,14 +1243,14 @@ const DocumentList: React.FC<DocumentListProps> = ({
                   </TableCell>
                 )}
                 {visibleColumns.enable && (
-                  <TableCell>
+                  <TableCell className="hidden sm:table-cell">
                     {doc.metadata.is_folder ? '' : (
                       <Switch
                         checked={doc.metadata.enabled}
                         disabled={isEnabling.has(doc.id)}
                         onCheckedChange={(checked) => {
                           if (isEnabling.has(doc.id)) return;
-                          const updatedDoc = { ...doc, metadata: { ...doc.metadata, enabled: checked }};
+                          const updatedDoc = { ...doc, metadata: { ...doc.metadata, enabled: checked } };
                           onDocumentUpdate(updatedDoc);
                           enableDocument(doc, checked).catch(error => {
                             console.error("Error toggling document:", error);
@@ -1262,7 +1262,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
                   </TableCell>
                 )}
                 {visibleColumns.parsingStatus && (
-                  <TableCell>
+                  <TableCell className="hidden sm:table-cell">
                     {doc.metadata.is_folder ? '' : (
                       <div className="flex items-center gap-2">
                         <Badge
@@ -1276,80 +1276,82 @@ const DocumentList: React.FC<DocumentListProps> = ({
                         >
                           {doc.metadata.parsing_status || 'Unparsed'}
                         </Badge>
-                        
-                        {doc.metadata.parser ? (
-                          <div className="relative">
-                            <Select
-                              value={doc.metadata.parser || "docling"}
-                              onValueChange={(value) => {
-                                const updatedDoc = {
-                                  ...doc,
-                                  metadata: {
-                                    ...doc.metadata,
-                                    parser: value
-                                  }
-                                };
-                                onDocumentUpdate(updatedDoc);
-                                toast({
-                                  title: "Parser Updated",
-                                  description: `Parser changed to ${value}`,
-                                });
-                              }}
-                            >
-                              <SelectTrigger 
-                                className={cn(
-                                  "h-6 min-w-0 px-2.5 py-0 border rounded-md text-xs font-semibold gap-1 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:opacity-70",
-                                  doc.metadata.parser === 'docling' || !doc.metadata.parser
-                                    ? "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100" 
-                                    : "bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100"
-                                )}
+
+                        <div className="hidden lg:block">
+                          {doc.metadata.parser ? (
+                            <div className="relative">
+                              <Select
+                                value={doc.metadata.parser || "docling"}
+                                onValueChange={(value) => {
+                                  const updatedDoc = {
+                                    ...doc,
+                                    metadata: {
+                                      ...doc.metadata,
+                                      parser: value
+                                    }
+                                  };
+                                  onDocumentUpdate(updatedDoc);
+                                  toast({
+                                    title: "Parser Updated",
+                                    description: `Parser changed to ${value}`,
+                                  });
+                                }}
                               >
-                                <SelectValue>{doc.metadata.parser || "docling"}</SelectValue>
-                              </SelectTrigger>
-                              <SelectContent>
-                                {availableParsers.map((parserName) => (
-                                  <SelectItem key={parserName} value={parserName}>
-                                    {parserName}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </div>
-                        ) : (
-                          <div className="relative">
-                            <Select
-                              value="docling" // Default to docling if no parser is set
-                              onValueChange={(value) => {
-                                const updatedDoc = {
-                                  ...doc,
-                                  metadata: {
-                                    ...doc.metadata,
-                                    parser: value
-                                  }
-                                };
-                                onDocumentUpdate(updatedDoc);
-                                toast({
-                                  title: "Parser Set",
-                                  description: `Parser set to ${value}`,
-                                });
-                              }}
-                            >
-                              <SelectTrigger 
-                                className="h-6 min-w-0 px-2.5 py-0 border rounded-md text-xs font-semibold bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 gap-1 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:opacity-70"
+                                <SelectTrigger
+                                  className={cn(
+                                    "h-6 min-w-0 px-2.5 py-0 border rounded-md text-xs font-semibold gap-1 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:opacity-70",
+                                    doc.metadata.parser === 'docling' || !doc.metadata.parser
+                                      ? "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100"
+                                      : "bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100"
+                                  )}
+                                >
+                                  <SelectValue>{doc.metadata.parser || "docling"}</SelectValue>
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {availableParsers.map((parserName) => (
+                                    <SelectItem key={parserName} value={parserName}>
+                                      {parserName}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          ) : (
+                            <div className="relative">
+                              <Select
+                                value="docling" // Default to docling if no parser is set
+                                onValueChange={(value) => {
+                                  const updatedDoc = {
+                                    ...doc,
+                                    metadata: {
+                                      ...doc.metadata,
+                                      parser: value
+                                    }
+                                  };
+                                  onDocumentUpdate(updatedDoc);
+                                  toast({
+                                    title: "Parser Set",
+                                    description: `Parser set to ${value}`,
+                                  });
+                                }}
                               >
-                                <SelectValue>docling</SelectValue>
-                              </SelectTrigger>
-                              <SelectContent>
-                                {availableParsers.map((parserName) => (
-                                  <SelectItem key={parserName} value={parserName}>
-                                    {parserName}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </div>
-                        )}
-                        
+                                <SelectTrigger
+                                  className="h-6 min-w-0 px-2.5 py-0 border rounded-md text-xs font-semibold bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 gap-1 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:opacity-70"
+                                >
+                                  <SelectValue>docling</SelectValue>
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {availableParsers.map((parserName) => (
+                                    <SelectItem key={parserName} value={parserName}>
+                                      {parserName}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          )}
+                        </div>
+
                         {parsingTasks[doc.id] && (
                           <ParsingStatusBox
                             taskId={parsingTasks[doc.id]}
@@ -1362,14 +1364,14 @@ const DocumentList: React.FC<DocumentListProps> = ({
                   </TableCell>
                 )}
                 {visibleColumns.isSummarized && (
-                  <TableCell>
+                  <TableCell className="hidden md:table-cell">
                     {doc.metadata.is_folder ? '' : (
                       <div className="flex items-center gap-1.5 group relative">
                         <Badge
                           variant={doc.metadata.summary && doc.metadata.summary.trim() !== "" ? "default" : "destructive"}
                           className={cn(
                             "text-xs px-2 py-0.5",
-                            doc.metadata.summary && doc.metadata.summary.trim() !== "" 
+                            doc.metadata.summary && doc.metadata.summary.trim() !== ""
                               ? "bg-green-100 text-green-800 border-green-200 hover:bg-green-200"
                               : "bg-red-100 text-red-800 border-red-200 hover:bg-red-200"
                           )}
@@ -1377,14 +1379,14 @@ const DocumentList: React.FC<DocumentListProps> = ({
                           {doc.metadata.summary && doc.metadata.summary.trim() !== "" ? 'Yes' : 'No'}
                         </Badge>
                         {(!doc.metadata.summary || doc.metadata.summary.trim() === "") && (
-                          <div 
+                          <div
                             className={cn(
                               "transition-all duration-200 ease-in-out",
                               "opacity-0 group-hover:opacity-100",
                               "transform group-hover:translate-x-0 translate-x-[-5px]"
                             )}
                           >
-                            <TooltipProvider delayDuration={300}> 
+                            <TooltipProvider delayDuration={300}>
                               <Tooltip>
                                 <TooltipTrigger asChild>
                                   <Button
@@ -1422,8 +1424,8 @@ const DocumentList: React.FC<DocumentListProps> = ({
                               variant="ghost"
                               size="icon"
                               className="h-8 w-8"
-                              onClick={(e) => { 
-                                e.stopPropagation(); 
+                              onClick={(e) => {
+                                e.stopPropagation();
                                 setIsRenamingId(doc.id);
                               }}
                             >
@@ -1550,9 +1552,9 @@ const DocumentList: React.FC<DocumentListProps> = ({
                 {selectedIds.size} {selectedIds.size === 1 ? 'document' : 'documents'} selected
               </span>
             </div>
-            
+
             <div className="flex items-center gap-8 p-2">
-              <Button 
+              <Button
                 size="sm"
                 variant="ghost"
                 className="flex items-center"
@@ -1562,10 +1564,10 @@ const DocumentList: React.FC<DocumentListProps> = ({
                 {parseLoading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Play className="h-4 w-4 mr-2" />}
                 Parse Selected
               </Button>
-              
+
               <div className="flex items-center">
                 <span className="mr-3">Enable/Disable</span>
-                <Switch 
+                <Switch
                   checked={selectedIds.size > 0 && documents.filter(doc => selectedIds.has(doc.id)).every(doc => doc.metadata.enabled)}
                   onCheckedChange={(checked) => {
                     if (toggleLoading) return;
@@ -1574,8 +1576,8 @@ const DocumentList: React.FC<DocumentListProps> = ({
                   disabled={toggleLoading}
                 />
               </div>
-              
-              <Button 
+
+              <Button
                 size="sm"
                 variant="destructive"
                 className="flex items-center"
@@ -1621,12 +1623,18 @@ const DocumentList: React.FC<DocumentListProps> = ({
           isOpen={isUploadModalOpen}
           onClose={() => setIsUploadModalOpen(false)}
           onUpload={internalHandleUpload}
+          onDataverseUpload={async (id, dest) => {
+            toast({ title: "Importing from Dataverse", description: `Importing dataset ${id}...` });
+            await ingestionApi.uploadDataverse(id, dest);
+            toast({ title: "Success", description: `Successfully imported dataset from Dataverse` });
+            await fetchDocuments();
+          }}
           currentFolderId={currentFolderId}
           folderName={currentFolderId ? folders.find(f => f.id === currentFolderId)?.name : 'Home'}
         />
 
-        <AlertDialog 
-          open={showReindexDialog} 
+        <AlertDialog
+          open={showReindexDialog}
           onOpenChange={setShowReindexDialog}
         >
           <AlertDialogContent className="sm:max-w-md">
@@ -1638,7 +1646,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
                 {selectedDocument && getReindexWarningContent(selectedDocument).description}
               </AlertDialogDescription>
             </AlertDialogHeader>
-            
+
             {isReindexing && (
               <div className="space-y-2 my-4">
                 <div className="text-sm text-muted-foreground">
@@ -1647,15 +1655,15 @@ const DocumentList: React.FC<DocumentListProps> = ({
                 <Progress value={reindexProgress} className="w-full" />
               </div>
             )}
-            
+
             <AlertDialogFooter>
-              <AlertDialogCancel 
+              <AlertDialogCancel
                 onClick={() => setShowReindexDialog(false)}
                 disabled={isReindexing}
               >
                 Cancel
               </AlertDialogCancel>
-              <AlertDialogAction 
+              <AlertDialogAction
                 onClick={handleReindexConfirm}
                 className="bg-primary text-white hover:bg-primary/90"
                 disabled={isReindexing}
@@ -1666,7 +1674,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
           </AlertDialogContent>
         </AlertDialog>
 
-        <ParserConfigModal 
+        <ParserConfigModal
           isOpen={isParserConfigModalOpen}
           onClose={() => setIsParserConfigModalOpen(false)}
           document={selectedDocumentForConfig}
@@ -1715,8 +1723,8 @@ const DocumentList: React.FC<DocumentListProps> = ({
               </Select>
             </div>
             <div className="flex justify-end gap-2 pt-2">
-               <Button variant="outline" onClick={() => setIsBulkParseParserSelectDialogOpen(false)}>Cancel</Button>
-               <Button onClick={handleBulkParseParserSelectConfirm}>Next</Button>
+              <Button variant="outline" onClick={() => setIsBulkParseParserSelectDialogOpen(false)}>Cancel</Button>
+              <Button onClick={handleBulkParseParserSelectConfirm}>Next</Button>
             </div>
           </DialogContent>
         </Dialog>

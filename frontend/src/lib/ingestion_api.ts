@@ -47,11 +47,11 @@ class IngestionApi {
   async getDocuments(): Promise<SimbaDoc[]> {
     const response = await httpClient.get<Record<string, SimbaDoc>>('/ingestion');
     const data = response.data;
-    
+
     if (!data || Object.keys(data).length === 0) {
       return [];
     }
-    
+
     return Object.values(data);
   }
 
@@ -95,6 +95,20 @@ class IngestionApi {
         },
       }
     );
+  }
+
+  async uploadDataverse(persistentId: string, folderPath: string = "/", dataverseUrl?: string): Promise<any> {
+    const body: Record<string, string> = { persistent_id: persistentId, folder_path: folderPath };
+    if (dataverseUrl) {
+      body.dataverse_url = dataverseUrl;
+    }
+
+    const response = await httpClient.post('/ingestion/dataverse', body, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
   }
 
   async getLoaders(): Promise<string[]> {

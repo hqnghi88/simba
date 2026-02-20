@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { SimbaDoc } from '@/types/document';
 import DocumentList from './DocumentList';
 import { Button } from "@/components/ui/button";
@@ -15,13 +14,10 @@ interface CollectionTabsProps {
   isLoading: boolean;
   onDelete: (id: string) => void;
   onSearch: (query: string) => void;
-  onUpload: (files: FileList) => void;
+  onUpload: (files: FileList) => Promise<void>;
   onPreview: (document: SimbaDoc) => void;
-  fetchDocuments: () => void;
+  fetchDocuments: () => Promise<void>;
   onDocumentUpdate: (document: SimbaDoc) => void;
-  onParse: (document: SimbaDoc) => void;
-  onDisable: (document: SimbaDoc) => void;
-  onEnable: (document: SimbaDoc) => void;
 }
 
 interface CustomCollection {
@@ -40,9 +36,6 @@ const CollectionTabs: React.FC<CollectionTabsProps> = ({
   onPreview,
   fetchDocuments,
   onDocumentUpdate,
-  onParse,
-  onDisable,
-  onEnable,
 }) => {
   // Initial collections setup with a dummy collection if empty
   const [customCollections, setCustomCollections] = useState<CustomCollection[]>([]);
@@ -59,20 +52,20 @@ const CollectionTabs: React.FC<CollectionTabsProps> = ({
         ...collection,
         displayName: collection.name === 'Default Collection' ? `Collection ${index + 1}` : collection.name
       }));
-      
+
       setCustomCollections(mappedCollections);
       setCollectionCount(mappedCollections.length);
-      
+
       if (!mappedCollections.some(c => c.id === activeTab)) {
         setActiveTab(mappedCollections[0]?.id || 'default');
       }
     } else if (customCollections.length === 0) {
       // Create a default collection if none exist
-      const defaultCollection = { 
-        id: 'default', 
-        name: 'Default Collection', 
-        displayName: 'Collection 1', 
-        documents: [] 
+      const defaultCollection = {
+        id: 'default',
+        name: 'Default Collection',
+        displayName: 'Collection 1',
+        documents: []
       };
       setCustomCollections([defaultCollection]);
       setActiveTab('default');
@@ -91,7 +84,7 @@ const CollectionTabs: React.FC<CollectionTabsProps> = ({
   const handleNewCollection = () => {
     const newCount = collectionCount + 1;
     setCollectionCount(newCount);
-    
+
     // Create a new collection with a unique ID
     const newCollectionId = `custom-collection-${Date.now()}`;
     const newCollection: CustomCollection = {
@@ -100,7 +93,7 @@ const CollectionTabs: React.FC<CollectionTabsProps> = ({
       displayName: `Collection ${newCount}`,
       documents: []
     };
-    
+
     // Add the new tab to the list but keep the existing ones
     setCustomCollections(prev => [...prev, newCollection]);
     // Make the new tab active immediately
@@ -138,66 +131,68 @@ const CollectionTabs: React.FC<CollectionTabsProps> = ({
   if (customCollections.length === 0) {
     return <div className="p-8 text-center text-muted-foreground">Loading collections...</div>;
   }
-  
+
   // Get active collection
   const activeCollection = customCollections.find(c => c.id === activeTab) || customCollections[0];
 
   return (
-    <div className="flex flex-col w-full h-full">
-      <div className="flex items-center bg-muted/20">
-        <div className="h-12 flex-1 p-0 flex bg-transparent rounded-none justify-start">
-          {customCollections.map((collection) => (
-            <button
-              key={collection.id}
-              className={`relative px-6 h-12 rounded-t-lg rounded-b-none border-b-2 hover:bg-background/60 
-                group flex items-center gap-2 
-                ${activeTab === collection.id 
-                  ? 'border-primary bg-background shadow-none' 
-                  : 'border-transparent'}`}
-              onClick={() => {
-                if (editingTabId) finishEditing();
-                setActiveTab(collection.id);
-              }}
+    <div className="flex flex-col w-full h-full overflow-hidden">
+      <div className="flex items-center bg-muted/20 border-b">
+        <div className="h-12 flex-1 p-0 flex bg-transparent rounded-none justify-start overflow-x-auto scrollbar-hide">
+          <div className="flex shrink-0">
+            {customCollections.map((collection) => (
+              <button
+                key={collection.id}
+                className={`relative px-6 h-12 rounded-t-lg rounded-b-none border-b-2 hover:bg-background/60 
+                group flex items-center gap-2 whitespace-nowrap
+                ${activeTab === collection.id
+                    ? 'border-primary bg-background shadow-none'
+                    : 'border-transparent'}`}
+                onClick={() => {
+                  if (editingTabId) finishEditing();
+                  setActiveTab(collection.id);
+                }}
+              >
+                <Folder className="h-4 w-4 text-muted-foreground shrink-0" />
+
+                {editingTabId === collection.id ? (
+                  <Input
+                    ref={editInputRef}
+                    value={editingName}
+                    onChange={(e) => setEditingName(e.target.value)}
+                    onKeyDown={handleEditKeyDown}
+                    onBlur={finishEditing}
+                    className="h-7 px-2 py-0 w-[140px] bg-transparent"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                ) : (
+                  <>
+                    <span className="truncate max-w-[140px]">{collection.displayName}</span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={(e) => startEditing(collection, e)}
+                    >
+                      <Pencil className="h-3 w-3" />
+                    </Button>
+                  </>
+                )}
+              </button>
+            ))}
+            <Button
+              size="sm"
+              variant="ghost"
+              className="h-12 px-3 text-muted-foreground rounded-none hover:bg-background/60 shrink-0"
+              onClick={handleNewCollection}
             >
-              <Folder className="h-4 w-4 text-muted-foreground shrink-0" />
-              
-              {editingTabId === collection.id ? (
-                <Input
-                  ref={editInputRef}
-                  value={editingName}
-                  onChange={(e) => setEditingName(e.target.value)}
-                  onKeyDown={handleEditKeyDown}
-                  onBlur={finishEditing}
-                  className="h-7 px-2 py-0 w-[140px] bg-transparent"
-                  onClick={(e) => e.stopPropagation()}
-                />
-              ) : (
-                <>
-                  <span className="truncate max-w-[140px]">{collection.displayName}</span>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                    onClick={(e) => startEditing(collection, e)}
-                  >
-                    <Pencil className="h-3 w-3" />
-                  </Button>
-                </>
-              )}
-            </button>
-          ))}
-          <Button 
-            size="sm" 
-            variant="ghost" 
-            className="h-12 px-3 text-muted-foreground rounded-none hover:bg-background/60"
-            onClick={handleNewCollection}
-          >
-            <Plus className="h-4 w-4" />
-          </Button>
+              <Plus className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </div>
-      
-      <div className="flex-1 py-6">
+
+      <div className="flex-1 py-6 h-full overflow-hidden">
         {/* Render only the active collection's documents */}
         <DocumentList
           documents={activeCollection.documents}
@@ -208,13 +203,10 @@ const CollectionTabs: React.FC<CollectionTabsProps> = ({
           onPreview={onPreview}
           fetchDocuments={fetchDocuments}
           onDocumentUpdate={onDocumentUpdate}
-          onParse={onParse}
-          onDisable={onDisable}
-          onEnable={onEnable}
         />
       </div>
     </div>
   );
 };
 
-export default CollectionTabs; 
+export default CollectionTabs;

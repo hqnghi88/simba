@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-// Create the base client
+// Create the base client. Dataverse uploads and large files can take a while.
 const httpClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8081',
+  timeout: 300000, // 5 minutes timeout for large datasets/files
 });
 
 // Add auth token to requests

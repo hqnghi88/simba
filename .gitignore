@@ -44,3 +44,8 @@ dump.rdb
 .db 
 simba_memory.pkl
 .log
+test.csv
+*.log
+vllm.log
+simba.log
+/tests/data/sample_data/shap_test.csv

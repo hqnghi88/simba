@@ -60,6 +60,84 @@ async def ingest_document(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+class DataverseIngestionRequest(BaseModel):
+    persistent_id: str
+    folder_path: str = "/"
+    dataverse_url: str = "https://dataverse.harvard.edu"
+
+
+@ingestion.post("/ingestion/dataverse")
+async def ingest_from_dataverse(
+    request: DataverseIngestionRequest,
+    current_user: Dict[str, Any] = Depends(get_current_user)
+):
+    """Ingest documents from a Dataverse dataset"""
+    import requests
+    try:
+        dataverse_url = request.dataverse_url.rstrip('/')
+        meta_url = f"{dataverse_url}/api/datasets/:persistentId/?persistentId={request.persistent_id}"
+        meta_resp = requests.get(meta_url)
+        meta_resp.raise_for_status()
+        dataset = meta_resp.json()["data"]
+
+        files = dataset.get("latestVersion", {}).get("files", [])
+        if not files:
+            raise HTTPException(status_code=400, detail="No files found in the dataset")
+
+        supported_extensions = loader.SUPPORTED_EXTENSIONS.keys()
+        
+        all_processed_docs = []
+        failed_files = []
+        
+        # Download and ingest each file
+        for f in files:
+            try:
+                file_id = f["dataFile"]["id"]
+                file_name = f["dataFile"]["filename"]
+                
+                # Check extension
+                extension = f".{file_name.split('.')[-1].lower()}"
+                if extension not in supported_extensions:
+                    logger.warning(f"Skipping unsupported file type from dataverse: {file_name}")
+                    continue
+                
+                file_url = f"{dataverse_url}/api/access/datafile/{file_id}"
+                r = requests.get(file_url)
+                r.raise_for_status()
+                
+                content = r.content
+                if len(content) == 0:
+                    continue
+                    
+                file_obj = UploadFile(
+                    filename=file_name,
+                    file=io.BytesIO(content)
+                )
+                
+                simba_doc = await ingestion_service.ingest_document(file_obj, request.folder_path)
+                all_processed_docs.append(simba_doc)
+            except Exception as e:
+                logger.error(f"Error processing dataverse file {file_name if 'file_name' in locals() else 'unknown'}: {str(e)}")
+                failed_files.append({"file": file_name if 'file_name' in locals() else 'unknown', "error": str(e)})
+
+        if all_processed_docs:
+            db.insert_documents(all_processed_docs, user_id=current_user["id"])
+            
+        return {
+            "message": f"Dataverse ingestion completed for {request.persistent_id}",
+            "processed_count": len(all_processed_docs),
+            "failed_count": len(failed_files),
+            "failed_files": failed_files,
+            "processed_docs": [doc.id for doc in all_processed_docs]
+        }
+    except requests.exceptions.HTTPError as e:
+        logger.error(f"HTTP error fetching dataverse dataset: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Failed to fetch dataset from Dataverse: {str(e)}")
+    except Exception as e:
+        logger.error(f"Error in ingest_from_dataverse: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 class BulkIngestionRequest(BaseModel):
     folder_paths: List[str]
 

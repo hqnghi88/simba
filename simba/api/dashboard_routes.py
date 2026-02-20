@@ -22,16 +22,16 @@ KPI_STORAGE_FILE = os.path.join(settings.paths.base_dir, "dashboard_kpis.json")
 
 # Define the data structure for our KPIs
 class KPIData(BaseModel):
-    soil_moisture: Any = Field(description="Value for Soil Moisture", default="N/A")
-    temperature: Any = Field(description="Value for Average Temperature", default="N/A")
-    rainfall: Any = Field(description="Value for Rainfall", default="N/A")
-    humidity: Any = Field(description="Value for Humidity", default="N/A")
-    crop_yield: Any = Field(description="Value for Crop Yield Forecast", default="N/A")
-    pest_risk: Any = Field(description="Value for Pest Risk Index", default="Low")
-    fertilizer: Any = Field(description="Value for Fertilizer Usage", default="N/A")
-    equipment_health: Any = Field(description="Value for Equipment Health", default="Good")
-    solar_radiation: Any = Field(description="Value for Solar Radiation", default="N/A")
-    harvest_progress: Any = Field(description="Value for Harvest Progress", default="0%")
+    soil_moisture: str = Field(description="A single concise measurement value ONLY (e.g. '25%' or 'High')", default="N/A")
+    temperature: str = Field(description="A single concise measurement value ONLY (e.g. '27.5°C' or 'High')", default="N/A")
+    rainfall: str = Field(description="A single concise measurement value ONLY (e.g. '150mm' or 'Low')", default="N/A")
+    humidity: str = Field(description="A single concise measurement value ONLY (e.g. '80%' or 'Optimal')", default="N/A")
+    crop_yield: str = Field(description="A single concise measurement value ONLY (e.g. '5.2t/ha' or 'Good')", default="N/A")
+    pest_risk: str = Field(description="A single concise measurement value ONLY (e.g. 'Low' or 'High')", default="Low")
+    fertilizer: str = Field(description="A single concise measurement value ONLY (e.g. '50kg/ha' or 'Normal')", default="N/A")
+    equipment_health: str = Field(description="A single concise measurement value ONLY (e.g. 'Good' or 'Fair')", default="Good")
+    solar_radiation: str = Field(description="A single concise measurement value ONLY (e.g. '5.5kWh/m2' or 'Strong')", default="N/A")
+    harvest_progress: str = Field(description="A single concise measurement value ONLY (e.g. '45%' or 'Complete')", default="0%")
     
     # Trends for UI
     soil_moisture_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
@@ -192,60 +192,211 @@ async def recalculate_kpis():
         save_kpis(empty_data)
         return KPIResponse(**empty_data)
 
-    # 3. Use LLM
     llm = get_llm()
-    # Explicitly set max_tokens lower for the dashboard to force speed
-    llm.max_tokens = 800
     
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", """You are a meticulous Agricultural Data Scientist.
-        Extract metrics from the provided text and provide HEAVY EVIDENCE for each value.
-        
-        LOCATIONS: Hoa Binh (VN), Luang Prabang (LA), Phrae (TH).
-        
-        REQUIRED FIELDS for EACH metric (e.g. soil_moisture):
-        - [metric]: The value string (e.g. "25.4")
-        - [metric]_trend: "up", "down", or "neutral"
-        - [metric]_explanation: EXACT CITATION from the text stating the document name and context.
-        - [metric]_trend_reasoning: Brief logic for the trend choice.
-        
-        ALL FIELDS MUST BE PRESENT FOR THESE METRICS: 
-        soil_moisture, temperature, rainfall, humidity, crop_yield, pest_risk, fertilizer, equipment_health, solar_radiation, harvest_progress.
-        
-        CRITICAL RULES:
-        - If you find a value, you MUST explain exactly which document it came from.
-        - If you fallback (e.g. 24.5C for temp), explain it as "Regional Average for Indochina".
-        - RETURN ONLY A PURE JSON OBJECT. NO CHAT.
-        """),
-        ("human", "Analyze these documents and provide a JSON response with evidence for EVERY field:\n\n{context}")
-    ])
-    
+    # Use a very explicit JSON template the model must fill in
+    json_template = """{
+  "soil_moisture": "<single value like '25%' or 'Low'>",
+  "temperature": "<single value like '27.6°C'>",
+  "rainfall": "<single value like '1534mm'>",
+  "humidity": "<single value like '79%'>",
+  "crop_yield": "<single value like '5.2 t/ha'>",
+  "pest_risk": "<single value: High/Medium/Low>",
+  "fertilizer": "<single value or N/A>",
+  "equipment_health": "<single value: Good/Fair/Poor>",
+  "solar_radiation": "<single value like '2521 hrs'>",
+  "harvest_progress": "<single value like '45%'>",
+  "soil_moisture_trend": "<up|down|neutral>",
+  "temperature_trend": "<up|down|neutral>",
+  "rainfall_trend": "<up|down|neutral>",
+  "humidity_trend": "<up|down|neutral>",
+  "crop_yield_trend": "<up|down|neutral>",
+  "pest_risk_trend": "<up|down|neutral>",
+  "fertilizer_trend": "<up|down|neutral>",
+  "equipment_health_trend": "<up|down|neutral>",
+  "solar_radiation_trend": "<up|down|neutral>",
+  "harvest_progress_trend": "<up|down|neutral>",
+  "soil_moisture_explanation": "<max 15 words>",
+  "temperature_explanation": "<max 15 words>",
+  "rainfall_explanation": "<max 15 words>",
+  "humidity_explanation": "<max 15 words>",
+  "crop_yield_explanation": "<max 15 words>",
+  "pest_risk_explanation": "<max 15 words>",
+  "fertilizer_explanation": "<max 15 words>",
+  "equipment_health_explanation": "<max 15 words>",
+  "solar_radiation_explanation": "<max 15 words>",
+  "harvest_progress_explanation": "<max 15 words>",
+  "soil_moisture_trend_reasoning": "<max 8 words>",
+  "temperature_trend_reasoning": "<max 8 words>",
+  "rainfall_trend_reasoning": "<max 8 words>",
+  "humidity_trend_reasoning": "<max 8 words>",
+  "crop_yield_trend_reasoning": "<max 8 words>",
+  "pest_risk_trend_reasoning": "<max 8 words>",
+  "fertilizer_trend_reasoning": "<max 8 words>",
+  "equipment_health_trend_reasoning": "<max 8 words>",
+  "solar_radiation_trend_reasoning": "<max 8 words>",
+  "harvest_progress_trend_reasoning": "<max 8 words>"
+}"""
+
     from langchain_core.output_parsers import StrOutputParser
-    chain = prompt | llm | StrOutputParser()
+    from langchain_core.prompts import PromptTemplate
     
+    prompt = PromptTemplate.from_template(
+        "You are an Agricultural Data Scientist. Analyze the documents and extract KPI values.\n\n"
+        "RULES:\n"
+        "- Each main metric MUST be a SINGLE measurement string (e.g. '27.6°C', '79%', 'Low').\n"
+        "- Trend fields MUST be exactly 'up', 'down', or 'neutral'.\n"
+        "- Fill in EVERY field in the JSON below with real values from the text.\n"
+        "- Do NOT add any text before or after the JSON.\n"
+        "- Output ONLY valid JSON.\n\n"
+        "Documents:\n{context}\n\n"
+        "Fill this JSON template with values from the documents:\n{template}"
+    )
+    
+    chain = prompt | llm | StrOutputParser()
+
+    import re, ast, json as jsonlib
+
+    METRIC_FIELDS = ["soil_moisture", "temperature", "rainfall", "humidity", "crop_yield",
+                     "pest_risk", "fertilizer", "equipment_health", "solar_radiation", "harvest_progress"]
+
+    def force_single_value(v):
+        """Returns a single concise string. No matter what."""
+        if v is None: return "N/A"
+        s = str(v).strip()
+        
+        # Strip markdown emphasis
+        s = re.sub(r'[*_`]', '', s)
+        
+        # If it's already short and clean, return it
+        if len(s) <= 12 and '{' not in s and '[' not in s:
+            return s
+        
+        # 1. Percentage
+        m = re.search(r"(\d+\.?\d*%)", s)
+        if m: return m.group(1)
+        
+        # 2. Number + unit (e.g. 27.6°C, 1534mm, 5.2 t/ha, 2521 hrs)
+        m = re.search(r"(\d+\.?\d*\s*(?:°C|t/ha|kg/ha|mm|kWh/m2|hrs|hours|%)?)", s)
+        if m and m.group(1).strip(): return m.group(1).strip()
+        
+        # 3. Status keywords
+        m = re.search(r"\b(High|Medium|Low|Good|Fair|Poor|Normal|Optimal|Stable|Neutral|N/A)\b", s, re.I)
+        if m: return m.group(1).capitalize()
+        
+        # 4. First word fallback
+        clean_s = re.sub(r'[\{\}\[\]\'\"]', '', s)
+        words = [w for w in clean_s.split() if w not in ('Hoa','Binh','Luang','Prabang','Phrae','The','N/A')]
+        if words: return words[0][:12]
+        
+        return "N/A"
+
+    def parse_bullet_list(text):
+        """Parse bullet-point lines like '* Soil Moisture: 27.6°C' into a dict."""
+        result = {}
+        field_map = {
+            "soil moisture": "soil_moisture", "temperature": "temperature",
+            "rainfall": "rainfall", "humidity": "humidity",
+            "crop yield": "crop_yield", "pest risk": "pest_risk",
+            "fertilizer": "fertilizer", "equipment health": "equipment_health",
+            "solar radiation": "solar_radiation", "harvest progress": "harvest_progress",
+        }
+        for raw_field, key in field_map.items():
+            m = re.search(
+                rf"[\*\-]\s*{re.escape(raw_field)}[:\s]+([^\n\(]+)",
+                text, re.I
+            )
+            if m:
+                val = m.group(1).strip().rstrip('(').strip()
+                result[key] = val
+            m_trend = re.search(
+                rf"[\*\-]\s*{re.escape(raw_field)}\s+trend[:\s]+(up|down|neutral)",
+                text, re.I
+            )
+            if m_trend:
+                result[f"{key}_trend"] = m_trend.group(1).lower()
+        return result
+
+    def extract_kv_from_raw(text):
+        """
+        Regex extraction of "key": "value" pairs from malformed JSON.
+        Works even when the JSON parser fails due to bad chars in values.
+        """
+        result = {}
+        # Match: "some_key": "some value possibly with commas and periods"
+        pattern = re.finditer(r'"([a-z_]+)"\s*:\s*"([^"]*)"', text)
+        for m in pattern:
+            key, val = m.group(1), m.group(2)
+            result[key] = val
+        return result
+
     try:
         logger.info(f"Invoking LLM for KPIs. Context length: {len(context_text)} chars")
-        raw_result = chain.invoke({"context": context_text})
-        logger.info(f"Raw LLM Response: {raw_result}")
+        raw_output = chain.invoke({
+            "context": context_text,
+            "template": json_template,
+        })
+        logger.info(f"Raw LLM Output (first 500 chars): {raw_output[:500]}")
         
-        # Robust JSON cleaning
-        clean_result = raw_result.strip()
-        if "{" in clean_result:
-            clean_result = clean_result[clean_result.find("{"):clean_result.rfind("}")+1]
-            
-        result = json.loads(clean_result)
+        result = {}
         
-        # Merge with defaults and cast to strings
+        # Clean the raw output: strip markdown code fences if present
+        stripped = raw_output.strip()
+        stripped = re.sub(r'^```(?:json)?\s*', '', stripped, flags=re.MULTILINE)
+        stripped = re.sub(r'```\s*$', '', stripped, flags=re.MULTILINE)
+        # Remove any <placeholder> values the model didn't fill in
+        stripped = re.sub(r'"<[^"]*>"', '"N/A"', stripped)
+        stripped = stripped.strip()
+        
+        # Strategy 1: Try to parse entire output as JSON
+        try:
+            result = jsonlib.loads(stripped)
+            logger.info(f"Parsed entire output as JSON directly. Keys: {list(result.keys())[:5]}")
+        except Exception as e1:
+            logger.warning(f"Direct JSON parse failed: {e1}")
+            # Strategy 2: Find JSON block (first { to last })
+            start = stripped.find('{')
+            end = stripped.rfind('}')
+            if start != -1 and end != -1 and end > start:
+                json_snippet = stripped[start:end+1]
+                # Remove trailing commas before } or ] (common LLM mistake)
+                json_snippet = re.sub(r',\s*([}\]])', r'\1', json_snippet)
+                try:
+                    result = jsonlib.loads(json_snippet)
+                    logger.info(f"Parsed via JSON block extraction. Keys: {list(result.keys())[:5]}")
+                except Exception as e2:
+                    logger.warning(f"JSON block extraction failed: {e2}")
+        
+        # Strategy 3: Regex extract "key": "value" pairs from raw text (handles malformed JSON)
+        if not result or not any(k in result for k in METRIC_FIELDS):
+            result = extract_kv_from_raw(raw_output)
+            logger.info(f"Parsed via regex KV extraction. Got {len(result)} fields.")
+        
+        # Strategy 4: Parse bullet-point list (fallback for markdown output)
+        if not result or not any(k in result for k in METRIC_FIELDS):
+            result = parse_bullet_list(raw_output)
+            logger.info(f"Parsed via bullet list: {result}")
+
         final_values = KPIData().model_dump()
-        for k, v in result.items():
-            if k in final_values:
-                # Force everything to string for the frontend, but handle nested objects if LLM messed up
-                if isinstance(v, dict):
-                    # Try to extract 'value' if it's nested
-                    final_values[k] = str(v.get('value', v))
-                else:
-                    final_values[k] = str(v)
         
+        for field in list(final_values.keys()):
+            val = result.get(field, "N/A")
+            
+            if field in METRIC_FIELDS:
+                final_values[field] = force_single_value(val)
+                logger.info(f"  {field}: '{val}' -> '{final_values[field]}'")
+            elif field.endswith("_trend"):
+                s = str(val).lower()
+                if 'up' in s: final_values[field] = 'up'
+                elif 'down' in s: final_values[field] = 'down'
+                else: final_values[field] = 'neutral'
+            elif field.endswith("_trend_reasoning"):
+                s = re.sub(r'[\{\}\[\]]', '', str(val).strip())
+                final_values[field] = s[:60] + "..." if len(s) > 63 else s
+            else:
+                s = re.sub(r'[\{\}\[\]]', '', str(val).strip())
+                final_values[field] = s[:180] + "..." if len(s) > 183 else s
+
         final_values['source_doc_ids'] = sorted(current_ids)
         save_kpis(final_values)
         
@@ -256,8 +407,7 @@ async def recalculate_kpis():
         
     except Exception as e:
         logger.error(f"Error calculating KPIs: {e}", exc_info=True)
-        # Return last known good data or empty
         cached = load_kpis()
         if cached:
             return KPIResponse(**cached)
-        return KPIResponse() # Fallback
+        return KPIResponse()

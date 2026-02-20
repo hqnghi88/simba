@@ -101,13 +101,14 @@ def create_app():
     async def shutdown_event():
         logger = logging.getLogger(__name__)
         logger.info("Shutting down SIMBA Application...")
-        if celery_app:
-            logger.info("Sending shutdown signal to Celery workers...")
-            try:
-                celery_app.control.broadcast("shutdown")
-                logger.info("Celery workers have been signaled to shut down.")
-            except Exception as e:
-                logger.error(f"Error while shutting down Celery: {e}")
+        # Commented out to avoid race conditions where failed server starts kill the worker
+        # if celery_app:
+        #     logger.info("Sending shutdown signal to Celery workers...")
+        #     try:
+        #         celery_app.control.broadcast("shutdown")
+        #         logger.info("Celery workers have been signaled to shut down.")
+        #     except Exception as e:
+        #         logger.error(f"Error while shutting down Celery: {e}")
         logger.info("SIMBA Application shutdown complete.")
 
     # Register routers

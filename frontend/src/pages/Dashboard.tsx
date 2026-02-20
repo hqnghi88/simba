@@ -65,23 +65,29 @@ const KPICard: React.FC<KPIProps & { delay: number }> = ({
                         {value}
                         <span className="text-xs font-normal text-muted-foreground ml-1">{unit}</span>
                     </div>
-                    <div className="flex items-center mt-1 group relative">
+                    <div className="flex items-center mt-1">
                         {trend === 'up' ? (
-                            <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
+                            <TrendingUp className="h-4 w-4 text-green-500 mr-1 shrink-0" />
                         ) : trend === 'down' ? (
-                            <TrendingUp className="h-4 w-4 text-red-500 mr-1 rotate-180" />
+                            <TrendingUp className="h-4 w-4 text-red-500 mr-1 rotate-180 shrink-0" />
                         ) : (
-                            <Activity className="h-4 w-4 text-gray-500 mr-1" />
+                            <Activity className="h-4 w-4 text-gray-500 mr-1 shrink-0" />
                         )}
-                        <p className={`text-xs truncate max-w-[150px] ${trend === 'up' ? 'text-green-500' : trend === 'down' ? 'text-red-500' : 'text-gray-500'
-                            }`}>
-                            {change}
-                        </p>
-                        {change && change.length > 20 && (
-                            <div className="absolute bottom-full left-0 mb-2 invisible group-hover:visible bg-popover text-popover-foreground text-[10px] p-2 rounded shadow-md border z-20 w-48">
-                                {change}
-                            </div>
-                        )}
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <p className={`text-xs truncate cursor-default ${trend === 'up' ? 'text-green-500' : trend === 'down' ? 'text-red-500' : 'text-gray-500'
+                                        }`}>
+                                        {change}
+                                    </p>
+                                </TooltipTrigger>
+                                {change && (
+                                    <TooltipContent side="bottom" className="max-w-[200px] text-[10px]">
+                                        {change}
+                                    </TooltipContent>
+                                )}
+                            </Tooltip>
+                        </TooltipProvider>
                     </div>
                 </CardContent>
             </Card>
@@ -239,36 +245,36 @@ const Dashboard: React.FC = () => {
     }
 
     return (
-        <div className="p-8 space-y-8 bg-zinc-50 min-h-screen">
-            <div className="flex justify-between items-center">
+        <div className="p-4 md:p-8 space-y-6 md:space-y-8 bg-zinc-50 min-h-screen">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900">Agriculture Dashboard</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Agriculture Dashboard</h2>
                     <p className="text-muted-foreground mt-1">Real-time overview of your farm's health and metrics.</p>
                 </div>
-                <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-2">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full md:w-auto">
+                    <div className="flex items-center space-x-2 w-full sm:w-auto">
                         {kpiData?.is_stale && (
                             <div
                                 onClick={recalculating ? undefined : handleRecalculate}
-                                className={`flex items-center px-3 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-200 cursor-pointer hover:bg-amber-200 transition-colors ${recalculating ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                className={`flex items-center px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 border border-amber-200 cursor-pointer hover:bg-amber-200 transition-colors flex-1 sm:flex-initial ${recalculating ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
-                                <span className="w-2 h-2 bg-amber-500 rounded-full mr-2 animate-pulse"></span>
-                                <span className="text-sm font-medium">
-                                    {recalculating ? "Recalculating..." : "New Data Available - Click to Update"}
+                                <span className="w-2 h-2 bg-amber-500 rounded-full mr-2 animate-pulse shrink-0"></span>
+                                <span className="text-xs md:text-sm font-medium truncate">
+                                    {recalculating ? "Recalculating..." : "New Data Available"}
                                 </span>
                             </div>
                         )}
                         <button
                             onClick={recalculating ? undefined : handleRecalculate}
                             disabled={recalculating}
-                            className={`p-2 rounded-md border border-gray-200 hover:bg-gray-100 transition-colors ${recalculating ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            className={`p-2 rounded-md border border-gray-200 hover:bg-gray-100 transition-colors shrink-0 ${recalculating ? 'opacity-50 cursor-not-allowed' : ''}`}
                             title="Force Recalculate"
                         >
                             <Activity className={`h-4 w-4 text-gray-500 ${recalculating ? 'animate-spin' : ''}`} />
                         </button>
                     </div>
-                    <span className="text-sm text-gray-500 shrink-0">
-                        Last updated: {kpiData?.last_updated ? new Date(kpiData.last_updated).toLocaleString() : 'Never'}
+                    <span className="text-xs md:text-sm text-gray-500 shrink-0">
+                        Updated: {kpiData?.last_updated ? new Date(kpiData.last_updated).toLocaleTimeString() : 'Never'}
                     </span>
                 </div>
             </div>

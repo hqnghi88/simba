@@ -8,11 +8,7 @@ import {
   Settings,
   HardDrive,
   HelpCircle,
-  Users,
-  Building2,
   Search,
-  ChevronsLeft,
-  ChevronsRight,
   BookOpen,
   PanelLeftClose,
   PanelLeftOpen,
@@ -51,7 +47,12 @@ const bottomItems = [
   { name: "Storage", icon: HardDrive, path: "/storage" },
 ]
 
-export function Sidebar() {
+interface SidebarProps {
+  open?: boolean;
+  setOpen?: (open: boolean) => void;
+}
+
+export function Sidebar({ open, setOpen }: SidebarProps) {
   const location = useLocation()
   const { user, signOut } = useAuth()
   const [expanded, setExpanded] = useState(true)
@@ -63,32 +64,43 @@ export function Sidebar() {
   }
 
   return (
-    <div className={cn(
-      "flex h-screen flex-col justify-between border-r bg-gray-50 text-gray-700 pb-4 transition-all duration-300 relative",
-      expanded ? "w-56" : "w-16"
+    <aside className={cn(
+      "fixed inset-y-0 left-0 z-50 flex h-screen flex-col justify-between border-r bg-gray-50 text-gray-700 pb-4 transition-all duration-300 transform md:relative md:translate-x-0",
+      expanded ? "w-64" : "w-16",
+      open ? "translate-x-0" : "-translate-x-full md:translate-x-0"
     )}>
       {/* Logo and Version */}
-      <div className="flex items-center px-4 h-16 border-b border-gray-200 justify-between">
+      <div className="flex items-center px-4 h-16 border-b border-gray-200 justify-between shrink-0">
         {expanded ? (
-          <>
-            <div className="flex items-center">
-              <span className="text-xl font-semibold">Simba</span>
-              <span className="text-xs text-gray-500 ml-2">{APP_VERSION}</span>
-            </div>
-          </>
+          <div className="flex items-center truncate">
+            <span className="text-xl font-semibold">Simba</span>
+            <span className="text-xs text-gray-500 ml-2">{APP_VERSION}</span>
+          </div>
         ) : (
-          <BookOpen className="h-6 w-6 mx-auto" />
+          <BookOpen className="h-6 w-6 mx-auto shrink-0" />
         )}
 
-        {/* Toggle Button - Integrated in header */}
-        <Button
-          variant="ghost"
-          size="sm"
-          className="h-8 w-8 p-0 ml-2 hover:bg-gray-100 rounded-md"
-          onClick={() => setExpanded(!expanded)}
-        >
-          {expanded ? <PanelLeftClose className="h-4 w-4" /> : <PanelLeftOpen className="h-4 w-4" />}
-        </Button>
+        <div className="flex items-center">
+          {/* Collapse Toggle (Desktop only) */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-8 w-8 p-0 ml-1 hidden md:flex hover:bg-gray-100 rounded-md shrink-0"
+            onClick={() => setExpanded(!expanded)}
+          >
+            {expanded ? <PanelLeftClose className="h-4 w-4" /> : <PanelLeftOpen className="h-4 w-4" />}
+          </Button>
+
+          {/* Close Sidebar (Mobile only) */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-8 w-8 p-0 ml-1 flex md:hidden hover:bg-gray-100 rounded-md shrink-0"
+            onClick={() => setOpen?.(false)}
+          >
+            <PanelLeftClose className="h-4 w-4" />
+          </Button>
+        </div>
       </div>
 
       {/* Search Bar */}
@@ -181,6 +193,6 @@ export function Sidebar() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </div>
+    </aside>
   )
 }

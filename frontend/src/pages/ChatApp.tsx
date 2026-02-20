@@ -91,6 +91,26 @@ const ChatApp: React.FC = () => {
     }
   };
 
+  const handleDataverseUpload = async (persistentId: string, destPath: string) => {
+    try {
+      await ingestionApi.uploadDataverse(persistentId, destPath);
+      setIsUploadModalOpen(false);
+
+      toast({
+        title: "✅ Import Successful",
+        description: "Your dataset has been imported. Go to KMS to process it.",
+        className: "bg-green-50 text-green-900 border-green-200",
+        duration: 5000
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to import dataset",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -159,6 +179,7 @@ const ChatApp: React.FC = () => {
         isOpen={isUploadModalOpen}
         onClose={() => setIsUploadModalOpen(false)}
         onUpload={handleChatUpload}
+        onDataverseUpload={handleDataverseUpload}
       />
       <Toaster />
     </motion.div>
