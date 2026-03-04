@@ -61,7 +61,12 @@ if grep -q "VITE_API_URL" .env; then
 else
     echo "VITE_API_URL=http://$SERVER_IP:8000" >> .env
 fi
-echo "✅ Configured VITE_API_URL=http://$SERVER_IP:8000"
+
+# Set default RUNTIME to empty to avoid Docker Compose warnings
+if ! grep -q "RUNTIME=" .env; then
+    echo "RUNTIME=" >> .env
+fi
+echo "✅ Configuration updated in .env"
 
 # Create required network if not already present
 echo "🌐 [3/5] Checking Docker network 'simba_network'..."

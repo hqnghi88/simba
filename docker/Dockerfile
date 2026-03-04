@@ -47,7 +47,7 @@ ENV PYTHONUNBUFFERED=1 \
 # Install runtime dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    libgl1-mesa-glx \
+    libgl1 \
     libglib2.0-0 \
     ffmpeg \
     poppler-utils \
@@ -71,15 +71,15 @@ RUN mkdir -p /app/data/uploads /app/data/processed
 ARG USE_GPU
 ARG TARGETARCH
 RUN if [ "$USE_GPU" = "true" ] && [ "$TARGETARCH" = "amd64" ]; then \
-      apt-get update && \
-      apt-get install -y --no-install-recommends wget gnupg && \
-      wget https://developer.download.nvidia.com/compute/cuda/repos/debian11/x86_64/cuda-keyring_1.0-1_all.deb && \
-      dpkg -i cuda-keyring_1.0-1_all.deb && \
-      apt-get update && \
-      apt-get install -y --no-install-recommends cuda-toolkit-11-8 && \
-      rm -f cuda-keyring_1.0-1_all.deb && \
-      apt-get clean && \
-      rm -rf /var/lib/apt/lists/*; \
+    apt-get update && \
+    apt-get install -y --no-install-recommends wget gnupg && \
+    wget https://developer.download.nvidia.com/compute/cuda/repos/debian11/x86_64/cuda-keyring_1.0-1_all.deb && \
+    dpkg -i cuda-keyring_1.0-1_all.deb && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends cuda-toolkit-11-8 && \
+    rm -f cuda-keyring_1.0-1_all.deb && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*; \
     fi
 
 # Expose port
