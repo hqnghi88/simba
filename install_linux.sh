@@ -47,9 +47,10 @@ fi
 echo "🔍 Checking for port conflicts..."
 function is_port_in_use() {
     local PORT=$1
-    (command -v ss >/dev/null && ss -tuln | grep -q ":$PORT ") || \
-    (command -v netstat >/dev/null && netstat -tuln | grep -q ":$PORT ") || \
-    (command -v lsof >/dev/null && lsof -i :$PORT >/dev/null)
+    # Check for :PORT followed by space, tab, or end of line/colon
+    (command -v ss >/dev/null && ss -tuln | grep -qE "[:.]$PORT(\s|$)") || \
+    (command -v netstat >/dev/null && netstat -tuln | grep -qE "[:.]$PORT(\s|$)") || \
+    (command -v lsof >/dev/null && lsof -i :$PORT >/dev/null 2>&1)
 }
 
 function check_and_fix_port() {
@@ -58,16 +59,21 @@ function check_and_fix_port() {
     local ALT_PORT=$3
     
     if is_port_in_use "$DEFAULT_PORT"; then
-        echo "⚠️  Port $DEFAULT_PORT is already in use."
+        echo "⚠️  Port $DEFAULT_PORT is already in use by a host service."
         if ! grep -q "^$PORT_VAR=" .env; then
             echo "   Configuring $PORT_VAR=$ALT_PORT in .env to avoid conflict."
             echo "$PORT_VAR=$ALT_PORT" >> .env
+            export $PORT_VAR=$ALT_PORT
         else
             # Also check if the current value in .env is the one in use
             CURRENT_VAL=$(grep "^$PORT_VAR=" .env | cut -d'=' -f2)
             if [ "$CURRENT_VAL" == "$DEFAULT_PORT" ]; then
                 echo "   Updating $PORT_VAR to $ALT_PORT in .env (previous value was conflicted)."
                 sed -i "s|^$PORT_VAR=.*|$PORT_VAR=$ALT_PORT|g" .env
+                export $PORT_VAR=$ALT_PORT
+            else
+                echo "   Note: $PORT_VAR is already set to $CURRENT_VAL in .env."
+                export $PORT_VAR=$CURRENT_VAL
             fi
         fi
     fi
@@ -77,6 +83,11 @@ check_and_fix_port "REDIS_PORT" 6379 6380
 check_and_fix_port "POSTGRES_PORT" 5432 5433
 check_and_fix_port "SERVER_PORT" 8000 8080
 check_and_fix_port "FRONTEND_PORT" 5173 5174
+
+# Force export all variables from .env to the current shell for Docker Compose
+set -a
+[ -f .env ] && . ./.env
+set +a
 
 # Try to detect Public IP for Frontend access
 echo "🔍 Detecting server IP for frontend configuration..."
@@ -91,7 +102,7 @@ elif [[ "$ip_confirm" != "y" ]]; then
 fi
 
 # Extract actual server port for VITE_API_URL
-ACTUAL_SERVER_PORT=$(grep "SERVER_PORT=" .env | cut -d'=' -f2 || echo "8000")
+ACTUAL_SERVER_PORT=${SERVER_PORT:-8000}
 
 # Update VITE_API_URL in .env
 if grep -q "VITE_API_URL" .env; then
@@ -101,14 +112,14 @@ else
 fi
 
 # Set default RUNTIME to empty to avoid Docker Compose warnings
-if ! grep -q "RUNTIME=" .env; then
+if ! grep -q "^RUNTIME=" .env; then
     echo "RUNTIME=" >> .env
 fi
 echo "✅ Configuration updated in .env (using port: $ACTUAL_SERVER_PORT)"
 
 # Attempt to clean up manually created network to avoid Compose label conflicts
 if docker network ls | grep -q "simba_network"; then
-    echo "🌐 [3/5] Cleaning up existing 'simba_network' to let Docker Compose manage it..."
+    echo "🌐 [3/5] Cleaning up existing 'simba_networks' to let Docker Compose manage it..."
     docker network rm simba_network || echo "⚠️ Could not remove network, Docker Compose will try to handle it."
 else
     echo "🌐 [3/5] Docker Compose will manage the 'simba_network' automatically."
@@ -123,8 +134,9 @@ echo "    🐳 [5/5] Building and Starting Services     "
 echo "=========================================="
 
 # Build and start services in the background
-echo "🏗️  Running: $DOCKER_COMPOSE_CMD -f docker/docker-compose.yml up --build -d"
-$DOCKER_COMPOSE_CMD -f docker/docker-compose.yml up --build -d
+# CRITICAL: We pass --env-file .env explicitly because the compose file is in a subdirectory
+echo "🏗️  Running: $DOCKER_COMPOSE_CMD --env-file .env -f docker/docker-compose.yml up --build -d"
+$DOCKER_COMPOSE_CMD --env-file .env -f docker/docker-compose.yml up --build -d
 
 # Extract actual ports used for final output
 ACTUAL_SERVER_PORT=$(grep "SERVER_PORT=" .env | cut -d'=' -f2 || echo "8000")
