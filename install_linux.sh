@@ -68,13 +68,12 @@ if ! grep -q "RUNTIME=" .env; then
 fi
 echo "✅ Configuration updated in .env"
 
-# Create required network if not already present
-echo "🌐 [3/5] Checking Docker network 'simba_network'..."
-if ! docker network ls | grep -q "simba_network"; then
-    docker network create simba_network
-    echo "✅ Created Docker network 'simba_network'."
+# Attempt to clean up manually created network to avoid Compose label conflicts
+if docker network ls | grep -q "simba_network"; then
+    echo "🌐 [3/5] Cleaning up existing 'simba_network' to let Docker Compose manage it..."
+    docker network rm simba_network || echo "⚠️ Could not remove network, Docker Compose will try to handle it."
 else
-    echo "✅ Docker network 'simba_network' already exists."
+    echo "🌐 [3/5] Docker Compose will manage the 'simba_network' automatically."
 fi
 
 # Make necessary directories to prevent permission issues when Docker creates them as root
