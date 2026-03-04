@@ -28,17 +28,7 @@ fi
 
 echo "✅ Docker and Docker Compose are available."
 
-# Check for port conflicts
-echo "🔍 Checking for port conflicts..."
-for port in 8000 5173 6379 5432; do
-    if ss -tuln | grep -q ":$port "; then
-        echo "⚠️  Warning: Port $port is already in use by another process."
-        echo "   If this is a local service (like Redis or Postgres), you may need to stop it"
-        echo "   or change the mapping in your .env file (e.g., REDIS_PORT=6380)."
-    fi
-done
-
-echo "🛠️  [2/5] Setting up environment..."
+echo "�️  [2/5] Setting up environment..."
 
 # Initialize .env file if it doesn't exist
 if [ ! -f ".env" ]; then
@@ -52,6 +42,29 @@ if [ ! -f ".env" ]; then
 else
     echo "✅ .env file already exists."
 fi
+
+# Check and fix port conflicts
+echo "🔍 Checking for port conflicts..."
+function check_and_fix_port() {
+    local PORT_VAR=$1
+    local DEFAULT_PORT=$2
+    local ALT_PORT=$3
+    
+    if ss -tuln | grep -q ":$DEFAULT_PORT "; then
+        echo "⚠️  Port $DEFAULT_PORT is already in use."
+        if ! grep -q "$PORT_VAR=" .env; then
+            echo "   Configuring $PORT_VAR=$ALT_PORT in .env to avoid conflict."
+            echo "$PORT_VAR=$ALT_PORT" >> .env
+        else
+            echo "   Note: $PORT_VAR is already defined in .env. Please ensure it's set to a free port."
+        fi
+    fi
+}
+
+check_and_fix_port "REDIS_PORT" 6379 6380
+check_and_fix_port "POSTGRES_PORT" 5432 5433
+check_and_fix_port "SERVER_PORT" 8000 8080
+check_and_fix_port "FRONTEND_PORT" 5173 5174
 
 # Try to detect Public IP for Frontend access
 echo "🔍 Detecting server IP for frontend configuration..."
