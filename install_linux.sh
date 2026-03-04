@@ -45,18 +45,30 @@ fi
 
 # Check and fix port conflicts
 echo "🔍 Checking for port conflicts..."
+function is_port_in_use() {
+    local PORT=$1
+    (command -v ss >/dev/null && ss -tuln | grep -q ":$PORT ") || \
+    (command -v netstat >/dev/null && netstat -tuln | grep -q ":$PORT ") || \
+    (command -v lsof >/dev/null && lsof -i :$PORT >/dev/null)
+}
+
 function check_and_fix_port() {
     local PORT_VAR=$1
     local DEFAULT_PORT=$2
     local ALT_PORT=$3
     
-    if ss -tuln | grep -q ":$DEFAULT_PORT "; then
+    if is_port_in_use "$DEFAULT_PORT"; then
         echo "⚠️  Port $DEFAULT_PORT is already in use."
-        if ! grep -q "$PORT_VAR=" .env; then
+        if ! grep -q "^$PORT_VAR=" .env; then
             echo "   Configuring $PORT_VAR=$ALT_PORT in .env to avoid conflict."
             echo "$PORT_VAR=$ALT_PORT" >> .env
         else
-            echo "   Note: $PORT_VAR is already defined in .env. Please ensure it's set to a free port."
+            # Also check if the current value in .env is the one in use
+            CURRENT_VAL=$(grep "^$PORT_VAR=" .env | cut -d'=' -f2)
+            if [ "$CURRENT_VAL" == "$DEFAULT_PORT" ]; then
+                echo "   Updating $PORT_VAR to $ALT_PORT in .env (previous value was conflicted)."
+                sed -i "s|^$PORT_VAR=.*|$PORT_VAR=$ALT_PORT|g" .env
+            fi
         fi
     fi
 }
