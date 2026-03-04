@@ -10,7 +10,7 @@ services:
     env_file:
       - ../.env
     ports:
-      - "8000:8000"
+      - "${SERVER_PORT:-8000}:8000"
     environment:
       - REDIS_HOST=redis
       - CELERY_BROKER_URL=redis://redis:6379/0
@@ -82,7 +82,7 @@ services:
     image: redis:7-alpine
     restart: always
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT:-6379}:6379"
     networks:
       - simba_network
     volumes:
@@ -103,7 +103,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     networks:
       - simba_network
     healthcheck:
@@ -119,7 +119,7 @@ services:
     image: ${FRONTEND_IMAGE_NAME:-simba-frontend}:${FRONTEND_IMAGE_TAG:-latest}
     restart: always
     ports:
-      - "5173:5173"
+      - "${FRONTEND_PORT:-5173}:5173"
     environment:
       - VITE_API_URL=${VITE_API_URL:-http://localhost:8000}
     volumes:
@@ -136,7 +136,7 @@ services:
     volumes:
       - ollama_models:/root/.ollama
     ports:
-      - "11434:11434"
+      - "${OLLAMA_PORT:-11434}:11434"
     networks:
       - simba_network
     runtime: ${RUNTIME:+${RUNTIME}}

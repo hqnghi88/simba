@@ -28,6 +28,16 @@ fi
 
 echo "✅ Docker and Docker Compose are available."
 
+# Check for port conflicts
+echo "🔍 Checking for port conflicts..."
+for port in 8000 5173 6379 5432; do
+    if ss -tuln | grep -q ":$port "; then
+        echo "⚠️  Warning: Port $port is already in use by another process."
+        echo "   If this is a local service (like Redis or Postgres), you may need to stop it"
+        echo "   or change the mapping in your .env file (e.g., REDIS_PORT=6380)."
+    fi
+done
+
 echo "🛠️  [2/5] Setting up environment..."
 
 # Initialize .env file if it doesn't exist
