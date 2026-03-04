@@ -49,4 +49,4 @@ test.csv
 vllm.log
 simba.log
 /tests/data/sample_data/shap_test.csv
-dashboard_kpis.json
+/dashboard_kpis.json

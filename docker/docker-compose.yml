@@ -7,6 +7,7 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
     image: ${IMAGE_NAME:-simba}:${IMAGE_TAG:-latest}
+    restart: always
     env_file:
       - ../.env
     ports:
@@ -21,23 +22,22 @@ services:
       - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY:-}
       - DEVICE=${DEVICE:-cpu}
       - OLLAMA_HOST=http://ollama:11434
-      
-      - SUPABASE_URL=http://host.docker.internal:8000
-      - SUPABASE_JWT_SECRET
-      - ANON_KEY
-      - SUPABASE_PUBLIC_KEY
-      - POSTGRES_HOST=host.docker.internal
-      - POSTGRES_PORT
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-simba}
+      - DATABASE_PROVIDER=${DATABASE_PROVIDER:-litedb}
     volumes:
       - ../config.yaml:/app/config.yaml
       - ../uploads:/app/uploads:rw
       - ../markdown:/app/markdown:rw
       - ../vector_stores:/app/vector_stores:rw
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
     networks:
       - simba_network
     runtime: ${RUNTIME:+${RUNTIME}}
@@ -49,6 +49,7 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
     image: ${IMAGE_NAME:-simba}:${IMAGE_TAG:-latest}
+    restart: always
     env_file:
       - ../.env
     environment:
@@ -58,21 +59,20 @@ services:
       - PYTHONPATH=/app
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
       - DEVICE=${DEVICE:-cpu}
-      - SUPABASE_URL
-      - SUPABASE_JWT_SECRET
-      - ANON_KEY
-      - SUPABASE_PUBLIC_KEY
-      - POSTGRES_HOST
-      - POSTGRES_PORT
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-simba}
     volumes:
       - ../config.yaml:/app/config.yaml
       - ../uploads:/app/uploads:rw
       - ../vector_stores:/app/vector_stores:rw
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
     networks:
       - simba_network
     runtime: ${RUNTIME:+${RUNTIME}}
@@ -81,6 +81,7 @@ services:
 
   redis:
     image: redis:7-alpine
+    restart: always
     ports:
       - "6379:6379"
     networks:
@@ -93,25 +94,44 @@ services:
       timeout: 3s
       retries: 3
 
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-simba}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - simba_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   frontend:
     build:
       context: ../frontend
       dockerfile: Dockerfile
     image: ${FRONTEND_IMAGE_NAME:-simba-frontend}:${FRONTEND_IMAGE_TAG:-latest}
+    restart: always
     ports:
       - "5173:5173"
+    environment:
+      - VITE_API_URL=${VITE_API_URL:-http://localhost:8000}
     volumes:
       - ../frontend:/app
       - /app/node_modules
-    environment:
-      - VITE_API_URL=http://localhost:8000
-      - NODE_ENV=development
     networks:
       - simba_network
-    restart: unless-stopped
 
   ollama:
     image: ollama/ollama:latest
+    restart: always
     environment:
       - OLLAMA_ORIGINS=*
     volumes:
@@ -128,8 +148,8 @@ networks:
   simba_network:
     name: simba_network
     driver: bridge
-    external: true
 
 volumes:
   redis_data:
+  postgres_data:
   ollama_models:
