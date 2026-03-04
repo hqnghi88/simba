@@ -78,18 +78,21 @@ elif [[ "$ip_confirm" != "y" ]]; then
     SERVER_IP="localhost"
 fi
 
+# Extract actual server port for VITE_API_URL
+ACTUAL_SERVER_PORT=$(grep "SERVER_PORT=" .env | cut -d'=' -f2 || echo "8000")
+
 # Update VITE_API_URL in .env
 if grep -q "VITE_API_URL" .env; then
-    sed -i "s|VITE_API_URL=.*|VITE_API_URL=http://$SERVER_IP:8000|g" .env
+    sed -i "s|VITE_API_URL=.*|VITE_API_URL=http://$SERVER_IP:$ACTUAL_SERVER_PORT|g" .env
 else
-    echo "VITE_API_URL=http://$SERVER_IP:8000" >> .env
+    echo "VITE_API_URL=http://$SERVER_IP:$ACTUAL_SERVER_PORT" >> .env
 fi
 
 # Set default RUNTIME to empty to avoid Docker Compose warnings
 if ! grep -q "RUNTIME=" .env; then
     echo "RUNTIME=" >> .env
 fi
-echo "✅ Configuration updated in .env"
+echo "✅ Configuration updated in .env (using port: $ACTUAL_SERVER_PORT)"
 
 # Attempt to clean up manually created network to avoid Compose label conflicts
 if docker network ls | grep -q "simba_network"; then
@@ -108,17 +111,21 @@ echo "    🐳 [5/5] Building and Starting Services     "
 echo "=========================================="
 
 # Build and start services in the background
-cd docker
-$DOCKER_COMPOSE_CMD up --build -d
+echo "🏗️  Running: $DOCKER_COMPOSE_CMD -f docker/docker-compose.yml up --build -d"
+$DOCKER_COMPOSE_CMD -f docker/docker-compose.yml up --build -d
+
+# Extract actual ports used for final output
+ACTUAL_SERVER_PORT=$(grep "SERVER_PORT=" .env | cut -d'=' -f2 || echo "8000")
+ACTUAL_FRONTEND_PORT=$(grep "FRONTEND_PORT=" .env | cut -d'=' -f2 || echo "5173")
 
 echo "=========================================================================="
 echo "🎉 Simba installation initiated successfully!"
 echo "Services are starting in the background. Note: The first build may take several minutes."
 echo ""
 echo "To check the logs and see when the services are ready, run:"
-echo "   cd docker && $DOCKER_COMPOSE_CMD logs -f"
+echo "   $DOCKER_COMPOSE_CMD -f docker/docker-compose.yml logs -f"
 echo ""
 echo "Once fully started, access the platform at:"
-echo "   🖥️  Frontend:   http://$SERVER_IP:5173"
-echo "   🔌 Backend API: http://$SERVER_IP:8000"
+echo "   🖥️  Frontend:   http://$SERVER_IP:$ACTUAL_FRONTEND_PORT"
+echo "   🔌 Backend API: http://$SERVER_IP:$ACTUAL_SERVER_PORT"
 echo "=========================================================================="
