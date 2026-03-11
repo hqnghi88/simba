@@ -56,26 +56,34 @@ function is_port_in_use() {
 function check_and_fix_port() {
     local PORT_VAR=$1
     local DEFAULT_PORT=$2
-    local ALT_PORT=$3
+    local START_PORT=$3
     
-    if is_port_in_use "$DEFAULT_PORT"; then
-        echo "⚠️  Port $DEFAULT_PORT is already in use by a host service."
+    # Extract current value and strip whitespace
+    local CURRENT_VAL=$(grep "^$PORT_VAR=" .env | cut -d'=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' || echo "")
+    
+    # If empty or not set, use default
+    if [ -z "$CURRENT_VAL" ]; then
+        CURRENT_VAL=$DEFAULT_PORT
+    fi
+    
+    if is_port_in_use "$CURRENT_VAL"; then
+        echo "⚠️  Port $CURRENT_VAL (for $PORT_VAR) is already in use."
+        
+        local NEW_PORT=$START_PORT
+        while is_port_in_use "$NEW_PORT"; do
+            NEW_PORT=$((NEW_PORT + 1))
+        done
+        
+        echo "   Found free port: $NEW_PORT. Updating .env..."
+        
         if ! grep -q "^$PORT_VAR=" .env; then
-            echo "   Configuring $PORT_VAR=$ALT_PORT in .env to avoid conflict."
-            echo "$PORT_VAR=$ALT_PORT" >> .env
-            export $PORT_VAR=$ALT_PORT
+            echo "$PORT_VAR=$NEW_PORT" >> .env
         else
-            # Also check if the current value in .env is the one in use
-            CURRENT_VAL=$(grep "^$PORT_VAR=" .env | cut -d'=' -f2)
-            if [ "$CURRENT_VAL" == "$DEFAULT_PORT" ]; then
-                echo "   Updating $PORT_VAR to $ALT_PORT in .env (previous value was conflicted)."
-                sed -i "s|^$PORT_VAR=.*|$PORT_VAR=$ALT_PORT|g" .env
-                export $PORT_VAR=$ALT_PORT
-            else
-                echo "   Note: $PORT_VAR is already set to $CURRENT_VAL in .env."
-                export $PORT_VAR=$CURRENT_VAL
-            fi
+            sed -i "s|^$PORT_VAR=.*|$PORT_VAR=$NEW_PORT|g" .env
         fi
+        export $PORT_VAR=$NEW_PORT
+    else
+        export $PORT_VAR=$CURRENT_VAL
     fi
 }
 
@@ -119,7 +127,7 @@ echo "✅ Configuration updated in .env (using port: $ACTUAL_SERVER_PORT)"
 
 # Attempt to clean up manually created network to avoid Compose label conflicts
 if docker network ls | grep -q "simba_network"; then
-    echo "🌐 [3/5] Cleaning up existing 'simba_networks' to let Docker Compose manage it..."
+    echo "🌐 [3/5] Cleaning up existing 'simba_network' to let Docker Compose manage it..."
     docker network rm simba_network || echo "⚠️ Could not remove network, Docker Compose will try to handle it."
 else
     echo "🌐 [3/5] Docker Compose will manage the 'simba_network' automatically."
@@ -139,8 +147,8 @@ echo "🏗️  Running: $DOCKER_COMPOSE_CMD --env-file .env -f docker/docker-com
 $DOCKER_COMPOSE_CMD --env-file .env -f docker/docker-compose.yml up --build -d
 
 # Extract actual ports used for final output
-ACTUAL_SERVER_PORT=$(grep "SERVER_PORT=" .env | cut -d'=' -f2 || echo "8000")
-ACTUAL_FRONTEND_PORT=$(grep "FRONTEND_PORT=" .env | cut -d'=' -f2 || echo "5173")
+ACTUAL_SERVER_PORT=${SERVER_PORT:-8000}
+ACTUAL_FRONTEND_PORT=${FRONTEND_PORT:-5173}
 
 echo "=========================================================================="
 echo "🎉 Simba installation initiated successfully!"
