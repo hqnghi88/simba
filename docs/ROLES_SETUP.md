@@ -35,7 +35,7 @@ We've provided a Python script to automatically apply migrations:
 
 2. Set up environment variables by creating a `.env` file at the project root:
    ```
-   SUPABASE_DB_URL=postgres://postgres:your-password@db.your-project-ref.supabase.co:5432/postgres
+   SUPABASE_DB_URL=postgres://postgres:your-password@db.your-project-ref.supabase.co:5431/postgres
    # Or set individual components:
    # SUPABASE_DB_HOST=db.your-project-ref.supabase.co
    # SUPABASE_DB_PORT=5432
