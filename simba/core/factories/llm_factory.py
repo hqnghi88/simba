@@ -52,6 +52,7 @@ def get_llm(LLMConfig: Optional[LLMConfig] = None):
             temperature=settings.llm.temperature,
             base_url=base_url,
             streaming=settings.llm.streaming,
+            timeout=60,
         )
 
     elif settings.llm.provider == "vllm":
@@ -67,7 +68,8 @@ def get_llm(LLMConfig: Optional[LLMConfig] = None):
             base_url=base_url,
             streaming=settings.llm.streaming,
             max_tokens=settings.llm.max_tokens or 2048,
-            model_kwargs={"response_format": {"type": "json_object"}}
+            model_kwargs={"response_format": {"type": "json_object"}},
+            timeout=60,
         )
 
     elif settings.llm.provider == "anthropic":
