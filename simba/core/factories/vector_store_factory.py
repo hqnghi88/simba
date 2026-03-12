@@ -61,8 +61,7 @@ class VectorStoreFactory:
             logger.info(f"Fallback: Using computed embedding dimension: {embedding_dim}")
 
         if (
-            os.path.exists(settings.paths.faiss_index_dir)
-            and len(os.listdir(settings.paths.faiss_index_dir)) > 0
+            os.path.exists(os.path.join(settings.paths.faiss_index_dir, "index.faiss"))
         ):
             logging.info("Loading existing FAISS vector store")
             store = FAISS.load_local(

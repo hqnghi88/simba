@@ -200,12 +200,14 @@ async def recalculate_kpis():
     llm = get_llm()
     
     prompt = PromptTemplate.from_template(
-        "Extract agricultural KPIs from the text and return a single JSON object with these keys for each of the 10 KPIs "
-        "(soil_moisture, temperature, rainfall, humidity, crop_yield, pest_risk, fertilizer, equipment_health, solar_radiation, harvest_progress):\n"
+        "Extract agricultural KPIs from the text and return a single FLAT JSON object. "
+        "DO NOT nest objects. For each KPI (soil_moisture, temperature, rainfall, humidity, crop_yield, pest_risk, fertilizer, equipment_health, solar_radiation, harvest_progress), provide:\n"
         "  - <kpi>: concise value string (e.g. '25%', '27°C', 'Low', 'N/A')\n"
         "  - <kpi>_trend: 'up', 'down', or 'neutral'\n"
         "  - <kpi>_trend_reasoning: one short sentence explaining the trend\n"
         "  - <kpi>_explanation: one short sentence quoting the source evidence\n\n"
+        "Example flat structure:\n"
+        "{{\"soil_moisture\": \"20%\", \"soil_moisture_trend\": \"up\", \"soil_moisture_trend_reasoning\": \"Recent rain\", \"soil_moisture_explanation\": \"Sensor data shows 20%\"}}\n\n"
         "Text: {context}\n\nJSON output:"
     )
     
@@ -226,17 +228,74 @@ async def recalculate_kpis():
         # Extract JSON using regex if direct parse fails
         try:
             result = json.loads(stripped)
-            logger.info("JSON successfully parsed.")
+            logger.info(f"JSON successfully parsed. Type: {type(result)}")
+            
+            # AGGRESSIVE FLATTENING
+            flattened = {}
+            
+            # If it's a list, take the first element
+            if isinstance(result, list) and len(result) > 0:
+                result = result[0]
+            
+            if isinstance(result, dict):
+                logger.info(f"Root keys before flattening: {list(result.keys())}")
+                for k, v in result.items():
+                    if isinstance(v, dict):
+                        logger.info(f"Flattening nested dict for key: {k}")
+                        # Extract 'value' or similar as the main key
+                        val = v.get("value") or v.get("val") or v.get("amount")
+                        if val is not None:
+                            flattened[k] = str(val)
+                        
+                        # Extract everything else with suffix
+                        for sub_k, sub_v in v.items():
+                            if sub_k not in ["value", "val", "amount"]:
+                                flattened[f"{k}_{sub_k}"] = str(sub_v)
+                            elif k not in flattened:
+                                # Fallback if we didn't set the main key yet
+                                flattened[k] = str(sub_v)
+                    else:
+                        flattened[k] = str(v)
+                result = flattened
+            
+            logger.info(f"Keys after flattening: {list(result.keys())}")
+            # Log a couple of sample flattened values to verify
+            if "soil_moisture" in result:
+                logger.info(f"Sample: soil_moisture='{result['soil_moisture']}' (type: {type(result['soil_moisture'])})")
+            
         except Exception as json_err:
             logger.warning(f"JSON parse failed: {json_err}. Attempting regex extraction.")
             # Fallback regex extraction
             result = {}
-            for field in ["soil_moisture", "temperature", "rainfall", "humidity", "crop_yield", "pest_risk", "fertilizer", "equipment_health", "solar_radiation", "harvest_progress"]:
+            kpis = ["soil_moisture", "temperature", "rainfall", "humidity", "crop_yield", "pest_risk", "fertilizer", "equipment_health", "solar_radiation", "harvest_progress"]
+            for field in kpis:
+                # Value
                 m = re.search(rf'"{field}"\s*:\s*"([^"]+)"', stripped, re.I)
                 if m: result[field] = m.group(1)
-                t_m = re.search(rf'"{field}_trend"\s*:\s*"(up|down|neutral)"', stripped, re.I)
-                if t_m: result[f"{field}_trend"] = t_m.group(1)
-            logger.info(f"Regex extraction found {len(result)} fields.")
+                
+                # Trend, reasoning, explanation
+                for suffix in ["_trend", "_trend_reasoning", "_explanation"]:
+                    f_m = re.search(rf'"{field}{suffix}"\s*:\s*"([^"]+)"', stripped, re.I)
+                    if f_m: result[f"{field}{suffix}"] = f_m.group(1)
+            
+            logger.info(f"Regex extraction found {len(result)} fields: {list(result.keys())}")
+            
+        except Exception as json_err:
+            logger.warning(f"JSON parse failed: {json_err}. Attempting regex extraction.")
+            # Fallback regex extraction
+            result = {}
+            kpis = ["soil_moisture", "temperature", "rainfall", "humidity", "crop_yield", "pest_risk", "fertilizer", "equipment_health", "solar_radiation", "harvest_progress"]
+            for field in kpis:
+                # Value
+                m = re.search(rf'"{field}"\s*:\s*"([^"]+)"', stripped, re.I)
+                if m: result[field] = m.group(1)
+                
+                # Trend, reasoning, explanation
+                for suffix in ["_trend", "_trend_reasoning", "_explanation"]:
+                    f_m = re.search(rf'"{field}{suffix}"\s*:\s*"([^"]+)"', stripped, re.I)
+                    if f_m: result[f"{field}{suffix}"] = f_m.group(1)
+            
+            logger.info(f"Regex extraction found {len(result)} fields: {list(result.keys())}")
 
         # Merge LLM result over defaults — keep ALL keys the LLM returned
         final_values = KPIData().model_dump()

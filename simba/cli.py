@@ -9,6 +9,7 @@ import click
 @click.group()
 def cli():
     """Simba CLI: Manage your Simba application."""
+    pass
 
 
 @cli.command("server")

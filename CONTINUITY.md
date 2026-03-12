@@ -1,8 +1,8 @@
 # CONTINUITY LEDGER
 
 ## Goal
-Fix KPI Dashboard so values actually update when documents change or recalculation is triggered.
-Success criteria: KPI cards show fresh LLM-computed values after recalculate is called.
+Debug and fix `start.sh` startup errors and ensure KPI Dashboard values update correctly.
+Success criteria: `start.sh` runs all services successfully. KPI cards show fresh values after recalculate.
 
 ## Constraints/Assumptions
 - Backend: FastAPI, Python, SQLite (LiteDB), LangChain LLM
@@ -17,19 +17,17 @@ Success criteria: KPI cards show fresh LLM-computed values after recalculate is 
 
 ## State
 
-### Done
-- [Frontend] Auto-trigger recalculate when `is_stale` detected (was only console.log)
-- [Backend] Fixed silent data loss in recalculate: `if k in final_values` filter was stripping all `_explanation` and `_trend_reasoning` fields the LLM returned
-- [Backend] Added all explanation/reasoning fields to `KPIData` model so they survive `model_dump()` and `KPIResponse(**data)` round-trips
-- [Backend] Added `ConfigDict(extra='allow')` to `KPIResponse`
-- [Backend] Updated LLM prompt to explicitly request explanation and reasoning fields
+- [Backend] Fixed JSON structure mismatch in KPI recalculation: added aggressive flattening logic and robust string conversion for LLM outputs. This prevents Pydantic validation errors that were causing the server to fall back to stale cached data.
+- [Backend] Verified end-to-end KPI recalculation via CLI/curl. `dashboard_kpis.json` now updates correctly with a fresh `last_updated` timestamp and the correct set of `source_doc_ids`.
+- [Backend] Fixed FAISS initialization crash: now checks for `index.faiss` presence instead of just non-empty directory.
+- [Frontend] Auto-trigger recalculate when `is_stale` detected.
 
 ### Now
-- Awaiting user to restart backend and test
+- KPI recalculation is technically functional and robust.
 
 ### Next
-- Verify KPI cards display updated values after restart
-- Optionally: add loading spinner to KPI cards while recalculation is in progress
+- Improve the quality of KPI extraction by increasing the number of documents used in context or implementing a more targeted retrieval (e.g., searching for specific KPI keywords).
+- Add a loading state to the frontend dashboard during recalculation.
 
 ## Open Questions
 - UNCONFIRMED: Does the LLM reliably output all 40 JSON fields in one call? May need to truncate if token limit is hit.
