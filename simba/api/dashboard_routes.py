@@ -121,26 +121,51 @@ async def recalculate_kpis():
     enabled_docs = [d for d in all_docs if d.metadata.enabled]
     current_ids = [d.id for d in enabled_docs]
     
+    logger.info(f"Total documents in database: {len(all_docs)}")
+    logger.info(f"Found {len(enabled_docs)} enabled documents: {current_ids}")
+    
     if not enabled_docs:
+        logger.warning("No enabled documents found for KPI calculation.")
         empty_data = KPIData().model_dump()
         empty_data['source_doc_ids'] = []
         save_kpis(empty_data)
         return KPIResponse(**empty_data)
         
-    # Optimized context: Take only the 3 most relevant docs and first 2 chunks
-    # This significantly speeds up local LLM inference
+    # Sort enabled docs by parsed_at or uploadedAt descending to prioritize newest/freshly enabled/updated docs
+    def get_doc_ts(d):
+        ts = d.metadata.parsed_at or d.metadata.uploadedAt or ""
+        return ts
+    
+    enabled_docs.sort(key=get_doc_ts, reverse=True)
+    
+    # Optimized context: Take up to 8 documents but limit each to the first chunk
+    # This provides a broader overview of all enabled data while keeping tokens low.
     context_text = ""
-    for doc in enabled_docs[:3]:
+    logger.info(f"Targeting up to 8 documents from {len(enabled_docs)} enabled docs for context.")
+    
+    docs_used = []
+    for doc in enabled_docs[:8]:
         content = ""
-        if hasattr(doc, "documents") and doc.documents:
-             content = "\n".join([c.page_content for c in doc.documents[:2]])
+        # Priority: Check for chunks (documents)
+        if hasattr(doc, "documents") and doc.documents and len(doc.documents) > 0:
+             content = doc.documents[0].page_content
+             logger.debug(f"Using first chunk of {doc.metadata.filename}")
+        # Fallback: Check for raw content
         elif hasattr(doc, "content") and doc.content:
-             content = doc.content[:1500]
+             content = doc.content[:1000]
+             logger.debug(f"Using raw content of {doc.metadata.filename}")
         
         if content:
-            context_text += f"Source: {doc.metadata.filename}\n{content}\n---\n"
+            context_text += f"\n--- Source Document: {doc.metadata.filename} ---\n{content}\n"
+            docs_used.append(doc.metadata.filename)
+        else:
+            logger.warning(f"Document {doc.metadata.filename} (ID: {doc.id}) has NO content chunks and NO raw content.")
+    
+    logger.info(f"Context successfully built using {len(docs_used)} documents: {', '.join(docs_used)}")
+    logger.info(f"Total context text size: {len(context_text)} characters")
     
     if not context_text.strip():
+        logger.error("Context text is empty! Cannot calculate KPIs.")
         empty_data = KPIData().model_dump()
         empty_data['source_doc_ids'] = current_ids
         save_kpis(empty_data)
@@ -159,6 +184,7 @@ async def recalculate_kpis():
     try:
         logger.info(f"Invoking LLM. Context size: {len(context_text)} chars")
         raw_output = await chain.ainvoke({"context": context_text})
+        logger.info(f"RAW LLM OUTPUT: {raw_output}")
         
         # Clean up output
         stripped = raw_output.strip()
@@ -170,14 +196,17 @@ async def recalculate_kpis():
         # Extract JSON using regex if direct parse fails
         try:
             result = json.loads(stripped)
-        except:
+            logger.info("JSON successfully parsed.")
+        except Exception as json_err:
+            logger.warning(f"JSON parse failed: {json_err}. Attempting regex extraction.")
             # Fallback regex extraction
             result = {}
             for field in ["soil_moisture", "temperature", "rainfall", "humidity", "crop_yield", "pest_risk", "fertilizer", "equipment_health", "solar_radiation", "harvest_progress"]:
-                m = re.search(f'"{field}"\\s*:\\s*"([^"]+)"', stripped, re.I)
+                m = re.search(rf'"{field}"\s*:\s*"([^"]+)"', stripped, re.I)
                 if m: result[field] = m.group(1)
-                t_m = re.search(f'"{field}_trend"\\s*:\\s*"(up|down|neutral)"', stripped, re.I)
+                t_m = re.search(rf'"{field}_trend"\s*:\s*"(up|down|neutral)"', stripped, re.I)
                 if t_m: result[f"{field}_trend"] = t_m.group(1)
+            logger.info(f"Regex extraction found {len(result)} fields.")
 
         # Merge with defaults
         final_values = KPIData().model_dump()
@@ -188,7 +217,7 @@ async def recalculate_kpis():
         save_kpis(final_values)
         
         elapsed = (datetime.now() - start_time).total_seconds()
-        logger.info(f"Recalculation completed in {elapsed:.2f}s")
+        logger.info(f"Recalculation completed in {elapsed:.2f}s. KPI values updated.")
         
         response = KPIResponse(**final_values)
         response.is_stale = False
@@ -196,7 +225,7 @@ async def recalculate_kpis():
         return response
         
     except Exception as e:
-        logger.error(f"Error calculating KPIs: {e}")
+        logger.error(f"Error calculating KPIs: {e}", exc_info=True)
         cached = load_kpis()
         if cached: return KPIResponse(**cached)
         return KPIResponse()
