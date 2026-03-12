@@ -6,7 +6,7 @@ from datetime import datetime
 import logging
 
 from fastapi import APIRouter
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -20,8 +20,9 @@ dashboard = APIRouter(prefix="/dashboard", tags=["dashboard"])
 
 KPI_STORAGE_FILE = os.path.join(settings.paths.base_dir, "dashboard_kpis.json")
 
-# Simplified KPI data structure for faster LLM response
+# KPI data structure
 class KPIData(BaseModel):
+    # Core values
     soil_moisture: str = Field(description="Value for Soil Moisture", default="N/A")
     temperature: str = Field(description="Value for Average Temperature", default="N/A")
     rainfall: str = Field(description="Value for Rainfall", default="N/A")
@@ -33,19 +34,44 @@ class KPIData(BaseModel):
     solar_radiation: str = Field(description="Value for Solar Radiation", default="N/A")
     harvest_progress: str = Field(description="Value for Harvest Progress", default="0%")
     
-    # Trends for UI
-    soil_moisture_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
-    temperature_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
-    rainfall_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
-    humidity_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
-    crop_yield_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
-    pest_risk_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
-    fertilizer_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
-    equipment_health_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
-    solar_radiation_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
-    harvest_progress_trend: str = Field(description="'up', 'down', or 'neutral'", default="neutral")
+    # Trends
+    soil_moisture_trend: str = Field(default="neutral")
+    temperature_trend: str = Field(default="neutral")
+    rainfall_trend: str = Field(default="neutral")
+    humidity_trend: str = Field(default="neutral")
+    crop_yield_trend: str = Field(default="neutral")
+    pest_risk_trend: str = Field(default="neutral")
+    fertilizer_trend: str = Field(default="neutral")
+    equipment_health_trend: str = Field(default="neutral")
+    solar_radiation_trend: str = Field(default="neutral")
+    harvest_progress_trend: str = Field(default="neutral")
+
+    # Explanations (source evidence)
+    soil_moisture_explanation: str = Field(default="")
+    temperature_explanation: str = Field(default="")
+    rainfall_explanation: str = Field(default="")
+    humidity_explanation: str = Field(default="")
+    crop_yield_explanation: str = Field(default="")
+    pest_risk_explanation: str = Field(default="")
+    fertilizer_explanation: str = Field(default="")
+    equipment_health_explanation: str = Field(default="")
+    solar_radiation_explanation: str = Field(default="")
+    harvest_progress_explanation: str = Field(default="")
+
+    # Trend reasoning
+    soil_moisture_trend_reasoning: str = Field(default="")
+    temperature_trend_reasoning: str = Field(default="")
+    rainfall_trend_reasoning: str = Field(default="")
+    humidity_trend_reasoning: str = Field(default="")
+    crop_yield_trend_reasoning: str = Field(default="")
+    pest_risk_trend_reasoning: str = Field(default="")
+    fertilizer_trend_reasoning: str = Field(default="")
+    equipment_health_trend_reasoning: str = Field(default="")
+    solar_radiation_trend_reasoning: str = Field(default="")
+    harvest_progress_trend_reasoning: str = Field(default="")
 
 class KPIResponse(KPIData):
+    model_config = ConfigDict(extra='allow')  # preserve any additional LLM fields
     is_stale: bool = Field(default=False)
     last_updated: Optional[str] = Field(default=None)
     source_doc_ids: List[str] = Field(default=[])
@@ -174,8 +200,12 @@ async def recalculate_kpis():
     llm = get_llm()
     
     prompt = PromptTemplate.from_template(
-        "Extract these agricultural KPIs as JSON from the text: soil_moisture, temperature, rainfall, humidity, crop_yield, pest_risk, fertilizer, equipment_health, solar_radiation, harvest_progress. "
-        "Also include trends (up/down/neutral) for each. Provide values in concise formats (e.g., '25%', '27°C', 'Low').\n\n"
+        "Extract agricultural KPIs from the text and return a single JSON object with these keys for each of the 10 KPIs "
+        "(soil_moisture, temperature, rainfall, humidity, crop_yield, pest_risk, fertilizer, equipment_health, solar_radiation, harvest_progress):\n"
+        "  - <kpi>: concise value string (e.g. '25%', '27°C', 'Low', 'N/A')\n"
+        "  - <kpi>_trend: 'up', 'down', or 'neutral'\n"
+        "  - <kpi>_trend_reasoning: one short sentence explaining the trend\n"
+        "  - <kpi>_explanation: one short sentence quoting the source evidence\n\n"
         "Text: {context}\n\nJSON output:"
     )
     
@@ -208,11 +238,9 @@ async def recalculate_kpis():
                 if t_m: result[f"{field}_trend"] = t_m.group(1)
             logger.info(f"Regex extraction found {len(result)} fields.")
 
-        # Merge with defaults
+        # Merge LLM result over defaults — keep ALL keys the LLM returned
         final_values = KPIData().model_dump()
-        for k, v in result.items():
-            if k in final_values: final_values[k] = v
-            
+        final_values.update(result)        # overwrite with everything from LLM
         final_values['source_doc_ids'] = current_ids
         save_kpis(final_values)
         

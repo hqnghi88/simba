@@ -100,26 +100,7 @@ const Dashboard: React.FC = () => {
     const [recalculating, setRecalculating] = React.useState(false);
     const [kpiData, setKpiData] = React.useState<any>(null);
 
-    const fetchKPIs = async () => {
-        try {
-            const { getDashboardKPIs } = await import('@/lib/api');
-            const data = await getDashboardKPIs();
-            setKpiData(data);
-            setLoading(false);
-            if (data.is_stale) {
-                console.log("Dashboard data is stale, prompting user.");
-            }
-        } catch (e) {
-            console.error("Failed to load dashboard data", e);
-            setLoading(false);
-        }
-    };
-
-    React.useEffect(() => {
-        fetchKPIs();
-    }, []);
-
-    const handleRecalculate = async () => {
+    const handleRecalculate = React.useCallback(async () => {
         setRecalculating(true);
         try {
             const { recalculateDashboardKPIs } = await import('@/lib/api');
@@ -130,7 +111,28 @@ const Dashboard: React.FC = () => {
         } finally {
             setRecalculating(false);
         }
-    };
+    }, []);
+
+    const fetchKPIs = React.useCallback(async () => {
+        try {
+            const { getDashboardKPIs } = await import('@/lib/api');
+            const data = await getDashboardKPIs();
+            setKpiData(data);
+            setLoading(false);
+            if (data.is_stale) {
+                console.log("Dashboard data is stale, auto-recalculating KPIs...");
+                // Automatically recalculate so KPI cards reflect the latest data
+                handleRecalculate();
+            }
+        } catch (e) {
+            console.error("Failed to load dashboard data", e);
+            setLoading(false);
+        }
+    }, [handleRecalculate]);
+
+    React.useEffect(() => {
+        fetchKPIs();
+    }, [fetchKPIs]);
 
     const kpis: KPIProps[] = React.useMemo(() => {
         // Default / Mock if loading or error or empty
