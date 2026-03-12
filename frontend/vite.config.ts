@@ -13,6 +13,7 @@ export default defineConfig({
     ]
   },
   server: {
+    allowedHosts: ['starfarm.ctu.edu.vn'],
     proxy: {
       '/api': {
         target: 'http://localhost:8000',
