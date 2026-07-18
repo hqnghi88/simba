@@ -99,22 +99,24 @@ def _ollama_generate(prompt: str, timeout: int = 120) -> str:
         return ""
 
 
-CHAIN_PROMPT = """Extract agricultural KPI data for the "{chain}" value chain from these documents.
-
-For each indicator found, return a JSON array of objects:
-[{{"kpi":"category","indicator":"name","unit":"unit","group":"group","median":null,"p25":null,"p75":null,"rate":null}}]
+CHAIN_PROMPT = """Read the following document carefully. Understand its content and extract any agricultural KPI baseline data relevant to the "{chain}" value chain.
 
 KPI categories: Productivity, Value added, Income, Soil quality, Exposure to pesticides, Women's empowerment, Youth empowerment, Adaptive capacity, Social Justice, Human well-being, Nutrient management, Crop health, Water sources
 
-Groups: Worse-off, Better-off, Cooperative, Independent
+Groups of interest: Worse-off, Better-off, Cooperative, Independent
 
-Rules:
-- Use EXACT KPI category names from the list above
-- Only include indicators you actually find in the documents
-- Set null for values not found
-- Return ONLY the JSON array, no other text
+For each piece of KPI data you find in the document — regardless of how it is formatted (tables, paragraphs, bullet points, labels, etc.) — create a JSON entry:
+{{"kpi":"best matching category","indicator":"what is being measured","unit":"unit if found","group":"which group","median":value,"p25":null,"p75":null,"rate":null}}
 
-Documents:
+Use your understanding of the document to:
+- Determine which KPI category each data point belongs to
+- Identify which group (Worse-off, Better-off, Cooperative, Independent) each value applies to
+- Place numeric values in the "median" field
+- If a percentage or rate is found, use the "rate" field
+
+Return ONLY a JSON array of entries. One entry per data point per group.
+
+Document:
 {context}
 
 JSON:"""
@@ -147,21 +149,23 @@ def _build_context_from_docs(enabled_docs: list, chain_filter: str = "") -> tupl
 def _normalize_group(g: str) -> str:
     """Normalize group name to match frontend format."""
     g_lower = g.lower().strip()
+    # Remove punctuation and extra spaces
+    g_clean = re.sub(r'[–—\-_]', ' ', g_lower).strip()
+    g_clean = re.sub(r'\s+', ' ', g_clean)
+    
     mapping = {
-        "worse-off": "Worse \u2013 off",
         "worse off": "Worse \u2013 off",
-        "worse_off": "Worse \u2013 off",
+        "worse": "Worse \u2013 off",
         "woff": "Worse \u2013 off",
-        "better-off": "Better \u2013 off",
         "better off": "Better \u2013 off",
-        "better_off": "Better \u2013 off",
+        "better": "Better \u2013 off",
         "boff": "Better \u2013 off",
         "cooperative": "Cooperative",
         "coop": "Cooperative",
         "independent": "Independent",
         "indep": "Independent",
     }
-    return mapping.get(g_lower, g)
+    return mapping.get(g_clean, mapping.get(g_lower, g))
 
 
 def _normalize_chain(c: str) -> str:
@@ -309,11 +313,23 @@ def _merge_with_baseline(baseline: dict, llm_chains: dict) -> dict:
             # Find matching baseline entry
             matched = False
             for base_entry in merged[chain_key]:
-                if (
-                    base_entry.get("kpi") == llm_kpi
-                    and base_entry.get("indicator") == llm_indicator
-                    and _normalize_group(base_entry.get("group", "")) == llm_group
-                ):
+                base_kpi = base_entry.get("kpi", "")
+                base_indicator = base_entry.get("indicator", "")
+                base_group = _normalize_group(base_entry.get("group", ""))
+
+                # Match by kpi + indicator (fuzzy) + group
+                kpi_match = base_kpi == llm_kpi
+                group_match = base_group == llm_group
+                # Fuzzy indicator match: LLM indicator contains baseline indicator or vice versa
+                ind_match = (
+                    base_indicator == llm_indicator
+                    or llm_indicator.lower().startswith(base_indicator.lower())
+                    or base_indicator.lower().startswith(llm_indicator.lower())
+                    or base_indicator.lower() in llm_indicator.lower()
+                    or llm_indicator.lower() in base_indicator.lower()
+                )
+
+                if kpi_match and group_match and ind_match:
                     # Update only non-null LLM values
                     for field in ["median", "p25", "p75", "rate"]:
                         llm_val = _to_float(llm_entry.get(field))

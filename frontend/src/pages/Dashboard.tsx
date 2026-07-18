@@ -396,6 +396,7 @@ function GapChart({ data }: { data: Record<string, KpiRow[]> }) {
 
 // --- Chain Tab ---
 function ChainTab({ name, items }: { name: string; items: KpiRow[] }) {
+  const [activeKpi, setActiveKpi] = useState<string>(KPI_ORDER[0]);
   const bk = useMemo(() => byKPI(items), [items]);
   const inds = useMemo(() => {
     const result: Record<string, IndGroup[]> = {};
@@ -406,56 +407,55 @@ function ChainTab({ name, items }: { name: string; items: KpiRow[] }) {
     return result;
   }, [bk]);
 
+  const activeInds = inds[activeKpi] || [];
+
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap gap-2">
-        {KPI_ORDER.map((k) => {
-          const cnt = inds[k]?.length || 0;
-          return (
-            <div
-              key={k}
-              className={`flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-md border ${
-                cnt === 0 ? 'opacity-40 border-border' : 'border-border bg-white'
-              }`}
-            >
-              <span
-                className="w-2 h-2 rounded-full shrink-0"
-                style={{ backgroundColor: KPI_COLORS[k] }}
-              />
-              <span className="font-semibold">{k}</span>
-              <span className="text-muted-foreground">({cnt})</span>
-            </div>
-          );
-        })}
+    <div>
+      <div className="bg-white border border-border rounded-lg shadow-sm mb-4 sticky top-[45px] z-40">
+        <div className="flex flex-wrap p-1 gap-1">
+          {KPI_ORDER.map((k) => {
+            const cnt = inds[k]?.length || 0;
+            return (
+              <button
+                key={k}
+                onClick={() => setActiveKpi(k)}
+                className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md transition-colors ${
+                  activeKpi === k
+                    ? 'bg-foreground text-white font-semibold shadow-sm'
+                    : cnt > 0
+                    ? 'text-foreground hover:bg-muted'
+                    : 'text-muted-foreground opacity-50'
+                }`}
+              >
+                <span
+                  className="w-2 h-2 rounded-full shrink-0"
+                  style={{ backgroundColor: KPI_COLORS[k] }}
+                />
+                {k}
+                {cnt > 0 && (
+                  <span
+                    className={`ml-0.5 px-1 py-0 rounded-full text-[10px] ${
+                      activeKpi === k ? 'bg-white/20' : 'bg-muted'
+                    }`}
+                  >
+                    {cnt}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {KPI_ORDER.map((kpiName) => {
-        const kpiItems = inds[kpiName];
-        const cnt = kpiItems?.length || 0;
-        return (
-          <div key={kpiName}>
-            <Card className="mb-2">
-              <CardHeader className="py-2 px-4 flex flex-row items-center gap-2">
-                <span
-                  className="w-2.5 h-2.5 rounded-full shrink-0"
-                  style={{ backgroundColor: KPI_COLORS[kpiName] }}
-                />
-                <CardTitle className="text-sm">{kpiName}</CardTitle>
-                <span className="ml-auto text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-                  {cnt > 0 ? `${cnt} indicators` : 'No data'}
-                </span>
-              </CardHeader>
-            </Card>
-            {cnt === 0 ? (
-              <div className="text-center text-muted-foreground text-sm py-8 border border-dashed border-border rounded-lg mb-3">
-                No data available for {kpiName} in {name}
-              </div>
-            ) : (
-              kpiItems.map((ind, i) => <IndCard key={ind.indicator} ind={ind} idx={i} />)
-            )}
+      <div className="space-y-3">
+        {activeInds.length === 0 ? (
+          <div className="text-center text-muted-foreground text-sm py-12 border border-dashed border-border rounded-lg">
+            No data available for {activeKpi} in {name}
           </div>
-        );
-      })}
+        ) : (
+          activeInds.map((ind, i) => <IndCard key={ind.indicator} ind={ind} idx={i} />)
+        )}
+      </div>
     </div>
   );
 }
@@ -723,7 +723,7 @@ export default function Dashboard() {
                     <p className="text-xs text-muted-foreground">{n}</p>
                     <p className="text-3xl font-bold text-foreground">{fmt(cv)}M</p>
                     <p className="text-xs text-muted-foreground">
-                      Cooperative profit (mill. VN\u0110/ha/yr)
+                      Cooperative profit (mill. VNĐ/ha/yr)
                     </p>
                     {diff !== 0 && (
                       <p

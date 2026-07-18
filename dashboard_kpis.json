@@ -1400,39 +1400,6 @@
         "p25": null,
         "p75": null,
         "rate": 40.0
-      },
-      {
-        "chain": "Mango",
-        "kpi": "Soil quality",
-        "indicator": "Soil Moisture",
-        "unit": "%",
-        "group": "Worse – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
-      },
-      {
-        "chain": "Mango",
-        "kpi": "Crop health",
-        "indicator": "Fertilizer Usage",
-        "unit": "kg/ha",
-        "group": "Worse – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
-      },
-      {
-        "chain": "Mango",
-        "kpi": "Value added",
-        "indicator": "Solar Radiation",
-        "unit": "°C",
-        "group": "Better – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
       }
     ],
     "Rice-lotus": [
@@ -3435,39 +3402,6 @@
         "p25": null,
         "p75": null,
         "rate": 54.0
-      },
-      {
-        "chain": "Rice-lotus",
-        "kpi": "Soil quality",
-        "indicator": "Soil Moisture",
-        "unit": "%",
-        "group": "Worse – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
-      },
-      {
-        "chain": "Rice-lotus",
-        "kpi": "Nutrient management",
-        "indicator": "Fertilizer Usage",
-        "unit": "kg/ha",
-        "group": "Worse – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
-      },
-      {
-        "chain": "Rice-lotus",
-        "kpi": "Crop health",
-        "indicator": "Crop Yield",
-        "unit": "tons/ha",
-        "group": "Better – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
       }
     ],
     "Rice - shrimp": [
@@ -4980,50 +4914,6 @@
         "p25": null,
         "p75": null,
         "rate": 32.0
-      },
-      {
-        "chain": "Rice - shrimp",
-        "kpi": "Soil quality",
-        "indicator": "Fertilizer Usage",
-        "unit": "kg/ha",
-        "group": "Worse – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
-      },
-      {
-        "chain": "Rice - shrimp",
-        "kpi": "Crop health",
-        "indicator": "Diseases",
-        "unit": "%",
-        "group": "Worse – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
-      },
-      {
-        "chain": "Rice - shrimp",
-        "kpi": "Nutrient management",
-        "indicator": "Soil Moisture",
-        "unit": "mm",
-        "group": "Better – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
-      },
-      {
-        "chain": "Rice - shrimp",
-        "kpi": "Water sources",
-        "indicator": "Irrigation",
-        "unit": "ha/day",
-        "group": "Cooperative",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
       }
     ],
     "Coconut": [
@@ -6656,44 +6546,9 @@
         "p25": null,
         "p75": null,
         "rate": 50.0
-      },
-      {
-        "chain": "Coconut",
-        "kpi": "Soil quality",
-        "indicator": "Soil Moisture",
-        "unit": "%",
-        "group": "Worse – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
-      },
-      {
-        "chain": "Coconut",
-        "kpi": "Nutrient management",
-        "indicator": "Fertilizer Usage",
-        "unit": "kg/ha",
-        "group": "Worse – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
-      },
-      {
-        "chain": "Coconut",
-        "kpi": "Crop health",
-        "indicator": "Crop Yield",
-        "unit": "tons/ha",
-        "group": "Better – off",
-        "median": null,
-        "p25": null,
-        "p75": null,
-        "rate": null
       }
     ]
   },
-  "source_doc_ids": [
-    "84d7942e-24bf-4a71-a090-458af00b7737"
-  ],
-  "last_updated": "2026-07-18T21:35:01.860938"
+  "source_doc_ids": [],
+  "last_updated": "2026-07-18T22:17:10.137259"
 }
