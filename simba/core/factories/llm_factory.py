@@ -51,8 +51,9 @@ def get_llm(LLMConfig: Optional[LLMConfig] = None):
             model=settings.llm.model_name,
             temperature=settings.llm.temperature,
             base_url=base_url,
-            streaming=settings.llm.streaming,
-            timeout=60,
+            streaming=False,
+            timeout=180,
+            num_ctx=8192,
         )
 
     elif settings.llm.provider == "vllm":

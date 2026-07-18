@@ -16,6 +16,7 @@ import {
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -24,6 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import httpClient from '@/lib/http/client';
 
 // Safe chart wrapper that properly destroys old instances
 function SafeChart({
@@ -533,19 +535,67 @@ function CrossChainTab({ data }: { data: Record<string, KpiRow[]> }) {
 export default function Dashboard() {
   const [data, setData] = useState<Record<string, KpiRow[]>>({});
   const [loading, setLoading] = useState(true);
+  const [isStale, setIsStale] = useState(false);
+  const [recalculating, setRecalculating] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
+  const [dataSource, setDataSource] = useState<'api' | 'static'>('api');
+
+  // Fetch KPI data from API, fall back to static
+  const fetchKPIs = React.useCallback(async () => {
+    setLoading(true);
+    try {
+      const resp = await httpClient.get('/dashboard/kpi');
+      const apiData = resp.data;
+      if (apiData.chains && Object.keys(apiData.chains).length > 0) {
+        setData(apiData.chains);
+        setIsStale(apiData.is_stale);
+        setLastUpdated(apiData.last_updated);
+        setDataSource('api');
+      } else {
+        // API returned empty, fall back to static
+        const staticResp = await fetch('/kpi_data.json');
+        const staticData = await staticResp.json();
+        setData(staticData);
+        setDataSource('static');
+        setIsStale(apiData.is_stale);
+      }
+    } catch (e) {
+      console.warn('API unavailable, loading static data:', e);
+      try {
+        const staticResp = await fetch('/kpi_data.json');
+        const staticData = await staticResp.json();
+        setData(staticData);
+        setDataSource('static');
+      } catch (e2) {
+        console.error('Failed to load any KPI data', e2);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Recalculate KPIs using LLM extraction
+  const handleRecalculate = React.useCallback(async () => {
+    setRecalculating(true);
+    try {
+      const resp = await httpClient.post('/dashboard/kpi/recalculate');
+      const apiData = resp.data;
+      if (apiData.chains && Object.keys(apiData.chains).length > 0) {
+        setData(apiData.chains);
+        setIsStale(false);
+        setLastUpdated(apiData.last_updated);
+        setDataSource('api');
+      }
+    } catch (e) {
+      console.error('Recalculation failed', e);
+    } finally {
+      setRecalculating(false);
+    }
+  }, []);
 
   useEffect(() => {
-    fetch('/kpi_data.json')
-      .then((r) => r.json())
-      .then((d) => {
-        setData(d);
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.error('Failed to load KPI data', e);
-        setLoading(false);
-      });
-  }, []);
+    fetchKPIs();
+  }, [fetchKPIs]);
 
   const chains = useMemo(() => Object.keys(data), [data]);
 
@@ -597,6 +647,40 @@ export default function Dashboard() {
 
   return (
     <div className="p-4 md:p-6 space-y-5 bg-slate-50 min-h-screen">
+      {/* Header with recalculate controls */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">KPI Analysis Dashboard</h2>
+          <p className="text-sm text-muted-foreground mt-0.5">
+            Baseline Performance Indicators across Agricultural Value Chains
+            {dataSource === 'static' && (
+              <span className="ml-2 text-amber-600 font-medium">(Static data)</span>
+            )}
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          {isStale && (
+            <span className="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-full px-3 py-1">
+              <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse" />
+              New data available
+            </span>
+          )}
+          {lastUpdated && (
+            <span className="text-xs text-muted-foreground">
+              Updated: {new Date(lastUpdated).toLocaleTimeString()}
+            </span>
+          )}
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleRecalculate}
+            disabled={recalculating}
+          >
+            {recalculating ? 'Extracting...' : 'Recalculate from Documents'}
+          </Button>
+        </div>
+      </div>
+
       <Tabs defaultValue="overview">
         <div className="bg-white border border-border rounded-lg shadow-sm sticky top-0 z-50">
           <TabsList className="h-auto p-1 bg-transparent w-full justify-start rounded-none overflow-x-auto">

@@ -1,46 +1,6699 @@
 {
-  "soil_moisture": "20%",
-  "temperature": "N/A",
-  "rainfall": "N/A",
-  "humidity": "Low",
-  "crop_yield": "N/A",
-  "pest_risk": "N/A",
-  "fertilizer": "N/A",
-  "equipment_health": "N/A",
-  "solar_radiation": "N/A",
-  "harvest_progress": "N/A",
-  "soil_moisture_trend": "up",
-  "temperature_trend": "N/A",
-  "rainfall_trend": "N/A",
-  "humidity_trend": "neutral",
-  "crop_yield_trend": "N/A",
-  "pest_risk_trend": "N/A",
-  "fertilizer_trend": "N/A",
-  "equipment_health_trend": "N/A",
-  "solar_radiation_trend": "N/A",
-  "harvest_progress_trend": "N/A",
-  "soil_moisture_explanation": "Sensor data shows 20%",
-  "temperature_explanation": "N/A",
-  "rainfall_explanation": "N/A",
-  "humidity_explanation": "Sensor data shows Low",
-  "crop_yield_explanation": "N/A",
-  "pest_risk_explanation": "N/A",
-  "fertilizer_explanation": "N/A",
-  "equipment_health_explanation": "N/A",
-  "solar_radiation_explanation": "N/A",
-  "harvest_progress_explanation": "N/A",
-  "soil_moisture_trend_reasoning": "Recent rain",
-  "temperature_trend_reasoning": "N/A",
-  "rainfall_trend_reasoning": "N/A",
-  "humidity_trend_reasoning": "Stable conditions",
-  "crop_yield_trend_reasoning": "N/A",
-  "pest_risk_trend_reasoning": "N/A",
-  "fertilizer_trend_reasoning": "N/A",
-  "equipment_health_trend_reasoning": "N/A",
-  "solar_radiation_trend_reasoning": "N/A",
-  "harvest_progress_trend_reasoning": "N/A",
+  "chains": {
+    "Mango": [
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 395.0,
+        "p25": 189.0,
+        "p75": 556.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 347.0,
+        "p25": 200.0,
+        "p75": 479.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 385.0,
+        "p25": 276.0,
+        "p75": 546.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 329.0,
+        "p25": 182.0,
+        "p75": 496.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Worse – off",
+        "median": 17.0,
+        "p25": 11.0,
+        "p75": 27.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Better – off",
+        "median": 17.0,
+        "p25": 11.0,
+        "p75": 25.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Cooperative",
+        "median": 20.0,
+        "p25": 14.0,
+        "p75": 26.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Independent",
+        "median": 16.0,
+        "p25": 11.0,
+        "p75": 24.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 236.0,
+        "p25": 158.0,
+        "p75": 326.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 165.0,
+        "p25": 119.0,
+        "p75": 249.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 203.0,
+        "p25": 139.0,
+        "p75": 283.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 180.0,
+        "p25": 129.0,
+        "p75": 272.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": 42.0,
+        "p25": 41.0,
+        "p75": 58.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share",
+        "unit": "%",
+        "group": "Better – off",
+        "median": 50.0,
+        "p25": 43.0,
+        "p75": 61.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": 45.0,
+        "p25": 41.0,
+        "p75": 51.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share",
+        "unit": "%",
+        "group": "Independent",
+        "median": 52.0,
+        "p25": 41.0,
+        "p75": 63.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 118.0,
+        "p25": 6.0,
+        "p75": 283.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 133.0,
+        "p25": 28.0,
+        "p75": 309.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 174.0,
+        "p25": 74.0,
+        "p75": 309.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 112.0,
+        "p25": 14.0,
+        "p75": 287.0,
+        "rate": null
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (pruned or dropped fruits)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 10.8
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (pruned or dropped fruits)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 10.1
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (pruned or dropped fruits)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 12.3
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (pruned or dropped fruits)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 9.7
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 3.4
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 1.8
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 2.1
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 3.3
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 50.0,
+        "p25": 12.0,
+        "p75": 124.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 98.0,
+        "p25": 48.0,
+        "p75": 182.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 128.0,
+        "p25": 60.0,
+        "p75": 261.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 76.0,
+        "p25": 24.0,
+        "p75": 129.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 18.0,
+        "p25": 0.0,
+        "p75": 120.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 27.0,
+        "p25": 0.0,
+        "p75": 160.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 72.0,
+        "p25": 5.0,
+        "p75": 240.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 13.0,
+        "p25": 0.0,
+        "p75": 120.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 105.0,
+        "p25": 49.0,
+        "p75": 223.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 183.0,
+        "p25": 95.0,
+        "p75": 346.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 238.0,
+        "p25": 112.0,
+        "p75": 461.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 141.0,
+        "p25": 61.0,
+        "p75": 230.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Worse – off",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 300.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Better – off",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 400.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Cooperative",
+        "median": 350.0,
+        "p25": 0.0,
+        "p75": 1000.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Independent",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 200.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Worse – off",
+        "median": 18.0,
+        "p25": 13.0,
+        "p75": 25.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Better – off",
+        "median": 16.0,
+        "p25": 14.0,
+        "p75": 20.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Cooperative",
+        "median": 18.0,
+        "p25": 15.0,
+        "p75": 20.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Independent",
+        "median": 17.0,
+        "p25": 13.0,
+        "p75": 23.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 42.5
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 59.7
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 80.8
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 43.4
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 90.0
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 92.0
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 88.5
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 92.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 23.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 19.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 12.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 24.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 93.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 89.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 89.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 91.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 7.5
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 16.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 39.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 3.9
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 30.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 32.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 36.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 30.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 24.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 23.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 19.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 25.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 7.4
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 2.3
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.4
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 5.6
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 40.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 47.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 50.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 43.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 32.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 16.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 30.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 21.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 12.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 25.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 10.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 21.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 16.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 13.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 10.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 15.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 25.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 24.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 20.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 25.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 16.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 4.5
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 2.7
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 10.6
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 75.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 85.5
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 76.3
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 96.2
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 65.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 61.3
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 57.7
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 64.5
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 20.8
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 19.6
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 50.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 4.3
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 90.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 92.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 100.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 88.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 73.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 69.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 92.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 63.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 38.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 44.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 54.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 37.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 5.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 6.5
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 19.2
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 1.3
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 13.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 21.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 19.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 17.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 50.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 48.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 77.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 40.0
+      },
+      {
+        "chain": "Mango",
+        "kpi": "Soil quality",
+        "indicator": "Soil Moisture",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Mango",
+        "kpi": "Crop health",
+        "indicator": "Fertilizer Usage",
+        "unit": "kg/ha",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Mango",
+        "kpi": "Value added",
+        "indicator": "Solar Radiation",
+        "unit": "°C",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      }
+    ],
+    "Rice-lotus": [
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Autum - winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 43.0,
+        "p25": 34.0,
+        "p75": 46.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Autum - winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 38.0,
+        "p25": 34.0,
+        "p75": 47.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Autum - winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 34.0,
+        "p25": 29.0,
+        "p75": 46.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Autum - winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 40.0,
+        "p25": 35.0,
+        "p75": 47.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Winter - Spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 49.0,
+        "p25": 43.0,
+        "p75": 53.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Winter - Spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 45.0,
+        "p25": 39.0,
+        "p75": 52.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Winter - Spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 45.0,
+        "p25": 42.0,
+        "p75": 50.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Winter - Spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 47.0,
+        "p25": 40.0,
+        "p75": 52.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 38.0,
+        "p25": 33.0,
+        "p75": 46.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 40.0,
+        "p25": 36.0,
+        "p75": 50.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 37.0,
+        "p25": 35.0,
+        "p75": 41.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 39.0,
+        "p25": 36.0,
+        "p75": 50.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 124.0,
+        "p25": 34.0,
+        "p75": 220.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 98.0,
+        "p25": 50.0,
+        "p75": 175.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 113.0,
+        "p25": 54.0,
+        "p75": 154.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 98.0,
+        "p25": 45.0,
+        "p75": 181.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Autumn-Winter)",
+        "unit": "tonnes/ha/year",
+        "group": "Worse – off",
+        "median": 6.7,
+        "p25": 4.8,
+        "p75": 7.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Autumn-Winter)",
+        "unit": "tonnes/ha/year",
+        "group": "Better – off",
+        "median": 6.2,
+        "p25": 5.7,
+        "p75": 7.3,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Autumn-Winter)",
+        "unit": "tonnes/ha/year",
+        "group": "Cooperative",
+        "median": 6.2,
+        "p25": 5.3,
+        "p75": 7.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Autumn-Winter)",
+        "unit": "tonnes/ha/year",
+        "group": "Independent",
+        "median": 6.4,
+        "p25": 5.7,
+        "p75": 7.3,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Winter-spring)",
+        "unit": "tonnes/ha/year",
+        "group": "Worse – off",
+        "median": 7.0,
+        "p25": 6.8,
+        "p75": 7.5,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Winter-spring)",
+        "unit": "tonnes/ha/year",
+        "group": "Better – off",
+        "median": 7.4,
+        "p25": 6.2,
+        "p75": 8.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Winter-spring)",
+        "unit": "tonnes/ha/year",
+        "group": "Cooperative",
+        "median": 7.5,
+        "p25": 6.7,
+        "p75": 8.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Winter-spring)",
+        "unit": "tonnes/ha/year",
+        "group": "Independent",
+        "median": 7.0,
+        "p25": 6.4,
+        "p75": 8.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Winter-spring)",
+        "unit": "tonnes/ha/year",
+        "group": "Worse – off",
+        "median": 6.0,
+        "p25": 5.3,
+        "p75": 7.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Winter-spring)",
+        "unit": "tonnes/ha/year",
+        "group": "Better – off",
+        "median": 6.3,
+        "p25": 6.0,
+        "p75": 8.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Winter-spring)",
+        "unit": "tonnes/ha/year",
+        "group": "Cooperative",
+        "median": 6.3,
+        "p25": 6.0,
+        "p75": 6.3,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield (Winter-spring)",
+        "unit": "tonnes/ha/year",
+        "group": "Independent",
+        "median": 6.4,
+        "p25": 6.0,
+        "p75": 8.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Lotus Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Worse – off",
+        "median": 7.3,
+        "p25": 2.5,
+        "p75": 9.5,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Lotus Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Better – off",
+        "median": 6.0,
+        "p25": 3.0,
+        "p75": 7.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Lotus Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Cooperative",
+        "median": 4.9,
+        "p25": 3.0,
+        "p75": 6.4,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Lotus Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Independent",
+        "median": 6.0,
+        "p25": 3.0,
+        "p75": 8.6,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Autumn-Winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 36.0,
+        "p25": 28.0,
+        "p75": 41.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Autumn-Winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 31.0,
+        "p25": 27.0,
+        "p75": 37.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Autumn-Winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 30.0,
+        "p25": 27.0,
+        "p75": 43.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Autumn-Winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 33.0,
+        "p25": 29.0,
+        "p75": 40.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Winter-spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 31.0,
+        "p25": 22.0,
+        "p75": 38.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Winter-spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 31.0,
+        "p25": 26.0,
+        "p75": 35.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Winter-spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 31.0,
+        "p25": 28.0,
+        "p75": 49.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Winter-spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 31.0,
+        "p25": 25.0,
+        "p75": 34.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 31.0,
+        "p25": 27.0,
+        "p75": 42.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 30.0,
+        "p25": 27.0,
+        "p75": 35.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 32.0,
+        "p25": 29.0,
+        "p75": 42.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 30.0,
+        "p25": 27.0,
+        "p75": 37.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 34.0,
+        "p25": 20.0,
+        "p75": 72.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 46.0,
+        "p25": 25.0,
+        "p75": 75.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 59.0,
+        "p25": 32.0,
+        "p75": 80.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 41.0,
+        "p25": 20.0,
+        "p75": 72.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Autumn - Winter)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": 21.0,
+        "p25": 17.0,
+        "p75": 31.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Autumn - Winter)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": 17.0,
+        "p25": 11.0,
+        "p75": 27.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Autumn - Winter)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": 19.0,
+        "p25": 17.0,
+        "p75": 24.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Autumn - Winter)",
+        "unit": "%",
+        "group": "Independent",
+        "median": 17.0,
+        "p25": 11.0,
+        "p75": 30.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Winter - Spring)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": 21.0,
+        "p25": 17.0,
+        "p75": 28.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Winter - Spring)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": 15.0,
+        "p25": 10.0,
+        "p75": 22.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Winter - Spring)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": 20.0,
+        "p25": 16.0,
+        "p75": 28.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Winter - Spring)",
+        "unit": "%",
+        "group": "Independent",
+        "median": 15.0,
+        "p25": 11.0,
+        "p75": 23.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Summer - Autumn)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": 24.0,
+        "p25": 15.0,
+        "p75": 43.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Summer - Autumn)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": 14.0,
+        "p25": 9.0,
+        "p75": 19.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Summer - Autumn)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": 17.0,
+        "p25": 14.0,
+        "p75": 19.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Summer - Autumn)",
+        "unit": "%",
+        "group": "Independent",
+        "median": 15.0,
+        "p25": 9.4,
+        "p75": 27.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Lotus)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": 45.0,
+        "p25": 32.0,
+        "p75": 61.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Lotus)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": 40.0,
+        "p25": 25.0,
+        "p75": 75.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Lotus)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": 28.0,
+        "p25": 24.0,
+        "p75": 50.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Lotus)",
+        "unit": "%",
+        "group": "Independent",
+        "median": 45.0,
+        "p25": 32.0,
+        "p75": 61.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Autumn - Winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 10.0,
+        "p25": -0.8,
+        "p75": 14.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Autumn - Winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 6.9,
+        "p25": 0.7,
+        "p75": 15.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Autumn - Winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 1.7,
+        "p25": -5.1,
+        "p75": 19.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Autumn - Winter)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 9.6,
+        "p25": 1.5,
+        "p75": 15.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Winter-Spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 18.0,
+        "p25": 15.0,
+        "p75": 27.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Winter-Spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 15.0,
+        "p25": 5.5,
+        "p75": 21.3,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Winter-Spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 9.8,
+        "p25": -2.6,
+        "p75": 16.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Winter-Spring)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 17.0,
+        "p25": 7.9,
+        "p75": 23.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 7.8,
+        "p25": 1.8,
+        "p75": 14.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 9.0,
+        "p25": 2.3,
+        "p75": 16.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 4.7,
+        "p25": -8.6,
+        "p75": 9.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Profit (Summer - Autumn)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 9.0,
+        "p25": 3.0,
+        "p75": 16.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Lotus Profit (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 81.0,
+        "p25": 16.0,
+        "p75": 131.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Lotus Profit (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 45.0,
+        "p25": 7.9,
+        "p75": 119.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Lotus Profit (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 33.0,
+        "p25": 7.5,
+        "p75": 121.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Lotus Profit (Lotus)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 65.0,
+        "p25": 10.0,
+        "p75": 127.0,
+        "rate": null
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (rice straw and lotus biomass )",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 2.3
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (rice straw and lotus biomass )",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 19.7
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (rice straw and lotus biomass )",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 18.4
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (rice straw and lotus biomass )",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 14.6
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 1.6
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 2.9
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 2.7
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 2.6
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 88.0,
+        "p25": 43.0,
+        "p75": 184.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 92.0,
+        "p25": 31.0,
+        "p75": 291.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 61.0,
+        "p25": 16.0,
+        "p75": 291.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 97.0,
+        "p25": 50.0,
+        "p75": 250.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 5.0,
+        "p25": 0.0,
+        "p75": 48.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 36.0,
+        "p25": 0.0,
+        "p75": 120.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 60.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 30.0,
+        "p25": 0.0,
+        "p75": 120.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 111.0,
+        "p25": 68.0,
+        "p75": 255.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 205.0,
+        "p25": 73.0,
+        "p75": 374.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 76.0,
+        "p25": 27.0,
+        "p75": 359.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 195.0,
+        "p25": 83.0,
+        "p75": 370.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Worse – off",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 75.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Better – off",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 500.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Cooperative",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 2000.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Independent",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 325.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Worse – off",
+        "median": 18.0,
+        "p25": 13.0,
+        "p75": 25.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Better – off",
+        "median": 16.0,
+        "p25": 14.0,
+        "p75": 20.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Cooperative",
+        "median": 18.0,
+        "p25": 15.0,
+        "p75": 20.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Independent",
+        "median": 17.0,
+        "p25": 13.0,
+        "p75": 23.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 42.5
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 59.7
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 80.8
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 43.4
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 90.0
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 92.0
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 88.5
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 92.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 50.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 28.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 42.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 32.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 92.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 94.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 79.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 97.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 17.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 21.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 37.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 16.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 42.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 52.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 37.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 53.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 27.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 28.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 28.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 28.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 3.3
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 3.8
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 1.1
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 4.3
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 67.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 54.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 43.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 58.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 22.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 20.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 14.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 21.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 11.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 15.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 29.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 13.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 11.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 14.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 8.3
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 23.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 30.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 31.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 28.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 8.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 3.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 4.7
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 91.7
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 88.7
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 100.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 68.8
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 50.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 60.6
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 31.6
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 64.5
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 3.8
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 11.8
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 96.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 87.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 95.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 88.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 96.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 82.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 90.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 84.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 63.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 51.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 47.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 55.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 4.2
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 1.4
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 2.6
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 44.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 33.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 53.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 31.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 67.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 52.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 63.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 54.0
+      },
+      {
+        "chain": "Rice-lotus",
+        "kpi": "Soil quality",
+        "indicator": "Soil Moisture",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Rice-lotus",
+        "kpi": "Nutrient management",
+        "indicator": "Fertilizer Usage",
+        "unit": "kg/ha",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Rice-lotus",
+        "kpi": "Crop health",
+        "indicator": "Crop Yield",
+        "unit": "tons/ha",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      }
+    ],
+    "Rice - shrimp": [
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 112.0,
+        "p25": 90.0,
+        "p75": 149.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 138.0,
+        "p25": 109.0,
+        "p75": 177.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 124.0,
+        "p25": 94.0,
+        "p75": 152.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Revenue (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 122.0,
+        "p25": 101.0,
+        "p75": 168.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Shrimp Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Worse – off",
+        "median": 0.2,
+        "p25": 0.1,
+        "p75": 0.4,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Shrimp Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Better – off",
+        "median": 0.3,
+        "p25": 0.2,
+        "p75": 0.4,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Shrimp Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Cooperative",
+        "median": 0.2,
+        "p25": 0.2,
+        "p75": 0.4,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Shrimp Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Independent",
+        "median": 0.3,
+        "p25": 0.2,
+        "p75": 0.4,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Worse – off",
+        "median": 6.5,
+        "p25": 5.0,
+        "p75": 7.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Better – off",
+        "median": 6.2,
+        "p25": 5.0,
+        "p75": 7.1,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Cooperative",
+        "median": 6.4,
+        "p25": 5.4,
+        "p75": 7.3,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Rice Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Independent",
+        "median": 6.3,
+        "p25": 5.0,
+        "p75": 7.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Crab Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Worse – off",
+        "median": 0.1,
+        "p25": 0.1,
+        "p75": 0.2,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Crab Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Better – off",
+        "median": 0.1,
+        "p25": 0.1,
+        "p75": 0.2,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Crab Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Cooperative",
+        "median": 0.1,
+        "p25": 0.1,
+        "p75": 0.2,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Crab Yield",
+        "unit": "tonnes/ha/year",
+        "group": "Independent",
+        "median": 0.1,
+        "p25": 0.1,
+        "p75": 0.3,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 69.0,
+        "p25": 55.0,
+        "p75": 94.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 67.0,
+        "p25": 47.0,
+        "p75": 93.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 62.0,
+        "p25": 47.0,
+        "p75": 93.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 79.0,
+        "p25": 58.0,
+        "p75": 97.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Overall system)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": 40.0,
+        "p25": 27.0,
+        "p75": 48.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Overall system)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": 31.0,
+        "p25": 23.0,
+        "p75": 39.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Overall system)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": 32.0,
+        "p25": 24.0,
+        "p75": 42.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Overall system)",
+        "unit": "%",
+        "group": "Independent",
+        "median": 35.0,
+        "p25": 26.0,
+        "p75": 48.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 45.0,
+        "p25": 16.0,
+        "p75": 72.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 68.0,
+        "p25": 40.0,
+        "p75": 104.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 64.0,
+        "p25": 33.0,
+        "p75": 85.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Overall system)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 49.0,
+        "p25": 22.0,
+        "p75": 88.0,
+        "rate": null
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (Rice straw)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 5.2
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (Rice straw)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 7.1
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (Rice straw)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 7.0
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (Rice straw)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 5.3
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.03
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.05
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.07
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.01
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 47.0,
+        "p25": 13.0,
+        "p75": 141.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 133.0,
+        "p25": 56.0,
+        "p75": 266.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 124.0,
+        "p25": 53.0,
+        "p75": 195.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 56.0,
+        "p25": 19.0,
+        "p75": 159.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 19.0,
+        "p25": 0.0,
+        "p75": 90.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 65.0,
+        "p25": 3.0,
+        "p75": 120.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 36.0,
+        "p25": 0.0,
+        "p75": 96.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 60.0,
+        "p25": 0.0,
+        "p75": 102.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 123.0,
+        "p25": 59.0,
+        "p75": 245.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 266.0,
+        "p25": 154.0,
+        "p75": 367.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 166.0,
+        "p25": 89.0,
+        "p75": 282.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 151.0,
+        "p25": 67.0,
+        "p75": 328.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Worse – off",
+        "median": 7.0,
+        "p25": 0.0,
+        "p75": 120.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Better – off",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 100.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Cooperative",
+        "median": 30.0,
+        "p25": 0.0,
+        "p75": 300.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Independent",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 30.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Worse – off",
+        "median": 3.0,
+        "p25": 3.0,
+        "p75": 4.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Better – off",
+        "median": 4.0,
+        "p25": 3.0,
+        "p75": 4.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Cooperative",
+        "median": 4.0,
+        "p25": 3.0,
+        "p75": 4.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Independent",
+        "median": 3.0,
+        "p25": 3.0,
+        "p75": 4.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 52.6
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 66.7
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 73.8
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 47.4
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 51.7
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 47.6
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 48.8
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 50.9
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 47.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 38.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 37.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 47.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 85.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 83.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 77.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 90.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 8.6
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 29.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 19.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 16.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 19.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 31.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 26.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 23.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 25.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 21.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 21.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 25.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 1.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.8
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.4
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 78.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 82.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 81.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 78.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 5.6
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 4.5
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 8.1
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 5.6
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 9.1
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 9.5
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 5.4
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 11.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 4.5
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 9.5
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 8.1
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 20.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 27.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 26.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 21.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 7.5
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 1.1
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 4.5
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 5.0
+      },
+      {
+        "kpi": "Adaptive capacity",
+        "indicator": "On-farm irrigation management",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 40.0
+      },
+      {
+        "kpi": "Adaptive capacity",
+        "indicator": "Community-level flood/salinity management",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 6.0
+      },
+      {
+        "kpi": "Adaptive capacity",
+        "indicator": "Shift to alternative crops/farming systems",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 8.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 69.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 81.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 74.4
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 73.7
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 86.4
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 82.4
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 87.9
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 82.2
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 47.6
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 48.5
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 81.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 6.1
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 95.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 91.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 93.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 93.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 85.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 91.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 91.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 84.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 61.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 64.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 65.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 60.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 7.1
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 7.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 60.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 63.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 67.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 57.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 38.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 55.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 63.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 32.0
+      },
+      {
+        "chain": "Rice - shrimp",
+        "kpi": "Soil quality",
+        "indicator": "Fertilizer Usage",
+        "unit": "kg/ha",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Rice - shrimp",
+        "kpi": "Crop health",
+        "indicator": "Diseases",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Rice - shrimp",
+        "kpi": "Nutrient management",
+        "indicator": "Soil Moisture",
+        "unit": "mm",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Rice - shrimp",
+        "kpi": "Water sources",
+        "indicator": "Irrigation",
+        "unit": "ha/day",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      }
+    ],
+    "Coconut": [
+      {
+        "kpi": "Productivity",
+        "indicator": "Regular coconut Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 86.0,
+        "p25": 50.0,
+        "p75": 120.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Regular coconut Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 90.0,
+        "p25": 41.0,
+        "p75": 138.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Regular coconut Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 88.0,
+        "p25": 48.0,
+        "p75": 117.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Regular coconut Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 88.0,
+        "p25": 50.0,
+        "p75": 132.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Macapuno coconut Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 94.0,
+        "p25": 22.0,
+        "p75": 210.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Macapuno coconut Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 86.0,
+        "p25": 25.0,
+        "p75": 128.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Macapuno coconut Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 144.0,
+        "p25": 19.0,
+        "p75": 252.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Macapuno coconut Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 86.0,
+        "p25": 25.0,
+        "p75": 129.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Regular coconut Yield",
+        "unit": "10 fruits/ha/year",
+        "group": "Worse – off",
+        "median": 8.6,
+        "p25": 5.8,
+        "p75": 12.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Regular coconut Yield",
+        "unit": "10 fruits/ha/year",
+        "group": "Better – off",
+        "median": 9.0,
+        "p25": 4.2,
+        "p75": 14.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Regular coconut Yield",
+        "unit": "10 fruits/ha/year",
+        "group": "Cooperative",
+        "median": 7.0,
+        "p25": 3.2,
+        "p75": 11.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Regular coconut Yield",
+        "unit": "10 fruits/ha/year",
+        "group": "Independent",
+        "median": 8.8,
+        "p25": 5.0,
+        "p75": 13.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Macapuno coconut Yield",
+        "unit": "10 fruits/ha/year",
+        "group": "Worse – off",
+        "median": 0.6,
+        "p25": 0.2,
+        "p75": 1.9,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Macapuno coconut Yield",
+        "unit": "10 fruits/ha/year",
+        "group": "Better – off",
+        "median": 0.5,
+        "p25": 0.3,
+        "p75": 1.2,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Macapuno coconut Yield",
+        "unit": "10 fruits/ha/year",
+        "group": "Cooperative",
+        "median": 1.8,
+        "p25": 0.1,
+        "p75": 2.1,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Macapuno coconut Yield",
+        "unit": "10 fruits/ha/year",
+        "group": "Independent",
+        "median": 0.5,
+        "p25": 0.3,
+        "p75": 1.2,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (regular coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 48.0,
+        "p25": 27.0,
+        "p75": 72.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (regular coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 38.0,
+        "p25": 28.0,
+        "p75": 60.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (regular coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 30.0,
+        "p25": 22.0,
+        "p75": 52.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (regular coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 42.0,
+        "p25": 29.0,
+        "p75": 69.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Macapuno coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 38.0,
+        "p25": 8.7,
+        "p75": 78.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Macapuno coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 45.0,
+        "p25": 30.0,
+        "p75": 63.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Macapuno coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 30.0,
+        "p25": 20.0,
+        "p75": 53.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Total production costs (Macapuno coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 45.0,
+        "p25": 28.0,
+        "p75": 71.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Regular coconut)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": 77.0,
+        "p25": 63.0,
+        "p75": 84.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Regular coconut)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": 71.0,
+        "p25": 57.0,
+        "p75": 80.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Regular coconut)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": 65.0,
+        "p25": 53.0,
+        "p75": 78.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Regular coconut)",
+        "unit": "%",
+        "group": "Independent",
+        "median": 72.0,
+        "p25": 63.0,
+        "p75": 82.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Macapuno coconut)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": 40.0,
+        "p25": 31.0,
+        "p75": 77.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Macapuno coconut)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": 67.0,
+        "p25": 46.0,
+        "p75": 75.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Macapuno coconut)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": 54.0,
+        "p25": 12.0,
+        "p75": 63.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Labour cost share (Macapuno coconut)",
+        "unit": "%",
+        "group": "Independent",
+        "median": 57.0,
+        "p25": 38.0,
+        "p75": 76.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Regular coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 34.0,
+        "p25": 3.9,
+        "p75": 76.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Regular coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 30.0,
+        "p25": -2.5,
+        "p75": 85.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Regular coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 37.0,
+        "p25": 12.0,
+        "p75": 82.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Regular coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 34.0,
+        "p25": -0.6,
+        "p75": 79.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Macapuno coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 24.0,
+        "p25": 12.0,
+        "p75": 133.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Macapuno coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 25.0,
+        "p25": -6.3,
+        "p75": 72.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Macapuno coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 91.0,
+        "p25": -0.5,
+        "p75": 222.0,
+        "rate": null
+      },
+      {
+        "kpi": "Productivity",
+        "indicator": "Profit (Macapuno coconut)",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 24.0,
+        "p25": -11.0,
+        "p75": 94.0,
+        "rate": null
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (Leaves)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 15.8
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (Leaves)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 4.3
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (Leaves)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 8.0
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "By – product (Leaves)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 9.3
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.3
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.1
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.2
+      },
+      {
+        "kpi": "Value added",
+        "indicator": "Income from by-product",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 27.0,
+        "p25": 4.0,
+        "p75": 82.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 34.0,
+        "p25": 9.0,
+        "p75": 89.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 66.0,
+        "p25": 50.0,
+        "p75": 89.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 27.0,
+        "p25": 5.0,
+        "p75": 82.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 36.0,
+        "p25": 0.0,
+        "p75": 113.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 52.0,
+        "p25": 0.0,
+        "p75": 96.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 54.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Non-farm income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 48.0,
+        "p25": 0.0,
+        "p75": 96.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Worse – off",
+        "median": 88.0,
+        "p25": 37.0,
+        "p75": 159.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Better – off",
+        "median": 109.0,
+        "p25": 65.0,
+        "p75": 156.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Cooperative",
+        "median": 96.0,
+        "p25": 50.0,
+        "p75": 166.0,
+        "rate": null
+      },
+      {
+        "kpi": "Income",
+        "indicator": "Total income",
+        "unit": "mill. $VN/household/year",
+        "group": "Independent",
+        "median": 101.0,
+        "p25": 52.0,
+        "p75": 156.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Worse – off",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 200.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Better – off",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 250.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Cooperative",
+        "median": 400.0,
+        "p25": 0.0,
+        "p75": 2750.0,
+        "rate": null
+      },
+      {
+        "kpi": "Soil quality",
+        "indicator": "Bio-organic input use",
+        "unit": "kg/ha/year",
+        "group": "Independent",
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 150.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Worse – off",
+        "median": 4.0,
+        "p25": 1.0,
+        "p75": 8.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Better – off",
+        "median": 4.0,
+        "p25": 2.0,
+        "p75": 9.5,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Cooperative",
+        "median": 3.0,
+        "p25": 2.0,
+        "p75": 8.0,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Chemical pesticide applications per year",
+        "unit": "Time/year",
+        "group": "Independent",
+        "median": 4.0,
+        "p25": 2.0,
+        "p75": 8.5,
+        "rate": null
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 14.0
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 27.6
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 30.0
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Bio-pesticide use",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 20.9
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 60.5
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 64.9
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 60.0
+      },
+      {
+        "kpi": "Exposure to pesticides",
+        "indicator": "Protective equipment",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 63.3
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 35.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 43.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 40.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Farming decision",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 40.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 81.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 91.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 90.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Financial decision",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 87.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 7.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 16.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 30.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Civil society participation",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 9.9
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 28.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 29.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 40.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Training Participation",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 28.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 27.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 27.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 34.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 27.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 1.7
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 1.9
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Women’s empowerment",
+        "indicator": "Women’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 2.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 68.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 81.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 100.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Manual work",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 73.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 16.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 2.7
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Mechanics",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 9.7
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 9.7
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 8.1
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Technology/ servies",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 9.7
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 6.5
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 8.1
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "skilled work",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 8.1
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 9.3
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 21.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 5.2
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (on – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 17.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 9.3
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 11.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 23.0
+      },
+      {
+        "kpi": "Youth empowerment",
+        "indicator": "Youth’s participation in production activities (off – farm)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 8.7
+      },
+      {
+        "kpi": "Adaptive capacity",
+        "indicator": "On-farm irrigation management",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 40.6
+      },
+      {
+        "kpi": "Adaptive capacity",
+        "indicator": "Community-level flood/salinity management",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 34.7
+      },
+      {
+        "kpi": "Adaptive capacity",
+        "indicator": "Shift to alternative crops/farming systems",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 5.9
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 83.7
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 86.2
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 80.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Information access output quality or prices",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 85.7
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 53.5
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 62.1
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 60.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Decisions in input/ output services",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 58.2
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 3.3
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 10.8
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 50.0
+      },
+      {
+        "kpi": "Social Justice",
+        "indicator": "Fair distribution of income by cooperative",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 70.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 81.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 81.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of nutriant role (N-P-K, and micro-nutrients)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 76.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 47.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 86.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 80.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Knowledge of soil nutriant role deficiency salinity or acidity",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 68.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 35.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 43.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 60.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Application of balanced fertilisation (4 principles)",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 37.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Yearly soil sample for fertility testing",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 0.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 55.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 66.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 80.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Use of farm by-products as organic fertilisers",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 60.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 19.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 26.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Cooperative",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 20.0
+      },
+      {
+        "kpi": "Nutrient management",
+        "indicator": "Training participation in soil management",
+        "unit": "%",
+        "group": "Independent",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": 50.0
+      },
+      {
+        "chain": "Coconut",
+        "kpi": "Soil quality",
+        "indicator": "Soil Moisture",
+        "unit": "%",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Coconut",
+        "kpi": "Nutrient management",
+        "indicator": "Fertilizer Usage",
+        "unit": "kg/ha",
+        "group": "Worse – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Coconut",
+        "kpi": "Crop health",
+        "indicator": "Crop Yield",
+        "unit": "tons/ha",
+        "group": "Better – off",
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      }
+    ]
+  },
   "source_doc_ids": [
     "84d7942e-24bf-4a71-a090-458af00b7737"
   ],
-  "last_updated": "2026-03-12T19:45:26.325557"
+  "last_updated": "2026-07-18T21:35:01.860938"
 }

@@ -2,16 +2,15 @@ from typing import List, Optional, Any
 import os
 import json
 import re
+import asyncio
 from datetime import datetime
 import logging
+import httpx
 
 from fastapi import APIRouter
 from pydantic import BaseModel, Field, ConfigDict
-from langchain_core.prompts import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser
 
 from simba.core.factories.database_factory import get_database
-from simba.core.factories.llm_factory import get_llm
 from simba.core.config import settings
 
 logger = logging.getLogger(__name__)
@@ -20,299 +19,435 @@ dashboard = APIRouter(prefix="/dashboard", tags=["dashboard"])
 
 KPI_STORAGE_FILE = os.path.join(settings.paths.base_dir, "dashboard_kpis.json")
 
-# KPI data structure
-class KPIData(BaseModel):
-    # Core values
-    soil_moisture: str = Field(description="Value for Soil Moisture", default="N/A")
-    temperature: str = Field(description="Value for Average Temperature", default="N/A")
-    rainfall: str = Field(description="Value for Rainfall", default="N/A")
-    humidity: str = Field(description="Value for Humidity", default="N/A")
-    crop_yield: str = Field(description="Value for Crop Yield Forecast", default="N/A")
-    pest_risk: str = Field(description="Value for Pest Risk Index", default="Low")
-    fertilizer: str = Field(description="Value for Fertilizer Usage", default="N/A")
-    equipment_health: str = Field(description="Value for Equipment Health", default="Good")
-    solar_radiation: str = Field(description="Value for Solar Radiation", default="N/A")
-    harvest_progress: str = Field(description="Value for Harvest Progress", default="0%")
-    
-    # Trends
-    soil_moisture_trend: str = Field(default="neutral")
-    temperature_trend: str = Field(default="neutral")
-    rainfall_trend: str = Field(default="neutral")
-    humidity_trend: str = Field(default="neutral")
-    crop_yield_trend: str = Field(default="neutral")
-    pest_risk_trend: str = Field(default="neutral")
-    fertilizer_trend: str = Field(default="neutral")
-    equipment_health_trend: str = Field(default="neutral")
-    solar_radiation_trend: str = Field(default="neutral")
-    harvest_progress_trend: str = Field(default="neutral")
+# --- 13 KPI Categories ---
+KPI_CATEGORIES = [
+    "Productivity", "Value added", "Income", "Soil quality",
+    "Exposure to pesticides", "Women's empowerment", "Youth empowerment",
+    "Adaptive capacity", "Social Justice", "Human well-being",
+    "Nutrient management", "Crop health", "Water sources",
+]
 
-    # Explanations (source evidence)
-    soil_moisture_explanation: str = Field(default="")
-    temperature_explanation: str = Field(default="")
-    rainfall_explanation: str = Field(default="")
-    humidity_explanation: str = Field(default="")
-    crop_yield_explanation: str = Field(default="")
-    pest_risk_explanation: str = Field(default="")
-    fertilizer_explanation: str = Field(default="")
-    equipment_health_explanation: str = Field(default="")
-    solar_radiation_explanation: str = Field(default="")
-    harvest_progress_explanation: str = Field(default="")
+CHAINS = ["Mango", "Rice-lotus", "Rice-shrimp", "Coconut"]
+GROUPS = ["Worse-off", "Better-off", "Cooperative", "Independent"]
 
-    # Trend reasoning
-    soil_moisture_trend_reasoning: str = Field(default="")
-    temperature_trend_reasoning: str = Field(default="")
-    rainfall_trend_reasoning: str = Field(default="")
-    humidity_trend_reasoning: str = Field(default="")
-    crop_yield_trend_reasoning: str = Field(default="")
-    pest_risk_trend_reasoning: str = Field(default="")
-    fertilizer_trend_reasoning: str = Field(default="")
-    equipment_health_trend_reasoning: str = Field(default="")
-    solar_radiation_trend_reasoning: str = Field(default="")
-    harvest_progress_trend_reasoning: str = Field(default="")
 
-class KPIResponse(KPIData):
-    model_config = ConfigDict(extra='allow')  # preserve any additional LLM fields
-    is_stale: bool = Field(default=False)
-    last_updated: Optional[str] = Field(default=None)
-    source_doc_ids: List[str] = Field(default=[])
+# --- Data Models ---
+class KPIEntry(BaseModel):
+    chain: str
+    kpi: str
+    indicator: str
+    unit: str = ""
+    group: str
+    median: Optional[float] = None
+    p25: Optional[float] = None
+    p75: Optional[float] = None
+    rate: Optional[float] = None
 
+
+class KPIExtractionResponse(BaseModel):
+    model_config = ConfigDict(extra="allow")
+    is_stale: bool = False
+    last_updated: Optional[str] = None
+    source_doc_ids: List[str] = []
+    chains: dict[str, list[KPIEntry]] = {}
+
+
+# --- Storage helpers ---
 def load_kpis() -> dict:
     if os.path.exists(KPI_STORAGE_FILE):
         try:
-            with open(KPI_STORAGE_FILE, 'r') as f:
+            with open(KPI_STORAGE_FILE, "r") as f:
                 return json.load(f)
         except Exception as e:
             logger.error(f"Error loading KPIs: {e}")
     return {}
 
+
 def save_kpis(data: dict):
     try:
-        data['last_updated'] = datetime.now().isoformat()
-        with open(KPI_STORAGE_FILE, 'w') as f:
-            json.dump(data, f, indent=2)
+        data["last_updated"] = datetime.now().isoformat()
+        with open(KPI_STORAGE_FILE, "w") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
     except Exception as e:
         logger.error(f"Error saving KPIs: {e}")
 
-@dashboard.get("/kpi", response_model=KPIResponse)
+
+# --- LLM Extraction (direct Ollama API, no langchain) ---
+OLLAMA_BASE_URL = os.environ.get("OLLAMA_HOST", settings.llm.base_url)
+
+
+def _ollama_generate(prompt: str, timeout: int = 120) -> str:
+    """Call Ollama API directly with stream=false for reliable non-streaming response."""
+    url = f"{OLLAMA_BASE_URL}/api/generate"
+    payload = {
+        "model": settings.llm.model_name,
+        "prompt": prompt,
+        "stream": False,
+        "options": {
+            "num_ctx": 8192,
+            "num_predict": 4096,
+            "temperature": settings.llm.temperature,
+        },
+    }
+    try:
+        with httpx.Client(timeout=timeout) as client:
+            resp = client.post(url, json=payload)
+            resp.raise_for_status()
+            return resp.json().get("response", "")
+    except Exception as e:
+        logger.error(f"Ollama API error: {e}")
+        return ""
+
+
+CHAIN_PROMPT = """Extract agricultural KPI data for the "{chain}" value chain from these documents.
+
+For each indicator found, return a JSON array of objects:
+[{{"kpi":"category","indicator":"name","unit":"unit","group":"group","median":null,"p25":null,"p75":null,"rate":null}}]
+
+KPI categories: Productivity, Value added, Income, Soil quality, Exposure to pesticides, Women's empowerment, Youth empowerment, Adaptive capacity, Social Justice, Human well-being, Nutrient management, Crop health, Water sources
+
+Groups: Worse-off, Better-off, Cooperative, Independent
+
+Rules:
+- Use EXACT KPI category names from the list above
+- Only include indicators you actually find in the documents
+- Set null for values not found
+- Return ONLY the JSON array, no other text
+
+Documents:
+{context}
+
+JSON:"""
+
+
+def _build_context_from_docs(enabled_docs: list, chain_filter: str = "") -> tuple[str, list[str]]:
+    """Build context text from enabled documents, optionally filtered by chain."""
+    context_text = ""
+    docs_used = []
+
+    def get_doc_ts(d):
+        return d.metadata.parsed_at or d.metadata.uploadedAt or ""
+
+    sorted_docs = sorted(enabled_docs, key=get_doc_ts, reverse=True)
+
+    for doc in sorted_docs[:5]:
+        content = ""
+        if hasattr(doc, "documents") and doc.documents and len(doc.documents) > 0:
+            content = doc.documents[0].page_content
+        elif hasattr(doc, "content") and doc.content:
+            content = doc.content[:1500]
+
+        if content:
+            context_text += f"\n--- {doc.metadata.filename} ---\n{content[:1500]}\n"
+            docs_used.append(doc.metadata.filename)
+
+    return context_text, docs_used
+
+
+def _normalize_group(g: str) -> str:
+    """Normalize group name to match frontend format."""
+    g_lower = g.lower().strip()
+    mapping = {
+        "worse-off": "Worse \u2013 off",
+        "worse off": "Worse \u2013 off",
+        "worse_off": "Worse \u2013 off",
+        "woff": "Worse \u2013 off",
+        "better-off": "Better \u2013 off",
+        "better off": "Better \u2013 off",
+        "better_off": "Better \u2013 off",
+        "boff": "Better \u2013 off",
+        "cooperative": "Cooperative",
+        "coop": "Cooperative",
+        "independent": "Independent",
+        "indep": "Independent",
+    }
+    return mapping.get(g_lower, g)
+
+
+def _normalize_chain(c: str) -> str:
+    """Normalize chain name."""
+    c_lower = c.lower().strip()
+    mapping = {
+        "mango": "Mango",
+        "rice-lotus": "Rice-lotus",
+        "rice lotus": "Rice-lotus",
+        "rice_lotus": "Rice-lotus",
+        "rice-shrimp": "Rice - shrimp",
+        "rice shrimp": "Rice - shrimp",
+        "rice_shrimp": "Rice - shrimp",
+        "coconut": "Coconut",
+    }
+    return mapping.get(c_lower, c)
+
+
+def _parse_json_from_llm(raw: str) -> list:
+    """Extract JSON array from LLM output, handling markdown fences etc."""
+    stripped = raw.strip()
+    if "```json" in stripped:
+        stripped = stripped.split("```json")[1].split("```")[0].strip()
+    elif "```" in stripped:
+        stripped = stripped.split("```")[1].split("```")[0].strip()
+
+    try:
+        result = json.loads(stripped)
+        if isinstance(result, dict):
+            for key in ["data", "entries", "kpis", "results"]:
+                if key in result and isinstance(result[key], list):
+                    return result[key]
+            return [result]
+        if isinstance(result, list):
+            return result
+    except json.JSONDecodeError:
+        m = re.search(r"\[.*\]", stripped, re.DOTALL)
+        if m:
+            try:
+                return json.loads(m.group())
+            except json.JSONDecodeError:
+                pass
+    return []
+
+
+def _to_float(v) -> Optional[float]:
+    if v is None:
+        return None
+    if isinstance(v, (int, float)):
+        return float(v)
+    try:
+        return float(str(v).replace(",", ".").strip())
+    except (ValueError, TypeError):
+        return None
+
+
+def extract_kpis_from_docs(
+    context_text: str, docs_used: list[str], doc_ids: list[str]
+) -> dict:
+    """Use LLM to extract KPI data from documents (synchronous, one chain at a time)."""
+    if not context_text.strip():
+        return {"chains": {}, "source_doc_ids": doc_ids}
+
+    all_entries = []
+
+    for chain_name in CHAINS:
+        logger.info(f"Extracting KPIs for chain: {chain_name}")
+        prompt = CHAIN_PROMPT.format(chain=chain_name, context=context_text)
+        raw_output = _ollama_generate(prompt, timeout=120)
+        logger.info(f"LLM output for {chain_name} ({len(raw_output)} chars): {raw_output[:200]}")
+
+        entries = _parse_json_from_llm(raw_output)
+        for entry in entries:
+            if isinstance(entry, dict):
+                chain = _normalize_chain(entry.get("chain", chain_name))
+                group = _normalize_group(entry.get("group", ""))
+                normalized = {
+                    "chain": chain,
+                    "kpi": entry.get("kpi", ""),
+                    "indicator": entry.get("indicator", ""),
+                    "unit": entry.get("unit", ""),
+                    "group": group,
+                    "median": _to_float(entry.get("median")),
+                    "p25": _to_float(entry.get("p25")),
+                    "p75": _to_float(entry.get("p75")),
+                    "rate": _to_float(entry.get("rate")),
+                }
+                all_entries.append(normalized)
+
+    # Build chain -> entries dict
+    chains_dict: dict[str, list[dict]] = {}
+    for entry in all_entries:
+        chain = entry.get("chain", "")
+        if chain not in chains_dict:
+            chains_dict[chain] = []
+        chains_dict[chain].append(entry)
+
+    return {"chains": chains_dict, "source_doc_ids": doc_ids}
+
+
+# --- Baseline Excel data (always used as foundation) ---
+BASELINE_FILE = os.path.join(
+    settings.paths.base_dir, "frontend", "public", "kpi_data.json"
+)
+
+
+def load_baseline() -> dict[str, list[dict]]:
+    """Load the Excel baseline KPI data as chain -> entries dict."""
+    if not os.path.exists(BASELINE_FILE):
+        logger.warning(f"Baseline file not found: {BASELINE_FILE}")
+        return {}
+    try:
+        with open(BASELINE_FILE, "r") as f:
+            return json.load(f)
+    except Exception as e:
+        logger.error(f"Error loading baseline: {e}")
+        return {}
+
+
+def _merge_with_baseline(baseline: dict, llm_chains: dict) -> dict:
+    """Merge LLM-extracted data into baseline.
+    
+    - Start with ALL baseline entries
+    - For each LLM entry, find a matching baseline entry (by kpi+indicator+group)
+    - If LLM has a non-null value, update the baseline entry
+    - If LLM value is null/missing, keep baseline unchanged
+    - Add any new indicators from LLM that don't exist in baseline
+    """
+    merged: dict[str, list[dict]] = {}
+
+    for chain_name, baseline_entries in baseline.items():
+        chain_key = _normalize_chain(chain_name)
+        merged[chain_key] = [dict(e) for e in baseline_entries]
+
+        llm_entries = llm_chains.get(chain_name, []) or llm_chains.get(chain_key, [])
+
+        for llm_entry in llm_entries:
+            llm_kpi = llm_entry.get("kpi", "")
+            llm_indicator = llm_entry.get("indicator", "")
+            llm_group = _normalize_group(llm_entry.get("group", ""))
+
+            if not llm_kpi or not llm_indicator:
+                continue
+
+            # Find matching baseline entry
+            matched = False
+            for base_entry in merged[chain_key]:
+                if (
+                    base_entry.get("kpi") == llm_kpi
+                    and base_entry.get("indicator") == llm_indicator
+                    and _normalize_group(base_entry.get("group", "")) == llm_group
+                ):
+                    # Update only non-null LLM values
+                    for field in ["median", "p25", "p75", "rate"]:
+                        llm_val = _to_float(llm_entry.get(field))
+                        if llm_val is not None and llm_val != 0:
+                            base_entry[field] = llm_val
+                    matched = True
+                    break
+
+            if not matched:
+                # New indicator not in baseline — add it
+                new_entry = {
+                    "chain": chain_key,
+                    "kpi": llm_kpi,
+                    "indicator": llm_indicator,
+                    "unit": llm_entry.get("unit", ""),
+                    "group": llm_group,
+                    "median": _to_float(llm_entry.get("median")),
+                    "p25": _to_float(llm_entry.get("p25")),
+                    "p75": _to_float(llm_entry.get("p75")),
+                    "rate": _to_float(llm_entry.get("rate")),
+                }
+                merged[chain_key].append(new_entry)
+
+    # Also add chains from LLM that don't exist in baseline
+    for chain_name, llm_entries in llm_chains.items():
+        chain_key = _normalize_chain(chain_name)
+        if chain_key not in merged:
+            merged[chain_key] = []
+            for llm_entry in llm_entries:
+                merged[chain_key].append({
+                    "chain": chain_key,
+                    "kpi": llm_entry.get("kpi", ""),
+                    "indicator": llm_entry.get("indicator", ""),
+                    "unit": llm_entry.get("unit", ""),
+                    "group": _normalize_group(llm_entry.get("group", "")),
+                    "median": _to_float(llm_entry.get("median")),
+                    "p25": _to_float(llm_entry.get("p25")),
+                    "p75": _to_float(llm_entry.get("p75")),
+                    "rate": _to_float(llm_entry.get("rate")),
+                })
+
+    return merged
+
+
+# --- API Endpoints ---
+@dashboard.get("/kpi", response_model=KPIExtractionResponse)
 async def get_kpis():
-    """Get cached KPIs and check validation status."""
+    """Get KPI data: baseline + any LLM adjustments."""
+    baseline = load_baseline()
     cached_data = load_kpis()
+
+    # If no cached extraction yet, just return baseline
+    if not cached_data.get("chains"):
+        enriched = {}
+        for chain_name, entries in baseline.items():
+            chain_key = _normalize_chain(chain_name)
+            enriched[chain_key] = [
+                KPIEntry(chain=chain_key, **{k: v for k, v in e.items() if k != "chain"})
+                for e in entries
+            ]
+        response = KPIExtractionResponse(chains=enriched)
+        response.is_stale = False
+        return response
+
+    # Merge cached LLM data on top of baseline
+    merged = _merge_with_baseline(baseline, cached_data.get("chains", {}))
+
     db = get_database()
     all_docs = db.get_all_documents()
     enabled_docs = [d for d in all_docs if d.metadata.enabled]
-    
-    current_ids = sorted([d.id for d in enabled_docs])
-    cached_ids = sorted(cached_data.get('source_doc_ids', []))
-    
-    # Check timestamps
-    latest_doc_ts = 0.0
-    for doc in enabled_docs:
-        ts_str = doc.metadata.parsed_at or doc.metadata.uploadedAt
-        if ts_str:
-            try:
-                ts = datetime.fromisoformat(str(ts_str)).timestamp()
-                if ts > latest_doc_ts:
-                    latest_doc_ts = ts
-            except: pass
 
-    last_kpi_ts = 0.0
-    if cached_data.get('last_updated'):
-        try:
-            last_kpi_ts = datetime.fromisoformat(cached_data['last_updated']).timestamp()
-        except: pass
-            
-    is_stale = False
-    if not cached_data and enabled_docs:
-        is_stale = True
-    elif current_ids != cached_ids:
-        is_stale = True
-    elif enabled_docs and (latest_doc_ts - last_kpi_ts) > 1.0:
-        is_stale = True
-        
-    response = KPIResponse(**(cached_data or {}))
-    response.is_stale = is_stale
-    response.last_updated = cached_data.get('last_updated')
-    response.source_doc_ids = cached_data.get('source_doc_ids', [])
-    
+    response = KPIExtractionResponse(
+        chains={k: [KPIEntry(chain=k, **{kk: vv for kk, vv in e.items() if kk != "chain"}) for e in v] for k, v in merged.items()},
+        source_doc_ids=cached_data.get("source_doc_ids", []),
+        last_updated=cached_data.get("last_updated"),
+    )
+
+    # Staleness check
+    current_ids = sorted([d.id for d in enabled_docs])
+    cached_ids = sorted(cached_data.get("source_doc_ids", []))
+    response.is_stale = current_ids != cached_ids
+
     return response
 
-@dashboard.post("/kpi/recalculate", response_model=KPIResponse)
+
+@dashboard.post("/kpi/recalculate", response_model=KPIExtractionResponse)
 async def recalculate_kpis():
-    """Force recalculation of KPIs using LLM with optimized context."""
-    logger.info("Recalculating Dashboard KPIs...")
+    """Recalculate: run LLM extraction, merge with baseline (baseline always preserved)."""
+    logger.info("Recalculating KPI extraction...")
     start_time = datetime.now()
-    
+
+    baseline = load_baseline()
+    if not baseline:
+        logger.error("No baseline data found.")
+        return KPIExtractionResponse()
+
     db = get_database()
     all_docs = db.get_all_documents()
     enabled_docs = [d for d in all_docs if d.metadata.enabled]
     current_ids = [d.id for d in enabled_docs]
-    
-    logger.info(f"Total documents in database: {len(all_docs)}")
-    logger.info(f"Found {len(enabled_docs)} enabled documents: {current_ids}")
-    
-    if not enabled_docs:
-        logger.warning("No enabled documents found for KPI calculation.")
-        empty_data = KPIData().model_dump()
-        empty_data['source_doc_ids'] = []
-        save_kpis(empty_data)
-        return KPIResponse(**empty_data)
-        
-    # Sort enabled docs by parsed_at or uploadedAt descending to prioritize newest/freshly enabled/updated docs
-    def get_doc_ts(d):
-        ts = d.metadata.parsed_at or d.metadata.uploadedAt or ""
-        return ts
-    
-    enabled_docs.sort(key=get_doc_ts, reverse=True)
-    
-    # Optimized context: Take up to 8 documents but limit each to the first chunk
-    # This provides a broader overview of all enabled data while keeping tokens low.
-    context_text = ""
-    logger.info(f"Targeting up to 8 documents from {len(enabled_docs)} enabled docs for context.")
-    
-    docs_used = []
-    for doc in enabled_docs[:8]:
-        content = ""
-        # Priority: Check for chunks (documents)
-        if hasattr(doc, "documents") and doc.documents and len(doc.documents) > 0:
-             content = doc.documents[0].page_content
-             logger.debug(f"Using first chunk of {doc.metadata.filename}")
-        # Fallback: Check for raw content
-        elif hasattr(doc, "content") and doc.content:
-             content = doc.content[:1000]
-             logger.debug(f"Using raw content of {doc.metadata.filename}")
-        
-        if content:
-            context_text += f"\n--- Source Document: {doc.metadata.filename} ---\n{content}\n"
-            docs_used.append(doc.metadata.filename)
+
+    logger.info(f"Found {len(enabled_docs)} enabled documents for KPI extraction.")
+
+    llm_chains = {}
+    if enabled_docs:
+        context_text, docs_used = _build_context_from_docs(enabled_docs)
+        logger.info(f"Context built from {len(docs_used)} documents: {', '.join(docs_used)}")
+
+        if context_text.strip():
+            try:
+                result = await asyncio.to_thread(
+                    extract_kpis_from_docs, context_text, docs_used, current_ids
+                )
+                llm_chains = result.get("chains", {})
+                elapsed = (datetime.now() - start_time).total_seconds()
+                logger.info(f"LLM extraction completed in {elapsed:.2f}s. Chains: {list(llm_chains.keys())}")
+            except Exception as e:
+                logger.error(f"LLM extraction error: {e}", exc_info=True)
         else:
-            logger.warning(f"Document {doc.metadata.filename} (ID: {doc.id}) has NO content chunks and NO raw content.")
-    
-    logger.info(f"Context successfully built using {len(docs_used)} documents: {', '.join(docs_used)}")
-    logger.info(f"Total context text size: {len(context_text)} characters")
-    
-    if not context_text.strip():
-        logger.error("Context text is empty! Cannot calculate KPIs.")
-        empty_data = KPIData().model_dump()
-        empty_data['source_doc_ids'] = current_ids
-        save_kpis(empty_data)
-        return KPIResponse(**empty_data)
+            logger.warning("Context text empty, skipping LLM extraction.")
 
-    llm = get_llm()
-    
-    prompt = PromptTemplate.from_template(
-        "Extract agricultural KPIs from the text and return a single FLAT JSON object. "
-        "DO NOT nest objects. For each KPI (soil_moisture, temperature, rainfall, humidity, crop_yield, pest_risk, fertilizer, equipment_health, solar_radiation, harvest_progress), provide:\n"
-        "  - <kpi>: concise value string (e.g. '25%', '27°C', 'Low', 'N/A')\n"
-        "  - <kpi>_trend: 'up', 'down', or 'neutral'\n"
-        "  - <kpi>_trend_reasoning: one short sentence explaining the trend\n"
-        "  - <kpi>_explanation: one short sentence quoting the source evidence\n\n"
-        "Example flat structure:\n"
-        "{{\"soil_moisture\": \"20%\", \"soil_moisture_trend\": \"up\", \"soil_moisture_trend_reasoning\": \"Recent rain\", \"soil_moisture_explanation\": \"Sensor data shows 20%\"}}\n\n"
-        "Text: {context}\n\nJSON output:"
+    # ALWAYS merge with baseline — baseline values are preserved
+    merged = _merge_with_baseline(baseline, llm_chains)
+
+    response_data = {
+        "chains": {k: v for k, v in merged.items()},
+        "source_doc_ids": current_ids,
+    }
+    save_kpis(response_data)
+
+    response = KPIExtractionResponse(
+        chains={k: [KPIEntry(chain=k, **{kk: vv for kk, vv in e.items() if kk != "chain"}) for e in v] for k, v in merged.items()},
+        source_doc_ids=current_ids,
+        last_updated=datetime.now().isoformat(),
     )
-    
-    chain = prompt | llm | StrOutputParser()
-    
-    try:
-        logger.info(f"Invoking LLM. Context size: {len(context_text)} chars")
-        raw_output = await chain.ainvoke({"context": context_text})
-        logger.info(f"RAW LLM OUTPUT: {raw_output}")
-        
-        # Clean up output
-        stripped = raw_output.strip()
-        if "```json" in stripped:
-            stripped = stripped.split("```json")[1].split("```")[0].strip()
-        elif "```" in stripped:
-             stripped = stripped.split("```")[1].split("```")[0].strip()
-        
-        # Extract JSON using regex if direct parse fails
-        try:
-            result = json.loads(stripped)
-            logger.info(f"JSON successfully parsed. Type: {type(result)}")
-            
-            # AGGRESSIVE FLATTENING
-            flattened = {}
-            
-            # If it's a list, take the first element
-            if isinstance(result, list) and len(result) > 0:
-                result = result[0]
-            
-            if isinstance(result, dict):
-                logger.info(f"Root keys before flattening: {list(result.keys())}")
-                for k, v in result.items():
-                    if isinstance(v, dict):
-                        logger.info(f"Flattening nested dict for key: {k}")
-                        # Extract 'value' or similar as the main key
-                        val = v.get("value") or v.get("val") or v.get("amount")
-                        if val is not None:
-                            flattened[k] = str(val)
-                        
-                        # Extract everything else with suffix
-                        for sub_k, sub_v in v.items():
-                            if sub_k not in ["value", "val", "amount"]:
-                                flattened[f"{k}_{sub_k}"] = str(sub_v)
-                            elif k not in flattened:
-                                # Fallback if we didn't set the main key yet
-                                flattened[k] = str(sub_v)
-                    else:
-                        flattened[k] = str(v)
-                result = flattened
-            
-            logger.info(f"Keys after flattening: {list(result.keys())}")
-            # Log a couple of sample flattened values to verify
-            if "soil_moisture" in result:
-                logger.info(f"Sample: soil_moisture='{result['soil_moisture']}' (type: {type(result['soil_moisture'])})")
-            
-        except Exception as json_err:
-            logger.warning(f"JSON parse failed: {json_err}. Attempting regex extraction.")
-            # Fallback regex extraction
-            result = {}
-            kpis = ["soil_moisture", "temperature", "rainfall", "humidity", "crop_yield", "pest_risk", "fertilizer", "equipment_health", "solar_radiation", "harvest_progress"]
-            for field in kpis:
-                # Value
-                m = re.search(rf'"{field}"\s*:\s*"([^"]+)"', stripped, re.I)
-                if m: result[field] = m.group(1)
-                
-                # Trend, reasoning, explanation
-                for suffix in ["_trend", "_trend_reasoning", "_explanation"]:
-                    f_m = re.search(rf'"{field}{suffix}"\s*:\s*"([^"]+)"', stripped, re.I)
-                    if f_m: result[f"{field}{suffix}"] = f_m.group(1)
-            
-            logger.info(f"Regex extraction found {len(result)} fields: {list(result.keys())}")
-            
-        except Exception as json_err:
-            logger.warning(f"JSON parse failed: {json_err}. Attempting regex extraction.")
-            # Fallback regex extraction
-            result = {}
-            kpis = ["soil_moisture", "temperature", "rainfall", "humidity", "crop_yield", "pest_risk", "fertilizer", "equipment_health", "solar_radiation", "harvest_progress"]
-            for field in kpis:
-                # Value
-                m = re.search(rf'"{field}"\s*:\s*"([^"]+)"', stripped, re.I)
-                if m: result[field] = m.group(1)
-                
-                # Trend, reasoning, explanation
-                for suffix in ["_trend", "_trend_reasoning", "_explanation"]:
-                    f_m = re.search(rf'"{field}{suffix}"\s*:\s*"([^"]+)"', stripped, re.I)
-                    if f_m: result[f"{field}{suffix}"] = f_m.group(1)
-            
-            logger.info(f"Regex extraction found {len(result)} fields: {list(result.keys())}")
-
-        # Merge LLM result over defaults — keep ALL keys the LLM returned
-        final_values = KPIData().model_dump()
-        final_values.update(result)        # overwrite with everything from LLM
-        final_values['source_doc_ids'] = current_ids
-        save_kpis(final_values)
-        
-        elapsed = (datetime.now() - start_time).total_seconds()
-        logger.info(f"Recalculation completed in {elapsed:.2f}s. KPI values updated.")
-        
-        response = KPIResponse(**final_values)
-        response.is_stale = False
-        response.last_updated = datetime.now().isoformat()
-        return response
-        
-    except Exception as e:
-        logger.error(f"Error calculating KPIs: {e}", exc_info=True)
-        cached = load_kpis()
-        if cached: return KPIResponse(**cached)
-        return KPIResponse()
+    response.is_stale = False
+    return response
