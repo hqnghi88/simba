@@ -73,8 +73,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
       <div className="flex items-center px-4 h-16 border-b border-gray-200 justify-between shrink-0">
         {expanded ? (
           <div className="flex items-center truncate">
-            <span className="text-xl font-semibold">Simba</span>
-            <span className="text-xs text-gray-500 ml-2">{APP_VERSION}</span>
+            <span className="text-xl font-semibold">KMS Starfarm</span>
           </div>
         ) : (
           <BookOpen className="h-6 w-6 mx-auto shrink-0" />
