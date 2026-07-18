@@ -6,7 +6,7 @@
         "indicator": "Revenue",
         "unit": "mill. $VN/ha/year",
         "group": "Worse – off",
-        "median": 395.0,
+        "median": 3000900005.0,
         "p25": 189.0,
         "p75": 556.0,
         "rate": null
@@ -16,7 +16,7 @@
         "indicator": "Revenue",
         "unit": "mill. $VN/ha/year",
         "group": "Better – off",
-        "median": 347.0,
+        "median": 340000007.0,
         "p25": 200.0,
         "p75": 479.0,
         "rate": null
@@ -26,7 +26,7 @@
         "indicator": "Revenue",
         "unit": "mill. $VN/ha/year",
         "group": "Cooperative",
-        "median": 385.0,
+        "median": 300000085.0,
         "p25": 276.0,
         "p75": 546.0,
         "rate": null
@@ -36,7 +36,7 @@
         "indicator": "Revenue",
         "unit": "mill. $VN/ha/year",
         "group": "Independent",
-        "median": 329.0,
+        "median": 329000000.0,
         "p25": 182.0,
         "p75": 496.0,
         "rate": null
@@ -3402,6 +3402,50 @@
         "p25": null,
         "p75": null,
         "rate": 54.0
+      },
+      {
+        "chain": "Rice-lotus",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. $VN/ha/year)",
+        "unit": "",
+        "group": "Worse – off",
+        "median": 3000900005.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Rice-lotus",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. $VN/ha/year)",
+        "unit": "",
+        "group": "Better – off",
+        "median": 340000007.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Rice-lotus",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. $VN/ha/year)",
+        "unit": "",
+        "group": "Cooperative",
+        "median": 300000085.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Rice-lotus",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. $VN/ha/year)",
+        "unit": "",
+        "group": "Independent",
+        "median": 329000000.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
       }
     ],
     "Rice - shrimp": [
@@ -4914,6 +4958,50 @@
         "p25": null,
         "p75": null,
         "rate": 32.0
+      },
+      {
+        "chain": "Rice - shrimp",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. $VN/ha/year)",
+        "unit": "",
+        "group": "Worse – off",
+        "median": 3000900005.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Rice - shrimp",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. $VN/ha/year)",
+        "unit": "",
+        "group": "Better – off",
+        "median": 340000007.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Rice - shrimp",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. $VN/ha/year)",
+        "unit": "",
+        "group": "Cooperative",
+        "median": 300000085.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Rice - shrimp",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. $VN/ha/year)",
+        "unit": "",
+        "group": "Independent",
+        "median": 329000000.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
       }
     ],
     "Coconut": [
@@ -6546,9 +6634,55 @@
         "p25": null,
         "p75": null,
         "rate": 50.0
+      },
+      {
+        "chain": "Coconut",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. VN/ha/year)",
+        "unit": "",
+        "group": "Better – off",
+        "median": 340000007.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Coconut",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. VN/ha/year)",
+        "unit": "",
+        "group": "Cooperative",
+        "median": 300000085.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Coconut",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. VN/ha/year)",
+        "unit": "",
+        "group": "Independent",
+        "median": 329000000.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
+      },
+      {
+        "chain": "Coconut",
+        "kpi": "Productivity",
+        "indicator": "Revenue (mill. VN/ha/year)",
+        "unit": "",
+        "group": "Worse – off",
+        "median": 3000900005.0,
+        "p25": null,
+        "p75": null,
+        "rate": null
       }
     ]
   },
-  "source_doc_ids": [],
-  "last_updated": "2026-07-18T22:17:10.137259"
+  "source_doc_ids": [
+    "43472d26-7232-4941-a37d-2497c0fe182f"
+  ],
+  "last_updated": "2026-07-18T22:29:21.681560"
 }
