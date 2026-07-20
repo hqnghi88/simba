@@ -13,11 +13,15 @@ class GradeAnswer(BaseModel):
 
 # LLM with function call
 llm = get_llm()
-structured_llm_grader = llm.with_structured_output(GradeAnswer)
+structured_llm_grader = llm.with_structured_output(GradeAnswer, method="json_mode")
 
 # Prompt
 system = """You are a grader assessing whether an answer addresses / resolves a question \n
-     Give a binary score 'yes' or 'no'. Yes' means that the answer resolves the question."""
+     Give a binary score 'yes' or 'no'. Yes' means that the answer resolves the question.
+
+     IMPORTANT: You MUST respond with ONLY a valid JSON object. No other text.
+     Expected format: {{"binary_score": "yes"}} or {{"binary_score": "no"}}
+"""
 answer_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system),

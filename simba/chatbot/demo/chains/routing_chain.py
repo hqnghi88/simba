@@ -25,9 +25,11 @@ routing_prompt = ChatPromptTemplate.from_template(
       * Off-topic, general, or cannot be answered by the system
 
     User message: {question}
-    Route (respond with only 'transform_query' or 'fallback'):
+
+    IMPORTANT: You MUST respond with ONLY a valid JSON object. No other text.
+    Expected format: {{"route": "transform_query"}} or {{"route": "fallback"}}
     """
 )
 
 
-routing_chain = routing_prompt | llm.with_structured_output(Route)
+routing_chain = routing_prompt | llm.with_structured_output(Route, method="json_mode")

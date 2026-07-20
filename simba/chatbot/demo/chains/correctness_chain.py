@@ -12,7 +12,7 @@ class GradeCorrectness(BaseModel):
 
 
 llm = get_llm()
-structured_llm_grader = llm.with_structured_output(GradeCorrectness)
+structured_llm_grader = llm.with_structured_output(GradeCorrectness, method="json_mode")
 
 # Prompt
 system = """You are a grader assessing whether a response actually answers the user's question. \n
@@ -21,7 +21,11 @@ system = """You are a grader assessing whether a response actually answers the u
     - Directly addresses the question's intent \n
     - Provides relevant information that answers the question \n
     - Avoids being off-topic or providing irrelevant information \n
-    Give a binary score 'yes' or 'no' to indicate whether the response properly answers the question."""
+    Give a binary score 'yes' or 'no' to indicate whether the response properly answers the question.
+
+    IMPORTANT: You MUST respond with ONLY a valid JSON object. No other text.
+    Expected format: {{"binary_score": "yes"}} or {{"binary_score": "no"}}
+"""
 grade_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system),

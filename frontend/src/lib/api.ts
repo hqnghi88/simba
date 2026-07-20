@@ -135,3 +135,22 @@ export async function recalculateDashboardKPIs(): Promise<any> {
   }
 }
 
+export async function extractKPIs(): Promise<any> {
+  const response = await fetch(`${config.apiUrl}/dashboard/kpi/extract`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+  return await response.json();
+}
+
+export async function applyKPIs(pendingId: string, approvedIds: string[]): Promise<any> {
+  const response = await fetch(`${config.apiUrl}/dashboard/kpi/apply`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ pending_id: pendingId, approved_ids: approvedIds }),
+  });
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+  return await response.json();
+}
+

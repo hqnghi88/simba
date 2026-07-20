@@ -12,13 +12,17 @@ class GradeDocuments(BaseModel):
 
 
 llm = get_llm()
-structured_llm_grader = llm.with_structured_output(GradeDocuments)
+structured_llm_grader = llm.with_structured_output(GradeDocuments, method="json_mode")
 
 # Prompt
 system = """You are a grader assessing relevance of a retrieved document to a user question. \n
     It does not need to be a stringent test. The goal is to filter out erroneous retrievals. \n
     If the document contains keyword(s) or semantic meaning related to the user question, grade it as relevant. \n
-    Give a binary score 'yes' or 'no' score to indicate whether the document is relevant to the question."""
+    Give a binary score 'yes' or 'no' score to indicate whether the document is relevant to the question.
+
+    IMPORTANT: You MUST respond with ONLY a valid JSON object. No other text.
+    Expected format: {{"binary_score": "yes"}} or {{"binary_score": "no"}}
+"""
 grade_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system),

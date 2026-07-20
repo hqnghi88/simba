@@ -57,7 +57,7 @@ fi
 # Start vLLM-MLX server
 echo "🧠 Starting vLLM-MLX server on port 8000..."
 # Running it in the background. We use port 8000 as requested by user.
-vllm-mlx serve mlx-community/Llama-3.2-3B-Instruct-4bit --port 8000 --continuous-batching > vllm.log 2>&1 &
+$POETRY_BIN run vllm-mlx serve mlx-community/Llama-3.2-3B-Instruct-4bit --port 8000 --continuous-batching > vllm.log 2>&1 &
 
 # Wait a bit for vLLM to initialize (it can be slow)
 echo "⏳ Waiting for vLLM to start (check vllm.log for details)..."

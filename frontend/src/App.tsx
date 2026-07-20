@@ -1,6 +1,7 @@
 import Dashboard from '@/pages/Dashboard';
 import ChatApp from '@/pages/ChatApp';
 import DocumentManagementApp from "@/pages/DocumentManagementApp";
+import KPIReview from '@/pages/KPIReview';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from '@/MainLayout';
 import { pdfjs } from 'react-pdf';
@@ -47,6 +48,11 @@ function App() {
           <Route path="/knowledge" element={
             <ProtectedRoute>
               <KnowledgeConfigPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/kpi-review" element={
+            <ProtectedRoute>
+              <KPIReview />
             </ProtectedRoute>
           } />
 

@@ -50,10 +50,13 @@ prompt = ChatPromptTemplate.from_template(
     {summaries}
     If the context is enough to answer the question, is_summary_enough is True else False.
 
+    IMPORTANT: You MUST respond with ONLY a valid JSON object. No other text.
+    Expected format: {{"is_summary_enough": true, "id": ["doc-id-1"], "page_content": ["content1"]}}
+    If summary is enough: {{"is_summary_enough": true, "id": [], "page_content": []}}
 
     """
 )
 
 llm = get_llm()
-cot_chain = prompt | llm.with_structured_output(DocumentSelectorChain)
+cot_chain = prompt | llm.with_structured_output(DocumentSelectorChain, method="json_mode")
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -533,6 +534,7 @@ function CrossChainTab({ data }: { data: Record<string, KpiRow[]> }) {
 
 // --- Main Dashboard ---
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [data, setData] = useState<Record<string, KpiRow[]>>({});
   const [loading, setLoading] = useState(true);
   const [isStale, setIsStale] = useState(false);
@@ -673,10 +675,9 @@ export default function Dashboard() {
           <Button
             size="sm"
             variant="outline"
-            onClick={handleRecalculate}
-            disabled={recalculating}
+            onClick={() => navigate('/kpi-review')}
           >
-            {recalculating ? 'Extracting...' : 'Recalculate from Documents'}
+            Review & Extract
           </Button>
         </div>
       </div>
