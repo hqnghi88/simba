@@ -259,7 +259,7 @@ def _normalize_chain(c: str) -> str:
 
 
 def _parse_json_from_llm(raw: str) -> list:
-    """Extract JSON array from LLM output, handling markdown fences etc."""
+    """Extract JSON array from LLM output, handling markdown fences, truncation etc."""
     stripped = raw.strip()
     if "```json" in stripped:
         stripped = stripped.split("```json")[1].split("```")[0].strip()
@@ -276,12 +276,27 @@ def _parse_json_from_llm(raw: str) -> list:
         if isinstance(result, list):
             return result
     except json.JSONDecodeError:
-        m = re.search(r"\[.*\]", stripped, re.DOTALL)
-        if m:
-            try:
-                return json.loads(m.group())
-            except json.JSONDecodeError:
-                pass
+        # LLM output may be truncated — try to salvage complete JSON objects
+        entries = []
+        depth = 0
+        start = None
+        for i, ch in enumerate(stripped):
+            if ch == '{':
+                if depth == 0:
+                    start = i
+                depth += 1
+            elif ch == '}':
+                depth -= 1
+                if depth == 0 and start is not None:
+                    try:
+                        obj = json.loads(stripped[start:i+1])
+                        entries.append(obj)
+                    except json.JSONDecodeError:
+                        pass
+                    start = None
+        if entries:
+            logger.info(f"Salvaged {len(entries)} entries from truncated LLM JSON")
+            return entries
     return []
 
 
@@ -313,6 +328,9 @@ def extract_kpis_from_docs(
     logger.info(f"LLM output ({len(raw_output)} chars): {raw_output[:300]}")
 
     entries = _parse_json_from_llm(raw_output)
+    logger.info(f"Parsed {len(entries)} entries from LLM. First 3: {json.dumps(entries[:3], default=str)[:500]}")
+    if not entries:
+        logger.warning(f"LLM returned {len(raw_output)} chars but parser got 0 entries. Raw start: {raw_output[:500]}")
     chains_dict: dict[str, list[dict]] = {}
     for entry in entries:
         if not isinstance(entry, dict):
