@@ -1,5 +1,83 @@
 {
-  "chains": {},
-  "source_doc_ids": [],
-  "last_updated": "2026-07-20T16:31:50.196678"
+  "chains": {
+    "Mango": [
+      {
+        "id": "1a19b716",
+        "chain": "Mango",
+        "kpi": "Productivity",
+        "indicator": "Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Worse – off",
+        "median": 3000900005.0,
+        "p25": null,
+        "p75": null,
+        "rate": null,
+        "baseline_median": 395.0,
+        "baseline_p25": 189.0,
+        "baseline_p75": 556.0,
+        "baseline_rate": null,
+        "is_new": false,
+        "approved": true
+      },
+      {
+        "id": "a968d276",
+        "chain": "Mango",
+        "kpi": "Productivity",
+        "indicator": "Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Better – off",
+        "median": 340000007.0,
+        "p25": null,
+        "p75": null,
+        "rate": null,
+        "baseline_median": 347.0,
+        "baseline_p25": 200.0,
+        "baseline_p75": 479.0,
+        "baseline_rate": null,
+        "is_new": false,
+        "approved": true
+      },
+      {
+        "id": "37db20b4",
+        "chain": "Mango",
+        "kpi": "Productivity",
+        "indicator": "Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Cooperative",
+        "median": 300000085.0,
+        "p25": null,
+        "p75": null,
+        "rate": null,
+        "baseline_median": 385.0,
+        "baseline_p25": 276.0,
+        "baseline_p75": 546.0,
+        "baseline_rate": null,
+        "is_new": false,
+        "approved": true
+      },
+      {
+        "id": "2e6735dc",
+        "chain": "Mango",
+        "kpi": "Productivity",
+        "indicator": "Revenue",
+        "unit": "mill. $VN/ha/year",
+        "group": "Independent",
+        "median": 329000000.0,
+        "p25": null,
+        "p75": null,
+        "rate": null,
+        "baseline_median": 329.0,
+        "baseline_p25": 182.0,
+        "baseline_p75": 496.0,
+        "baseline_rate": null,
+        "is_new": false,
+        "approved": true
+      }
+    ]
+  },
+  "source_doc_ids": [
+    "e8a5e6a7-87e1-4c9c-a6fd-f367a50f4478",
+    "062fcaeb-dcf9-4129-8e2e-9f7cc481914e"
+  ],
+  "last_updated": "2026-08-26T09:29:49.283417"
 }

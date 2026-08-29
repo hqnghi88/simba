@@ -1,6 +1,82 @@
 {
-  "pending_id": "3d442390-cb0f-4b37-acb3-1f99f82f38cb",
-  "entries": [],
-  "source_doc_ids": [],
-  "extracted_at": "2026-07-20T16:31:51.042355"
+  "pending_id": "6e5f76da-9050-436b-ae31-7123f354f08f",
+  "entries": [
+    {
+      "id": "ba3c74fc",
+      "chain": "Mango",
+      "kpi": "Productivity",
+      "indicator": "Revenue",
+      "unit": "mill. $VN/ha/year",
+      "group": "Worse – off",
+      "median": 3000900005.0,
+      "p25": null,
+      "p75": null,
+      "rate": null,
+      "baseline_median": 395.0,
+      "baseline_p25": 189.0,
+      "baseline_p75": 556.0,
+      "baseline_rate": null,
+      "is_new": false,
+      "approved": true
+    },
+    {
+      "id": "53e6e40d",
+      "chain": "Mango",
+      "kpi": "Productivity",
+      "indicator": "Revenue",
+      "unit": "mill. $VN/ha/year",
+      "group": "Better – off",
+      "median": 340000007.0,
+      "p25": null,
+      "p75": null,
+      "rate": null,
+      "baseline_median": 347.0,
+      "baseline_p25": 200.0,
+      "baseline_p75": 479.0,
+      "baseline_rate": null,
+      "is_new": false,
+      "approved": true
+    },
+    {
+      "id": "c70f2655",
+      "chain": "Mango",
+      "kpi": "Productivity",
+      "indicator": "Revenue",
+      "unit": "mill. $VN/ha/year",
+      "group": "Cooperative",
+      "median": 300000085.0,
+      "p25": null,
+      "p75": null,
+      "rate": null,
+      "baseline_median": 385.0,
+      "baseline_p25": 276.0,
+      "baseline_p75": 546.0,
+      "baseline_rate": null,
+      "is_new": false,
+      "approved": true
+    },
+    {
+      "id": "a5948062",
+      "chain": "Mango",
+      "kpi": "Productivity",
+      "indicator": "Revenue",
+      "unit": "mill. $VN/ha/year",
+      "group": "Independent",
+      "median": 329000000.0,
+      "p25": null,
+      "p75": null,
+      "rate": null,
+      "baseline_median": 329.0,
+      "baseline_p25": 182.0,
+      "baseline_p75": 496.0,
+      "baseline_rate": null,
+      "is_new": false,
+      "approved": true
+    }
+  ],
+  "source_doc_ids": [
+    "e8a5e6a7-87e1-4c9c-a6fd-f367a50f4478",
+    "062fcaeb-dcf9-4129-8e2e-9f7cc481914e"
+  ],
+  "extracted_at": "2026-08-28T16:48:40.230861"
 }
